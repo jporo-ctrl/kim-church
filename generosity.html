@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Become a Founding Partner — Kingdom Insights Ministries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C8922A;
+    --gold-light: #E8B84B;
+    --gold-pale: #FBF4E8;
+    --deep: #0D0D0D;
+    --ink: #1A1613;
+    --parchment: #FAF7F2;
+    --muted: #6B6560;
+    --border: rgba(200, 146, 42, 0.25);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,146,42,0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #F5EDD8;
+    text-decoration: none;
+  }
+
+  .nav-back {
+    font-size: 13px;
+    color: rgba(245,237,216,0.5);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 60vh;
+    background: var(--deep);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(200,146,42,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 600;
+    line-height: 1.05;
+    color: #F5EDD8;
+    margin-bottom: 24px;
+  }
+
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+
+  .hero-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,237,216,0.55);
+    max-width: 560px;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .body-text {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .body-text strong { font-weight: 500; color: var(--ink); }
+
+  /* TIER CARDS */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    margin: 56px 0;
+    border: 1px solid var(--border);
+  }
+
+  .tier {
+    background: var(--parchment);
+    padding: 40px 28px;
+    position: relative;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .tier:last-child { border-right: none; }
+  .tier:hover { background: var(--gold-pale); }
+
+  .tier.featured {
+    background: var(--deep);
+  }
+
+  .tier.featured:hover { background: #1a1613; }
+
+  .tier-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .tier.featured .tier-name { color: #F5EDD8; }
+
+  .tier-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .tier-freq {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .tier.featured .tier-freq { color: rgba(245,237,216,0.4); }
+
+  .tier-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .tier.featured .tier-desc { color: rgba(245,237,216,0.55); }
+
+  .tier-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .tier-perks li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .tier.featured .tier-perks li { color: rgba(245,237,216,0.5); }
+
+  .tier-perks li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tier-btn {
+    display: block;
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid rgba(26,22,19,0.25);
+    width: 100%;
+  }
+
+  .tier-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .tier.featured .tier-btn {
+    background: var(--gold);
+    color: var(--deep);
+    border: none;
+  }
+
+  .tier.featured .tier-btn:hover {
+    background: var(--gold-light);
+  }
+
+  /* WHAT IT MEANS */
+  .meaning-block {
+    background: var(--deep);
+    padding: 80px 24px;
+  }
+
+  .meaning-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .meaning-text .section-eyebrow { color: var(--gold-light); }
+  .meaning-text .section-title { color: #F5EDD8; }
+  .meaning-body {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(245,237,216,0.5);
+  }
+  .meaning-body p + p { margin-top: 16px; }
+  .meaning-body strong { color: rgba(245,237,216,0.85); font-weight: 400; }
+
+  .meaning-verse {
+    padding: 40px;
+    border: 1px solid rgba(200,146,42,0.2);
+    position: relative;
+  }
+
+  .meaning-verse::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    color: rgba(200,146,42,0.12);
+    position: absolute;
+    top: -20px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .meaning-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #F5EDD8;
+    line-height: 1.55;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meaning-ref {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* SCRIPTURE BOTTOM */
+  .scripture-bar {
+    background: var(--gold-pale);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px;
+    text-align: center;
+  }
+
+  .scripture-bar p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-style: italic;
+    color: var(--ink);
+    max-width: 580px;
+    margin: 0 auto 12px;
+    line-height: 1.55;
+  }
+
+  .scripture-bar span {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* GIVE DIRECT */
+  .give-section {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .give-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 48px;
+    background: var(--gold);
+    color: var(--deep);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: 36px;
+  }
+
+  .give-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--deep);
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #F5EDD8;
+    margin-bottom: 6px;
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    color: rgba(245,237,216,0.3);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(245,237,216,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    .meaning-inner { grid-template-columns: 1fr; gap: 40px; }
+    .tiers { grid-template-columns: 1fr; }
+    .tier { border-right: none; border-bottom: 1px solid var(--border); }
+    .tier:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">KIM</a>
+  <a href="index.html" class="nav-back">← The Builders Gathering</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Generosity</p>
+  <h1 class="hero-title">Become a<br><em>Founding Partner</em></h1>
+  <p class="hero-body">Every great Kingdom house is built by people who give before they see the walls go up. Your partnership plants the seeds that the next generation will stand under.</p>
+</section>
+
+<div class="content">
+  <p class="section-eyebrow">What It Means</p>
+  <h2 class="section-title">More than a gift.<br>A declaration of <em>faith</em>.</h2>
+  <p class="body-text">A Founding Partner is someone who commits to financially supporting Kingdom Insights Ministries during its launch season — not because the house is complete, but because they believe in where God is taking it. <strong>Your partnership is an act of faith that writes your name into the foundation of this ministry.</strong></p>
+  <p class="body-text">Choose the tier that reflects where you are and what you feel led to give. Every level is honored. Every gift is sown into real Kingdom work.</p>
+
+  <!-- TIERS -->
+  <div class="tiers">
+    <div class="tier">
+      <span class="tier-badge">Tier One</span>
+      <h3 class="tier-name">Stone</h3>
+      <div class="tier-amount">$25</div>
+      <p class="tier-freq">per month</p>
+      <p class="tier-desc">Every stone matters. Your consistent faithfulness builds the floor others stand on.</p>
+      <ul class="tier-perks">
+        <li>Monthly ministry updates</li>
+        <li>Founding Partner recognition</li>
+        <li>Dedicated prayer coverage</li>
+      </ul>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="tier-btn">Give $25/mo</a>
+    </div>
+
+    <div class="tier featured">
+      <span class="tier-badge">Tier Two · Most Common</span>
+      <h3 class="tier-name">Pillar</h3>
+      <div class="tier-amount">$100</div>
+      <p class="tier-freq">per month</p>
+      <p class="tier-desc">Pillars hold the weight of the house. Your giving sustains operations and outreach.</p>
+      <ul class="tier-perks">
+        <li>All Stone benefits</li>
+        <li>Quarterly partner calls with leadership</li>
+        <li>Early access to KIM teachings</li>
+        <li>Named in launch commemoration</li>
+      </ul>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="tier-btn">Give $100/mo</a>
+    </div>
+
+    <div class="tier">
+      <span class="tier-badge">Tier Three</span>
+      <h3 class="tier-name">Cornerstone</h3>
+      <div class="tier-amount">$250</div>
+      <p class="tier-freq">per month</p>
+      <p class="tier-desc">Cornerstones anchor the entire structure. You're investing at the level that shapes the future.</p>
+      <ul class="tier-perks">
+        <li>All Pillar benefits</li>
+        <li>Direct access to Apostle Joshua</li>
+        <li>Founding Council seat (annual)</li>
+        <li>Legacy recognition</li>
+      </ul>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="tier-btn">Give $250/mo</a>
+    </div>
+  </div>
+
+  <p class="body-text" style="text-align:center; font-size:14px;">Prefer to give a one-time gift? Every amount is welcome and fully honored.</p>
+</div>
+
+<!-- MEANING SECTION -->
+<section class="meaning-block">
+  <div class="meaning-inner">
+    <div class="meaning-text">
+      <p class="section-eyebrow" style="color: var(--gold);">Why It Matters</p>
+      <h2 class="section-title" style="color: #F5EDD8;">You're not just giving.<br>You're <em>building</em>.</h2>
+      <div class="meaning-body">
+        <p>Every dollar sown into KIM goes directly toward establishing the infrastructure of a ministry designed to serve, disciple, and transform lives in Hurst, TX and beyond.</p>
+        <p>Your generosity funds <strong>teaching resources, outreach events, worship experiences, and the digital tools</strong> that reach people who can't walk through our doors yet.</p>
+        <p>When this ministry is standing strong ten years from now, your name will be written in the foundation.</p>
+      </div>
+    </div>
+    <div class="meaning-verse">
+      <p class="meaning-quote">"Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty."</p>
+      <p class="meaning-ref">Proverbs 3:9–10</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECT GIVE -->
+<section class="give-section">
+  <p class="section-eyebrow" style="justify-content:center;">Ready to Give?</p>
+  <h2 class="section-title">Step into your role<br>as a Founding <em>Partner</em></h2>
+  <p class="body-text" style="max-width:480px; margin:0 auto;">Click below to be directed to our secure giving page. You can set up a recurring monthly gift or make a one-time contribution.</p>
+  <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="give-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Give Now via Tithe.ly
+  </a>
+  <p style="font-size:13px; color:var(--muted); margin-top:16px;">Secure giving powered by Tithe.ly. All donations are tax-deductible.</p>
+</section>
+
+<section class="scripture-bar">
+  <p>"Each of you should give what you have decided in your heart to give — not reluctantly or under compulsion, for God loves a cheerful giver."</p>
+  <span>2 Corinthians 9:7</span>
+</section>
+
+<footer class="footer">
+  <p class="footer-logo">Kingdom Insights Ministries</p>
+  <p class="footer-sub">HURST, TEXAS · KIM.CHURCH</p>
+  <div class="footer-links">
+    <a href="index.html">The Builders Gathering</a>
+    <a href="register.html">Join the Launch Team</a>
+    <a href="https://kim.church" target="_blank">Main Website</a>
+  </div>
+</footer>
+
+</body>
+</html>
