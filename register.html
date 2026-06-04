@@ -454,8 +454,8 @@
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">KIM</a>
-  <a href="index.html" class="nav-back">← The Builders Gathering</a>
+  <a href="builders.html" class="nav-logo">KIM</a>
+  <a href="builders.html" class="nav-back">← The Builders Gathering</a>
 </nav>
 
 <section class="hero">
@@ -472,7 +472,7 @@
   </div>
 
   <div class="form-card" id="form-card">
-    <form id="registration-form" onsubmit="handleSubmit(event)">
+    <form id="registration-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event)">
       <div class="form-grid">
 
         <!-- Personal -->
@@ -637,7 +637,7 @@
   <div class="note-card">
     <h3 class="note-title">Add to Calendar</h3>
     <p class="note-body">Don't let July 25 slip by. Download the event directly to your calendar with a single tap.</p>
-    <a href="index.html" class="note-link" onclick="setTimeout(()=>window.opener&&window.opener.downloadICS&&window.opener.downloadICS(),200)">← Back to download .ics</a>
+    <a href="builders.html" class="note-link" onclick="setTimeout(()=>window.opener&&window.opener.downloadICS&&window.opener.downloadICS(),200)">← Back to download .ics</a>
   </div>
   <div class="note-card">
     <h3 class="note-title">Become a Partner</h3>
@@ -650,7 +650,7 @@
   <p class="footer-logo">Kingdom Insights Ministries</p>
   <p class="footer-sub">HURST, TEXAS · KIM.CHURCH</p>
   <div class="footer-links">
-    <a href="index.html">The Builders Gathering</a>
+    <a href="builders.html">The Builders Gathering</a>
     <a href="generosity.html">Give</a>
     <a href="https://kim.church" target="_blank">Main Website</a>
   </div>
@@ -661,27 +661,38 @@ document.getElementById('prayer-check').addEventListener('change', function() {
   document.getElementById('prayer-box').style.display = this.checked ? 'flex' : 'none';
 });
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('registration-form');
+  const btn = form.querySelector('.submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
   const data = new FormData(form);
 
-  // Collect form data for display
-  const payload = {};
-  data.forEach((v, k) => {
-    if (payload[k]) {
-      payload[k] = Array.isArray(payload[k]) ? [...payload[k], v] : [payload[k], v];
+  try {
+    const response = await fetch('https://formspree.io/f/mwvjkwkg', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('success-msg').offsetTop - 100, behavior: 'smooth' });
     } else {
-      payload[k] = v;
+      const json = await response.json();
+      const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+      btn.textContent = 'Submit My Registration';
+      btn.disabled = false;
+      alert(msg);
     }
-  });
-
-  console.log('Registration submission:', payload);
-
-  // Show success state
-  document.getElementById('form-card').style.display = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('success-msg').offsetTop - 100, behavior: 'smooth' });
+  } catch (err) {
+    btn.textContent = 'Submit My Registration';
+    btn.disabled = false;
+    alert('Network error. Please check your connection and try again.');
+  }
 }
 </script>
 </body>
