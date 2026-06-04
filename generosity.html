@@ -446,6 +446,21 @@
 
   .footer-links a:hover { color: var(--gold); }
 
+  .journey-bg { background: var(--gold-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .journey-inner { max-width: 840px; margin: 0 auto; padding: 100px 24px; }
+  .journey-steps { display: flex; flex-direction: column; gap: 0; margin-top: 48px; position: relative; }
+  .journey-steps::before { content: ''; position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .journey-step { display: flex; gap: 32px; align-items: flex-start; padding: 32px 0; position: relative; }
+  .journey-step + .journey-step { border-top: 1px solid var(--border); }
+  .step-dot { width: 48px; height: 48px; flex-shrink: 0; border: 1px solid var(--gold); background: var(--parchment); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--gold); position: relative; z-index: 1; }
+  .step-dot.active { background: var(--gold); color: var(--deep); }
+  .step-content { flex: 1; padding-top: 8px; }
+  .step-date { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .step-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--muted); }
+  .step-link { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
+  .step-link:hover { color: var(--gold-light); }
+
   @media (max-width: 640px) {
     .meaning-inner { grid-template-columns: 1fr; gap: 40px; }
     .tiers { grid-template-columns: 1fr; }
@@ -557,6 +572,43 @@
 <section class="scripture-bar">
   <p>"Each of you should give what you have decided in your heart to give — not reluctantly or under compulsion, for God loves a cheerful giver."</p>
   <span>2 Corinthians 9:7</span>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey-bg">
+  <div class="journey-inner">
+    <p style="font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">The Journey</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,48px);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:0;">Three nights.<br><em style="font-style:italic;color:var(--gold);">One foundation.</em></h2>
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="step-dot">1</div>
+        <div class="step-content">
+          <p class="step-date">Saturday · July 27, 2025 · 6:00 PM – 8:00 PM</p>
+          <h3 class="step-title">Vision Night</h3>
+          <p class="step-desc">The vision is cast. Come hear what God is building — no commitment required. This is the open door for anyone who is searching.</p>
+          <a href="/vision" class="step-link">RSVP →</a>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-dot">2</div>
+        <div class="step-content">
+          <p class="step-date">Friday · July 25, 2025 · 6:00 PM – 8:00 PM</p>
+          <h3 class="step-title">The Builders Gathering</h3>
+          <p class="step-desc">For those ready to build. Foundations Night — culture, structure, mission, discipleship pathway, and your place as a founding member of KIM.</p>
+          <a href="/builders" class="step-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-dot active">3</div>
+        <div class="step-content">
+          <p class="step-date">Friday · August 29, 2025</p>
+          <h3 class="step-title">Ministry Launch</h3>
+          <p class="step-desc">The doors open. Kingdom Insights Ministries officially launches to the public. What was built in private comes into the light.</p>
+          <a href="/launch" class="step-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">
