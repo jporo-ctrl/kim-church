@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision Night — Kingdom Insights Ministries</title>
+<meta name="description" content="You're invited to Vision Night — an evening where Apostle Joshua Poro casts the full vision for Kingdom Insights Ministries. Come hear what God is building.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C8922A;
+  --gold-light: #E8B84B;
+  --gold-pale: #FBF4E8;
+  --deep: #0D0D0D;
+  --ink: #1A1613;
+  --parchment: #FAF7F2;
+  --muted: #6B6560;
+  --border: rgba(200,146,42,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 72px;
+  background: rgba(13,13,13,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,146,42,0.12);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600;
+  color: #F5EDD8; text-decoration: none;
+}
+
+.nav-back {
+  font-size: 13px; color: rgba(245,237,216,0.5);
+  text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s;
+}
+.nav-back:hover { color: var(--gold); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 100px;
+  overflow: hidden;
+  background: var(--deep);
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,146,42,0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 100%, rgba(200,146,42,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-ornament {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  margin: 0 auto 32px;
+  opacity: 0; animation: fadeDown 1s ease 0.3s forwards;
+}
+
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 11vw, 104px);
+  font-weight: 600; line-height: 0.95;
+  color: #F5EDD8; margin-bottom: 12px;
+  opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.hero-title em { font-style: italic; color: var(--gold-light); }
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 3vw, 26px);
+  font-style: italic; font-weight: 400;
+  color: rgba(245,237,216,0.5);
+  margin-bottom: 56px;
+  opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+}
+
+.hero-date-block {
+  display: inline-flex; flex-direction: column; align-items: center;
+  border: 1px solid var(--border);
+  padding: 24px 48px; margin-bottom: 56px;
+  position: relative;
+  opacity: 0; animation: fadeUp 1s ease 1.1s forwards;
+}
+
+.hero-date-block::before,
+.hero-date-block::after {
+  content: ''; position: absolute;
+  width: 8px; height: 8px; border: 1px solid var(--gold);
+}
+.hero-date-block::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+.hero-date-block::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+.hero-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px; font-weight: 600;
+  color: #F5EDD8; letter-spacing: 0.05em;
+}
+
+.hero-time {
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,237,216,0.5);
+  letter-spacing: 0.15em; margin-top: 6px;
+}
+
+.hero-location {
+  font-size: 12px; color: rgba(245,237,216,0.35);
+  margin-top: 8px; letter-spacing: 0.1em;
+}
+
+.hero-cta {
+  opacity: 0; animation: fadeUp 1s ease 1.3s forwards;
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 48px;
+  background: var(--gold); color: var(--deep);
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 48px;
+  background: transparent; color: rgba(245,237,216,0.7);
+  border: 1px solid rgba(245,237,216,0.25);
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.2s; margin-top: 12px;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeIn 1s ease 2s forwards;
+}
+.scroll-hint span { font-size: 10px; letter-spacing: 0.25em; color: rgba(245,237,216,0.3); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--gold), transparent); animation: pulse 2s ease infinite; }
+
+/* WHAT IS VISION NIGHT */
+.section { padding: 100px 24px; }
+.section-inner { max-width: 840px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.eyebrow::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border); max-width: 60px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 600; line-height: 1.15;
+  color: var(--ink); margin-bottom: 28px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+
+.body-text {
+  font-size: 17px; font-weight: 300;
+  line-height: 1.85; color: var(--muted);
+  margin-bottom: 20px;
+}
+.body-text strong { font-weight: 500; color: var(--ink); }
+
+/* WHAT TO EXPECT */
+.expect-bg { background: var(--deep); }
+
+.expect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2px; margin-top: 56px;
+}
+
+.expect-card {
+  padding: 40px 28px;
+  border: 1px solid rgba(200,146,42,0.15);
+}
+
+.expect-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 700;
+  color: rgba(200,146,42,0.18); line-height: 1;
+  margin-bottom: 16px;
+}
+
+.expect-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: #F5EDD8; margin-bottom: 12px;
+}
+
+.expect-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.7; color: rgba(245,237,216,0.5);
+}
+
+/* JOURNEY */
+.journey-bg { background: var(--gold-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.journey-inner { max-width: 840px; margin: 0 auto; }
+
+.journey-steps {
+  display: flex; flex-direction: column;
+  gap: 0; margin-top: 48px;
+  position: relative;
+}
+
+.journey-steps::before {
+  content: '';
+  position: absolute; left: 23px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+
+.journey-step {
+  display: flex; gap: 32px; align-items: flex-start;
+  padding: 32px 0; position: relative;
+}
+
+.journey-step + .journey-step {
+  border-top: 1px solid var(--border);
+}
+
+.step-dot {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border: 1px solid var(--gold);
+  background: var(--parchment);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--gold);
+  position: relative; z-index: 1;
+}
+
+.step-dot.active {
+  background: var(--gold); color: var(--deep);
+}
+
+.step-content { flex: 1; padding-top: 8px; }
+
+.step-date {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 600;
+  color: var(--ink); margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.7; color: var(--muted);
+}
+
+.step-link {
+  display: inline-block; margin-top: 12px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: color 0.2s;
+}
+.step-link:hover { color: var(--gold-light); }
+
+/* SCRIPTURE */
+.scripture-block {
+  padding: 80px 24px; text-align: center;
+  background: var(--deep);
+  border-top: 1px solid rgba(200,146,42,0.15);
+}
+
+.scripture-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 36px);
+  font-style: italic; font-weight: 400;
+  color: #F5EDD8; line-height: 1.5;
+  max-width: 680px; margin: 0 auto 20px;
+}
+
+.scripture-ref {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.2em; color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* RSVP FORM */
+.rsvp-section { max-width: 640px; margin: 0 auto; padding: 100px 24px; }
+
+.form-card {
+  background: white;
+  border: 1px solid rgba(200,146,42,0.15);
+  padding: 48px;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select, textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 300; color: var(--ink);
+  background: var(--parchment);
+  border: 1px solid rgba(26,22,19,0.18);
+  padding: 14px 16px; width: 100%;
+  appearance: none; outline: none;
+  transition: border-color 0.2s; border-radius: 0;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+input::placeholder, textarea::placeholder { color: rgba(107,101,96,0.4); }
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8922A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+.submit-btn {
+  width: 100%; padding: 18px;
+  background: var(--gold); color: var(--deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.1em; border: none;
+  cursor: pointer; transition: background 0.2s; margin-top: 8px;
+}
+.submit-btn:hover { background: var(--gold-light); }
+
+.success-message {
+  display: none; text-align: center;
+  padding: 48px; background: var(--gold-pale);
+  border: 1px solid var(--border);
+}
+.success-icon { font-size: 36px; color: var(--gold); margin-bottom: 16px; }
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 600; color: var(--ink); margin-bottom: 10px;
+}
+.success-body { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+/* FOOTER */
+.footer { background: var(--deep); padding: 40px 24px; text-align: center; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
+.footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+@media (max-width: 600px) {
+  .nav { padding: 0 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .form-card { padding: 28px 20px; }
+  .expect-grid { grid-template-columns: 1fr; }
+  .hero-date-block { padding: 20px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">KIM</a>
+  <a href="/" class="nav-back">← kim.church</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament"></div>
+  <p class="hero-eyebrow">Kingdom Insights Ministries · You're Invited</p>
+  <h1 class="hero-title">Vision<br><em>Night</em></h1>
+  <p class="hero-subtitle">Come hear what God is building</p>
+
+  <div class="hero-date-block">
+    <span class="hero-date">Saturday, July 27, 2025</span>
+    <span class="hero-time">6:00 PM – 8:00 PM · Compass Center</span>
+    <span class="hero-location">4201 Pool Road, Grapevine, TX 76051</span>
+  </div>
+
+  <div class="hero-cta">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+      <a href="#rsvp" class="btn-gold">Reserve My Seat</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- WHAT IS VISION NIGHT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <p class="eyebrow">What Is Vision Night</p>
+    <h2 class="section-title">Before you build,<br>you must <em>see</em>.</h2>
+    <p class="body-text">Vision Night is an open invitation to anyone who has felt a stirring — a sense that God may be calling them into something. This is not a church service. It's a conversation. Apostle Joshua Poro will <strong>openly share the full vision</strong> God has placed on his heart for Kingdom Insights Ministries — who we are, where we're going, and why now.</p>
+    <p class="body-text">No commitment required. Come with your questions, your curiosity, and an open heart. If what you hear resonates, there is a place for you in this house.</p>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="section expect-bg">
+  <div class="section-inner" style="max-width:1000px;">
+    <p class="eyebrow" style="color:var(--gold);">What to Expect</p>
+    <h2 class="section-title" style="color:#F5EDD8;">An evening of <em>clarity</em>.</h2>
+    <div class="expect-grid">
+      <div class="expect-card">
+        <div class="expect-num">01</div>
+        <h3 class="expect-title">The Vision</h3>
+        <p class="expect-desc">Apostle Joshua will share the God-given vision for KIM — where it started, what it's becoming, and the assignment on this house.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-num">02</div>
+        <h3 class="expect-title">The Mission</h3>
+        <p class="expect-desc">You'll understand the specific mandate and purpose of Kingdom Insights Ministries and how it's different from anything else in the region.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-num">03</div>
+        <h3 class="expect-title">The Community</h3>
+        <p class="expect-desc">Meet the people who are already saying yes. Vision Night is the first gathering — you'll be in the room with the people who will become your spiritual family.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-num">04</div>
+        <h3 class="expect-title">Your Next Step</h3>
+        <p class="expect-desc">Whether you're ready to commit or still listening, we'll share the path forward — including the Builders Gathering on July 25 and Ministry Launch on August 29.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY / TIMELINE -->
+<section class="section journey-bg">
+  <div class="journey-inner">
+    <p class="eyebrow">The Journey</p>
+    <h2 class="section-title">Three nights.<br>One <em>foundation</em>.</h2>
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="step-dot active">1</div>
+        <div class="step-content">
+          <p class="step-date">Saturday · July 27, 2025 · 6:00 PM – 8:00 PM</p>
+          <h3 class="step-title">Vision Night</h3>
+          <p class="step-desc">The vision is cast. You come, you hear, you see what God is building. This is the beginning — the open door for anyone who is searching.</p>
+          <a href="#rsvp" class="step-link">RSVP Now →</a>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-dot">2</div>
+        <div class="step-content">
+          <p class="step-date">Friday · July 25, 2025</p>
+          <h3 class="step-title">The Builders Gathering</h3>
+          <p class="step-desc">For those ready to build. Foundations Night — culture, structure, mission, discipleship pathway, and your place as a founding member of KIM.</p>
+          <a href="/builders" class="step-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-dot">3</div>
+        <div class="step-content">
+          <p class="step-date">Friday · August 29, 2025</p>
+          <h3 class="step-title">Ministry Launch</h3>
+          <p class="step-desc">The doors open. Kingdom Insights Ministries officially launches to the public. What was built in private comes into the light.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTURE -->
+<section class="scripture-block">
+  <p class="scripture-text">"Write the vision and make it plain on tablets, that he may run who reads it."</p>
+  <p class="scripture-ref">Habakkuk 2:2</p>
+</section>
+
+<!-- RSVP FORM -->
+<section class="rsvp-section" id="rsvp">
+  <p class="eyebrow">Reserve Your Seat</p>
+  <h2 class="section-title" style="margin-bottom:12px;">We saved a seat<br>for <em>you</em>.</h2>
+  <p class="body-text" style="margin-bottom:40px;">Seating is limited. Fill out the form below and we'll confirm your spot for Vision Night on July 27.</p>
+
+  <div class="form-card" id="form-card">
+    <form id="vision-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="form_type" value="Vision Night RSVP">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="first">First Name *</label>
+          <input type="text" id="first" name="first_name" placeholder="First name" required>
+        </div>
+        <div class="form-group">
+          <label for="last">Last Name *</label>
+          <input type="text" id="last" name="last_name" placeholder="Last name" required>
+        </div>
+        <div class="form-group full">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group full">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(817) 555-0100">
+        </div>
+        <div class="form-group full">
+          <label for="party">How many are coming with you?</label>
+          <select id="party" name="party_size">
+            <option value="">— Select —</option>
+            <option>Just me</option>
+            <option>2 people</option>
+            <option>3 people</option>
+            <option>4 people</option>
+            <option>5 or more</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="heard">How did you hear about Vision Night?</label>
+          <input type="text" id="heard" name="how_heard" placeholder="A friend, social media, QR code, etc.">
+        </div>
+        <div class="form-group full">
+          <label for="note">Anything you'd like us to know?</label>
+          <textarea id="note" name="message" placeholder="Questions, prayer requests, or just say hello..."></textarea>
+        </div>
+        <div class="form-group full">
+          <button type="submit" class="submit-btn">Reserve My Seat for Saturday July 27</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="success-message" id="success-msg">
+    <div class="success-icon">✦</div>
+    <h2 class="success-title">You're on the list.</h2>
+    <p class="success-body">We'll see you Saturday July 27 at 6:00 PM at the Compass Center. Someone from the KIM team will be in touch to confirm your seat. Bring someone with you.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-logo">Kingdom Insights Ministries</p>
+  <p class="footer-sub">HURST, TEXAS · KIM.CHURCH</p>
+  <div class="footer-links">
+    <a href="/">Main Website</a>
+    <a href="/builders">Builders Gathering</a>
+    <a href="/generosity">Give</a>
+    <a href="/register">Join Launch Team</a>
+  </div>
+</footer>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('vision-form');
+  const btn = form.querySelector('.submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('https://formspree.io/f/mwvjkwkg', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('success-msg').offsetTop - 100, behavior: 'smooth' });
+    } else {
+      const json = await response.json();
+      const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+      btn.textContent = 'Reserve My Seat for July 27';
+      btn.disabled = false;
+      alert(msg);
+    }
+  } catch (err) {
+    btn.textContent = 'Reserve My Seat for July 27';
+    btn.disabled = false;
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+</script>
+</body>
+</html>
