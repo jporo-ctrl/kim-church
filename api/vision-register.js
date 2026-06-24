@@ -28,6 +28,23 @@ module.exports = async function handler(req, res) {
       to: toPhone
     });
 
+    // Also notify via Formspree so admin gets email
+    try {
+      await fetch('https://formspree.io/f/mwvjkwkg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_type: 'Vision Night RSVP',
+          full_name,
+          phone,
+          email: email || '',
+          how_heard: how_heard || ''
+        })
+      });
+    } catch (fErr) {
+      console.warn('Formspree notify failed:', fErr.message);
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('vision-register error:', err);
