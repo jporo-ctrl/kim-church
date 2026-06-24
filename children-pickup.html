@@ -598,6 +598,7 @@
 
     async function handleLookup() {
       const phone = document.getElementById('lookupPhone').value.trim();
+      if (!phone) {
         document.getElementById('lookupError').textContent = 'Please enter your phone number.';
         document.getElementById('lookupError').style.display = 'block';
         return;
@@ -615,6 +616,7 @@
       btn.textContent = 'Find My Children';
 
       const el = document.getElementById('lookupResults');
+      if (!records || records.length === 0) {
         el.innerHTML = '<p style="color:#e88080; font-size:13px; text-align:center;">No active check-ins found for that number.</p>';
         return;
       }
