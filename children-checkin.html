@@ -429,6 +429,8 @@
         document.getElementById('ticketChild').textContent = `${childName} · checked in at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
         document.getElementById('formView').style.display = 'none';
         document.getElementById('successView').style.display = 'block';
+        // Save parent info for next child
+        window._savedParent = { name: parentName, phone: parentPhone, email: parentEmail };
 
       } catch (err) {
         showError(err.message || 'Could not check in. Please try again.');
@@ -438,9 +440,15 @@
     }
 
     function resetForm() {
-      ['parentName','parentPhone','parentEmail','childName','childDob','allergies'].forEach(id => {
+      ['childName','childDob','allergies'].forEach(id => {
         document.getElementById(id).value = '';
       });
+      // Re-fill parent info
+      if (window._savedParent) {
+        document.getElementById('parentName').value = window._savedParent.name || '';
+        document.getElementById('parentPhone').value = window._savedParent.phone || '';
+        document.getElementById('parentEmail').value = window._savedParent.email || '';
+      }
       const btn = document.getElementById('submitBtn');
       btn.disabled = false;
       btn.textContent = 'Check In My Child';
