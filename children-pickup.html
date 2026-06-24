@@ -547,8 +547,8 @@
           }
         );
 
-        // 2. Notify attendant via Vercel API route
-        await fetch('/api/notify-pickup', {
+        // 2. Notify attendant via Vercel API route (non-blocking)
+        fetch('/api/notify-pickup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -558,7 +558,7 @@
             pickupCode: currentRecord.pickup_code,
             eventDate: currentRecord.event_date
           })
-        });
+        }).catch(e => console.log('Attendant notify failed:', e));
 
         document.getElementById('checkoutMsg').textContent = `${currentRecord.child_name} has been released to ${currentRecord.parent_name}. Blessings!`;
         document.getElementById('childFound').style.display = 'none';
