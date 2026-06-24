@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom Insights Ministries | Serve & Volunteer</title>
+<meta name="description" content="At Kingdom Insights Ministries, we believe that serving is one of the highest expressions of love. Join us to serve, volunteer, and be part of what God is doing.">
+<meta property="og:title" content="Kingdom Insights Ministries | Become a New Member">
+<meta property="og:description" content="Serving is one of the highest expressions of love. Step in and step up with Kingdom Insights Ministries.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C8922A;
+  --gold-light: #E8B84B;
+  --gold-pale: #FBF4E8;
+  --deep: #0D0D0D;
+  --ink: #1A1613;
+  --parchment: #FAF7F2;
+  --muted: #6B6560;
+  --border: rgba(200,146,42,0.25);
+  --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 72px;
+  background: rgba(13,13,13,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,146,42,0.12);
+}
+
+.nav-logo img { height: 44px; }
+
+.nav-links {
+  display: flex; gap: 28px; list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px; font-weight: 400; letter-spacing: 0.08em;
+  color: rgba(245,237,216,0.6); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-give {
+  padding: 10px 22px;
+  background: var(--gold);
+  color: var(--deep);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.nav-give:hover { background: var(--gold-light); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: rgba(245,237,216,0.7);
+  transition: all 0.3s;
+}
+
+.mobile-menu {
+  display: none; position: fixed;
+  top: 72px; left: 0; right: 0; z-index: 199;
+  background: rgba(13,13,13,0.97);
+  padding: 24px 32px 32px;
+  flex-direction: column; gap: 0;
+  border-bottom: 1px solid rgba(200,146,42,0.15);
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  padding: 14px 0;
+  font-size: 15px; font-weight: 400;
+  color: rgba(245,237,216,0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu a:last-child { border-bottom: none; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920&h=1080&fit=crop&q=80') center/cover no-repeat;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(13,13,13,0.72) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.8) 100%);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 9vw, 92px);
+  font-weight: 600; line-height: 1.0;
+  color: #F5EDD8; margin-bottom: 24px;
+}
+
+.hero-sub {
+  font-size: 18px; font-weight: 300; line-height: 1.75;
+  color: rgba(245,237,216,0.65);
+  max-width: 520px; margin: 0 auto 48px;
+}
+
+.hero-btns {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+
+.btn-gold {
+  padding: 16px 36px;
+  background: var(--gold); color: var(--deep);
+  font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.btn-outline {
+  padding: 16px 36px;
+  background: transparent; color: #F5EDD8;
+  border: 1px solid rgba(245,237,216,0.35);
+  font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  z-index: 1;
+  animation: fadeIn 1s ease 2s both;
+}
+.scroll-hint span { font-size: 10px; letter-spacing: 0.25em; color: rgba(245,237,216,0.35); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--gold), transparent); animation: pulse 2s ease infinite; }
+
+/* ── BUILDERS BANNER ── */
+.builders-banner {
+  background: var(--deep);
+  border-top: 1px solid rgba(200,146,42,0.2);
+  border-bottom: 1px solid rgba(200,146,42,0.2);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.builders-inner {
+  max-width: 800px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+
+.builders-text { text-align: left; }
+
+.builders-eyebrow {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+
+.builders-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 600;
+  color: #F5EDD8;
+}
+
+.builders-detail {
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,237,216,0.45);
+  margin-top: 4px;
+}
+
+.builders-btn {
+  padding: 14px 28px;
+  background: var(--gold); color: var(--deep);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.builders-btn:hover { background: var(--gold-light); }
+
+/* ── SECTION COMMONS ── */
+.section { padding: 100px 24px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-inner-sm { max-width: 760px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 600; line-height: 1.15;
+  color: var(--ink); margin-bottom: 24px;
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+.section-title-light { color: #F5EDD8; }
+.section-title-light em { color: var(--gold-light); }
+
+.body-text {
+  font-size: 17px; font-weight: 300;
+  line-height: 1.85; color: var(--muted);
+}
+.body-text + .body-text { margin-top: 16px; }
+
+.divider {
+  display: flex; align-items: center; gap: 24px;
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 24px;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-mark { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); }
+
+/* ── SERVICES ── */
+.services-bg { background: var(--deep); }
+
+.services-intro {
+  text-align: center; margin-bottom: 64px;
+}
+
+.services-location {
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,237,216,0.4);
+  letter-spacing: 0.1em; margin-top: 12px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.service-card {
+  padding: 40px 32px;
+  border: 1px solid rgba(200,146,42,0.12);
+  position: relative;
+}
+
+.service-tag {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+
+.service-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 600;
+  color: #F5EDD8; margin-bottom: 4px;
+}
+
+.service-duration {
+  font-size: 12px; color: rgba(245,237,216,0.35);
+  margin-bottom: 20px; letter-spacing: 0.08em;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: #F5EDD8; margin-bottom: 12px;
+}
+
+.service-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.7; color: rgba(245,237,216,0.5);
+}
+
+.service-icon {
+  font-size: 28px; margin-bottom: 16px;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+}
+
+.values-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 40px;
+}
+
+.value-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  background: var(--gold-pale);
+}
+
+.value-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 600;
+  color: var(--ink); margin-bottom: 8px;
+}
+
+.value-verse {
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--gold); margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.value-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.65; color: var(--muted);
+}
+
+/* ── FOUNDATION / MISSION ── */
+.foundation-bg { background: var(--deep); }
+
+.foundation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px; margin-top: 56px;
+}
+
+.foundation-card {
+  padding: 36px 28px;
+  border: 1px solid rgba(200,146,42,0.15);
+}
+
+.foundation-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+
+.foundation-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 600;
+  color: #F5EDD8; margin-bottom: 12px;
+}
+
+.foundation-text {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.7; color: rgba(245,237,216,0.5);
+}
+
+/* ── FAITH ── */
+.faith-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px; margin-top: 48px;
+}
+
+.faith-card {
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+}
+
+.faith-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--ink); margin-bottom: 6px;
+}
+
+.faith-verse {
+  font-size: 11px; letter-spacing: 0.12em;
+  color: var(--gold); margin-bottom: 12px; text-transform: uppercase;
+}
+
+.faith-text {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.65; color: var(--muted);
+}
+
+.faith-scripture {
+  margin-top: 64px; text-align: center;
+  padding: 48px; background: var(--gold-pale);
+  border: 1px solid var(--border);
+}
+
+.faith-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 30px);
+  font-style: italic; color: var(--ink);
+  line-height: 1.5; margin-bottom: 16px;
+}
+
+.faith-ref {
+  font-size: 12px; letter-spacing: 0.2em;
+  color: var(--gold); text-transform: uppercase; font-weight: 500;
+}
+
+/* ── SERVE ── */
+.serve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; margin-top: 48px;
+}
+
+.serve-card {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.serve-img {
+  width: 100%; height: 200px;
+  object-fit: cover; display: block;
+}
+
+.serve-body { padding: 24px; }
+
+.serve-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--ink); margin-bottom: 8px;
+}
+
+.serve-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.65; color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.serve-link {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.12em; color: var(--gold);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.serve-link:hover { color: var(--gold-light); }
+
+/* ── TESTIMONIALS ── */
+.testimonials-bg { background: var(--deep); }
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px; margin-top: 48px;
+}
+
+.testi-card {
+  padding: 36px 28px;
+  border: 1px solid rgba(200,146,42,0.12);
+}
+
+.testi-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic;
+  color: rgba(245,237,216,0.8);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover; margin-bottom: 12px;
+}
+
+.testi-name {
+  font-size: 14px; font-weight: 500;
+  color: #F5EDD8; margin-bottom: 2px;
+}
+
+.testi-role {
+  font-size: 12px; color: rgba(245,237,216,0.35);
+  letter-spacing: 0.08em;
+}
+
+/* ── LEADER ── */
+.leader-grid {
+  display: grid; grid-template-columns: 380px 1fr;
+  gap: 64px; align-items: start; margin-top: 48px;
+}
+
+.leader-img-wrap {
+  position: relative;
+}
+
+.leader-img {
+  width: 100%; display: block;
+  border: 1px solid var(--border);
+}
+
+.leader-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 2px;
+}
+
+.stat-box {
+  padding: 20px 16px; text-align: center;
+  background: var(--gold-pale);
+  border: 1px solid var(--border);
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700;
+  color: var(--gold); display: block;
+}
+
+.stat-label {
+  font-size: 11px; color: var(--muted);
+  margin-top: 2px; letter-spacing: 0.08em;
+}
+
+.leader-role {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+
+.leader-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 600; color: var(--ink);
+  margin-bottom: 8px; line-height: 1.1;
+}
+
+.leader-title {
+  font-size: 15px; font-weight: 300;
+  color: var(--muted); font-style: italic;
+  margin-bottom: 28px;
+}
+
+.leader-bio {
+  font-size: 16px; font-weight: 300;
+  line-height: 1.85; color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.leader-quote {
+  padding: 24px 28px;
+  border-left: 2px solid var(--gold);
+  background: var(--gold-pale);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic;
+  color: var(--ink); line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.social-links {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+.social-link {
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; color: var(--muted);
+  text-decoration: none; transition: all 0.2s;
+}
+.social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── CONTACT FORM ── */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+}
+
+.contact-img {
+  width: 100%; display: block;
+  object-fit: cover; max-height: 480px;
+}
+
+.contact-meta {
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: var(--gold-pale);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  color: var(--ink); margin-top: 16px;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select, textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 300;
+  color: var(--ink);
+  background: white;
+  border: 1px solid rgba(26,22,19,0.18);
+  padding: 14px 16px;
+  width: 100%; appearance: none; outline: none;
+  transition: border-color 0.2s; border-radius: 0;
+}
+
+input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+input::placeholder, textarea::placeholder { color: rgba(107,101,96,0.4); }
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8922A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+.checkbox-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px; height: 18px; min-width: 18px;
+  border: 1px solid rgba(26,22,19,0.2);
+  background: white; appearance: none;
+  cursor: pointer; padding: 0; position: relative;
+  transition: all 0.15s;
+}
+
+.checkbox-row input[type="checkbox"]:checked {
+  background: var(--gold); border-color: var(--gold);
+}
+
+.checkbox-row input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute; left: 4px; top: 1px;
+  width: 8px; height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.checkbox-row label {
+  font-size: 13px; font-weight: 300;
+  text-transform: none; letter-spacing: 0;
+  color: var(--muted); cursor: pointer;
+}
+
+.submit-btn {
+  width: 100%; padding: 18px;
+  background: var(--gold); color: var(--deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.1em; border: none;
+  cursor: pointer; transition: background 0.2s;
+}
+.submit-btn:hover { background: var(--gold-light); }
+
+/* ── GENEROSITY ── */
+.generosity-bg { background: var(--deep); }
+
+.give-box {
+  max-width: 560px; margin: 0 auto;
+  text-align: center; padding: 56px 40px;
+  border: 1px solid rgba(200,146,42,0.2);
+}
+
+.give-verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  color: rgba(245,237,216,0.65);
+  line-height: 1.6; margin-bottom: 8px;
+}
+
+.give-ref {
+  font-size: 11px; letter-spacing: 0.2em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 32px; display: block;
+}
+
+.give-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--gold); color: var(--deep);
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.08em; text-decoration: none;
+  transition: background 0.2s;
+}
+.give-btn:hover { background: var(--gold-light); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  position: relative; overflow: hidden;
+  padding: 100px 24px; text-align: center;
+}
+
+.cta-band-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&h=800&fit=crop&q=80') center/cover no-repeat;
+}
+
+.cta-band-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(13,13,13,0.78);
+}
+
+.cta-band-content { position: relative; z-index: 1; }
+
+.cta-band-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 600; color: #F5EDD8;
+  margin-bottom: 16px; line-height: 1.1;
+}
+
+.cta-band-sub {
+  font-size: 16px; font-weight: 300;
+  color: rgba(245,237,216,0.55);
+  margin-bottom: 40px;
+}
+
+.cta-band-btns {
+  display: flex; gap: 16px;
+  justify-content: center; flex-wrap: wrap;
+}
+
+/* ── FOOTER ── */
+.footer { background: var(--deep); padding: 64px 24px 40px; }
+
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-logo-img { height: 48px; margin-bottom: 20px; }
+
+.footer-tagline {
+  font-size: 14px; font-weight: 300;
+  color: rgba(245,237,216,0.45);
+  line-height: 1.7; margin-bottom: 24px;
+  max-width: 280px;
+}
+
+.footer-socials { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.footer-social {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(200,146,42,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(245,237,216,0.45); text-decoration: none;
+  font-size: 14px; transition: all 0.2s;
+}
+.footer-social:hover { border-color: var(--gold); color: var(--gold); }
+
+.footer-col-title {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-links a {
+  font-size: 14px; font-weight: 300;
+  color: rgba(245,237,216,0.45);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-address {
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,237,216,0.4);
+  line-height: 1.8;
+}
+
+.footer-address a {
+  color: rgba(245,237,216,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-address a:hover { color: var(--gold); }
+
+.footer-bottom {
+  max-width: 1100px; margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(200,146,42,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+
+.footer-copy {
+  font-size: 12px; color: rgba(245,237,216,0.25);
+  letter-spacing: 0.05em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .leader-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .nav { padding: 0 20px; }
+  .values-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .builders-inner { flex-direction: column; text-align: center; }
+  .builders-text { text-align: center; }
+  .leader-stats { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#"><img src="https://storage.googleapis.com/rewebly-c2c2b.firebasestorage.app/projects/j0imv2O2DZSmUWxLFNv2/assets/image_0.png" alt="Kingdom Insights Ministries" class="nav-logo" style="height:44px;"></a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#serve">Serve & Volunteer</a></li>
+    <li><a href="/generosity">Generosity</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/vision" style="color:var(--gold);">Vision Night</a></li>
+    <li><a href="/builders" style="color:var(--gold);">Builders Gathering</a></li>
+    <li><a href="/launch" style="color:var(--gold);">Ministry Launch</a></li>
+  </ul>
+  <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="nav-give">Online Giving</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About Us</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#team" onclick="closeMenu()">Our Team</a>
+  <a href="#serve" onclick="closeMenu()">Serve & Volunteer</a>
+  <a href="/generosity" onclick="closeMenu()">Generosity</a>
+  <a href="/contact" onclick="closeMenu()">Contact</a>
+  <a href="/vision" style="color:var(--gold);">Vision Night ✦</a>
+  <a href="/builders" style="color:var(--gold);">Builders Gathering ✦</a>
+  <a href="/launch" style="color:var(--gold);">Ministry Launch ✦</a>
+  <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank">Online Giving</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Kingdom Insights Ministries · Hurst, TX</p>
+    <h1 class="hero-title">Become a<br>New Member</h1>
+    <p class="hero-sub">Serving is one of the highest expressions of love and the purest evidence of a life transformed by Christ.</p>
+    <div class="hero-btns">
+      <a href="/contact" class="btn-gold">Step In & Step Up</a>
+      <a href="#serve" class="btn-outline">Explore Ministries</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- BUILDERS BANNER -->
+<div class="builders-banner">
+  <div class="builders-inner">
+    <div class="builders-text">
+      <p class="builders-eyebrow">Coming July 25, 2025</p>
+      <p class="builders-headline">The Builders Gathering — Foundations Night</p>
+      <p class="builders-detail">Compass Center · Grapevine, TX · 6:00 PM – 8:00 PM</p>
+    </div>
+    <a href="builders/builders.html" class="builders-btn">Learn More & RSVP →</a>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section services-bg" id="services">
+  <div class="section-inner">
+    <div class="services-intro">
+      <p class="eyebrow" style="color:var(--gold); justify-content:center;">Gather With Us</p>
+      <h2 class="section-title section-title-light">Our Services</h2>
+      <p style="font-size:16px; font-weight:300; color:rgba(245,237,216,0.5); max-width:520px; margin:0 auto;">Every gathering is a divine appointment. Come expecting a word, an encounter, and a community that will walk alongside you.</p>
+      <p class="services-location">4201 Pool Rd, Grapevine, TX 76051 · Available In Person & Online</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <p class="service-tag">Every Saturday · Optional</p>
+        <p class="service-time">5:00 PM</p>
+        <p class="service-duration">5:00 PM – 6:00 PM</p>
+        <h3 class="service-name">Intercession & Personal Prayer</h3>
+        <p class="service-desc">Come early and seek the face of God. This dedicated prayer hour is open to all who desire a deeper encounter before the service begins. Intercessors, prayer warriors, and newcomers are all welcome.</p>
+      </div>
+      <div class="service-card" style="border-color:rgba(200,146,42,0.3);">
+        <p class="service-tag">Every Saturday · Main Service</p>
+        <p class="service-time">6:00 PM</p>
+        <p class="service-duration">6:00 PM – 8:00 PM</p>
+        <h3 class="service-name">Saturday Service</h3>
+        <p class="service-desc">Experience powerful corporate worship, prophetic ministry, and the transformative teaching of Apostle Joshua Poro. Every Saturday is an encounter with the living God.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✝️</div>
+        <p class="service-tag">Special · Sunday April 5, 2026</p>
+        <h3 class="service-name">Easter Sunday Service</h3>
+        <p class="service-desc">Celebrate the resurrection of Jesus Christ with a special Easter service filled with worship, Word, and the joy of the risen King. Time TBD — Check Back Soon.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⭐</div>
+        <p class="service-tag">Special · Wednesday December 24, 2026</p>
+        <h3 class="service-name">Christmas Service</h3>
+        <p class="service-desc">Honor the birth of our Savior with a Christmas celebration service. Come and worship Emmanuel — God with us. Time TBD — Check Back Soon.</p>
+      </div>
+    </div>
+    <div style="display:flex; gap:16px; justify-content:center; margin-top:48px; flex-wrap:wrap;">
+      <a href="/contact" class="btn-gold">Plan Your First Visit</a>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="btn-outline" style="color:rgba(245,237,216,0.8); border-color:rgba(245,237,216,0.25);">Give Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow">Our Heart</p>
+        <h2 class="section-title">A Ministry Built<br>on <em>Purpose</em></h2>
+        <p class="body-text">At Kingdom Insights Ministries, we believe that serving is one of the highest expressions of love and the purest evidence of a life transformed by Christ. If God has placed a desire in your heart to serve — to give your time, your gifts, and your hands for His glory — we invite you to step in and step up.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <p class="value-verse">Hebrews 11:6</p>
+          <h3 class="value-title">Faith</h3>
+          <p class="value-desc">Faith in Jesus Christ is the foundation of salvation and spiritual transformation.</p>
+        </div>
+        <div class="value-card">
+          <p class="value-verse">Matthew 28:19-20</p>
+          <h3 class="value-title">Discipleship</h3>
+          <p class="value-desc">Growing in God's Word and living out our faith with authenticity and intentionality.</p>
+        </div>
+        <div class="value-card">
+          <p class="value-verse">Jeremiah 29:11</p>
+          <h3 class="value-title">Purpose</h3>
+          <p class="value-desc">Every individual has a unique God-given calling. We help them discover and live it out.</p>
+        </div>
+        <div class="value-card">
+          <p class="value-verse">Acts 2:42-47</p>
+          <h3 class="value-title">Community</h3>
+          <p class="value-desc">Fellowship and unity — we are stronger together as the body of Christ.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+
+<!-- FOUNDATION -->
+<section class="section foundation-bg">
+  <div class="section-inner">
+    <p class="eyebrow" style="color:var(--gold);">Who We Are & Why We Exist</p>
+    <h2 class="section-title section-title-light">Our <em>Foundation</em></h2>
+    <div class="foundation-grid">
+      <div class="foundation-card">
+        <p class="foundation-label">Our Mission</p>
+        <h3 class="foundation-title">What We Do</h3>
+        <p class="foundation-text">To empower believers with transformative Kingdom insights — cultivating discipleship, purpose, and spiritual growth through the teachings of Jesus Christ, while fostering a community of support, accountability, and love.</p>
+      </div>
+      <div class="foundation-card">
+        <p class="foundation-label">Our Vision</p>
+        <h3 class="foundation-title">Where We're Going</h3>
+        <p class="foundation-text">To see every believer equipped with divine purpose, empowered to live out their faith boldly, and passionate about making disciples who impact the world for God's glory.</p>
+      </div>
+      <div class="foundation-card">
+        <p class="foundation-label">Matthew 20:28</p>
+        <h3 class="foundation-title">Service</h3>
+        <p class="foundation-text">Serving others with compassion, humility, and generosity — reflecting the heart of Christ in everything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT OF FAITH -->
+<section class="section">
+  <div class="section-inner">
+    <p class="eyebrow">What We Believe</p>
+    <h2 class="section-title">Statement of <em>Faith</em></h2>
+    <div class="faith-grid">
+      <div class="faith-card">
+        <p class="faith-verse">Genesis 1:1, John 1:1-14</p>
+        <h3 class="faith-title">God</h3>
+        <p class="faith-text">We believe in one God, eternally existing in three persons: Father, Son, and Holy Spirit — Creator of all things and source of all life.</p>
+      </div>
+      <div class="faith-card">
+        <p class="faith-verse">John 14:6, 1 Corinthians 15:3-4</p>
+        <h3 class="faith-title">Jesus Christ</h3>
+        <p class="faith-text">Jesus Christ is the Son of God, fully God and fully man. He lived sinlessly, died for our sins, and rose on the third day, providing salvation for all who believe.</p>
+      </div>
+      <div class="faith-card">
+        <p class="faith-verse">Acts 1:8, John 14:26</p>
+        <h3 class="faith-title">Holy Spirit</h3>
+        <p class="faith-text">The Holy Spirit empowers believers for Godly living, equips them with spiritual gifts, and guides them in their walk with Christ.</p>
+      </div>
+      <div class="faith-card">
+        <p class="faith-verse">2 Timothy 3:16-17</p>
+        <h3 class="faith-title">The Bible</h3>
+        <p class="faith-text">The Bible is the inspired, inerrant Word of God — authoritative in all matters of faith and practice.</p>
+      </div>
+      <div class="faith-card">
+        <p class="faith-verse">Ephesians 2:8-9</p>
+        <h3 class="faith-title">Salvation</h3>
+        <p class="faith-text">Salvation is by grace through faith in Jesus Christ alone — a free gift, not based on works, but on God's love and mercy.</p>
+      </div>
+      <div class="faith-card">
+        <p class="faith-verse">John 3:16, Revelation 20:15</p>
+        <h3 class="faith-title">Eternal Life</h3>
+        <p class="faith-text">We believe in eternal life with God for all who trust in Jesus Christ, and in the reality of eternal separation from God for those who reject Him.</p>
+      </div>
+    </div>
+    <div class="faith-scripture">
+      <p class="faith-quote">"For God so loved the world that He gave His only Son, that whoever believes in Him shall not perish but have eternal life."</p>
+      <p class="faith-ref">John 3:16</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVE -->
+<section class="section" id="serve" style="background:var(--gold-pale); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <p class="eyebrow">Where You Can Serve</p>
+    <h2 class="section-title">Find Your <em>Place</em></h2>
+    <p class="body-text" style="max-width:600px;">Whether you're outgoing or behind-the-scenes, experienced or just getting started — there is room for you in this house.</p>
+    <div class="serve-grid">
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop&q=80" alt="Worship Team" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Worship Team</h3>
+          <p class="serve-desc">Use your musical gifts to lead the congregation into the presence of God through praise and worship.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=400&fit=crop&q=80" alt="Media & Production" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Media & Production</h3>
+          <p class="serve-desc">Help bring the Saturday experience to life through audio, video, lighting, and digital content.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop&q=80" alt="Children's Ministry" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Children's Ministry</h3>
+          <p class="serve-desc">Create a fun, safe, and transformative experience for the next generation of believers.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop&q=80" alt="Hospitality & Greeting" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Hospitality & Greeting</h3>
+          <p class="serve-desc">Be the first smile and warm welcome for every guest who walks through our doors.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop&q=80" alt="Outreach & Missions" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Outreach & Missions</h3>
+          <p class="serve-desc">Take the love of Christ beyond our walls through community service and outreach events.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&h=400&fit=crop&q=80" alt="Small Groups" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Small Groups</h3>
+          <p class="serve-desc">Lead or co-lead a small group to nurture spiritual growth in an intimate setting.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop&q=80" alt="Safety & Security" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Safety & Security</h3>
+          <p class="serve-desc">Help maintain a safe and secure environment so everyone can worship freely.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+      <div class="serve-card">
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&h=400&fit=crop&q=80" alt="Café & Fellowship" class="serve-img">
+        <div class="serve-body">
+          <h3 class="serve-name">Café & Fellowship</h3>
+          <p class="serve-desc">Serve behind the scenes to create a warm, inviting atmosphere where connections are made.</p>
+          <a href="/contact" class="serve-link">Join This Team →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-bg">
+  <div class="section-inner">
+    <p class="eyebrow" style="color:var(--gold);">Voices of Our Community</p>
+    <h2 class="section-title section-title-light">Lives <em>Transformed</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p class="testi-quote">"Joining the volunteer team at KIM is the best decision I ever made. I found my purpose and a family that loves deeply. Can't wait to Launch."</p>
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80" alt="Sarah M." class="testi-avatar">
+        <p class="testi-name">Sarah M.</p>
+        <p class="testi-role">Worship Team Volunteer</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"I came in shy and unsure, but the people here embraced me. Serving in children's ministry changed my life and theirs."</p>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&q=80" alt="David K." class="testi-avatar">
+        <p class="testi-name">David K.</p>
+        <p class="testi-role">Children's Ministry Leader</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"Being part of this house has shown me what it truly means to be a servant-hearted person. God is moving here."</p>
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&q=80" alt="Maria G." class="testi-avatar">
+        <p class="testi-name">Maria G.</p>
+        <p class="testi-role">Hospitality Team</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADER -->
+<section class="section" id="team">
+  <div class="section-inner">
+    <p class="eyebrow">The People Behind the Vision</p>
+    <h2 class="section-title">Our <em>Leadership</em></h2>
+    <div class="leader-grid">
+      <div class="leader-img-wrap">
+        <img src="apostle-joshua-poro.jpg" alt="Apostle Joshua Poro" class="leader-img">
+        <div class="leader-stats">
+          <div class="stat-box"><span class="stat-num">10+</span><span class="stat-label">Years Ministry</span></div>
+          <div class="stat-box"><span class="stat-num">48K+</span><span class="stat-label">Global Followers</span></div>
+          <div class="stat-box"><span class="stat-num">22K+</span><span class="stat-label">YouTube Subs</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="leader-role">Vision Bearer & Lead Apostle</p>
+        <h2 class="leader-name">Apostle Joshua Poro</h2>
+        <p class="leader-title">Apostle of Revelation, Awakening & Kingdom Manifestation</p>
+        <p class="leader-bio">Apostle Joshua Poro is a voice for this generation — called, anointed, and appointed to reveal Christ with depth, clarity, and power. As the Vision Bearer of Kingdom Insights Ministries, he carries a mandate to unlock purpose and restore identity in Christ.</p>
+        <p class="leader-bio">With over 10 years of impactful online ministry and a global footprint of more than 48,000 digital followers, his messages are marked by revelation knowledge, apostolic fire, and prophetic accuracy — convicting the heart, renewing the mind, and awakening dormant callings.</p>
+        <blockquote class="leader-quote">"At Kingdom Insights, we are more than a ministry — we are a movement of purpose-driven believers who are passionate about knowing Christ and making Him known."</blockquote>
+        <div class="social-links">
+          <a href="https://www.youtube.com/@joshuaporo" target="_blank" class="social-link">YouTube</a>
+          <a href="https://www.facebook.com/JoshuaPoroII" target="_blank" class="social-link">Facebook</a>
+          <a href="https://www.tiktok.com/@porojosh" target="_blank" class="social-link">TikTok</a>
+          <a href="https://www.instagram.com/joshuaporo/" target="_blank" class="social-link">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="section" id="contact" style="position:relative; overflow:hidden; border-top:1px solid var(--border);">
+  <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&h=900&fit=crop&q=80') center/cover no-repeat; z-index:0;"></div>
+  <div style="position:absolute; inset:0; background:rgba(13,13,13,0.82); z-index:1;"></div>
+  <div class="section-inner" style="position:relative; z-index:2;">
+    <p class="eyebrow">Get Involved</p>
+    <h2 class="section-title" style="color:#F5EDD8;">Ready to <em>Serve?</em></h2>
+    <div class="contact-grid">
+      <div>
+        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=700&h=500&fit=crop&q=80" alt="Community serving together" class="contact-img">
+        <div class="contact-meta">"There is room for you."<br><span style="font-size:14px; font-style:normal; color:var(--muted); font-family:'DM Sans',sans-serif;">— Kingdom Insights Ministries</span></div>
+      </div>
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:8px;">Become a New Member</h3>
+        <p style="font-size:14px; color:var(--muted); margin-bottom:28px;">All fields marked with * are required</p>
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div class="form-group">
+              <label for="cf-first">First Name *</label>
+              <input type="text" id="cf-first" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+              <label for="cf-last">Last Name *</label>
+              <input type="text" id="cf-last" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cf-phone">Phone *</label>
+            <input type="tel" id="cf-phone" placeholder="(817) 555-0100" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email *</label>
+            <input type="email" id="cf-email" placeholder="you@example.com" required>
+          </div>
+          <div class="checkbox-row" style="margin-bottom:24px;">
+            <input type="checkbox" id="cf-news">
+            <label for="cf-news">Sign up for news and updates</label>
+          </div>
+          <div class="form-group">
+            <label for="cf-position">Serve or Volunteer Position *</label>
+            <select id="cf-position" required>
+              <option value="">Select an option</option>
+              <option>Worship Team</option>
+              <option>Media & Production</option>
+              <option>Children's Ministry</option>
+              <option>Hospitality & Greeting</option>
+              <option>Safety & Security</option>
+              <option>Outreach & Missions</option>
+              <option>Café & Fellowship</option>
+              <option>Small Groups</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" placeholder="Tell us more about yourself..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+        <div id="form-success" style="display:none; padding:32px; background:white; border:1px solid var(--border); text-align:center; margin-top:16px;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:var(--ink); margin-bottom:10px;">Application Received ✦</p>
+          <p style="font-size:15px; font-weight:300; color:var(--muted);">Thank you! Someone from our team will reach out to you personally.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENEROSITY -->
+<section class="section generosity-bg" id="generosity">
+  <div class="section-inner" style="text-align:center;">
+    <p class="eyebrow" style="color:var(--gold); justify-content:center;">Give Online</p>
+    <h2 class="section-title section-title-light">Support the <em>Kingdom</em></h2>
+    <div class="give-box">
+      <p class="give-verse">"Bring the whole tithe into the storehouse..."</p>
+      <span class="give-ref">Malachi 3:10</span>
+      <p style="font-size:15px; font-weight:300; color:rgba(245,237,216,0.5); margin-bottom:32px; line-height:1.7;">Your generosity enables Kingdom Insights Ministries to spread the Gospel and build the Kingdom of God.</p>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="give-btn">Give Online via Tithe.ly</a>
+      <p style="margin-top:16px; font-size:13px; color:rgba(245,237,216,0.3);">Or become a <a href="builders/generosity.html" style="color:var(--gold); text-decoration:none;">Founding Partner →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="cta-band-content">
+    <h2 class="cta-band-title">Your Next Step<br>Starts Today</h2>
+    <p class="cta-band-sub">Don't wait to make a difference. Whether through serving, giving, or connecting — God is calling you to be part of something extraordinary.</p>
+    <div class="cta-band-btns">
+      <a href="/contact" class="btn-gold">Join Our Team</a>
+      <a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank" class="btn-outline" style="color:rgba(245,237,216,0.8); border-color:rgba(245,237,216,0.25);">Give Online</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <img src="https://storage.googleapis.com/rewebly-c2c2b.firebasestorage.app/projects/j0imv2O2DZSmUWxLFNv2/assets/image_1.png" alt="Kingdom Insights Ministries" class="footer-logo-img">
+      <p class="footer-tagline">Building a ministry fueled by servant-hearted people. We believe serving is one of the highest expressions of love.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/JoshuaPoroII" target="_blank" class="footer-social">f</a>
+        <a href="https://www.instagram.com/joshuaporo/" target="_blank" class="footer-social">in</a>
+        <a href="https://www.youtube.com/@joshuaporo" target="_blank" class="footer-social">▶</a>
+        <a href="https://www.tiktok.com/@porojosh" target="_blank" class="footer-social">tt</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Quick Links</p>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#serve">Serve & Volunteer</a></li>
+        <li><a href="builders/builders.html">Builders Gathering</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Connect</p>
+      <ul class="footer-links">
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="https://give.tithe.ly/?formId=4a3a9c26-b54a-4b76-bc6d-f187ac5e25af" target="_blank">Online Giving</a></li>
+        <li><a href="builders/generosity.html">Founding Partner</a></li>
+        <li><a href="builders/register.html">Join Launch Team</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Visit Us</p>
+      <div class="footer-address">
+        <p>1418 W Pipeline Rd #145<br>Hurst, TX 76053</p>
+        <br>
+        <p><a href="mailto:jporo@kim.church">jporo@kim.church</a></p>
+        <p><a href="tel:+14694648295">(469) 464-8295</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Kingdom Insights Ministries. All rights reserved.</p>
+    <p class="footer-copy">Made with ♥ for His Kingdom</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
