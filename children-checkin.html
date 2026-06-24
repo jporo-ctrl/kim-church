@@ -368,6 +368,17 @@
       return `${initials}-${num}`;
     }
 
+    // Auto-fill from localStorage on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('kim_parent');
+      if (saved) {
+        const p = JSON.parse(saved);
+        document.getElementById('parentName').value = p.name || '';
+        document.getElementById('parentPhone').value = p.phone || '';
+        document.getElementById('parentEmail').value = p.email || '';
+      }
+    });
+
     function showError(msg) {
       const el = document.getElementById('errorMsg');
       el.textContent = msg;
@@ -429,8 +440,9 @@
         document.getElementById('ticketChild').textContent = `${childName} · checked in at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
         document.getElementById('formView').style.display = 'none';
         document.getElementById('successView').style.display = 'block';
-        // Save parent info for next child
+        // Save parent info for next child and to localStorage
         window._savedParent = { name: parentName, phone: parentPhone, email: parentEmail };
+        localStorage.setItem('kim_parent', JSON.stringify({ name: parentName, phone: parentPhone, email: parentEmail }));
 
       } catch (err) {
         showError(err.message || 'Could not check in. Please try again.');

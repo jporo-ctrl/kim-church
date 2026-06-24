@@ -374,6 +374,21 @@
         <div class="error-msg" id="pickupError"></div>
 
         <button class="submit-btn" onclick="handlePickup()">Find My Child</button>
+
+        <div style="text-align:center; margin-top:16px;">
+          <button onclick="toggleLookup()" style="background:none; border:none; color:var(--gold); font-size:13px; font-family:Inter,sans-serif; cursor:pointer; text-decoration:underline;">I lost my pick-up code</button>
+        </div>
+
+        <div id="lookupSection" style="display:none; margin-top:20px;">
+          <div class="section-label">Look Up My Code</div>
+          <div class="field">
+            <label>Your Phone Number</label>
+            <input type="tel" id="lookupPhone" placeholder="Phone used at check-in" />
+          </div>
+          <div class="error-msg" id="lookupError"></div>
+          <button class="submit-btn" onclick="handleLookup()">Find My Children</button>
+          <div id="lookupResults" style="margin-top:16px;"></div>
+        </div>
       </div>
 
       <!-- Child found -->
@@ -569,6 +584,42 @@
         btn.textContent = '✓ Confirm & Check Out';
         alert('Something went wrong. Please try again or see an attendant.');
       }
+    }
+
+    function toggleLookup() {
+      const s = document.getElementById('lookupSection');
+      s.style.display = s.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function handleLookup() {
+      const phone = document.getElementById('lookupPhone').value.trim();
+        document.getElementById('lookupError').textContent = 'Please enter your phone number.';
+        document.getElementById('lookupError').style.display = 'block';
+        return;
+      }
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = 'Searching...';
+
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/kim_children_checkin?parent_phone=eq.${encodeURIComponent(phone)}&status=eq.checked_in&select=child_name,pickup_code,checked_in_at`,
+        { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+      );
+      const records = await res.json();
+      btn.disabled = false;
+      btn.textContent = 'Find My Children';
+
+      const el = document.getElementById('lookupResults');
+        el.innerHTML = '<p style="color:#e88080; font-size:13px; text-align:center;">No active check-ins found for that number.</p>';
+        return;
+      }
+      el.innerHTML = records.map(r => `
+        <div class="ticket" style="margin-bottom:12px;">
+          <div class="ticket-label">Pick-Up Code</div>
+          <div class="ticket-value">${r.pickup_code}</div>
+          <div class="ticket-sub">${r.child_name} · checked in at ${new Date(r.checked_in_at).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>
+        </div>
+      `).join('');
     }
 
     function resetPickup() {
