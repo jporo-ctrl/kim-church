@@ -430,7 +430,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   <p class="hero-subtitle">Come hear what God is building</p>
 
   <div class="hero-date-block">
-    <span class="hero-date">Saturday, July 27, 2025</span>
+    <span class="hero-date">Friday, June 27, 2026</span>
     <span class="hero-time">6:00 PM – 8:00 PM · Compass Center</span>
     <span class="hero-location">4201 Pool Road, Grapevine, TX 76051</span>
   </div>
@@ -497,7 +497,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
       <div class="journey-step">
         <div class="step-dot active">1</div>
         <div class="step-content">
-          <p class="step-date">Saturday · July 27, 2025 · 6:00 PM – 8:00 PM</p>
+          <p class="step-date">Friday · June 27, 2026 · 6:00 PM – 8:00 PM</p>
           <h3 class="step-title">Vision Night</h3>
           <p class="step-desc">The vision is cast. You come, you hear, you see what God is building. This is the beginning — the open door for anyone who is searching.</p>
           <a href="#rsvp" class="step-link">RSVP Now →</a>
@@ -534,7 +534,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 <section class="rsvp-section" id="rsvp">
   <p class="eyebrow">Reserve Your Seat</p>
   <h2 class="section-title" style="margin-bottom:12px;">We saved a seat<br>for <em>you</em>.</h2>
-  <p class="body-text" style="margin-bottom:40px;">Seating is limited. Fill out the form below and we'll confirm your spot for Vision Night on July 27.</p>
+  <p class="body-text" style="margin-bottom:40px;">Seating is limited. Fill out the form below and we'll confirm your spot for Vision Night on June 27.</p>
 
   <div class="form-card" id="form-card">
     <form id="vision-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event)">
@@ -576,7 +576,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
           <textarea id="note" name="message" placeholder="Questions, prayer requests, or just say hello..."></textarea>
         </div>
         <div class="form-group full">
-          <button type="submit" class="submit-btn">Reserve My Seat for Saturday July 27</button>
+          <button type="submit" class="submit-btn">Reserve My Seat for Saturday June 27</button>
         </div>
       </div>
     </form>
@@ -585,7 +585,7 @@ textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   <div class="success-message" id="success-msg">
     <div class="success-icon">✦</div>
     <h2 class="success-title">You're on the list.</h2>
-    <p class="success-body">We'll see you Saturday July 27 at 6:00 PM at the Compass Center. Someone from the KIM team will be in touch to confirm your seat. Bring someone with you.</p>
+    <p class="success-body">We'll see you Saturday June 27 at 6:00 PM at the Compass Center. Someone from the KIM team will be in touch to confirm your seat. Bring someone with you.</p>
   </div>
 </section>
 
@@ -610,25 +610,29 @@ async function handleSubmit(e) {
   btn.disabled = true;
 
   try {
-    const response = await fetch('https://formspree.io/f/mwvjkwkg', {
+    const data = {
+      full_name: (form.querySelector('[name="first_name"]').value.trim() + ' ' + form.querySelector('[name="last_name"]').value.trim()).trim(),
+      phone: form.querySelector('[name="phone"]').value.trim(),
+      email: form.querySelector('[name="email"]').value.trim(),
+      how_heard: form.querySelector('[name="how_heard"]').value.trim()
+    };
+    const response = await fetch('/api/vision-register', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-
+    const json = await response.json();
     if (response.ok) {
       document.getElementById('form-card').style.display = 'none';
       document.getElementById('success-msg').style.display = 'block';
       window.scrollTo({ top: document.getElementById('success-msg').offsetTop - 100, behavior: 'smooth' });
     } else {
-      const json = await response.json();
-      const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
-      btn.textContent = 'Reserve My Seat for July 27';
+      btn.textContent = 'Reserve My Seat - June 27';
       btn.disabled = false;
-      alert(msg);
+      alert(json.error || 'Something went wrong. Please try again.');
     }
   } catch (err) {
-    btn.textContent = 'Reserve My Seat for July 27';
+    btn.textContent = 'Reserve My Seat - June 27';
     btn.disabled = false;
     alert('Network error. Please check your connection and try again.');
   }
