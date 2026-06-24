@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children's Check-In — Kingdom Insights Ministries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --white: #ffffff;
+      --off-white: #f8f5ef;
+      --gray: #6b6b6b;
+      --border: rgba(201,168,76,0.25);
+      --success: #2d7a4f;
+      --error: #b94040;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 48px;
+    }
+
+    /* Header */
+    .header {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+
+    .logo-mark {
+      width: 56px;
+      height: 56px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .ministry-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .gold-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 20px auto 0;
+    }
+
+    /* Card */
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: #111111;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #aaa;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--gold);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #444;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.4) sepia(1) saturate(3) hue-rotate(5deg);
+      cursor: pointer;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover { background: var(--gold-light); }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Success state */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--gold-dim);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .success-sub {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .ticket {
+      background: var(--gold-dim);
+      border: 1px dashed var(--gold);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .ticket-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .ticket-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--white);
+    }
+
+    .ticket-sub {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .new-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .new-btn:hover { border-color: var(--gold); }
+
+    .error-msg {
+      background: rgba(185,64,64,0.1);
+      border: 1px solid rgba(185,64,64,0.3);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #e88080;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo-mark">KIM</div>
+    <p class="ministry-name">Kingdom Insights Ministries</p>
+    <h1 class="page-title">Children's Check-In</h1>
+    <p class="page-subtitle">Fill out this form to check your child in safely.<br>You'll receive a pick-up code when done.</p>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="card">
+
+    <!-- Form -->
+    <div id="formView">
+      <div class="section-label">Parent / Guardian</div>
+
+      <div class="field">
+        <label>Full Name *</label>
+        <input type="text" id="parentName" placeholder="Your full name" />
+      </div>
+
+      <div class="field">
+        <label>Phone Number *</label>
+        <input type="tel" id="parentPhone" placeholder="(555) 000-0000" />
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="parentEmail" placeholder="you@example.com" />
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Child Information</div>
+
+      <div class="field">
+        <label>Child's Full Name *</label>
+        <input type="text" id="childName" placeholder="Child's full name" />
+      </div>
+
+      <div class="field">
+        <label>Date of Birth *</label>
+        <input type="date" id="childDob" />
+      </div>
+
+      <div class="field">
+        <label>Allergies or Medical Notes</label>
+        <textarea id="allergies" placeholder="Any allergies, medications, or special needs our team should know about..."></textarea>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Check In My Child</button>
+    </div>
+
+    <!-- Success -->
+    <div class="success-screen" id="successView">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">Checked In!</h2>
+      <p class="success-sub">Your child is safely checked in.<br>Show this code when picking up.</p>
+
+      <div class="ticket">
+        <div class="ticket-label">Pick-Up Code</div>
+        <div class="ticket-value" id="ticketCode">—</div>
+        <div class="ticket-sub" id="ticketChild">—</div>
+      </div>
+
+      <button class="new-btn" onclick="resetForm()">Check In Another Child</button>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Kingdom Insights Ministries · Children's Ministry</p>
+
+  <script>
+    const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemplam16bnZobWF2cSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzM5OTIyNjI3LCJleHAiOjIwNTU0OTg2Mjd9.V_CcNomk_cHaGkBfBfFXjBIBMPMJCEBCMJAvpBpNLlE';
+
+    function generateCode(childName) {
+      const initials = childName.trim().split(' ').map(w => w[0]).join('').toUpperCase().slice(0,3);
+      const num = Math.floor(1000 + Math.random() * 9000);
+      return `${initials}-${num}`;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideError() {
+      document.getElementById('errorMsg').style.display = 'none';
+    }
+
+    async function handleSubmit() {
+      hideError();
+      const parentName = document.getElementById('parentName').value.trim();
+      const parentPhone = document.getElementById('parentPhone').value.trim();
+      const parentEmail = document.getElementById('parentEmail').value.trim();
+      const childName = document.getElementById('childName').value.trim();
+      const childDob = document.getElementById('childDob').value;
+      const allergies = document.getElementById('allergies').value.trim();
+
+      if (!parentName || !parentPhone || !childName || !childDob) {
+        showError('Please fill in all required fields.');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Checking in...';
+
+      const pickupCode = generateCode(childName);
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/kim_children_checkin`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            parent_name: parentName,
+            parent_phone: parentPhone,
+            parent_email: parentEmail || null,
+            child_name: childName,
+            child_dob: childDob,
+            allergies: allergies || null,
+            pickup_code: pickupCode,
+            status: 'checked_in'
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.message || 'Something went wrong.');
+        }
+
+        // Show success
+        document.getElementById('ticketCode').textContent = pickupCode;
+        document.getElementById('ticketChild').textContent = `${childName} · checked in at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').style.display = 'block';
+
+      } catch (err) {
+        showError(err.message || 'Could not check in. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Check In My Child';
+      }
+    }
+
+    function resetForm() {
+      ['parentName','parentPhone','parentEmail','childName','childDob','allergies'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = false;
+      btn.textContent = 'Check In My Child';
+      document.getElementById('successView').style.display = 'none';
+      document.getElementById('formView').style.display = 'block';
+      hideError();
+    }
+  </script>
+</body>
+</html>

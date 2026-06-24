@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children's Pick-Up — Kingdom Insights Ministries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --white: #ffffff;
+      --off-white: #f8f5ef;
+      --gray: #6b6b6b;
+      --border: rgba(201,168,76,0.25);
+      --success: #2d7a4f;
+      --success-dim: rgba(45,122,79,0.15);
+      --error: #b94040;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 48px;
+    }
+
+    .header {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+
+    .logo-mark {
+      width: 56px;
+      height: 56px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+    }
+
+    .ministry-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .gold-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 20px auto 0;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: #111111;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+
+    .tab-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 9px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      color: var(--gray);
+      border: none;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tab.active {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .field { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input:focus { border-color: var(--gold); }
+    input::placeholder { color: #444; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover { background: var(--gold-light); }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .error-msg {
+      background: rgba(185,64,64,0.1);
+      border: 1px solid rgba(185,64,64,0.3);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #e88080;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* Child result card */
+    .child-card {
+      background: var(--gold-dim);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .child-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .child-card-meta {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .child-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #aaa;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .child-card-row:last-child { border-bottom: none; }
+    .child-card-row span:last-child { color: var(--white); font-weight: 500; }
+
+    .checkout-btn {
+      width: 100%;
+      background: #2d7a4f;
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 16px;
+    }
+    .checkout-btn:hover { background: #3a9462; }
+    .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Checked out success */
+    .success-screen { display: none; text-align: center; padding: 12px 0; }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--success-dim);
+      border: 2px solid #2d7a4f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .success-sub {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .new-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+    }
+    .new-btn:hover { border-color: var(--gold); }
+
+    /* Attendant tab */
+    .info-box {
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .attendant-registered {
+      display: none;
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    .att-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .att-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .att-sub { font-size: 13px; color: var(--gray); }
+
+    .footer-note {
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo-mark">KIM</div>
+    <p class="ministry-name">Kingdom Insights Ministries</p>
+    <h1 class="page-title">Children's Pick-Up</h1>
+    <p class="page-subtitle">Enter your pick-up code to release your child.<br>Attendants: register below to receive alerts.</p>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="card">
+
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab('pickup')">Parent Pick-Up</button>
+      <button class="tab" onclick="switchTab('attendant')">Attendant Sign-In</button>
+    </div>
+
+    <!-- PICKUP PANEL -->
+    <div class="panel active" id="panel-pickup">
+
+      <div id="pickupForm">
+        <div class="section-label">Verify Identity</div>
+
+        <div class="field">
+          <label>Pick-Up Code *</label>
+          <input type="text" id="pickupCode" placeholder="e.g. JOH-4821" style="text-transform:uppercase; letter-spacing: 2px;" />
+        </div>
+
+        <div class="field">
+          <label>Your Phone Number *</label>
+          <input type="tel" id="pickupPhone" placeholder="Must match check-in number" />
+        </div>
+
+        <div class="error-msg" id="pickupError"></div>
+
+        <button class="submit-btn" onclick="handlePickup()">Find My Child</button>
+      </div>
+
+      <!-- Child found -->
+      <div id="childFound" style="display:none;">
+        <div class="child-card" id="childCard">
+          <div class="child-card-name" id="foundChildName">—</div>
+          <div class="child-card-meta" id="foundCheckinTime">—</div>
+          <div class="child-card-row"><span>Parent</span><span id="foundParentName">—</span></div>
+          <div class="child-card-row"><span>Phone</span><span id="foundParentPhone">—</span></div>
+          <div class="child-card-row"><span>Allergies</span><span id="foundAllergies">None</span></div>
+        </div>
+        <p style="font-size:13px; color: var(--gray); margin-bottom: 12px; text-align:center;">Confirm this is your child, then tap below.</p>
+        <button class="checkout-btn" id="checkoutBtn" onclick="handleCheckout()">✓ Confirm & Check Out</button>
+      </div>
+
+      <!-- Checked out success -->
+      <div class="success-screen" id="pickupSuccess">
+        <div class="success-icon">✓</div>
+        <h2 class="success-title">Checked Out!</h2>
+        <p class="success-sub" id="checkoutMsg">Your child has been released.<br>See you next time!</p>
+        <button class="new-btn" onclick="resetPickup()">Done</button>
+      </div>
+
+    </div>
+
+    <!-- ATTENDANT PANEL -->
+    <div class="panel" id="panel-attendant">
+
+      <div id="attendantForm">
+        <div class="info-box">
+          📲 Register your name and phone number. When a parent checks out a child, you'll receive an SMS notification instantly.
+        </div>
+
+        <div class="section-label">Your Details</div>
+
+        <div class="field">
+          <label>Your Name *</label>
+          <input type="text" id="attName" placeholder="First and last name" />
+        </div>
+
+        <div class="field">
+          <label>Your Phone Number *</label>
+          <input type="tel" id="attPhone" placeholder="(555) 000-0000" />
+        </div>
+
+        <div class="error-msg" id="attError"></div>
+
+        <button class="submit-btn" onclick="handleAttendant()">Register as Attendant</button>
+      </div>
+
+      <div class="attendant-registered" id="attendantSuccess">
+        <div class="att-icon">🙏</div>
+        <h3 class="att-title">You're registered!</h3>
+        <p class="att-sub">You'll receive a text each time<br>a child is checked out.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <p class="footer-note">Kingdom Insights Ministries · Children's Ministry</p>
+
+  <script>
+    const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemplam16bnZobWF2cSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzM5OTIyNjI3LCJleHAiOjIwNTU0OTg2Mjd9.V_CcNomk_cHaGkBfBfFXjBIBMPMJCEBCMJAvpBpNLlE';
+
+    let currentRecord = null;
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(`panel-${tab}`).classList.add('active');
+    }
+
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideErr(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    async function handlePickup() {
+      hideErr('pickupError');
+      const code = document.getElementById('pickupCode').value.trim().toUpperCase();
+      const phone = document.getElementById('pickupPhone').value.trim().replace(/\D/g, '');
+
+      if (!code || !phone) {
+        showErr('pickupError', 'Please enter your pick-up code and phone number.');
+        return;
+      }
+
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = 'Searching...';
+
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/kim_children_checkin?pickup_code=eq.${code}&status=eq.checked_in`,
+          {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          }
+        );
+
+        const records = await res.json();
+
+        if (!records || records.length === 0) {
+          showErr('pickupError', 'No active check-in found for that code. Please check with an attendant.');
+          btn.disabled = false;
+          btn.textContent = 'Find My Child';
+          return;
+        }
+
+        const record = records[0];
+        const storedPhone = record.parent_phone.replace(/\D/g, '');
+
+        if (!storedPhone.endsWith(phone.slice(-10)) && !phone.endsWith(storedPhone.slice(-10))) {
+          showErr('pickupError', 'Phone number does not match our records. Please see an attendant.');
+          btn.disabled = false;
+          btn.textContent = 'Find My Child';
+          return;
+        }
+
+        currentRecord = record;
+
+        // Show child card
+        document.getElementById('foundChildName').textContent = record.child_name;
+        document.getElementById('foundCheckinTime').textContent = `Checked in at ${new Date(record.checked_in_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
+        document.getElementById('foundParentName').textContent = record.parent_name;
+        document.getElementById('foundParentPhone').textContent = record.parent_phone;
+        document.getElementById('foundAllergies').textContent = record.allergies || 'None';
+        document.getElementById('childCard').style.display = 'block';
+        document.getElementById('pickupForm').style.display = 'none';
+        document.getElementById('childFound').style.display = 'block';
+
+      } catch (err) {
+        showErr('pickupError', 'Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Find My Child';
+      }
+    }
+
+    async function handleCheckout() {
+      if (!currentRecord) return;
+      const btn = document.getElementById('checkoutBtn');
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+
+      try {
+        // 1. Update record status
+        await fetch(
+          `${SUPABASE_URL}/rest/v1/kim_children_checkin?id=eq.${currentRecord.id}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({
+              status: 'checked_out',
+              checked_out_at: new Date().toISOString()
+            })
+          }
+        );
+
+        // 2. Notify attendant via Vercel API route
+        await fetch('/api/notify-pickup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            childName: currentRecord.child_name,
+            parentName: currentRecord.parent_name,
+            parentPhone: currentRecord.parent_phone,
+            pickupCode: currentRecord.pickup_code,
+            eventDate: currentRecord.event_date
+          })
+        });
+
+        document.getElementById('checkoutMsg').textContent = `${currentRecord.child_name} has been released to ${currentRecord.parent_name}. Blessings!`;
+        document.getElementById('childFound').style.display = 'none';
+        document.getElementById('pickupSuccess').style.display = 'block';
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '✓ Confirm & Check Out';
+        alert('Something went wrong. Please try again or see an attendant.');
+      }
+    }
+
+    function resetPickup() {
+      currentRecord = null;
+      document.getElementById('pickupCode').value = '';
+      document.getElementById('pickupPhone').value = '';
+      document.getElementById('pickupSuccess').style.display = 'none';
+      document.getElementById('childFound').style.display = 'none';
+      document.getElementById('childCard').style.display = 'none';
+      document.getElementById('pickupForm').style.display = 'block';
+      const btn = document.querySelector('.submit-btn');
+      btn.disabled = false;
+      btn.textContent = 'Find My Child';
+    }
+
+    async function handleAttendant() {
+      hideErr('attError');
+      const name = document.getElementById('attName').value.trim();
+      const phone = document.getElementById('attPhone').value.trim();
+
+      if (!name || !phone) {
+        showErr('attError', 'Please fill in both fields.');
+        return;
+      }
+
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = 'Registering...';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/kim_attendants`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ name, phone, event_date: new Date().toISOString().split('T')[0] })
+        });
+
+        if (!res.ok) throw new Error();
+
+        document.getElementById('attendantForm').style.display = 'none';
+        document.getElementById('attendantSuccess').style.display = 'block';
+
+      } catch {
+        showErr('attError', 'Could not register. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Register as Attendant';
+      }
+    }
+  </script>
+</body>
+</html>
