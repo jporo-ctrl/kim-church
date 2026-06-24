@@ -642,8 +642,14 @@
 
     async function handleAttendant() {
       hideErr('attError');
+      const pin = document.getElementById('attPin').value.trim();
       const name = document.getElementById('attName').value.trim();
       const phone = document.getElementById('attPhone').value.trim();
+
+      if (pin !== '512942') {
+        showErr('attError', 'Incorrect PIN. Please check with your ministry leader.');
+        return;
+      }
 
       if (!name || !phone) {
         showErr('attError', 'Please fill in both fields.');
