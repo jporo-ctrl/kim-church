@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
       .from('kim_children_checkin')
       .select('*')
       .eq('pickup_code', code.toUpperCase().trim())
-      .order('created_at', { ascending: false })
+      .order('checked_in_at', { ascending: false })
       .limit(1);
     if (error) return res.status(500).json({ error: error.message });
     if (!data || data.length === 0) return res.status(404).json({ error: 'Not found' });
@@ -27,8 +27,8 @@ module.exports = async function handler(req, res) {
       .from('kim_children_checkin')
       .select('*')
       .eq('status', 'checked_in')
-      .gte('created_at', todayStart.toISOString())
-      .order('created_at', { ascending: true });
+      .gte('checked_in_at', todayStart.toISOString())
+      .order('checked_in_at', { ascending: true });
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json({ records: data || [] });
   }

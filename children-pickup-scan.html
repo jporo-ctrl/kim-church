@@ -173,7 +173,7 @@
       const d = new Date(rec.child_dob + 'T00:00:00');
       document.getElementById('cc-dob').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     } else { document.getElementById('cc-dob').textContent = '—'; }
-    const cin = new Date(rec.created_at);
+    const cin = new Date(rec.checked_in_at);
     document.getElementById('cc-checkin-time').textContent = cin.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
     const allergyRow = document.getElementById('cc-allergy-row');
     if (rec.allergies && rec.allergies.trim()) {
@@ -223,7 +223,7 @@
     document.getElementById('active-count').textContent = data ? data.length : 0;
     if (!data || data.length === 0) { list.innerHTML = '<div class="empty-dashboard">No children currently checked in.</div>'; return; }
     list.innerHTML = data.map(rec => {
-      const cin = new Date(rec.created_at);
+      const cin = new Date(rec.checked_in_at);
       const timeStr = cin.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
       return '<div class="child-row" onclick="selectFromDashboard(\'' + rec.pickup_code + '\')">' +
         '<div><div class="child-row-name">' + rec.child_name + '</div><div class="child-row-meta">Parent: ' + rec.parent_name + ' &middot; In at ' + timeStr + '</div></div>' +
