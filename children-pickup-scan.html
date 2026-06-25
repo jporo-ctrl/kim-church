@@ -153,12 +153,13 @@
     if (!code) return;
     document.getElementById('child-card').style.display = 'none';
     document.getElementById('not-found').style.display = 'none';
-    console.log('Looking up code:', JSON.stringify(code));
-    const { data, error } = await db.from('kim_children_checkin').select('*').eq('pickup_code', code).order('created_at', { ascending: false }).limit(1);
-    console.log('Result:', data, 'Error:', error);
-    if (error || !data || data.length === 0) { document.getElementById('not-found').style.display = 'block'; return; }
-    currentRecord = data[0];
-    renderChildCard(currentRecord);
+    try {
+      const res = await fetch('/api/children-lookup?code=' + encodeURIComponent(code));
+      const data = await res.json();
+      if (!res.ok || !data.record) { document.getElementById('not-found').style.display = 'block'; return; }
+      currentRecord = data.record;
+      renderChildCard(currentRecord);
+    } catch (err) { document.getElementById('not-found').style.display = 'block'; }
   }
 
   function renderChildCard(rec) {
@@ -195,12 +196,22 @@
     if (!currentRecord) return;
     const btn = document.querySelector('#cc-action .btn-gold');
     if (btn) { btn.disabled = true; btn.textContent = 'Updating...'; }
-    const now = new Date().toISOString();
-    const { error } = await db.from('kim_children_checkin').update({ status: 'picked_up', picked_up_at: now }).eq('id', currentRecord.id);
-    if (error) { alert('Error updating record. Please try again.'); if (btn) { btn.disabled = false; btn.textContent = 'Mark as Picked Up'; } return; }
-    currentRecord.status = 'picked_up'; currentRecord.picked_up_at = now;
-    renderChildCard(currentRecord);
-    loadDashboard();
+    try {
+      const res = await fetch('/api/children-pickup-update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: currentRecord.id })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      currentRecord.status = 'picked_up';
+      currentRecord.picked_up_at = new Date().toISOString();
+      renderChildCard(currentRecord);
+      loadDashboard();
+    } catch (err) {
+      alert('Error updating record: ' + err.message);
+      if (btn) { btn.disabled = false; btn.textContent = 'Mark as Picked Up'; }
+    }
   }
 
   async function loadDashboard() {
