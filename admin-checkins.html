@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Check-ins | KIM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0D0D0D; color: #FAF7F2; font-family: 'DM Sans', sans-serif; min-height: 100vh; padding: 32px 16px; }
+    .login-screen { max-width: 380px; margin: 10vh auto; }
+    .login-screen h2 { font-family: 'Cormorant Garamond', serif; color: #C8922A; font-size: 1.8rem; margin-bottom: 24px; text-align: center; }
+    input[type=password] { width: 100%; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; color: #FAF7F2; font-size: 1rem; font-family: 'DM Sans', sans-serif; outline: none; }
+    input[type=password]:focus { border-color: #C8922A; }
+    .btn { display: inline-block; background: #C8922A; color: #0D0D0D; border: none; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+    .btn-outline { background: transparent; border: 1px solid #C8922A; color: #C8922A; }
+    .error { color: #f44336; font-size: 0.85rem; margin-top: 8px; }
+    .dashboard { display: none; max-width: 900px; margin: 0 auto; }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+    .header h1 { font-family: 'Cormorant Garamond', serif; color: #C8922A; font-size: 1.8rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: #C8922A; }
+    .stat-label { font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+    .filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .filters input { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 9px 14px; color: #FAF7F2; font-size: 0.9rem; font-family: 'DM Sans', sans-serif; outline: none; flex: 1; min-width: 180px; }
+    .filters input:focus { border-color: #C8922A; }
+    select { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 9px 14px; color: #FAF7F2; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { text-align: left; color: #C8922A; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 10px 12px; border-bottom: 1px solid #2a2a2a; }
+    td { padding: 12px; border-bottom: 1px solid #1e1e1e; color: #FAF7F2; }
+    tr:hover td { background: #1a1a1a; }
+    .empty { text-align: center; color: #555; padding: 40px; }
+    .event-badge { background: #1e1a10; color: #C8922A; border: 1px solid rgba(200,146,42,0.2); border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="login-screen" id="login-screen">
+    <h2>Admin Check-ins</h2>
+    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" />
+    <div class="error" id="pw-error"></div>
+    <button class="btn" style="margin-top:16px;width:100%" onclick="doLogin()">Enter</button>
+  </div>
+  <div class="dashboard" id="dashboard">
+    <div class="header">
+      <h1>Check-in Dashboard</h1>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-outline" onclick="loadCheckins()">Refresh</button>
+        <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Check-ins</div></div>
+      <div class="stat"><div class="stat-num" id="stat-event">—</div><div class="stat-label">Filtered Count</div></div>
+    </div>
+    <div class="filters">
+      <input type="text" id="search" placeholder="Search by name, phone, or email..." oninput="filterRows()" />
+      <select id="event-filter" onchange="filterRows()">
+        <option value="">All Events</option>
+        <option value="vision-night">Vision Night</option>
+        <option value="builders-gathering">Builders Gathering</option>
+        <option value="ministry-launch">Ministry Launch</option>
+      </select>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Phone</th><th>Email</th><th>Event</th><th>Time</th></tr>
+      </thead>
+      <tbody id="checkin-tbody"></tbody>
+    </table>
+    <div class="empty" id="empty-msg" style="display:none">No check-ins found.</div>
+  </div>
+  <script>
+    const PASSWORD = 'KIM2026!';
+    let allRows = [];
+    function doLogin() {
+      if (document.getElementById('pw-input').value === PASSWORD) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadCheckins();
+      } else {
+        document.getElementById('pw-error').textContent = 'Incorrect password.';
+      }
+    }
+    async function loadCheckins() {
+      const res = await fetch('/api/admin-checkins');
+      const data = await res.json();
+      allRows = data.checkins || [];
+      filterRows();
+    }
+    function filterRows() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const ev = document.getElementById('event-filter').value;
+      const filtered = allRows.filter(r => {
+        const matchQ = !q || r.name.toLowerCase().includes(q) || r.phone.includes(q) || r.email.toLowerCase().includes(q);
+        const matchEv = !ev || r.event === ev;
+        return matchQ && matchEv;
+      });
+      document.getElementById('stat-total').textContent = allRows.length;
+      document.getElementById('stat-event').textContent = filtered.length;
+      const tbody = document.getElementById('checkin-tbody');
+      const empty = document.getElementById('empty-msg');
+      if (!filtered.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+      tbody.innerHTML = filtered.map(r => {
+        const t = new Date(r.checked_in_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+        return '<tr><td>' + r.name + '</td><td>' + r.phone + '</td><td>' + r.email + '</td><td><span class="event-badge">' + r.event + '</span></td><td style="color:#888;font-size:0.85rem">' + t + '</td></tr>';
+      }).join('');
+    }
+    function exportCSV() {
+      if (!allRows.length) return;
+      const csv = ['Name,Phone,Email,Event,Checked In At', ...allRows.map(r => [r.name, r.phone, r.email, r.event, r.checked_in_at].map(v => '"' + v + '"').join(','))].join('\n');
+      const a = document.createElement('a');
+      a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+      a.download = 'kim-checkins.csv';
+      a.click();
+    }
+  </script>
+</body>
+</html>

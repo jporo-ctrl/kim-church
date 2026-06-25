@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check In — Kingdom Insights Ministries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0D0D0D; color: #FAF7F2; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; }
+    .logo { width: 64px; height: 64px; margin-bottom: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #C8922A; text-align: center; margin-bottom: 4px; }
+    .subtitle { font-size: 0.9rem; color: #aaa; text-align: center; margin-bottom: 32px; }
+    .card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 32px 24px; width: 100%; max-width: 420px; }
+    label { display: block; font-size: 0.8rem; color: #C8922A; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; margin-top: 20px; }
+    label:first-of-type { margin-top: 0; }
+    input { width: 100%; background: #0D0D0D; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; color: #FAF7F2; font-family: 'DM Sans', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #C8922A; }
+    button { width: 100%; margin-top: 28px; background: #C8922A; color: #0D0D0D; border: none; border-radius: 8px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .message { margin-top: 20px; text-align: center; font-size: 0.95rem; display: none; }
+    .message.success { color: #4caf50; display: block; }
+    .message.error { color: #f44336; display: block; }
+    .success-screen { text-align: center; display: none; }
+    .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: #C8922A; margin-bottom: 12px; }
+    .success-screen p { color: #aaa; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <img src="/kim-logo.png" alt="KIM Logo" class="logo" />
+  <h1>Vision Night</h1>
+  <p class="subtitle">Saturday, June 27 &middot; 6&ndash;8 PM &middot; Compass Center</p>
+  <div class="card" id="form-card">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Your name" autocomplete="name" />
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" placeholder="+1 (817) 000-0000" autocomplete="tel" />
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="you@email.com" autocomplete="email" />
+    <button id="submit-btn" onclick="handleCheckin()">I'm Here</button>
+    <div class="message" id="msg"></div>
+  </div>
+  <div class="success-screen" id="success-screen">
+    <h2>Welcome!</h2>
+    <p>You're checked in for Vision Night.<br/>We're glad you're here.</p>
+  </div>
+  <script>
+    async function handleCheckin() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('msg');
+      msg.className = 'message';
+      msg.textContent = '';
+      if (!name || !phone || !email) {
+        msg.className = 'message error';
+        msg.textContent = 'Please fill in all fields.';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Checking you in...';
+      try {
+        const res = await fetch('/api/checkin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, event: 'vision-night' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('form-card').style.display = 'none';
+          document.getElementById('success-screen').style.display = 'block';
+        } else {
+          msg.className = 'message error';
+          msg.textContent = data.error || 'Something went wrong. Please try again.';
+          btn.disabled = false;
+          btn.textContent = "I'm Here";
+        }
+      } catch (e) {
+        msg.className = 'message error';
+        msg.textContent = 'Network error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = "I'm Here";
+      }
+    }
+  </script>
+</body>
+</html>
