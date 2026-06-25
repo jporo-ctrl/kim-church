@@ -101,8 +101,8 @@
   <div class="freq-section">
     <p class="section-label">Frequency</p>
     <div class="freq-tabs">
-      <button class="freq-tab active" data-freq="one-time" onclick="selectFreq(this)">One Time</button>
-      <button class="freq-tab" data-freq="weekly" onclick="selectFreq(this)">Weekly</button>
+      <button class="freq-tab" data-freq="one-time" onclick="selectFreq(this)">One Time</button>
+      <button class="freq-tab active" data-freq="weekly" onclick="selectFreq(this)">Weekly</button>
       <button class="freq-tab" data-freq="bi-weekly" onclick="selectFreq(this)">Bi-weekly</button>
       <button class="freq-tab" data-freq="monthly" onclick="selectFreq(this)">Monthly</button>
     </div>
@@ -161,7 +161,7 @@
 </div>
 
 <script>
-let stripe, cardElement, selectedFreq = 'one-time', currentAmount = 0;
+let stripe, cardElement, selectedFreq = 'weekly', currentAmount = 0;
 
 async function initStripe() {
   const res = await fetch('/api/stripe-key');
