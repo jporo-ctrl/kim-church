@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Give — Kingdom Insights Ministries</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMCxzdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --gold: #C8922A; --gold-light: #E8B84B; --deep: #0D0D0D; --ink: #1A1613; --bg: #EBEBEB; --muted: #888; }
-  html, body { height: 100%; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; padding-bottom: 120px; }
+  :root { --gold: #C8922A; --gold-light: #E8B84B; --deep: #0D0D0D; --ink: #1A1613; --muted: #888; }
+  body { font-family: 'DM Sans', sans-serif; background: #EBEBEB; color: var(--ink); min-height: 100vh; padding: 0; }
 
-  /* DESKTOP CENTERING */
+  /* MOBILE: full screen, no card */
+  .page-wrap { width: 100%; background: white; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* DESKTOP: centered card with padding */
   @media (min-width: 640px) {
-    body { display: flex; flex-direction: column; align-items: center; padding: 40px 0 140px; }
-    #give-screen, #success-screen { width: 100%; max-width: 480px; }
-    #give-screen { background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); overflow: visible; }
-
+    body { display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px 60px; }
+    .page-wrap { max-width: 480px; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); overflow: hidden; min-height: unset; }
   }
 
   /* HEADER */
-  .header { background: var(--deep); padding: 16px 20px; display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 50; }
+  .header { background: var(--deep); padding: 16px 20px; text-align: center; }
   .header-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #F5EDD8; }
   .header-logo span { color: var(--gold); }
 
@@ -38,18 +38,16 @@
   .amount-big-input::placeholder { color: #DDD; }
   .preset-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
 
-  /* SHARED SECTION */
+  /* SECTIONS */
   .give-section { background: white; padding: 20px 24px; border-bottom: 1px solid #F0F0F0; }
   .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 
   /* PILLS */
   .pill { padding: 8px 18px; border-radius: 100px; border: 1.5px solid #E0E0E0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); cursor: pointer; transition: all 0.15s; }
-  .pill.active { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
-  .pill:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .pill.active, .pill:focus { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; outline: none; }
   .freq-pills { display: flex; gap: 8px; flex-wrap: wrap; }
   .freq-pill { padding: 10px 18px; border-radius: 100px; border: 1.5px solid #E0E0E0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .freq-pill.active { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
-  .freq-pill:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
 
   /* FIELDS */
   .give-field { width: 100%; padding: 14px 18px; border: 1.5px solid #E8E8E8; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: var(--ink); background: #FAFAFA; outline: none; transition: all 0.15s; margin-bottom: 12px; appearance: none; }
@@ -57,7 +55,7 @@
   .give-field:focus { border-color: var(--gold); background: white; }
   .give-field::placeholder { color: #BBB; }
 
-  /* CARD */
+  /* CARD ELEMENT */
   .give-card-element { padding: 14px 18px; border: 1.5px solid #E8E8E8; border-radius: 12px; background: #FAFAFA; transition: all 0.15s; }
   .give-card-element.focused { border-color: var(--gold); background: white; }
   #card-errors { color: #C0392B; font-size: 13px; margin-top: 8px; display: none; }
@@ -79,17 +77,20 @@
   .memo-input::placeholder { color: #BBB; }
 
   /* ERROR */
-  .error-banner { display: none; margin: 12px 24px; padding: 14px 16px; background: #FFF0F0; border: 1px solid rgba(180,68,68,0.3); border-radius: 10px; font-size: 14px; color: #C0392B; line-height: 1.5; }
+  .error-banner { display: none; margin: 0 24px 16px; padding: 14px 16px; background: #FFF0F0; border: 1px solid rgba(180,68,68,0.3); border-radius: 10px; font-size: 14px; color: #C0392B; line-height: 1.5; }
 
-  /* STICKY FOOTER */
-  .sticky-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; padding: 12px 20px 20px; background: white; border-top: 1px solid #F0F0F0; z-index: 100; border-radius: 0 0 20px 20px; }
+  /* GIVE BUTTON - inside form, not sticky */
+  .give-btn-section { background: white; padding: 20px 24px 32px; }
   .give-now-btn { width: 100%; padding: 18px 24px; background: var(--gold); color: white; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
   .give-now-btn:hover { background: var(--gold-light); }
   .give-now-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-  .secured-note { text-align: center; font-size: 11px; color: #BBB; margin-top: 8px; }
+  .secured-note { text-align: center; font-size: 11px; color: #BBB; margin-top: 10px; }
 
   /* SUCCESS */
-  #success-screen { display: none; text-align: center; padding: 80px 32px; background: white; min-height: 100vh; }
+  #success-screen { display: none; text-align: center; padding: 80px 32px; background: white; }
+  @media (min-width: 640px) {
+    #success-screen { border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); max-width: 480px; width: 100%; }
+  }
   .success-mark { font-family: 'Cormorant Garamond', serif; font-size: 64px; color: var(--gold); margin-bottom: 24px; }
   .success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--ink); margin-bottom: 16px; }
   .success-body { font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--muted); max-width: 320px; margin: 0 auto 32px; }
@@ -103,7 +104,7 @@
 </head>
 <body>
 
-<div id="give-screen">
+<div class="page-wrap" id="give-screen">
   <div class="header">
     <div class="header-logo">Kingdom Insights <span>Ministries</span></div>
   </div>
@@ -164,6 +165,14 @@
   </div>
 
   <div class="error-banner" id="error-banner"></div>
+
+  <div class="give-btn-section">
+    <button class="give-now-btn" id="give-btn" onclick="handleGive()">
+      <span id="give-btn-label">Give</span>
+      <span id="btn-amount">$0.00</span>
+    </button>
+    <p class="secured-note">🔒 Secured by Stripe</p>
+  </div>
 </div>
 
 <div id="success-screen">
@@ -172,14 +181,6 @@
   <div class="success-amount" id="success-amount">$0.00</div>
   <p class="success-body">Your gift has been received. A confirmation has been sent to your email. You are a Founding Partner of Kingdom Insights Ministries.</p>
   <a href="/" class="back-link">Return to kim.church</a>
-</div>
-
-<div class="sticky-footer" id="sticky-footer">
-  <button class="give-now-btn" id="give-btn" onclick="handleGive()">
-    <span id="give-btn-label">Give</span>
-    <span id="btn-amount">$0.00</span>
-  </button>
-  <p class="secured-note">🔒 Secured by Stripe</p>
 </div>
 
 <script>
@@ -277,7 +278,6 @@ async function handleGive() {
     });
 
     document.getElementById('give-screen').style.display = 'none';
-    document.getElementById('sticky-footer').style.display = 'none';
     document.getElementById('success-amount').textContent = '$' + finalAmount.toFixed(2);
     document.getElementById('success-screen').style.display = 'block';
     window.scrollTo(0, 0);
