@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIM Children Pickup | Kingdom Insights Ministries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; color: #f5f0e8; font-family: 'Montserrat', sans-serif; min-height: 100vh; }
+    .header { background: linear-gradient(135deg, #0d0d0d 0%, #1a1400 100%); border-bottom: 1px solid #c9a84c33; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+    .header img { height: 36px; }
+    .header-text h1 { font-family: 'Playfair Display', serif; font-size: 18px; color: #c9a84c; }
+    .header-text p { font-size: 11px; color: #888; margin-top: 2px; }
+    .container { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
+    #pin-gate { background: #1a1a1a; border: 1px solid #c9a84c33; border-radius: 16px; padding: 32px 24px; text-align: center; margin-top: 40px; }
+    #pin-gate h2 { font-family: 'Playfair Display', serif; color: #c9a84c; font-size: 22px; margin-bottom: 8px; }
+    #pin-gate p { color: #888; font-size: 13px; margin-bottom: 24px; }
+    .pin-input { width: 100%; background: #111; border: 1px solid #333; border-radius: 8px; padding: 14px; color: #f5f0e8; font-size: 24px; text-align: center; letter-spacing: 8px; margin-bottom: 16px; outline: none; }
+    .pin-input:focus { border-color: #c9a84c; }
+    .btn-gold { width: 100%; background: linear-gradient(135deg, #c9a84c, #e8c84a); color: #0d0d0d; border: none; border-radius: 8px; padding: 14px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+    .btn-gold:hover { opacity: 0.9; }
+    .error-msg { color: #e05555; font-size: 12px; margin-top: 8px; display: none; }
+    #main-screen { display: none; }
+    .section-title { font-family: 'Playfair Display', serif; color: #c9a84c; font-size: 20px; margin-bottom: 4px; }
+    .section-sub { color: #888; font-size: 12px; margin-bottom: 20px; }
+    .lookup-bar { display: flex; gap: 8px; margin-bottom: 24px; }
+    .lookup-bar input { flex: 1; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; color: #f5f0e8; font-size: 15px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px; outline: none; }
+    .lookup-bar input:focus { border-color: #c9a84c; }
+    .lookup-bar button { background: #c9a84c; color: #0d0d0d; border: none; border-radius: 8px; padding: 12px 18px; font-weight: 700; font-size: 13px; cursor: pointer; }
+    #child-card { background: #1a1a1a; border: 1px solid #c9a84c55; border-radius: 16px; padding: 24px; margin-bottom: 24px; display: none; }
+    #child-card.picked-up { border-color: #2a5c2a; background: #111a11; }
+    .child-name { font-family: 'Playfair Display', serif; font-size: 26px; color: #f5f0e8; margin-bottom: 4px; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .badge-checked-in { background: #c9a84c22; color: #c9a84c; border: 1px solid #c9a84c44; }
+    .badge-picked-up { background: #2a5c2a44; color: #5cb85c; border: 1px solid #5cb85c44; }
+    .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ffffff0d; font-size: 13px; }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-label { color: #888; }
+    .info-value { color: #f5f0e8; font-weight: 500; text-align: right; max-width: 60%; }
+    .allergy-tag { background: #5c1a1a44; color: #e05555; border: 1px solid #e0555544; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+    .pickup-action { margin-top: 20px; }
+    .picked-up-time { text-align: center; padding: 14px; background: #2a5c2a22; border-radius: 8px; color: #5cb85c; font-size: 13px; font-weight: 600; }
+    .not-found-msg { text-align: center; padding: 24px; color: #888; font-size: 13px; display: none; }
+    #dashboard { margin-top: 32px; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .count-badge { background: #c9a84c22; color: #c9a84c; border: 1px solid #c9a84c44; border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 700; }
+    .child-row { background: #1a1a1a; border: 1px solid #ffffff0d; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: border-color 0.2s; }
+    .child-row:hover { border-color: #c9a84c55; }
+    .child-row-name { font-weight: 600; font-size: 14px; }
+    .child-row-meta { font-size: 11px; color: #888; margin-top: 3px; }
+    .child-row-code { font-family: monospace; font-size: 12px; color: #c9a84c; background: #c9a84c11; padding: 4px 8px; border-radius: 4px; }
+    .empty-dashboard { text-align: center; padding: 32px; color: #555; font-size: 13px; }
+    .divider { border: none; border-top: 1px solid #ffffff0d; margin: 28px 0; }
+  </style>
+</head>
+<body>
+<div class="header">
+  <img src="https://firebasestorage.googleapis.com/v0/b/kingdominsightsministries.appspot.com/o/KIM_logo.png?alt=media" alt="KIM" onerror="this.style.display='none'">
+  <div class="header-text">
+    <h1>Children Pickup</h1>
+    <p>Kingdom Insights Ministries</p>
+  </div>
+</div>
+<div class="container">
+  <div id="pin-gate">
+    <h2>Attendant Access</h2>
+    <p>Enter your PIN to access the pickup dashboard</p>
+    <input type="password" class="pin-input" id="pin-input" maxlength="6" placeholder="••••••" inputmode="numeric">
+    <div class="error-msg" id="pin-error">Incorrect PIN. Try again.</div>
+    <button class="btn-gold" onclick="checkPin()">Unlock</button>
+  </div>
+  <div id="main-screen">
+    <h2 class="section-title">Scan or Enter Code</h2>
+    <p class="section-sub">Enter the pickup code shown on the parent's screen</p>
+    <div class="lookup-bar">
+      <input type="text" id="code-input" placeholder="PICKUP CODE" maxlength="20" oninput="this.value=this.value.toUpperCase()">
+      <button onclick="lookupCode()">Find</button>
+    </div>
+    <div id="child-card">
+      <div class="child-name" id="cc-child-name"></div>
+      <div id="cc-badge" class="badge badge-checked-in">Checked In</div>
+      <div class="info-row"><span class="info-label">Parent</span><span class="info-value" id="cc-parent"></span></div>
+      <div class="info-row"><span class="info-label">Phone</span><span class="info-value" id="cc-phone"></span></div>
+      <div class="info-row"><span class="info-label">Date of Birth</span><span class="info-value" id="cc-dob"></span></div>
+      <div class="info-row"><span class="info-label">Check-In Time</span><span class="info-value" id="cc-checkin-time"></span></div>
+      <div class="info-row" id="cc-allergy-row"><span class="info-label">Allergies</span><span class="info-value" id="cc-allergies"></span></div>
+      <div class="pickup-action" id="cc-action"></div>
+    </div>
+    <div class="not-found-msg" id="not-found">No record found for that code. Double-check and try again.</div>
+    <hr class="divider">
+    <div id="dashboard">
+      <div class="dashboard-header">
+        <h2 class="section-title" style="margin-bottom:0">Still Checked In</h2>
+        <span class="count-badge" id="active-count">0</span>
+      </div>
+      <div id="dashboard-list"></div>
+    </div>
+  </div>
+</div>
+<script>
+  const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mzc5OTcsImV4cCI6MjA4OTUxMzk5N30.nd1Vzmkhi0gklchYnu6OmW4C_LZ_CkS1_G7wQ2SPGW4';
+  const ATTENDANT_PIN = '512942';
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let currentRecord = null;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) window._autoCode = code;
+    if (sessionStorage.getItem('kim_attendant_unlocked') === '1') unlockScreen();
+  });
+
+  function checkPin() {
+    const val = document.getElementById('pin-input').value.trim();
+    if (val === ATTENDANT_PIN) {
+      sessionStorage.setItem('kim_attendant_unlocked', '1');
+      unlockScreen();
+    } else {
+      document.getElementById('pin-error').style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+    document.getElementById('code-input') && document.getElementById('code-input').addEventListener('keydown', e => { if (e.key === 'Enter') lookupCode(); });
+  });
+
+  function unlockScreen() {
+    document.getElementById('pin-gate').style.display = 'none';
+    document.getElementById('main-screen').style.display = 'block';
+    loadDashboard();
+    if (window._autoCode) {
+      document.getElementById('code-input').value = window._autoCode.toUpperCase();
+      lookupCode();
+    }
+  }
+
+  async function lookupCode() {
+    const code = document.getElementById('code-input').value.trim();
+    if (!code) return;
+    document.getElementById('child-card').style.display = 'none';
+    document.getElementById('not-found').style.display = 'none';
+    const { data, error } = await db.from('kim_children_checkin').select('*').eq('pickup_code', code).order('created_at', { ascending: false }).limit(1);
+    if (error || !data || data.length === 0) { document.getElementById('not-found').style.display = 'block'; return; }
+    currentRecord = data[0];
+    renderChildCard(currentRecord);
+  }
+
+  function renderChildCard(rec) {
+    const card = document.getElementById('child-card');
+    card.style.display = 'block';
+    card.className = rec.status === 'picked_up' ? 'picked-up' : '';
+    document.getElementById('cc-child-name').textContent = rec.child_name;
+    document.getElementById('cc-parent').textContent = rec.parent_name;
+    document.getElementById('cc-phone').textContent = rec.parent_phone || '—';
+    if (rec.child_dob) {
+      const d = new Date(rec.child_dob + 'T00:00:00');
+      document.getElementById('cc-dob').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    } else { document.getElementById('cc-dob').textContent = '—'; }
+    const cin = new Date(rec.created_at);
+    document.getElementById('cc-checkin-time').textContent = cin.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    const allergyRow = document.getElementById('cc-allergy-row');
+    if (rec.allergies && rec.allergies.trim()) {
+      allergyRow.style.display = 'flex';
+      document.getElementById('cc-allergies').innerHTML = '<span class="allergy-tag">&#9888; ' + rec.allergies + '</span>';
+    } else { allergyRow.style.display = 'none'; }
+    const badge = document.getElementById('cc-badge');
+    const action = document.getElementById('cc-action');
+    if (rec.status === 'picked_up') {
+      badge.className = 'badge badge-picked-up'; badge.textContent = 'Picked Up';
+      const pt = rec.picked_up_at ? new Date(rec.picked_up_at) : null;
+      action.innerHTML = '<div class="picked-up-time">&#10003; Picked up at ' + (pt ? pt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) : '—') + '</div>';
+    } else {
+      badge.className = 'badge badge-checked-in'; badge.textContent = 'Checked In';
+      action.innerHTML = '<button class="btn-gold" onclick="markPickedUp()">&#10003; &nbsp;Mark as Picked Up</button>';
+    }
+  }
+
+  async function markPickedUp() {
+    if (!currentRecord) return;
+    const btn = document.querySelector('#cc-action .btn-gold');
+    if (btn) { btn.disabled = true; btn.textContent = 'Updating...'; }
+    const now = new Date().toISOString();
+    const { error } = await db.from('kim_children_checkin').update({ status: 'picked_up', picked_up_at: now }).eq('id', currentRecord.id);
+    if (error) { alert('Error updating record. Please try again.'); if (btn) { btn.disabled = false; btn.textContent = 'Mark as Picked Up'; } return; }
+    currentRecord.status = 'picked_up'; currentRecord.picked_up_at = now;
+    renderChildCard(currentRecord);
+    loadDashboard();
+  }
+
+  async function loadDashboard() {
+    const list = document.getElementById('dashboard-list');
+    list.innerHTML = '<p style="color:#555;font-size:13px;text-align:center;padding:16px">Loading...</p>';
+    const todayStart = new Date(); todayStart.setHours(0,0,0,0);
+    const { data, error } = await db.from('kim_children_checkin').select('*').eq('status', 'checked_in').gte('created_at', todayStart.toISOString()).order('created_at', { ascending: true });
+    if (error) { list.innerHTML = '<p style="color:#e05555;font-size:13px;text-align:center">Error loading dashboard.</p>'; return; }
+    document.getElementById('active-count').textContent = data ? data.length : 0;
+    if (!data || data.length === 0) { list.innerHTML = '<div class="empty-dashboard">No children currently checked in.</div>'; return; }
+    list.innerHTML = data.map(rec => {
+      const cin = new Date(rec.created_at);
+      const timeStr = cin.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      return '<div class="child-row" onclick="selectFromDashboard(\'' + rec.pickup_code + '\')">' +
+        '<div><div class="child-row-name">' + rec.child_name + '</div><div class="child-row-meta">Parent: ' + rec.parent_name + ' &middot; In at ' + timeStr + '</div></div>' +
+        '<span class="child-row-code">' + rec.pickup_code + '</span></div>';
+    }).join('');
+  }
+
+  function selectFromDashboard(code) {
+    document.getElementById('code-input').value = code;
+    lookupCode();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

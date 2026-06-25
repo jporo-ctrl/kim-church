@@ -285,6 +285,7 @@
       margin-top: 20px;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -345,6 +346,11 @@
       <div class="success-icon">✓</div>
       <h2 class="success-title">Checked In!</h2>
       <p class="success-sub">Your child is safely checked in.<br>Show this code when picking up.</p>
+      <div style="margin-top:24px;text-align:center;">
+        <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#888;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Scan for Pickup</p>
+        <div id="qrcode" style="display:inline-block;background:#fff;padding:12px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);"></div>
+        <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#aaa;margin-top:8px;">Show this to the attendant at pickup</p>
+      </div>
 
       <div class="ticket">
         <div class="ticket-label">Pick-Up Code</div>
@@ -438,6 +444,15 @@
 
         // Show success
         document.getElementById('ticketCode').textContent = pickupCode;
+        document.getElementById('qrcode').innerHTML = '';
+        new QRCode(document.getElementById('qrcode'), {
+          text: 'https://kim.church/children-pickup-scan?code=' + pickupCode,
+          width: 180,
+          height: 180,
+          colorDark: '#1a1a1a',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
         document.getElementById('ticketChild').textContent = `${childName} · checked in at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
         document.getElementById('formView').style.display = 'none';
         document.getElementById('successView').style.display = 'block';
@@ -466,6 +481,7 @@
       btn.disabled = false;
       btn.textContent = 'Check In My Child';
       document.getElementById('successView').style.display = 'none';
+        document.getElementById('qrcode').innerHTML = '';
       document.getElementById('formView').style.display = 'block';
       hideError();
     }
