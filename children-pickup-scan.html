@@ -170,7 +170,8 @@
     document.getElementById('cc-parent').textContent = rec.parent_name;
     document.getElementById('cc-phone').textContent = rec.parent_phone || '—';
     if (rec.child_dob) {
-      const d = new Date(rec.child_dob + 'T00:00:00');
+      const parts = rec.child_dob.split('-');
+      const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       document.getElementById('cc-dob').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     } else { document.getElementById('cc-dob').textContent = '—'; }
     const cin = new Date(rec.checked_in_at);
