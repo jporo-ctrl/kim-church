@@ -110,11 +110,17 @@
   window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
-    if (code) window._autoCode = code.toUpperCase().trim();
-    // Small delay to ensure Supabase client is ready
-    setTimeout(() => {
-      if (sessionStorage.getItem('kim_attendant_unlocked') === '1') unlockScreen();
-    }, 300);
+    if (code) {
+      window._autoCode = code.toUpperCase().trim();
+      // Show the code in the PIN gate so attendant knows what they're about to verify
+      const hint = document.createElement('p');
+      hint.style.cssText = 'color:#c9a84c;font-size:12px;margin-bottom:16px;font-weight:600;letter-spacing:1px;';
+      hint.textContent = 'Code: ' + window._autoCode;
+      document.getElementById('pin-gate').insertBefore(hint, document.querySelector('.pin-input'));
+    }
+    if (sessionStorage.getItem('kim_attendant_unlocked') === '1') {
+      unlockScreen();
+    }
   });
 
   function checkPin() {
@@ -138,7 +144,7 @@
     loadDashboard();
     if (window._autoCode) {
       document.getElementById('code-input').value = window._autoCode.toUpperCase();
-      lookupCode();
+      setTimeout(() => lookupCode(), 300);
     }
   }
 
