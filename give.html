@@ -19,7 +19,7 @@
   @media (min-width: 640px) {
     body { display: flex; flex-direction: column; align-items: center; padding: 40px 0 140px; }
     #give-screen, #success-screen { width: 100%; max-width: 480px; }
-    #give-screen { background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); overflow: hidden; }
+    #give-screen { background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); overflow: visible; }
 
   }
 
@@ -82,7 +82,7 @@
   .error-banner { display: none; margin: 12px 24px; padding: 14px 16px; background: #FFF0F0; border: 1px solid rgba(180,68,68,0.3); border-radius: 10px; font-size: 14px; color: #C0392B; line-height: 1.5; }
 
   /* STICKY FOOTER */
-  .sticky-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; padding: 12px 20px 28px; background: white; border-top: 1px solid #F0F0F0; z-index: 100; }
+  .sticky-footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; padding: 12px 20px 20px; background: white; border-top: 1px solid #F0F0F0; z-index: 100; border-radius: 0 0 20px 20px; }
   .give-now-btn { width: 100%; padding: 18px 24px; background: var(--gold); color: white; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
   .give-now-btn:hover { background: var(--gold-light); }
   .give-now-btn:disabled { opacity: 0.6; cursor: not-allowed; }
