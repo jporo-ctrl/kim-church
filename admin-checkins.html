@@ -13,6 +13,7 @@
     input[type=password] { width: 100%; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; color: #FAF7F2; font-size: 1rem; font-family: 'DM Sans', sans-serif; outline: none; }
     input[type=password]:focus { border-color: #C8922A; }
     .btn { display: inline-block; background: #C8922A; color: #0D0D0D; border: none; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-outline { background: transparent; border: 1px solid #C8922A; color: #C8922A; }
     .error { color: #f44336; font-size: 0.85rem; margin-top: 8px; }
     .dashboard { display: none; max-width: 900px; margin: 0 auto; }
@@ -32,6 +33,19 @@
     tr:hover td { background: #1a1a1a; }
     .empty { text-align: center; color: #555; padding: 40px; }
     .event-badge { background: #1e1a10; color: #C8922A; border: 1px solid rgba(200,146,42,0.2); border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; }
+    .message-panel { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 28px; margin-top: 40px; }
+    .message-panel h2 { font-size: 0.75rem; color: #C8922A; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+    .type-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .type-tab { padding: 8px 20px; border-radius: 20px; border: 1px solid #333; background: transparent; color: #aaa; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+    .type-tab.active { background: #C8922A; color: #0D0D0D; border-color: #C8922A; font-weight: 600; }
+    .msg-input { width: 100%; background: #0D0D0D; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; color: #FAF7F2; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; margin-bottom: 12px; }
+    .msg-input:focus { border-color: #C8922A; }
+    textarea.msg-input { resize: vertical; min-height: 100px; }
+    .send-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .send-count { font-size: 0.85rem; color: #888; }
+    .send-result { font-size: 0.85rem; margin-top: 12px; }
+    .send-result.success { color: #4caf50; }
+    .send-result.error { color: #f44336; }
   </style>
 </head>
 <body>
@@ -41,18 +55,21 @@
     <div class="error" id="pw-error"></div>
     <button class="btn" style="margin-top:16px;width:100%" onclick="doLogin()">Enter</button>
   </div>
+
   <div class="dashboard" id="dashboard">
     <div class="header">
       <h1>Check-in Dashboard</h1>
       <div style="display:flex;gap:10px">
-        <button class="btn btn-outline" onclick="loadCheckins()">Refresh</button>
-        <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
+        <button class="btn btn-outline" style="font-size:0.85rem;padding:9px 18px" onclick="loadCheckins()">Refresh</button>
+        <button class="btn btn-outline" style="font-size:0.85rem;padding:9px 18px" onclick="exportCSV()">Export CSV</button>
       </div>
     </div>
+
     <div class="stats">
       <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Check-ins</div></div>
       <div class="stat"><div class="stat-num" id="stat-event">—</div><div class="stat-label">Filtered Count</div></div>
     </div>
+
     <div class="filters">
       <input type="text" id="search" placeholder="Search by name, phone, or email..." oninput="filterRows()" />
       <select id="event-filter" onchange="filterRows()">
@@ -62,6 +79,7 @@
         <option value="ministry-launch">Ministry Launch</option>
       </select>
     </div>
+
     <table>
       <thead>
         <tr><th>Name</th><th>Phone</th><th>Email</th><th>Event</th><th>Time</th></tr>
@@ -69,10 +87,37 @@
       <tbody id="checkin-tbody"></tbody>
     </table>
     <div class="empty" id="empty-msg" style="display:none">No check-ins found.</div>
+
+    <!-- Message Panel -->
+    <div class="message-panel">
+      <h2>Message All Check-ins</h2>
+      <div class="type-tabs">
+        <button class="type-tab active" id="tab-sms" onclick="setType('sms')">SMS</button>
+        <button class="type-tab" id="tab-email" onclick="setType('email')">Email</button>
+      </div>
+      <div id="subject-row" style="display:none">
+        <input type="text" class="msg-input" id="msg-subject" placeholder="Email subject..." />
+      </div>
+      <select id="msg-event-filter" class="msg-input" style="margin-bottom:12px">
+        <option value="">All Events</option>
+        <option value="vision-night">Vision Night</option>
+        <option value="builders-gathering">Builders Gathering</option>
+        <option value="ministry-launch">Ministry Launch</option>
+      </select>
+      <textarea class="msg-input" id="msg-body" placeholder="Write your message..."></textarea>
+      <div class="send-row">
+        <span class="send-count" id="send-count">Sending to — check-ins</span>
+        <button class="btn" id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+      <div class="send-result" id="send-result"></div>
+    </div>
   </div>
+
   <script>
     const PASSWORD = 'KIM2026!';
     let allRows = [];
+    let msgType = 'sms';
+
     function doLogin() {
       if (document.getElementById('pw-input').value === PASSWORD) {
         document.getElementById('login-screen').style.display = 'none';
@@ -82,12 +127,15 @@
         document.getElementById('pw-error').textContent = 'Incorrect password.';
       }
     }
+
     async function loadCheckins() {
       const res = await fetch('/api/admin-checkins');
       const data = await res.json();
       allRows = data.checkins || [];
       filterRows();
+      updateSendCount();
     }
+
     function filterRows() {
       const q = document.getElementById('search').value.toLowerCase();
       const ev = document.getElementById('event-filter').value;
@@ -107,6 +155,60 @@
         return '<tr><td>' + r.name + '</td><td>' + r.phone + '</td><td>' + r.email + '</td><td><span class="event-badge">' + r.event + '</span></td><td style="color:#888;font-size:0.85rem">' + t + '</td></tr>';
       }).join('');
     }
+
+    function setType(type) {
+      msgType = type;
+      document.getElementById('tab-sms').classList.toggle('active', type === 'sms');
+      document.getElementById('tab-email').classList.toggle('active', type === 'email');
+      document.getElementById('subject-row').style.display = type === 'email' ? 'block' : 'none';
+    }
+
+    function updateSendCount() {
+      const ev = document.getElementById('msg-event-filter').value;
+      const filtered = ev ? allRows.filter(r => r.event === ev) : allRows;
+      const count = msgType === 'sms' ? filtered.filter(r => r.phone).length : filtered.filter(r => r.email).length;
+      document.getElementById('send-count').textContent = 'Sending to ' + count + ' check-in' + (count !== 1 ? 's' : '');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('msg-event-filter').addEventListener('change', updateSendCount);
+    });
+
+    async function sendMessage() {
+      const body = document.getElementById('msg-body').value.trim();
+      const subject = document.getElementById('msg-subject').value.trim();
+      const event = document.getElementById('msg-event-filter').value;
+      const btn = document.getElementById('send-btn');
+      const result = document.getElementById('send-result');
+      if (!body) { result.className = 'send-result error'; result.textContent = 'Please write a message.'; return; }
+      if (msgType === 'email' && !subject) { result.className = 'send-result error'; result.textContent = 'Please add a subject.'; return; }
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      result.textContent = '';
+      try {
+        const res = await fetch('/api/message-checkins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-password': 'KIM2026!' },
+          body: JSON.stringify({ type: msgType, body, subject, event })
+        });
+        const data = await res.json();
+        if (data.success) {
+          result.className = 'send-result success';
+          result.textContent = 'Sent to ' + data.sent + ' recipient' + (data.sent !== 1 ? 's' : '') + '.';
+          document.getElementById('msg-body').value = '';
+          document.getElementById('msg-subject').value = '';
+        } else {
+          result.className = 'send-result error';
+          result.textContent = data.error || 'Something went wrong.';
+        }
+      } catch(e) {
+        result.className = 'send-result error';
+        result.textContent = 'Network error.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send';
+    }
+
     function exportCSV() {
       if (!allRows.length) return;
       const csv = ['Name,Phone,Email,Event,Checked In At', ...allRows.map(r => [r.name, r.phone, r.email, r.event, r.checked_in_at].map(v => '"' + v + '"').join(','))].join('\n');
