@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Givers — KIM Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#C8922A;--gold-light:#E8B84B;--deep:#0D0D0D;--ink:#1A1613;--muted:#6B6560;--bg:#F5F5F5;--white:#fff;--border:#E8E8E8}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.login-card{background:var(--white);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.08);padding:48px 40px;width:100%;max-width:380px;text-align:center}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:32px;letter-spacing:0.05em}
+.login-input{width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--bg);outline:none;margin-bottom:12px;transition:border-color 0.15s}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;padding:14px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer}
+.login-btn:hover{background:var(--gold-light)}
+.login-error{color:#C0392B;font-size:13px;margin-top:10px;display:none}
+.admin-screen{display:none}
+.topbar{background:var(--deep);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.topbar-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#F5EDD8}
+.topbar-logo span{color:var(--gold)}
+.topbar-link{font-size:13px;color:rgba(245,237,216,0.5);text-decoration:none;margin-left:16px}
+.topbar-link:hover{color:var(--gold)}
+.admin-body{max-width:1100px;margin:0 auto;padding:40px 24px}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.stat-card{background:var(--white);border-radius:12px;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.stat-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-value{font-size:28px;font-weight:300;color:var(--ink)}
+.msg-card{background:var(--white);border-radius:12px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:24px}
+.msg-title{font-size:14px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.msg-tabs{display:flex;gap:8px;margin-bottom:16px}
+.msg-tab{padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);cursor:pointer;transition:all 0.15s}
+.msg-tab.active{background:var(--gold);border-color:var(--gold);color:white;font-weight:500}
+.msg-subject{width:100%;padding:12px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg);outline:none;margin-bottom:12px;display:none}
+.msg-subject:focus{border-color:var(--gold)}
+.msg-textarea{width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg);outline:none;resize:none;height:100px;margin-bottom:12px}
+.msg-textarea:focus{border-color:var(--gold)}
+.msg-footer{display:flex;align-items:center;justify-content:space-between}
+.msg-count{font-size:13px;color:var(--muted)}
+.send-btn{padding:12px 28px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer}
+.send-btn:hover{background:var(--gold-light)}
+.send-btn:disabled{opacity:0.6;cursor:not-allowed}
+.msg-status{font-size:13px;margin-top:10px;display:none;padding:10px 14px;border-radius:8px}
+.msg-status.success{background:#F0FFF4;color:#27AE60;display:block}
+.msg-status.error{background:#FFF0F0;color:#C0392B;display:block}
+.table-card{background:var(--white);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);overflow:hidden}
+.table-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-title{font-size:14px;font-weight:500;color:var(--ink)}
+.table-search{padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);outline:none;width:220px}
+.table-search:focus{border-color:var(--gold)}
+table{width:100%;border-collapse:collapse}
+th{padding:12px 16px;text-align:left;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:#FAFAFA}
+td{padding:14px 16px;font-size:14px;font-weight:300;color:var(--ink);border-bottom:1px solid #F5F5F5}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FAFAFA}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500}
+.badge-green{background:#F0FFF4;color:#27AE60}
+.badge-gold{background:#FBF4E8;color:var(--gold)}
+.badge-gray{background:#F5F5F5;color:var(--muted)}
+.empty-state{text-align:center;padding:60px 24px;color:var(--muted);font-size:14px}
+@media(max-width:768px){.stats-row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">KIM Admin</div>
+    <p class="login-sub">GIVERS DASHBOARD</p>
+    <input type="password" class="login-input" id="admin-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
+    <button class="login-btn" onclick="login()">Sign In</button>
+    <p class="login-error" id="login-error">Incorrect password.</p>
+  </div>
+</div>
+<div class="admin-screen" id="admin-screen">
+  <div class="topbar">
+    <div class="topbar-logo">KIM <span>Admin</span></div>
+    <div>
+      <a href="/" class="topbar-link">← kim.church</a>
+    </div>
+  </div>
+  <div class="admin-body">
+    <h1 class="page-title">Givers</h1>
+    <p class="page-sub" id="last-updated">Loading...</p>
+    <div class="stats-row">
+      <div class="stat-card"><p class="stat-label">Total Givers</p><div class="stat-value" id="stat-count">—</div></div>
+      <div class="stat-card"><p class="stat-label">Total Given</p><div class="stat-value" id="stat-total">—</div></div>
+      <div class="stat-card"><p class="stat-label">Recurring</p><div class="stat-value" id="stat-recurring">—</div></div>
+      <div class="stat-card"><p class="stat-label">With Phone</p><div class="stat-value" id="stat-phones">—</div></div>
+    </div>
+    <div class="msg-card">
+      <p class="msg-title">Message All Givers</p>
+      <div class="msg-tabs">
+        <button class="msg-tab active" data-type="sms" onclick="switchMsgType(this)">SMS</button>
+        <button class="msg-tab" data-type="email" onclick="switchMsgType(this)">Email</button>
+      </div>
+      <input type="text" class="msg-subject" id="msg-subject" placeholder="Email subject...">
+      <textarea class="msg-textarea" id="msg-body" placeholder="Write your message..."></textarea>
+      <div class="msg-footer">
+        <span class="msg-count" id="msg-count">Loading...</span>
+        <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+      <div class="msg-status" id="msg-status"></div>
+    </div>
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-title">All Givers</span>
+        <input type="text" class="table-search" id="table-search" placeholder="Search..." oninput="filterTable()">
+      </div>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Amount</th><th>Frequency</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody id="givers-table"><tr><td colspan="7" class="empty-state">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+const PASS='KIM2026!';
+let givers=[],msgType='sms';
+function login(){
+  if(document.getElementById('admin-password').value===PASS){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-screen').style.display='block';
+    loadGivers();
+  }else{document.getElementById('login-error').style.display='block';}
+}
+function switchMsgType(btn){
+  document.querySelectorAll('.msg-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');msgType=btn.dataset.type;
+  document.getElementById('msg-subject').style.display=msgType==='email'?'block':'none';
+  updateMsgCount();
+}
+function updateMsgCount(){
+  const sms=givers.filter(g=>g.phone&&g.status==='completed').length;
+  const em=givers.filter(g=>g.email&&g.status==='completed').length;
+  document.getElementById('msg-count').textContent=msgType==='sms'?`Sending to ${sms} givers with phones`:`Sending to ${em} givers with emails`;
+}
+async function loadGivers(){
+  try{
+    const res=await fetch('/api/admin-givers',{headers:{'x-admin-password':PASS}});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error);
+    givers=data.givers;
+    renderStats();renderTable(givers);updateMsgCount();
+    document.getElementById('last-updated').textContent='Last updated: '+new Date().toLocaleString('en-US',{timeZone:'America/Chicago'})+' CST';
+  }catch(err){document.getElementById('givers-table').innerHTML='<tr><td colspan="7" class="empty-state">'+err.message+'</td></tr>';}
+}
+function renderStats(){
+  const c=givers.filter(g=>g.status==='completed');
+  const t=c.reduce((s,g)=>s+parseFloat(g.amount||0),0);
+  document.getElementById('stat-count').textContent=c.length;
+  document.getElementById('stat-total').textContent='$'+t.toFixed(2);
+  document.getElementById('stat-recurring').textContent=c.filter(g=>g.frequency!=='one-time').length;
+  document.getElementById('stat-phones').textContent=c.filter(g=>g.phone).length;
+}
+function renderTable(data){
+  const tb=document.getElementById('givers-table');
+  if(!data.length){tb.innerHTML='<tr><td colspan="7" class="empty-state">No givers yet.</td></tr>';return;}
+  tb.innerHTML=data.map(g=>{
+    const d=new Date(g.created_at).toLocaleDateString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',year:'numeric'});
+    const sb=g.status==='completed'?'<span class="badge badge-green">Completed</span>':'<span class="badge badge-gray">Pending</span>';
+    const fb=g.frequency==='one-time'?'<span class="badge badge-gray">One-time</span>':'<span class="badge badge-gold">'+g.frequency+'</span>';
+    return '<tr><td>'+g.full_name+'</td><td>'+(g.email||'—')+'</td><td>'+(g.phone||'—')+'</td><td>$'+parseFloat(g.amount).toFixed(2)+'</td><td>'+fb+'</td><td>'+sb+'</td><td>'+d+'</td></tr>';
+  }).join('');
+}
+function filterTable(){
+  const q=document.getElementById('table-search').value.toLowerCase();
+  renderTable(givers.filter(g=>(g.full_name||'').toLowerCase().includes(q)||(g.email||'').toLowerCase().includes(q)||(g.phone||'').toLowerCase().includes(q)));
+}
+async function sendMessage(){
+  const body=document.getElementById('msg-body').value.trim();
+  const subject=document.getElementById('msg-subject').value.trim();
+  const statusEl=document.getElementById('msg-status');
+  statusEl.className='msg-status';
+  if(!body){alert('Please write a message.');return;}
+  if(msgType==='email'&&!subject){alert('Please enter a subject.');return;}
+  if(!confirm('Send '+msgType.toUpperCase()+' to all givers?'))return;
+  const btn=document.getElementById('send-btn');
+  btn.disabled=true;btn.textContent='Sending...';
+  try{
+    const res=await fetch('/api/message-givers',{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':PASS},body:JSON.stringify({type:msgType,body,subject})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error);
+    statusEl.textContent='Sent to '+data.sent+' '+(msgType==='sms'?'phones':'emails')+' successfully.';
+    statusEl.className='msg-status success';
+    document.getElementById('msg-body').value='';
+    document.getElementById('msg-subject').value='';
+  }catch(err){statusEl.textContent='Error: '+err.message;statusEl.className='msg-status error';}
+  btn.disabled=false;btn.textContent='Send';
+}
+</script>
+</body>
+</html>
