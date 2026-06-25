@@ -110,8 +110,11 @@
   window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
-    if (code) window._autoCode = code;
-    if (sessionStorage.getItem('kim_attendant_unlocked') === '1') unlockScreen();
+    if (code) window._autoCode = code.toUpperCase().trim();
+    // Small delay to ensure Supabase client is ready
+    setTimeout(() => {
+      if (sessionStorage.getItem('kim_attendant_unlocked') === '1') unlockScreen();
+    }, 300);
   });
 
   function checkPin() {
