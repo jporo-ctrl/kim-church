@@ -91,6 +91,54 @@
     .amount-row { gap: 8px; }
     .amount-btn { padding: 10px 12px; font-size: 13px; }
   }
+
+  .give-wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 80px; }
+  .give-card { background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); overflow: hidden; }
+  .give-success { display: none; text-align: center; padding: 60px 32px; background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+  .success-icon { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: var(--gold); margin-bottom: 20px; }
+  .success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+  .success-body { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--muted); max-width: 340px; margin: 0 auto; }
+  .amount-hero { padding: 40px 32px 28px; text-align: center; }
+  .amount-label { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .amount-row-big { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 24px; }
+  .amount-dollar { font-size: 44px; font-weight: 300; color: var(--muted); line-height: 1; margin-top: 10px; }
+  .amount-big-input { font-family: 'DM Sans', sans-serif; font-size: 72px; font-weight: 300; color: var(--ink); border: none; outline: none; background: transparent; width: 220px; text-align: left; line-height: 1; caret-color: var(--gold); -moz-appearance: textfield; }
+  .amount-big-input::-webkit-outer-spin-button, .amount-big-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .amount-big-input::placeholder { color: #DDD; }
+  .preset-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .pill { padding: 8px 20px; border-radius: 100px; border: 1.5px solid #E0E0E0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); cursor: pointer; transition: all 0.15s; }
+  .pill.active { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
+  .pill:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .divider { height: 1px; background: #F0F0F0; margin: 0 24px; }
+  .give-section { padding: 24px 32px; }
+  .give-section-title { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .give-field { width: 100%; padding: 14px 18px; border: 1.5px solid #E8E8E8; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: var(--ink); background: #FAFAFA; outline: none; transition: all 0.15s; margin-bottom: 12px; appearance: none; }
+  .give-field:last-child { margin-bottom: 0; }
+  .give-field:focus { border-color: var(--gold); background: white; }
+  .give-field::placeholder { color: #BBB; }
+  .give-card-element { padding: 14px 18px; border: 1.5px solid #E8E8E8; border-radius: 12px; background: #FAFAFA; transition: all 0.15s; }
+  .give-card-element.focused { border-color: var(--gold); background: white; }
+  .freq-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .freq-pill { padding: 10px 20px; border-radius: 100px; border: 1.5px solid #E0E0E0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .freq-pill.active { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
+  .freq-pill:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .cover-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: #FAFAFA; border-top: 1px solid #F0F0F0; border-bottom: 1px solid #F0F0F0; }
+  .cover-label { font-size: 14px; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+  .cover-hint { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #BBB; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #BBB; cursor: help; }
+  .toggle { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-track { position: absolute; inset: 0; background: #DDD; border-radius: 26px; cursor: pointer; transition: background 0.2s; }
+  .toggle-track::before { content: ''; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .toggle input:checked + .toggle-track { background: var(--gold); }
+  .toggle input:checked + .toggle-track::before { transform: translateX(22px); }
+  .error-banner { display: none; margin: 0 32px 16px; padding: 12px 16px; background: #FFF0F0; border: 1px solid rgba(180,68,68,0.2); border-radius: 10px; font-size: 13px; color: #C0392B; line-height: 1.5; }
+  .give-now-btn { width: 100%; padding: 18px 24px; background: var(--gold); color: white; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  .give-now-btn:hover { background: var(--gold-light); }
+  .give-now-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .secured-note { text-align: center; font-size: 11px; color: #BBB; margin-top: 12px; }
+  @media (max-width: 500px) { .amount-hero { padding: 32px 20px 20px; } .give-section { padding: 20px; } .cover-row { padding: 16px 20px; } .fields-row { grid-template-columns: 1fr; } .amount-big-input { font-size: 56px; width: 180px; } .error-banner { margin: 0 20px 16px; } }
+
 </style>
 </head>
 <body>
@@ -114,64 +162,70 @@
 </div>
 
 <div class="give-wrap">
-  <div class="form-card" id="give-card">
 
-
-
-    <span class="form-section-label">Gift amount</span>
-    <div class="amount-row">
-      <button class="amount-btn" onclick="setAmount(this,'25')">$25</button>
-      <button class="amount-btn" onclick="setAmount(this,'50')">$50</button>
-      <button class="amount-btn" onclick="setAmount(this,'100')">$100</button>
-      <button class="amount-btn" onclick="setAmount(this,'250')">$250</button>
-      <button class="amount-btn" onclick="setAmount(this,'500')">$500</button>
-    </div>
-    <div class="amount-custom">
-      <span>$</span>
-      <input type="number" id="amount-input" placeholder="Other amount" min="1" step="1" oninput="clearAmountBtns()" onfocus="clearAmountBtns()">
-    </div>
-
-    <span class="form-section-label">Frequency</span>
-    <div class="freq-row">
-      <button class="freq-btn active" data-freq="one-time" onclick="selectFreq(this)">One-time</button>
-      <button class="freq-btn" data-freq="monthly" onclick="selectFreq(this)">Monthly</button>
-    </div>
-
-    <span class="form-section-label">Your information</span>
-    <div class="give-form-grid">
-      <div class="form-group">
-        <label for="give-name">Full Name *</label>
-        <input type="text" id="give-name" placeholder="Your full name" autocomplete="name">
+  <div class="give-card" id="give-card">
+    <div class="amount-hero">
+      <p class="amount-label">Enter amount</p>
+      <div class="amount-row-big">
+        <span class="amount-dollar">$</span>
+        <input type="number" id="amount-input" class="amount-big-input" placeholder="0" min="1" step="1" oninput="onAmountInput()" onfocus="clearPresets()">
       </div>
-      <div class="form-group">
-        <label for="give-email">Email Address *</label>
-        <input type="email" id="give-email" placeholder="you@example.com" autocomplete="email">
-      </div>
-      <div class="form-group" style="grid-column:1/-1;">
-        <label for="give-phone">Phone (optional)</label>
-        <input type="tel" id="give-phone" placeholder="(817) 555-0100" autocomplete="tel">
+      <div class="preset-pills">
+        <button class="pill" onclick="setPreset(this,25)">$25</button>
+        <button class="pill" onclick="setPreset(this,50)">$50</button>
+        <button class="pill" onclick="setPreset(this,100)">$100</button>
+        <button class="pill" onclick="setPreset(this,250)">$250</button>
+        <button class="pill" onclick="setPreset(this,500)">$500</button>
       </div>
     </div>
-
-    <span class="form-section-label">Card details</span>
-    <div id="card-element"></div>
-    <div id="card-errors" style="color:#B44;font-size:13px;margin-top:6px;display:none;"></div>
-
+    <div class="divider"></div>
+    <div class="give-section">
+      <div class="freq-pills">
+        <button class="freq-pill active" data-freq="one-time" onclick="selectFreq(this)">One Time</button>
+        <button class="freq-pill" data-freq="weekly" onclick="selectFreq(this)">Weekly</button>
+        <button class="freq-pill" data-freq="bi-weekly" onclick="selectFreq(this)">Bi-weekly</button>
+        <button class="freq-pill" data-freq="monthly" onclick="selectFreq(this)">Monthly</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="give-section">
+      <p class="give-section-title">Contact Details</p>
+      <div class="fields-row">
+        <input type="text" class="give-field" id="give-first" placeholder="First Name" autocomplete="given-name">
+        <input type="text" class="give-field" id="give-last" placeholder="Last Name" autocomplete="family-name">
+      </div>
+      <input type="email" class="give-field" id="give-email" placeholder="Email" autocomplete="email">
+      <input type="tel" class="give-field" id="give-phone" placeholder="Phone (optional)" autocomplete="tel">
+    </div>
+    <div class="divider"></div>
+    <div class="give-section">
+      <p class="give-section-title">Payment Information</p>
+      <div id="card-element" class="give-card-element"></div>
+      <div id="card-errors" style="color:#C0392B;font-size:13px;margin-top:8px;display:none;"></div>
+    </div>
+    <div class="cover-row">
+      <span class="cover-label">Cover the processing fees? <span class="cover-hint" title="Adds 2.9% + $0.30 so 100% of your gift reaches KIM">?</span></span>
+      <label class="toggle"><input type="checkbox" id="cover-fees" onchange="updateGiveBtn()"><span class="toggle-track"></span></label>
+    </div>
     <div class="error-banner" id="give-error"></div>
-
-    <button class="give-btn" id="give-btn" onclick="handleGive()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      Give Now
-    </button>
-    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">🔒 Secured by Stripe. Your card details are never stored on our servers.</p>
+    <div class="give-section">
+      <button class="give-now-btn" id="give-btn" onclick="handleGive()">
+        <span id="give-btn-text">Give $0.00</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
+      <p class="secured-note">Powered and Secured by Stripe</p>
+    </div>
   </div>
 
   <div class="give-success" id="give-success">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold);margin-bottom:24px;">✦</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--ink);margin-bottom:16px;">Thank you.</h2>
-    <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--muted);max-width:380px;margin:0 auto;">Your gift has been received. A confirmation has been sent to your email. You are now a Founding Partner of Kingdom Insights Ministries.</p>
+    <div class="success-icon">✦</div>
+    <h2 class="success-title">Thank you.</h2>
+    <p class="success-body">Your gift has been received. A confirmation has been sent to your email. You are now a Founding Partner of Kingdom Insights Ministries.</p>
   </div>
+
 </div>
+
+
 
 <section class="meaning-block">
   <div class="meaning-inner">
@@ -207,10 +261,7 @@
 </footer>
 
 <script>
-let selectedTier = 'Stone';
-let selectedFreq = 'one-time';
-let selectedAmount = null;
-let stripe, cardElement;
+let stripe, cardElement, selectedFreq = 'one-time', currentAmount = 0;
 
 async function initStripe() {
   const res = await fetch('/api/stripe-key');
@@ -218,81 +269,86 @@ async function initStripe() {
   stripe = Stripe(publishableKey);
   const elements = stripe.elements();
   cardElement = elements.create('card', {
-    style: {
-      base: {
-        fontFamily: "'DM Sans', sans-serif",
-        fontSize: '15px',
-        color: '#1A1613',
-        '::placeholder': { color: 'rgba(107,101,96,0.4)' }
-      }
-    }
+    style: { base: { fontFamily: "'DM Sans', sans-serif", fontSize: '15px', color: '#1A1613', '::placeholder': { color: '#BBB' } } }
   });
   cardElement.mount('#card-element');
-  cardElement.on('change', function(e) {
+  cardElement.on('focus', () => document.getElementById('card-element').classList.add('focused'));
+  cardElement.on('blur', () => document.getElementById('card-element').classList.remove('focused'));
+  cardElement.on('change', e => {
     const el = document.getElementById('card-errors');
     if (e.error) { el.textContent = e.error.message; el.style.display = 'block'; }
     else { el.style.display = 'none'; }
   });
 }
 
-function selectTier(btn) {
-  document.querySelectorAll('.tier-select-btn').forEach(b => b.classList.remove('active'));
+function setPreset(btn, val) {
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  selectedTier = btn.dataset.tier;
+  currentAmount = val;
+  document.getElementById('amount-input').value = val;
+  updateGiveBtn();
+}
+
+function clearPresets() { document.querySelectorAll('.pill').forEach(b => b.classList.remove('active')); }
+
+function onAmountInput() {
+  clearPresets();
+  currentAmount = parseFloat(document.getElementById('amount-input').value) || 0;
+  updateGiveBtn();
 }
 
 function selectFreq(btn) {
-  document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.freq-pill').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedFreq = btn.dataset.freq;
 }
 
-function setAmount(btn, val) {
-  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selectedAmount = val;
-  document.getElementById('amount-input').value = '';
-}
-
-function clearAmountBtns() {
-  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-  selectedAmount = null;
+function updateGiveBtn() {
+  const coverFees = document.getElementById('cover-fees').checked;
+  let total = currentAmount;
+  if (coverFees && total > 0) total = Math.round(((total + 0.30) / (1 - 0.029)) * 100) / 100;
+  document.getElementById('give-btn-text').textContent = total > 0 ? 'Give $' + total.toFixed(2) : 'Give $0.00';
 }
 
 async function handleGive() {
-  const amount = selectedAmount || document.getElementById('amount-input').value;
-  const name = document.getElementById('give-name').value.trim();
+  const amount = currentAmount;
+  const firstName = document.getElementById('give-first').value.trim();
+  const lastName = document.getElementById('give-last').value.trim();
   const email = document.getElementById('give-email').value.trim();
   const phone = document.getElementById('give-phone').value.trim();
+  const coverFees = document.getElementById('cover-fees').checked;
   const errorEl = document.getElementById('give-error');
   errorEl.style.display = 'none';
 
-  if (!amount || parseFloat(amount) < 1) { errorEl.textContent = 'Please enter a gift amount.'; errorEl.style.display = 'block'; return; }
-  if (!name) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
+  if (!amount || amount < 1) { errorEl.textContent = 'Please enter a gift amount.'; errorEl.style.display = 'block'; return; }
+  if (!firstName) { errorEl.textContent = 'Please enter your first name.'; errorEl.style.display = 'block'; return; }
   if (!email) { errorEl.textContent = 'Please enter your email address.'; errorEl.style.display = 'block'; return; }
+
+  let finalAmount = amount;
+  if (coverFees) finalAmount = Math.round(((amount + 0.30) / (1 - 0.029)) * 100) / 100;
 
   const btn = document.getElementById('give-btn');
   btn.disabled = true;
-  btn.textContent = 'Processing...';
+  document.getElementById('give-btn-text').textContent = 'Processing...';
 
   try {
     const res = await fetch('/api/give', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount, frequency: selectedFreq, full_name: name, email, phone, tier: selectedTier })
+      body: JSON.stringify({ amount: finalAmount, frequency: selectedFreq, full_name: (firstName + ' ' + lastName).trim(), email, phone, tier: 'General' })
     });
     const { clientSecret, error } = await res.json();
     if (error) throw new Error(error);
 
     const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: { card: cardElement, billing_details: { name, email } }
+      payment_method: { card: cardElement, billing_details: { name: (firstName + ' ' + lastName).trim(), email } }
     });
     if (stripeError) throw new Error(stripeError.message);
 
     await fetch('/api/give-confirm', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ paymentIntentId: paymentIntent.id, full_name: name, email, amount, frequency: selectedFreq, tier: selectedTier })
+      body: JSON.stringify({ paymentIntentId: paymentIntent.id, full_name: (firstName + ' ' + lastName).trim(), email, amount: finalAmount, frequency: selectedFreq, tier: 'General' })
     });
 
     document.getElementById('give-card').style.display = 'none';
@@ -303,7 +359,7 @@ async function handleGive() {
     errorEl.textContent = err.message;
     errorEl.style.display = 'block';
     btn.disabled = false;
-    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Give Now';
+    document.getElementById('give-btn-text').textContent = 'Give $' + finalAmount.toFixed(2);
   }
 }
 
