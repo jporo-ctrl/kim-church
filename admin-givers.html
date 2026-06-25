@@ -141,7 +141,7 @@ function updateMsgCount(){
 }
 async function loadGivers(){
   try{
-    const res=await fetch('/api/admin-givers',{headers:{'x-admin-password':PASS}});
+    const res=await fetch('/api/admin?action=givers',{headers:{'x-admin-password':PASS}});
     const data=await res.json();
     if(!res.ok)throw new Error(data.error);
     givers=data.givers;
@@ -182,7 +182,7 @@ async function sendMessage(){
   const btn=document.getElementById('send-btn');
   btn.disabled=true;btn.textContent='Sending...';
   try{
-    const res=await fetch('/api/message-givers',{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':PASS},body:JSON.stringify({type:msgType,body,subject})});
+    const res=await fetch('/api/admin?action=message',{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':PASS},body:JSON.stringify({type:msgType,body,subject})});
     const data=await res.json();
     if(!res.ok)throw new Error(data.error);
     statusEl.textContent='Sent to '+data.sent+' '+(msgType==='sms'?'phones':'emails')+' successfully.';

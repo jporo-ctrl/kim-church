@@ -154,7 +154,7 @@
     document.getElementById('child-card').style.display = 'none';
     document.getElementById('not-found').style.display = 'none';
     try {
-      const res = await fetch('/api/children-lookup?code=' + encodeURIComponent(code));
+      const res = await fetch('/api/children?action=lookup&code=' + encodeURIComponent(code));
       const data = await res.json();
       if (!res.ok || !data.record) { document.getElementById('not-found').style.display = 'block'; return; }
       currentRecord = data.record;
@@ -197,7 +197,7 @@
     const btn = document.querySelector('#cc-action .btn-gold');
     if (btn) { btn.disabled = true; btn.textContent = 'Updating...'; }
     try {
-      const res = await fetch('/api/children-pickup-update', {
+      const res = await fetch('/api/children?action=pickup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: currentRecord.id })
