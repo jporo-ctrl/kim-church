@@ -22,6 +22,15 @@ module.exports = async function handler(req, res) {
 
     const firstName = full_name.trim().split(' ')[0];
 
+    // Format time in Central Time
+    const now = new Date();
+    const cstTime = now.toLocaleString('en-US', {
+      timeZone: 'America/Chicago',
+      weekday: 'short', year: 'numeric', month: 'short',
+      day: 'numeric', hour: 'numeric', minute: '2-digit',
+      hour12: true
+    });
+
     // SMS confirmation
     try {
       const cleanPhone = phone.replace(/\D/g, '');
@@ -73,6 +82,7 @@ module.exports = async function handler(req, res) {
             <tr><td style="padding:8px 0;color:#666;">Phone</td><td>${phone}</td></tr>
             <tr><td style="padding:8px 0;color:#666;">Email</td><td>${email || 'Not provided'}</td></tr>
             <tr><td style="padding:8px 0;color:#666;">How heard</td><td>${how_heard || 'Not specified'}</td></tr>
+            <tr><td style="padding:8px 0;color:#666;">Registered</td><td>${cstTime} CST</td></tr>
           </table>
         </div>`
       });
