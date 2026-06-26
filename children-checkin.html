@@ -1,490 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Children's Check-In — Kingdom Insights Ministries</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children Check-In | Kingdom Insights Ministries</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #C8922A; --gold-light: #E8B84B; --deep: #0D0D0D; --ink: #1A1613; --muted: #888; --bg: #F5F5F5; --white: #fff; --border: #E8E8E8; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+    .header { background: var(--deep); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .header img { height: 40px; }
+    .header-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #F5EDD8; }
+    .container { max-width: 480px; margin: 0 auto; padding: 24px 16px 60px; }
+    .screen { display: none; }
+    .screen.active { display: block; }
 
-    :root {
-      --black: #0a0a0a;
-      --gold: #c9a84c;
-      --gold-light: #e8c96a;
-      --gold-dim: rgba(201,168,76,0.15);
-      --white: #ffffff;
-      --off-white: #f8f5ef;
-      --gray: #6b6b6b;
-      --border: rgba(201,168,76,0.25);
-      --success: #2d7a4f;
-      --error: #b94040;
-    }
+    /* PHONE LOOKUP */
+    .screen-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .screen-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .field input { width: 100%; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.15s; }
+    .field input:focus { border-color: var(--gold); }
+    .field input::placeholder { color: #BBB; }
+    .btn { width: 100%; padding: 16px; background: var(--gold); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .btn:hover { background: var(--gold-light); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); margin-top: 10px; }
+    .btn-outline:hover { background: rgba(200,146,42,0.05); }
+    .error-msg { color: #C0392B; font-size: 13px; margin-top: 8px; display: none; }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 16px 48px;
-    }
+    /* FAMILY SCREEN */
+    .parent-info { background: var(--white); border-radius: 12px; padding: 16px 18px; margin-bottom: 20px; border: 1px solid var(--border); }
+    .parent-name { font-size: 16px; font-weight: 500; color: var(--ink); }
+    .parent-phone { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .child-checkbox { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.15s; }
+    .child-checkbox.selected { border-color: var(--gold); background: #FBF4E8; }
+    .child-checkbox input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
+    .child-info { flex: 1; }
+    .child-check-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+    .child-check-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .add-child-btn { display: flex; align-items: center; gap: 10px; padding: 14px 18px; background: transparent; border: 1.5px dashed var(--border); border-radius: 12px; width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--muted); cursor: pointer; transition: all 0.15s; margin-top: 4px; margin-bottom: 20px; }
+    .add-child-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* Header */
-    .header {
-      width: 100%;
-      max-width: 480px;
-      text-align: center;
-      padding: 40px 0 32px;
-    }
+    /* ADD CHILD FORM */
+    .add-child-form { background: var(--white); border-radius: 12px; padding: 20px; border: 1.5px solid var(--gold); margin-bottom: 20px; display: none; }
+    .add-child-form.show { display: block; }
+    .add-child-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    .logo-mark {
-      width: 56px;
-      height: 56px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: var(--gold);
-      letter-spacing: 1px;
-    }
-
-    .ministry-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .page-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .page-subtitle {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.5;
-    }
-
-    .gold-rule {
-      width: 40px;
-      height: 2px;
-      background: var(--gold);
-      margin: 20px auto 0;
-    }
-
-    /* Card */
-    .card {
-      width: 100%;
-      max-width: 480px;
-      background: #111111;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px;
-    }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: #aaa;
-      margin-bottom: 6px;
-      letter-spacing: 0.3px;
-    }
-
-    input, textarea {
-      width: 100%;
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 15px;
-      font-family: 'Inter', sans-serif;
-      color: var(--white);
-      outline: none;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--gold);
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #444;
-    }
-
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(0.4) sepia(1) saturate(3) hue-rotate(5deg);
-      cursor: pointer;
-    }
-
-    textarea {
-      resize: none;
-      height: 80px;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 24px 0;
-    }
-
-    .submit-btn {
-      width: 100%;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      border-radius: 10px;
-      padding: 15px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 8px;
-    }
-
-    .submit-btn:hover { background: var(--gold-light); }
-    .submit-btn:active { transform: scale(0.98); }
-    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* Success state */
-    .success-screen {
-      display: none;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .success-icon {
-      width: 72px;
-      height: 72px;
-      background: var(--gold-dim);
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 28px;
-    }
-
-    .success-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-
-    .success-sub {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .ticket {
-      background: var(--gold-dim);
-      border: 1px dashed var(--gold);
-      border-radius: 10px;
-      padding: 16px 20px;
-      text-align: left;
-      margin-bottom: 20px;
-    }
-
-    .ticket-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .ticket-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: var(--white);
-    }
-
-    .ticket-sub {
-      font-size: 12px;
-      color: var(--gray);
-      margin-top: 4px;
-    }
-
-    .new-btn {
-      width: 100%;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--gold);
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    .new-btn:hover { border-color: var(--gold); }
-
-    .error-msg {
-      background: rgba(185,64,64,0.1);
-      border: 1px solid rgba(185,64,64,0.3);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: #e88080;
-      margin-bottom: 16px;
-      display: none;
-    }
-
-    .footer-note {
-      font-size: 11px;
-      color: #444;
-      text-align: center;
-      margin-top: 20px;
-    }
+    /* SUCCESS */
+    .success-wrap { text-align: center; padding: 20px 0; }
+    .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .success-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .qr-card { background: var(--white); border-radius: 16px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); }
+    .qr-child-name { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .qr-code-text { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+    .qr-container { display: flex; justify-content: center; margin-bottom: 12px; }
+    .qr-container > div { padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: inline-block; }
+    .qr-code-label { font-family: monospace; font-size: 18px; font-weight: 700; color: var(--gold); text-align: center; letter-spacing: 3px; }
+    .checkin-another { margin-top: 20px; }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
-  <div class="header">
-    <div class="logo-mark">KIM</div>
-    <p class="ministry-name">Kingdom Insights Ministries</p>
-    <h1 class="page-title">Children's Check-In</h1>
-    <p class="page-subtitle">Fill out this form to check your child in safely.<br>You'll receive a pick-up code when done.</p>
-    <div class="gold-rule"></div>
+<div class="header">
+  <a href="/"><img src="/kim-logo.png" alt="KIM"></a>
+  <div class="header-title">Children Check-In</div>
+</div>
+
+<div class="container">
+
+  <!-- SCREEN 1: Phone lookup -->
+  <div class="screen active" id="screen-phone">
+    <h1 class="screen-title">Welcome</h1>
+    <p class="screen-sub">Enter your phone number to check in your children. We'll remember your family for next time.</p>
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" id="lookup-phone" placeholder="(817) 555-0100" autocomplete="tel" onkeydown="if(event.key==='Enter')lookupFamily()">
+    </div>
+    <p class="error-msg" id="phone-error">Please enter a valid phone number.</p>
+    <button class="btn" onclick="lookupFamily()">Continue</button>
   </div>
 
-  <div class="card">
-
-    <!-- Form -->
-    <div id="formView">
-      <div class="section-label">Parent / Guardian</div>
-
-      <div class="field">
-        <label>Full Name *</label>
-        <input type="text" id="parentName" placeholder="Your full name" />
-      </div>
-
-      <div class="field">
-        <label>Phone Number *</label>
-        <input type="tel" id="parentPhone" placeholder="(555) 000-0000" />
-      </div>
-
-      <div class="field">
-        <label>Email Address</label>
-        <input type="email" id="parentEmail" placeholder="you@example.com" />
-      </div>
-
-      <div class="divider"></div>
-      <div class="section-label">Child Information</div>
-
+  <!-- SCREEN 2: Returning family -->
+  <div class="screen" id="screen-family">
+    <h1 class="screen-title">Welcome back!</h1>
+    <p class="screen-sub">Select the children attending today.</p>
+    <div class="parent-info">
+      <div class="parent-name" id="family-parent-name"></div>
+      <div class="parent-phone" id="family-parent-phone"></div>
+    </div>
+    <p class="section-label">Your Children</p>
+    <div id="children-list"></div>
+    <button class="add-child-btn" onclick="toggleAddChild()">
+      <span style="font-size:20px;line-height:1;">+</span> Add another child
+    </button>
+    <div class="add-child-form" id="add-child-form">
+      <p class="add-child-title">New Child</p>
       <div class="field">
         <label>Child's Full Name *</label>
-        <input type="text" id="childName" placeholder="Child's full name" />
+        <input type="text" id="new-child-name" placeholder="First Last">
       </div>
-
-      <div class="field">
-        <label>Date of Birth *</label>
-        <input type="date" id="childDob" />
+      <div class="form-row">
+        <div class="field">
+          <label>Date of Birth *</label>
+          <input type="date" id="new-child-dob">
+        </div>
+        <div class="field">
+          <label>Allergies</label>
+          <input type="text" id="new-child-allergies" placeholder="None">
+        </div>
       </div>
-
-      <div class="field">
-        <label>Allergies or Medical Notes</label>
-        <textarea id="allergies" placeholder="Any allergies, medications, or special needs our team should know about..."></textarea>
-      </div>
-
-      <div class="error-msg" id="errorMsg"></div>
-
-      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Check In My Child</button>
+      <button class="btn" onclick="saveNewChild()" style="margin-top:4px;">Save Child</button>
     </div>
-
-    <!-- Success -->
-    <div class="success-screen" id="successView">
-      <div class="success-icon">✓</div>
-      <h2 class="success-title">Checked In!</h2>
-      <p class="success-sub">Your child is safely checked in.<br>Show this code when picking up.</p>
-      <div style="margin-top:24px;text-align:center;">
-        <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#888;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Scan for Pickup</p>
-        <div id="qrcode" style="display:inline-block;background:#fff;padding:12px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);"></div>
-        <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#aaa;margin-top:8px;">Show this to the attendant at pickup</p>
-      </div>
-
-      <div class="ticket">
-        <div class="ticket-label">Pick-Up Code</div>
-        <div class="ticket-value" id="ticketCode">—</div>
-        <div class="ticket-sub" id="ticketChild">—</div>
-      </div>
-
-      <button class="new-btn" onclick="resetForm()">Check In Another Child</button>
-    </div>
-
+    <button class="btn" onclick="checkInSelected()">Check In Selected Children</button>
+    <button class="btn btn-outline" onclick="showScreen('screen-phone')">← Different family</button>
+    <p class="error-msg" id="family-error">Please select at least one child.</p>
   </div>
 
-  <p class="footer-note">Kingdom Insights Ministries · Children's Ministry</p>
+  <!-- SCREEN 3: New family registration -->
+  <div class="screen" id="screen-new">
+    <h1 class="screen-title">Register Your Family</h1>
+    <p class="screen-sub">First time? Let's get your family set up. We'll remember you for next time.</p>
+    <div class="field">
+      <label>Your Full Name *</label>
+      <input type="text" id="new-parent-name" placeholder="Your full name" autocomplete="name">
+    </div>
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="new-parent-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <p class="section-label" style="margin-top:8px;">First Child</p>
+    <div class="field">
+      <label>Child's Full Name *</label>
+      <input type="text" id="first-child-name" placeholder="First Last">
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label>Date of Birth *</label>
+        <input type="date" id="first-child-dob">
+      </div>
+      <div class="field">
+        <label>Allergies</label>
+        <input type="text" id="first-child-allergies" placeholder="None">
+      </div>
+    </div>
+    <p class="error-msg" id="new-error"></p>
+    <button class="btn" onclick="registerFamily()">Register & Check In</button>
+    <button class="btn btn-outline" onclick="showScreen('screen-phone')">← Back</button>
+  </div>
 
-  <script>
-    const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mzc5OTcsImV4cCI6MjA4OTUxMzk5N30.nd1Vzmkhi0gklchYnu6OmW4C_LZ_CkS1_G7wQ2SPGW4';
+  <!-- SCREEN 4: Success -->
+  <div class="screen" id="screen-success">
+    <div class="success-wrap">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">Checked In!</h2>
+      <p class="success-sub">Show the QR code(s) below to the attendant when picking up.</p>
+      <div id="qr-cards"></div>
+      <div class="checkin-another">
+        <button class="btn btn-outline" onclick="checkInAnother()">Check In Another Family</button>
+      </div>
+    </div>
+  </div>
 
-    function generateCode(childName) {
-      const initials = childName.trim().split(' ').map(w => w[0]).join('').toUpperCase().slice(0,3);
-      const num = Math.floor(1000 + Math.random() * 9000);
-      return `${initials}-${num}`;
-    }
+</div>
 
-    // Auto-fill from localStorage on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('kim_parent');
-      if (saved) {
-        const p = JSON.parse(saved);
-        document.getElementById('parentName').value = p.name || '';
-        document.getElementById('parentPhone').value = p.phone || '';
-        document.getElementById('parentEmail').value = p.email || '';
-      }
+<script>
+const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mzc5OTcsImV4cCI6MjA4OTUxMzk5N30.nd1Vzmkhi0gklchYnu6OmW4C_LZ_CkS1_G7wQ2SPGW4';
+
+let currentFamily = null;
+let currentChildren = [];
+let checkedInCodes = [];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function generateCode(name) {
+  const initials = name.trim().split(' ').map(w => w[0].toUpperCase()).join('');
+  const num = Math.floor(1000 + Math.random() * 9000);
+  return initials + '-' + num;
+}
+
+async function supabaseFetch(path, options = {}) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+    ...options.headers
+  };
+  return fetch(SUPABASE_URL + path, { ...options, headers });
+}
+
+async function lookupFamily() {
+  const phone = document.getElementById('lookup-phone').value.trim().replace(/\D/g, '');
+  const errorEl = document.getElementById('phone-error');
+  errorEl.style.display = 'none';
+  if (phone.length < 10) { errorEl.style.display = 'block'; return; }
+
+  const res = await supabaseFetch('/rest/v1/kim_families?parent_phone=eq.' + phone + '&select=*');
+  const data = await res.json();
+
+  if (!data || data.length === 0) {
+    // New family
+    document.getElementById('new-parent-name').value = '';
+    document.getElementById('new-parent-email').value = '';
+    document.getElementById('first-child-name').value = '';
+    document.getElementById('first-child-dob').value = '';
+    document.getElementById('first-child-allergies').value = '';
+    window._newPhone = phone;
+    showScreen('screen-new');
+  } else {
+    // Returning family
+    currentFamily = data[0];
+    document.getElementById('family-parent-name').textContent = currentFamily.parent_name;
+    document.getElementById('family-parent-phone').textContent = phone;
+    await loadFamilyChildren();
+    showScreen('screen-family');
+  }
+}
+
+async function loadFamilyChildren() {
+  const res = await supabaseFetch('/rest/v1/kim_children?family_id=eq.' + currentFamily.id + '&select=*&order=created_at.asc');
+  currentChildren = await res.json();
+  renderChildrenList();
+}
+
+function renderChildrenList() {
+  const list = document.getElementById('children-list');
+  if (!currentChildren.length) {
+    list.innerHTML = '<p style="color:#888;font-size:14px;margin-bottom:16px;">No children registered yet.</p>';
+    return;
+  }
+  list.innerHTML = currentChildren.map((child, i) => {
+    const dob = child.child_dob ? new Date(child.child_dob + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    return '<label class="child-checkbox" id="child-label-' + i + '">' +
+      '<input type="checkbox" id="child-cb-' + i + '" checked onchange="toggleChildSelect(' + i + ')">' +
+      '<div class="child-info">' +
+        '<div class="child-check-name">' + child.child_name + '</div>' +
+        '<div class="child-check-detail">' + (dob || '') + (child.allergies ? ' · ⚠️ ' + child.allergies : '') + '</div>' +
+      '</div>' +
+    '</label>';
+  }).join('');
+}
+
+function toggleChildSelect(i) {
+  const cb = document.getElementById('child-cb-' + i);
+  const label = document.getElementById('child-label-' + i);
+  label.classList.toggle('selected', cb.checked);
+}
+
+function toggleAddChild() {
+  const form = document.getElementById('add-child-form');
+  form.classList.toggle('show');
+}
+
+async function saveNewChild() {
+  const name = document.getElementById('new-child-name').value.trim();
+  const dob = document.getElementById('new-child-dob').value;
+  const allergies = document.getElementById('new-child-allergies').value.trim();
+  if (!name || !dob) { alert('Please enter child name and date of birth.'); return; }
+
+  const res = await supabaseFetch('/rest/v1/kim_children', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=representation' },
+    body: JSON.stringify({ family_id: currentFamily.id, child_name: name, child_dob: dob, allergies: allergies || null })
+  });
+  const data = await res.json();
+  currentChildren.push(data[0]);
+  renderChildrenList();
+  document.getElementById('add-child-form').classList.remove('show');
+  document.getElementById('new-child-name').value = '';
+  document.getElementById('new-child-dob').value = '';
+  document.getElementById('new-child-allergies').value = '';
+}
+
+async function checkInSelected() {
+  const selected = currentChildren.filter((_, i) => {
+    const cb = document.getElementById('child-cb-' + i);
+    return cb && cb.checked;
+  });
+  const errorEl = document.getElementById('family-error');
+  if (!selected.length) { errorEl.style.display = 'block'; return; }
+  errorEl.style.display = 'none';
+
+  checkedInCodes = [];
+  const today = new Date().toISOString().split('T')[0];
+
+  for (const child of selected) {
+    const code = generateCode(child.child_name);
+    await supabaseFetch('/rest/v1/kim_children_checkin', {
+      method: 'POST',
+      headers: { 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        parent_name: currentFamily.parent_name,
+        parent_phone: currentFamily.parent_phone,
+        parent_email: currentFamily.parent_email || null,
+        child_name: child.child_name,
+        child_dob: child.child_dob || null,
+        allergies: child.allergies || null,
+        pickup_code: code,
+        status: 'checked_in',
+        event_date: today
+      })
     });
+    checkedInCodes.push({ name: child.child_name, code });
+  }
 
-    function showError(msg) {
-      const el = document.getElementById('errorMsg');
-      el.textContent = msg;
-      el.style.display = 'block';
-    }
+  renderSuccessScreen();
+  showScreen('screen-success');
+}
 
-    function hideError() {
-      document.getElementById('errorMsg').style.display = 'none';
-    }
+async function registerFamily() {
+  const parentName = document.getElementById('new-parent-name').value.trim();
+  const parentEmail = document.getElementById('new-parent-email').value.trim();
+  const childName = document.getElementById('first-child-name').value.trim();
+  const childDob = document.getElementById('first-child-dob').value;
+  const childAllergies = document.getElementById('first-child-allergies').value.trim();
+  const errorEl = document.getElementById('new-error');
+  errorEl.style.display = 'none';
 
-    async function handleSubmit() {
-      hideError();
-      const parentName = document.getElementById('parentName').value.trim();
-      const parentPhone = document.getElementById('parentPhone').value.trim();
-      const parentEmail = document.getElementById('parentEmail').value.trim();
-      const childName = document.getElementById('childName').value.trim();
-      const childDob = document.getElementById('childDob').value;
-      const allergies = document.getElementById('allergies').value.trim();
+  if (!parentName) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
+  if (!childName || !childDob) { errorEl.textContent = 'Please enter child name and date of birth.'; errorEl.style.display = 'block'; return; }
 
-      if (!parentName || !parentPhone || !childName || !childDob) {
-        showError('Please fill in all required fields.');
-        return;
-      }
+  // Create family
+  const famRes = await supabaseFetch('/rest/v1/kim_families', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=representation' },
+    body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null })
+  });
+  const famData = await famRes.json();
+  currentFamily = famData[0];
 
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = 'Checking in...';
+  // Create child
+  const childRes = await supabaseFetch('/rest/v1/kim_children', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=representation' },
+    body: JSON.stringify({ family_id: currentFamily.id, child_name: childName, child_dob: childDob, allergies: childAllergies || null })
+  });
+  const childData = await childRes.json();
+  currentChildren = [childData[0]];
 
-      const pickupCode = generateCode(childName);
+  // Check in
+  const code = generateCode(childName);
+  const today = new Date().toISOString().split('T')[0];
+  await supabaseFetch('/rest/v1/kim_children_checkin', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=minimal' },
+    body: JSON.stringify({
+      parent_name: parentName,
+      parent_phone: window._newPhone,
+      parent_email: parentEmail || null,
+      child_name: childName,
+      child_dob: childDob,
+      allergies: childAllergies || null,
+      pickup_code: code,
+      status: 'checked_in',
+      event_date: today
+    })
+  });
 
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/kim_children_checkin`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({
-            parent_name: parentName,
-            parent_phone: parentPhone,
-            parent_email: parentEmail || null,
-            child_name: childName,
-            child_dob: childDob,
-            allergies: allergies || null,
-            pickup_code: pickupCode,
-            status: 'checked_in'
-          })
-        });
+  checkedInCodes = [{ name: childName, code }];
+  renderSuccessScreen();
+  showScreen('screen-success');
+}
 
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.message || 'Something went wrong.');
-        }
+function renderSuccessScreen() {
+  const container = document.getElementById('qr-cards');
+  container.innerHTML = checkedInCodes.map(({ name, code }) => {
+    return '<div class="qr-card" id="qr-card-' + code + '">' +
+      '<div class="qr-child-name">' + name + '</div>' +
+      '<div class="qr-code-text">Scan this QR code at pickup</div>' +
+      '<div class="qr-container"><div id="qr-' + code + '"></div></div>' +
+      '<div class="qr-code-label">' + code + '</div>' +
+    '</div>';
+  }).join('');
 
-        // Show success
-        document.getElementById('ticketCode').textContent = pickupCode;
-        document.getElementById('qrcode').innerHTML = '';
-        new QRCode(document.getElementById('qrcode'), {
-          text: 'https://kim.church/children-pickup-scan?code=' + pickupCode,
-          width: 180,
-          height: 180,
-          colorDark: '#1a1a1a',
-          colorLight: '#ffffff',
-          correctLevel: QRCode.CorrectLevel.H
-        });
-        document.getElementById('ticketChild').textContent = `${childName} · checked in at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
-        document.getElementById('formView').style.display = 'none';
-        document.getElementById('successView').style.display = 'block';
-        // Save parent info for next child and to localStorage
-        window._savedParent = { name: parentName, phone: parentPhone, email: parentEmail };
-        localStorage.setItem('kim_parent', JSON.stringify({ name: parentName, phone: parentPhone, email: parentEmail }));
+  checkedInCodes.forEach(({ code }) => {
+    new QRCode(document.getElementById('qr-' + code), {
+      text: 'https://kim.church/children-pickup-scan?code=' + code,
+      width: 180, height: 180,
+      colorDark: '#0D0D0D', colorLight: '#FFFFFF',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+}
 
-      } catch (err) {
-        showError(err.message || 'Could not check in. Please try again.');
-        btn.disabled = false;
-        btn.textContent = 'Check In My Child';
-      }
-    }
-
-    function resetForm() {
-      ['childName','childDob','allergies'].forEach(id => {
-        document.getElementById(id).value = '';
-      });
-      // Re-fill parent info
-      if (window._savedParent) {
-        document.getElementById('parentName').value = window._savedParent.name || '';
-        document.getElementById('parentPhone').value = window._savedParent.phone || '';
-        document.getElementById('parentEmail').value = window._savedParent.email || '';
-      }
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = false;
-      btn.textContent = 'Check In My Child';
-      document.getElementById('successView').style.display = 'none';
-        document.getElementById('qrcode').innerHTML = '';
-      document.getElementById('formView').style.display = 'block';
-      hideError();
-    }
-  </script>
+function checkInAnother() {
+  currentFamily = null;
+  currentChildren = [];
+  checkedInCodes = [];
+  document.getElementById('lookup-phone').value = '';
+  showScreen('screen-phone');
+}
+</script>
 </body>
 </html>
