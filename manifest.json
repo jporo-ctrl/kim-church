@@ -1,0 +1,41 @@
+{
+  "name": "Kingdom Insights Ministries",
+  "short_name": "KIM",
+  "description": "Kingdom Insights Ministries — Grapevine & Hurst, TX",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#0D0D0D",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/kim-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/kim-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Check In Children",
+      "url": "/checkin",
+      "description": "Check in your children"
+    },
+    {
+      "name": "Give",
+      "url": "/give",
+      "description": "Give to KIM"
+    },
+    {
+      "name": "Vision Night",
+      "url": "/vision",
+      "description": "Register for Vision Night"
+    }
+  ]
+}
