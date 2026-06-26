@@ -117,13 +117,7 @@
       <p id="attendant-msg" style="font-size:13px;margin-top:10px;display:none;"></p>
     </div>
 
-    <!-- REGISTERED ATTENDANTS -->
-    <div class="card" style="margin-bottom:24px;">
-      <p class="card-title">Registered Attendants</p>
-      <div id="registered-attendants-list"><p class="empty">Loading...</p></div>
-    </div>
-
-    <!-- ADD ATTENDANT -->
+    
     <div class="card" style="margin-bottom:24px;">
       <p class="card-title">Add Attendant</p>
       <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;">
@@ -167,6 +161,51 @@ async function loadData() {
   renderChildren(childrenData.records || []);
   loadAttendants();
   document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CST';
+}
+
+async function loadAttendants() {
+  // Signed-in today
+  try {
+    const sessRes = await fetch('/api/children?action=attendants');
+    const sessData = await sessRes.json();
+    const el = document.getElementById('attendants-list');
+    const sessions = sessData.attendants || [];
+    if (!sessions.length) { el.innerHTML = '<p class="empty">No attendants signed in today.</p>'; }
+    else {
+      el.innerHTML = sessions.map(a => {
+        const t = new Date(a.signed_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
+        return '<div class="attendant-row"><div><div class="attendant-name">' + a.attendant_name + '</div><div class="attendant-time">Signed in at ' + t + '</div></div></div>';
+      }).join('');
+    }
+  } catch(e) { document.getElementById('attendants-list').innerHTML = '<p class="empty">Error loading.</p>'; }
+
+  // Registered attendants
+  try {
+    const allRes = await fetch('/api/children?action=all-attendants', { headers: { 'x-admin-password': PASS } });
+    const allData = await allRes.json();
+    const regEl = document.getElementById('registered-attendants-list');
+    const allList = allData.attendants || [];
+    if (!allList.length) { regEl.innerHTML = '<p class="empty">No attendants registered yet.</p>'; return; }
+    regEl.innerHTML = allList.map(a => {
+      const active = a.active !== false;
+      return '<div class="attendant-row">' +
+        '<div><div class="attendant-name" style="' + (!active ? 'text-decoration:line-through;color:#999;' : '') + '">' + a.name + '</div>' +
+        '<div class="attendant-time">PIN: ' + a.pin + (!active ? ' · Suspended' : ' · Active') + '</div></div>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="suspend-btn" onclick="toggleAttendantActive('' + a.id + '',' + active + ')">' + (active ? 'Suspend' : 'Reinstate') + '</button>' +
+          '<button onclick="removeAttendant('' + a.id + '','' + a.name + '')" style="padding:6px 14px;background:transparent;border:1px solid #E05555;color:#E05555;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;">Remove</button>' +
+        '</div></div>';
+    }).join('');
+  } catch(e) { document.getElementById('registered-attendants-list').innerHTML = '<p class="empty">Error loading.</p>'; }
+}
+
+async function toggleAttendantActive(id, currentlyActive) {
+  await fetch('/api/children?action=toggle-attendant', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-password': PASS },
+    body: JSON.stringify({ id, active: !currentlyActive })
+  });
+  loadAttendants();
 }
 
 function renderAttendants(list) {
