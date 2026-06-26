@@ -66,10 +66,11 @@
 <div class="container">
   <div id="pin-gate">
     <h2>Attendant Access</h2>
-    <p>Enter your PIN to access the pickup dashboard</p>
+    <p>Enter your name and PIN to sign in</p>
+    <input type="text" class="pin-input" id="attendant-name" placeholder="Your name" style="font-size:16px;letter-spacing:normal;margin-bottom:12px;">
     <input type="password" class="pin-input" id="pin-input" maxlength="6" placeholder="••••••" inputmode="numeric">
     <div class="error-msg" id="pin-error">Incorrect PIN. Try again.</div>
-    <button class="btn-gold" onclick="checkPin()">Unlock</button>
+    <button class="btn-gold" onclick="checkPin()">Sign In</button>
   </div>
   <div id="main-screen">
     <h2 class="section-title">Scan or Enter Code</h2>
@@ -123,10 +124,20 @@
     }
   });
 
-  function checkPin() {
+  async function checkPin() {
     const val = document.getElementById('pin-input').value.trim();
+    const name = document.getElementById('attendant-name') ? document.getElementById('attendant-name').value.trim() : '';
     if (val === ATTENDANT_PIN) {
       localStorage.setItem('kim_attendant_unlocked', '1');
+      localStorage.setItem('kim_attendant_name', name || 'Attendant');
+      // Log sign-in
+      try {
+        await fetch('/api/children?action=attendant-signin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name || 'Attendant' })
+        });
+      } catch(e) {}
       unlockScreen();
     } else {
       document.getElementById('pin-error').style.display = 'block';

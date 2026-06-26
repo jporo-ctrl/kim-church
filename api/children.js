@@ -76,5 +76,27 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true });
   }
 
+  // Log attendant sign-in
+  if (action === 'attendant-signin' && req.method === 'POST') {
+    const { name } = req.body;
+    await supabase.from('kim_attendant_sessions').insert({
+      attendant_name: name || 'Attendant',
+      event_date: new Date().toISOString().split('T')[0]
+    });
+    return res.status(200).json({ success: true });
+  }
+
+  // Get attendant sessions for today
+  if (action === 'attendants') {
+    const today = new Date().toISOString().split('T')[0];
+    const { data, error } = await supabase
+      .from('kim_attendant_sessions')
+      .select('*')
+      .eq('event_date', today)
+      .order('signed_in_at', { ascending: true });
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ attendants: data || [] });
+  }
+
   return res.status(400).json({ error: 'Invalid action' });
 };
