@@ -17,8 +17,6 @@
     .container { max-width: 480px; margin: 0 auto; padding: 24px 16px 60px; }
     .screen { display: none; }
     .screen.active { display: block; }
-
-    /* PHONE LOOKUP */
     .screen-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
     .screen-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
     .field { margin-bottom: 16px; }
@@ -29,42 +27,35 @@
     .btn { width: 100%; padding: 16px; background: var(--gold); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
     .btn:hover { background: var(--gold-light); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .btn-outline { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); margin-top: 10px; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); }
     .btn-outline:hover { background: rgba(200,146,42,0.05); }
+    .btn-danger { background: transparent; border: 1.5px solid #E05555; color: #E05555; }
     .error-msg { color: #C0392B; font-size: 13px; margin-top: 8px; display: none; }
-
-    /* FAMILY SCREEN */
     .parent-info { background: var(--white); border-radius: 12px; padding: 16px 18px; margin-bottom: 20px; border: 1px solid var(--border); }
     .parent-name { font-size: 16px; font-weight: 500; color: var(--ink); }
     .parent-phone { font-size: 13px; color: var(--muted); margin-top: 2px; }
-    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-    .child-checkbox { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.15s; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: block; }
+    .child-checkbox { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; transition: all 0.15s; }
     .child-checkbox.selected { border-color: var(--gold); background: #FBF4E8; }
     .child-checkbox input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
-    .child-info { flex: 1; }
+    .child-info { flex: 1; cursor: pointer; }
     .child-check-name { font-size: 15px; font-weight: 500; color: var(--ink); }
     .child-check-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .delete-child-btn { background: none; border: none; color: #CCC; font-size: 18px; cursor: pointer; padding: 4px; flex-shrink: 0; transition: color 0.15s; }
+    .delete-child-btn:hover { color: #E05555; }
     .add-child-btn { display: flex; align-items: center; gap: 10px; padding: 14px 18px; background: transparent; border: 1.5px dashed var(--border); border-radius: 12px; width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--muted); cursor: pointer; transition: all 0.15s; margin-top: 4px; margin-bottom: 20px; }
     .add-child-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* ADD CHILD FORM */
-    .add-child-form { background: var(--white); border-radius: 12px; padding: 20px; border: 1.5px solid var(--gold); margin-bottom: 20px; display: none; }
+    .add-child-form { background: var(--white); border-radius: 12px; padding: 20px; border: 1.5px solid var(--gold); margin-bottom: 16px; display: none; }
     .add-child-form.show { display: block; }
     .add-child-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 16px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-    /* SUCCESS */
-    .success-wrap { text-align: center; padding: 20px 0; }
-    .success-icon { font-size: 48px; margin-bottom: 16px; }
-    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-    .success-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
-    .qr-card { background: var(--white); border-radius: 16px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); }
+    .qr-card { background: var(--white); border-radius: 16px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); text-align: center; }
     .qr-child-name { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
     .qr-code-text { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
     .qr-container { display: flex; justify-content: center; margin-bottom: 12px; }
     .qr-container > div { padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: inline-block; }
-    .qr-code-label { font-family: monospace; font-size: 18px; font-weight: 700; color: var(--gold); text-align: center; letter-spacing: 3px; }
-    .checkin-another { margin-top: 20px; }
+    .qr-code-label { font-family: monospace; font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 3px; }
+    .gap { margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -76,10 +67,10 @@
 
 <div class="container">
 
-  <!-- SCREEN 1: Phone lookup -->
+  <!-- SCREEN 1: Phone -->
   <div class="screen active" id="screen-phone">
     <h1 class="screen-title">Welcome</h1>
-    <p class="screen-sub">Enter your phone number to check in your children. We'll remember your family for next time.</p>
+    <p class="screen-sub">Enter your phone number to check in your children.</p>
     <div class="field">
       <label>Phone Number</label>
       <input type="tel" id="lookup-phone" placeholder="(817) 555-0100" autocomplete="tel" onkeydown="if(event.key==='Enter')lookupFamily()">
@@ -88,7 +79,29 @@
     <button class="btn" onclick="lookupFamily()">Continue</button>
   </div>
 
-  <!-- SCREEN 2: Returning family -->
+  <!-- SCREEN 2: New family -->
+  <div class="screen" id="screen-new">
+    <h1 class="screen-title">Register Your Family</h1>
+    <p class="screen-sub">First time? Set up your family profile. We'll remember you next time.</p>
+    <div class="field">
+      <label>Your Full Name *</label>
+      <input type="text" id="new-parent-name" placeholder="Your full name" autocomplete="name">
+    </div>
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="new-parent-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <span class="section-label" style="margin-top:8px;">Children Attending Today</span>
+    <div id="new-children-list"></div>
+    <button class="add-child-btn" onclick="addNewChildRow()">
+      <span style="font-size:20px;line-height:1;">+</span> Add a child
+    </button>
+    <p class="error-msg" id="new-error"></p>
+    <button class="btn" onclick="registerFamily()">Register & Check In</button>
+    <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Back</button>
+  </div>
+
+  <!-- SCREEN 3: Returning family -->
   <div class="screen" id="screen-family">
     <h1 class="screen-title">Welcome back!</h1>
     <p class="screen-sub">Select the children attending today.</p>
@@ -96,7 +109,7 @@
       <div class="parent-name" id="family-parent-name"></div>
       <div class="parent-phone" id="family-parent-phone"></div>
     </div>
-    <p class="section-label">Your Children</p>
+    <span class="section-label">Your Children</span>
     <div id="children-list"></div>
     <button class="add-child-btn" onclick="toggleAddChild()">
       <span style="font-size:20px;line-height:1;">+</span> Add another child
@@ -117,56 +130,19 @@
           <input type="text" id="new-child-allergies" placeholder="None">
         </div>
       </div>
-      <button class="btn" onclick="saveNewChild()" style="margin-top:4px;">Save Child</button>
+      <button class="btn" onclick="saveNewChild()">Save Child</button>
     </div>
-    <button class="btn" onclick="checkInSelected()">Check In Selected Children</button>
-    <button class="btn btn-outline" onclick="showScreen('screen-phone')">← Different family</button>
     <p class="error-msg" id="family-error">Please select at least one child.</p>
-  </div>
-
-  <!-- SCREEN 3: New family registration -->
-  <div class="screen" id="screen-new">
-    <h1 class="screen-title">Register Your Family</h1>
-    <p class="screen-sub">First time? Let's get your family set up. We'll remember you for next time.</p>
-    <div class="field">
-      <label>Your Full Name *</label>
-      <input type="text" id="new-parent-name" placeholder="Your full name" autocomplete="name">
-    </div>
-    <div class="field">
-      <label>Email Address</label>
-      <input type="email" id="new-parent-email" placeholder="you@example.com" autocomplete="email">
-    </div>
-    <p class="section-label" style="margin-top:8px;">First Child</p>
-    <div class="field">
-      <label>Child's Full Name *</label>
-      <input type="text" id="first-child-name" placeholder="First Last">
-    </div>
-    <div class="form-row">
-      <div class="field">
-        <label>Date of Birth *</label>
-        <input type="date" id="first-child-dob">
-      </div>
-      <div class="field">
-        <label>Allergies</label>
-        <input type="text" id="first-child-allergies" placeholder="None">
-      </div>
-    </div>
-    <p class="error-msg" id="new-error"></p>
-    <button class="btn" onclick="registerFamily()">Register & Check In</button>
-    <button class="btn btn-outline" onclick="showScreen('screen-phone')">← Back</button>
+    <button class="btn" onclick="checkInSelected()">Check In Selected Children</button>
+    <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Different family</button>
   </div>
 
   <!-- SCREEN 4: Success -->
   <div class="screen" id="screen-success">
-    <div class="success-wrap">
-      <div class="success-icon">✓</div>
-      <h2 class="success-title">Checked In!</h2>
-      <p class="success-sub">Show the QR code(s) below to the attendant when picking up.</p>
-      <div id="qr-cards"></div>
-      <div class="checkin-another">
-        <button class="btn btn-outline" onclick="checkInAnother()">Check In Another Family</button>
-      </div>
-    </div>
+    <h1 class="screen-title">Checked In!</h1>
+    <p class="screen-sub">Show each QR code to the attendant at pickup time.</p>
+    <div id="qr-cards"></div>
+    <button class="btn btn-outline gap" onclick="resetAll()">Check In Another Family</button>
   </div>
 
 </div>
@@ -177,11 +153,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 let currentFamily = null;
 let currentChildren = [];
+let newChildRows = [];
 let checkedInCodes = [];
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
 function generateCode(name) {
@@ -191,15 +169,11 @@ function generateCode(name) {
 }
 
 async function supabaseFetch(path, options = {}) {
-  const headers = {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-    ...options.headers
-  };
+  const headers = { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, ...options.headers };
   return fetch(SUPABASE_URL + path, { ...options, headers });
 }
 
+// PHONE LOOKUP
 async function lookupFamily() {
   const phone = document.getElementById('lookup-phone').value.trim().replace(/\D/g, '');
   const errorEl = document.getElementById('phone-error');
@@ -210,16 +184,14 @@ async function lookupFamily() {
   const data = await res.json();
 
   if (!data || data.length === 0) {
-    // New family
+    window._newPhone = phone;
+    newChildRows = [];
     document.getElementById('new-parent-name').value = '';
     document.getElementById('new-parent-email').value = '';
-    document.getElementById('first-child-name').value = '';
-    document.getElementById('first-child-dob').value = '';
-    document.getElementById('first-child-allergies').value = '';
-    window._newPhone = phone;
+    document.getElementById('new-children-list').innerHTML = '';
+    addNewChildRow();
     showScreen('screen-new');
   } else {
-    // Returning family
     currentFamily = data[0];
     document.getElementById('family-parent-name').textContent = currentFamily.parent_name;
     document.getElementById('family-parent-phone').textContent = phone;
@@ -228,6 +200,83 @@ async function lookupFamily() {
   }
 }
 
+// NEW FAMILY - add child rows dynamically
+function addNewChildRow() {
+  const idx = newChildRows.length;
+  newChildRows.push({ name: '', dob: '', allergies: '' });
+  const list = document.getElementById('new-children-list');
+  const div = document.createElement('div');
+  div.id = 'new-child-row-' + idx;
+  div.style.cssText = 'background:white;border:1.5px solid #E8E8E8;border-radius:12px;padding:16px 18px;margin-bottom:12px;';
+  div.innerHTML =
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+      '<span style="font-size:13px;font-weight:500;color:#1A1613;">Child ' + (idx + 1) + '</span>' +
+      (idx > 0 ? '<button onclick="removeChildRow(' + idx + ')" style="background:none;border:none;color:#CCC;font-size:18px;cursor:pointer;" onmouseover="this.style.color=\'#E05555\'" onmouseout="this.style.color=\'#CCC\'">✕</button>' : '') +
+    '</div>' +
+    '<div class="field"><label>Full Name *</label><input type="text" id="nc-name-' + idx + '" placeholder="Child\'s full name"></div>' +
+    '<div class="form-row">' +
+      '<div class="field"><label>Date of Birth *</label><input type="date" id="nc-dob-' + idx + '"></div>' +
+      '<div class="field"><label>Allergies</label><input type="text" id="nc-allergy-' + idx + '" placeholder="None"></div>' +
+    '</div>';
+  list.appendChild(div);
+}
+
+function removeChildRow(idx) {
+  const el = document.getElementById('new-child-row-' + idx);
+  if (el) el.remove();
+  newChildRows[idx] = null;
+}
+
+async function registerFamily() {
+  const parentName = document.getElementById('new-parent-name').value.trim();
+  const parentEmail = document.getElementById('new-parent-email').value.trim();
+  const errorEl = document.getElementById('new-error');
+  errorEl.style.display = 'none';
+
+  if (!parentName) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
+
+  // Collect children
+  const children = [];
+  for (let i = 0; i < newChildRows.length; i++) {
+    if (newChildRows[i] === null) continue;
+    const name = (document.getElementById('nc-name-' + i) || {}).value?.trim();
+    const dob = (document.getElementById('nc-dob-' + i) || {}).value;
+    const allergies = (document.getElementById('nc-allergy-' + i) || {}).value?.trim();
+    if (!name || !dob) { errorEl.textContent = 'Please fill in name and date of birth for all children.'; errorEl.style.display = 'block'; return; }
+    children.push({ name, dob, allergies });
+  }
+  if (!children.length) { errorEl.textContent = 'Please add at least one child.'; errorEl.style.display = 'block'; return; }
+
+  // Create family
+  const famRes = await supabaseFetch('/rest/v1/kim_families', {
+    method: 'POST', headers: { 'Prefer': 'return=representation' },
+    body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null })
+  });
+  const famData = await famRes.json();
+  currentFamily = famData[0];
+
+  // Create children and check in
+  checkedInCodes = [];
+  const today = new Date().toISOString().split('T')[0];
+
+  for (const child of children) {
+    await supabaseFetch('/rest/v1/kim_children', {
+      method: 'POST', headers: { 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ family_id: currentFamily.id, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null })
+    });
+    const code = generateCode(child.name);
+    await supabaseFetch('/rest/v1/kim_children_checkin', {
+      method: 'POST', headers: { 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null, pickup_code: code, status: 'checked_in', event_date: today })
+    });
+    checkedInCodes.push({ name: child.name, code });
+  }
+
+  renderSuccessScreen();
+  showScreen('screen-success');
+}
+
+// RETURNING FAMILY
 async function loadFamilyChildren() {
   const res = await supabaseFetch('/rest/v1/kim_children?family_id=eq.' + currentFamily.id + '&select=*&order=created_at.asc');
   currentChildren = await res.json();
@@ -242,13 +291,14 @@ function renderChildrenList() {
   }
   list.innerHTML = currentChildren.map((child, i) => {
     const dob = child.child_dob ? new Date(child.child_dob + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-    return '<label class="child-checkbox" id="child-label-' + i + '">' +
+    return '<div class="child-checkbox selected" id="child-label-' + i + '">' +
       '<input type="checkbox" id="child-cb-' + i + '" checked onchange="toggleChildSelect(' + i + ')">' +
-      '<div class="child-info">' +
+      '<div class="child-info" onclick="document.getElementById(\'child-cb-' + i + '\').click()">' +
         '<div class="child-check-name">' + child.child_name + '</div>' +
         '<div class="child-check-detail">' + (dob || '') + (child.allergies ? ' · ⚠️ ' + child.allergies : '') + '</div>' +
       '</div>' +
-    '</label>';
+      '<button class="delete-child-btn" onclick="deleteChild(\'' + child.id + '\',' + i + ')" title="Remove child">✕</button>' +
+    '</div>';
   }).join('');
 }
 
@@ -258,9 +308,15 @@ function toggleChildSelect(i) {
   label.classList.toggle('selected', cb.checked);
 }
 
+async function deleteChild(id, i) {
+  if (!confirm('Remove ' + currentChildren[i].child_name + ' from your family profile?')) return;
+  await supabaseFetch('/rest/v1/kim_children?id=eq.' + id, { method: 'DELETE' });
+  currentChildren.splice(i, 1);
+  renderChildrenList();
+}
+
 function toggleAddChild() {
-  const form = document.getElementById('add-child-form');
-  form.classList.toggle('show');
+  document.getElementById('add-child-form').classList.toggle('show');
 }
 
 async function saveNewChild() {
@@ -270,8 +326,7 @@ async function saveNewChild() {
   if (!name || !dob) { alert('Please enter child name and date of birth.'); return; }
 
   const res = await supabaseFetch('/rest/v1/kim_children', {
-    method: 'POST',
-    headers: { 'Prefer': 'return=representation' },
+    method: 'POST', headers: { 'Prefer': 'return=representation' },
     body: JSON.stringify({ family_id: currentFamily.id, child_name: name, child_dob: dob, allergies: allergies || null })
   });
   const data = await res.json();
@@ -298,19 +353,8 @@ async function checkInSelected() {
   for (const child of selected) {
     const code = generateCode(child.child_name);
     await supabaseFetch('/rest/v1/kim_children_checkin', {
-      method: 'POST',
-      headers: { 'Prefer': 'return=minimal' },
-      body: JSON.stringify({
-        parent_name: currentFamily.parent_name,
-        parent_phone: currentFamily.parent_phone,
-        parent_email: currentFamily.parent_email || null,
-        child_name: child.child_name,
-        child_dob: child.child_dob || null,
-        allergies: child.allergies || null,
-        pickup_code: code,
-        status: 'checked_in',
-        event_date: today
-      })
+      method: 'POST', headers: { 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ parent_name: currentFamily.parent_name, parent_phone: currentFamily.parent_phone, parent_email: currentFamily.parent_email || null, child_name: child.child_name, child_dob: child.child_dob || null, allergies: child.allergies || null, pickup_code: code, status: 'checked_in', event_date: today })
     });
     checkedInCodes.push({ name: child.child_name, code });
   }
@@ -319,85 +363,29 @@ async function checkInSelected() {
   showScreen('screen-success');
 }
 
-async function registerFamily() {
-  const parentName = document.getElementById('new-parent-name').value.trim();
-  const parentEmail = document.getElementById('new-parent-email').value.trim();
-  const childName = document.getElementById('first-child-name').value.trim();
-  const childDob = document.getElementById('first-child-dob').value;
-  const childAllergies = document.getElementById('first-child-allergies').value.trim();
-  const errorEl = document.getElementById('new-error');
-  errorEl.style.display = 'none';
-
-  if (!parentName) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
-  if (!childName || !childDob) { errorEl.textContent = 'Please enter child name and date of birth.'; errorEl.style.display = 'block'; return; }
-
-  // Create family
-  const famRes = await supabaseFetch('/rest/v1/kim_families', {
-    method: 'POST',
-    headers: { 'Prefer': 'return=representation' },
-    body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null })
-  });
-  const famData = await famRes.json();
-  currentFamily = famData[0];
-
-  // Create child
-  const childRes = await supabaseFetch('/rest/v1/kim_children', {
-    method: 'POST',
-    headers: { 'Prefer': 'return=representation' },
-    body: JSON.stringify({ family_id: currentFamily.id, child_name: childName, child_dob: childDob, allergies: childAllergies || null })
-  });
-  const childData = await childRes.json();
-  currentChildren = [childData[0]];
-
-  // Check in
-  const code = generateCode(childName);
-  const today = new Date().toISOString().split('T')[0];
-  await supabaseFetch('/rest/v1/kim_children_checkin', {
-    method: 'POST',
-    headers: { 'Prefer': 'return=minimal' },
-    body: JSON.stringify({
-      parent_name: parentName,
-      parent_phone: window._newPhone,
-      parent_email: parentEmail || null,
-      child_name: childName,
-      child_dob: childDob,
-      allergies: childAllergies || null,
-      pickup_code: code,
-      status: 'checked_in',
-      event_date: today
-    })
-  });
-
-  checkedInCodes = [{ name: childName, code }];
-  renderSuccessScreen();
-  showScreen('screen-success');
-}
-
 function renderSuccessScreen() {
   const container = document.getElementById('qr-cards');
-  container.innerHTML = checkedInCodes.map(({ name, code }) => {
-    return '<div class="qr-card" id="qr-card-' + code + '">' +
+  container.innerHTML = checkedInCodes.map(({ name, code }) =>
+    '<div class="qr-card" id="qr-card-' + code + '">' +
       '<div class="qr-child-name">' + name + '</div>' +
-      '<div class="qr-code-text">Scan this QR code at pickup</div>' +
+      '<div class="qr-code-text">Show to attendant at pickup</div>' +
       '<div class="qr-container"><div id="qr-' + code + '"></div></div>' +
       '<div class="qr-code-label">' + code + '</div>' +
-    '</div>';
-  }).join('');
+    '</div>'
+  ).join('');
 
   checkedInCodes.forEach(({ code }) => {
     new QRCode(document.getElementById('qr-' + code), {
       text: 'https://kim.church/children-pickup-scan?code=' + code,
-      width: 180, height: 180,
+      width: 200, height: 200,
       colorDark: '#0D0D0D', colorLight: '#FFFFFF',
       correctLevel: QRCode.CorrectLevel.H
     });
   });
 }
 
-function checkInAnother() {
-  currentFamily = null;
-  currentChildren = [];
-  checkedInCodes = [];
+function resetAll() {
+  currentFamily = null; currentChildren = []; newChildRows = []; checkedInCodes = [];
   document.getElementById('lookup-phone').value = '';
   showScreen('screen-phone');
 }

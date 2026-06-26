@@ -98,5 +98,29 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ attendants: data || [] });
   }
 
+  // All children today (for admin)
+  if (action === 'dashboard-all') {
+    const today = new Date().toISOString().split('T')[0];
+    const { data, error } = await supabase
+      .from('kim_children_checkin')
+      .select('*')
+      .eq('event_date', today)
+      .order('checked_in_at', { ascending: true });
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ records: data || [] });
+  }
+
+  // Suspend/reinstate attendant
+  if (action === 'suspend-attendant' && req.method === 'POST') {
+    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    const { id, suspend } = req.body;
+    const { error } = await supabase
+      .from('kim_attendant_sessions')
+      .update({ suspended: suspend })
+      .eq('id', id);
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ success: true });
+  }
+
   return res.status(400).json({ error: 'Invalid action' });
 };
