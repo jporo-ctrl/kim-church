@@ -62,7 +62,9 @@ module.exports = async function handler(req, res) {
           from: 'Kingdom Insights Ministries <info@kim.church>',
           to: rec.parent_email,
           subject: rec.child_name + ' has been picked up',
-          html: '<div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#1A1613;">' +
+          html: '<div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#1A1613;"><div style="background:#0D0D0D;padding:24px;text-align:center;margin-bottom:32px;">
+  <img src="https://kim.church/kim-logo-email.png" alt="Kingdom Insights Ministries" style="height:60px;">
+</div><div style="padding:0 24px 24px;">' +
             '<p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C8922A;margin-bottom:24px;">Kingdom Insights Ministries</p>' +
             '<h1 style="font-size:28px;font-weight:600;margin-bottom:16px;">' + rec.child_name + ' has been picked up</h1>' +
             '<p style="font-size:16px;line-height:1.8;color:#6B6560;">This is to confirm that <strong style="color:#1A1613;">' + rec.child_name + '</strong> was released to <strong style="color:#1A1613;">' + rec.parent_name + '</strong> at <strong style="color:#1A1613;">' + timeStr + ' CST</strong>.</p>' +
