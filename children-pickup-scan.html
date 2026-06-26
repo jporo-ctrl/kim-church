@@ -141,21 +141,34 @@
 
   async function checkPin() {
     const val = document.getElementById('pin-input').value.trim();
-    const name = document.getElementById('attendant-name') ? document.getElementById('attendant-name').value.trim() : '';
-    if (val === ATTENDANT_PIN) {
-      localStorage.setItem('kim_attendant_unlocked', '1');
-      localStorage.setItem('kim_attendant_name', name || 'Attendant');
-      // Log sign-in
-      try {
-        await fetch('/api/children?action=attendant-signin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name || 'Attendant' })
-        });
-      } catch(e) {}
-      unlockScreen();
-    } else {
-      document.getElementById('pin-error').style.display = 'block';
+    const errorEl = document.getElementById('pin-error');
+    errorEl.style.display = 'none';
+    if (!val) return;
+
+    try {
+      const res = await fetch('/api/children?action=verify-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin: val })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        localStorage.setItem('kim_attendant_unlocked', '1');
+        localStorage.setItem('kim_attendant_name', data.name);
+        try {
+          await fetch('/api/children?action=attendant-signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: data.name })
+          });
+        } catch(e) {}
+        unlockScreen();
+      } else {
+        errorEl.style.display = 'block';
+        document.getElementById('pin-input').value = '';
+      }
+    } catch(e) {
+      errorEl.style.display = 'block';
       document.getElementById('pin-input').value = '';
     }
   }

@@ -122,5 +122,56 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true });
   }
 
+  // Get all attendants (admin)
+  if (action === 'all-attendants') {
+    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    const { data, error } = await supabase
+      .from('kim_attendants')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ attendants: data || [] });
+  }
+
+  // Add attendant
+  if (action === 'add-attendant' && req.method === 'POST') {
+    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    const { name, pin } = req.body;
+    const { error } = await supabase.from('kim_attendants').insert({ name, pin, active: true });
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ success: true });
+  }
+
+  // Remove attendant
+  if (action === 'remove-attendant' && req.method === 'POST') {
+    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    const { id } = req.body;
+    const { error } = await supabase.from('kim_attendants').delete().eq('id', id);
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ success: true });
+  }
+
+  // Toggle attendant active
+  if (action === 'toggle-attendant' && req.method === 'POST') {
+    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    const { id, active } = req.body;
+    const { error } = await supabase.from('kim_attendants').update({ active }).eq('id', id);
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(200).json({ success: true });
+  }
+
+  // Verify attendant PIN
+  if (action === 'verify-pin' && req.method === 'POST') {
+    const { pin } = req.body;
+    const { data, error } = await supabase
+      .from('kim_attendants')
+      .select('*')
+      .eq('pin', pin)
+      .eq('active', true)
+      .limit(1);
+    if (error || !data || !data.length) return res.status(401).json({ error: 'Invalid PIN' });
+    return res.status(200).json({ success: true, name: data[0].name });
+  }
+
   return res.status(400).json({ error: 'Invalid action' });
 };

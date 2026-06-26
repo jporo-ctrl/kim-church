@@ -94,6 +94,40 @@
       </div>
     </div>
 
+    <!-- ADD ATTENDANT -->
+    <div class="card" style="margin-bottom:24px;">
+      <p class="card-title">Add Attendant</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;">
+        <div>
+          <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">Name</label>
+          <input type="text" id="new-attendant-name" placeholder="Full name" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">PIN (numbers only)</label>
+          <input type="text" id="new-attendant-pin" placeholder="e.g. 7823" maxlength="8" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
+        </div>
+        <button onclick="addAttendant()" style="padding:12px 20px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;">Add</button>
+      </div>
+      <p id="attendant-msg" style="font-size:13px;margin-top:10px;display:none;"></p>
+    </div>
+
+    <!-- ADD ATTENDANT -->
+    <div class="card" style="margin-bottom:24px;">
+      <p class="card-title">Add Attendant</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;">
+        <div>
+          <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">Name</label>
+          <input type="text" id="new-attendant-name" placeholder="Full name" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">PIN (numbers only)</label>
+          <input type="text" id="new-attendant-pin" placeholder="e.g. 7823" maxlength="8" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
+        </div>
+        <button onclick="addAttendant()" style="padding:12px 20px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;">Add</button>
+      </div>
+      <p id="attendant-msg" style="font-size:13px;margin-top:10px;display:none;"></p>
+    </div>
+
     <!-- CHILDREN LIST -->
     <div class="card">
       <p class="card-title">All Children Today</p>
@@ -116,15 +150,10 @@ function login() {
 }
 
 async function loadData() {
-  const [attendantsRes, childrenRes] = await Promise.all([
-    fetch('/api/children?action=attendants'),
-    fetch('/api/children?action=dashboard-all')
-  ]);
-  const attendantsData = await attendantsRes.json();
+  const childrenRes = await fetch('/api/children?action=dashboard-all');
   const childrenData = await childrenRes.json();
-
-  renderAttendants(attendantsData.attendants || []);
   renderChildren(childrenData.records || []);
+  loadAttendants();
   document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CST';
 }
 
@@ -172,6 +201,45 @@ async function toggleSuspend(id, currentlySuspended) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-admin-password': PASS },
     body: JSON.stringify({ id, suspend: !currentlySuspended })
+  });
+  loadData();
+}
+
+async function addAttendant() {
+  const name = document.getElementById('new-attendant-name').value.trim();
+  const pin = document.getElementById('new-attendant-pin').value.trim();
+  const msg = document.getElementById('attendant-msg');
+  msg.style.display = 'none';
+
+  if (!name) { msg.textContent = 'Please enter a name.'; msg.style.color = '#C0392B'; msg.style.display = 'block'; return; }
+  if (!pin || pin.length < 4) { msg.textContent = 'PIN must be at least 4 digits.'; msg.style.color = '#C0392B'; msg.style.display = 'block'; return; }
+
+  const res = await fetch('/api/children?action=add-attendant', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-password': PASS },
+    body: JSON.stringify({ name, pin })
+  });
+  const data = await res.json();
+  if (res.ok) {
+    msg.textContent = name + ' added with PIN ' + pin;
+    msg.style.color = '#27AE60';
+    msg.style.display = 'block';
+    document.getElementById('new-attendant-name').value = '';
+    document.getElementById('new-attendant-pin').value = '';
+    loadData();
+  } else {
+    msg.textContent = data.error || 'Error adding attendant.';
+    msg.style.color = '#C0392B';
+    msg.style.display = 'block';
+  }
+}
+
+async function removeAttendant(id, name) {
+  if (!confirm('Remove ' + name + '?')) return;
+  await fetch('/api/children?action=remove-attendant', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-password': PASS },
+    body: JSON.stringify({ id })
   });
   loadData();
 }
