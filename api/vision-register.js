@@ -51,7 +51,7 @@ module.exports = async function handler(req, res) {
           from: 'Kingdom Insights Ministries <info@kim.church>',
           to: email.trim(),
           subject: 'You\'re registered for Vision Night',
-          html: `<div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#1A1613;"><div style="background:#0D0D0D;padding:24px;text-align:center;margin-bottom:32px;">
+          html: `<div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#1A1613;background-color:#ffffff;"><div style="background:#0D0D0D;padding:24px;text-align:center;margin-bottom:32px;">
   <img src="https://kim.church/kim-logo-email.png" alt="Kingdom Insights Ministries" style="height:60px;">
 </div><div style="padding:0 24px 24px;">
             <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C8922A;margin-bottom:24px;">Kingdom Insights Ministries</p>
