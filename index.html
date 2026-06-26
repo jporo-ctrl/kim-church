@@ -865,13 +865,47 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     style="position:absolute;top:50%;right:16px;transform:translateY(-50%);background:none;border:none;color:rgba(245,237,216,0.4);font-size:18px;cursor:pointer;">✕</button>
 </div>
 <script>
-  // Show banner only on iOS Safari if not installed and not dismissed
   (function() {
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isStandalone = window.navigator.standalone;
+    const isAndroid = /android/i.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
     const dismissed = localStorage.getItem('pwa-dismissed');
-    if (isIOS && !isStandalone && !dismissed) {
+
+    if (isStandalone || dismissed) return;
+
+    // iOS — show manual banner
+    if (isIOS) {
       document.getElementById('pwa-banner').style.display = 'block';
+    }
+
+    // Android — catch native install prompt and show custom button
+    if (isAndroid) {
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const banner = document.getElementById('pwa-banner');
+        banner.style.display = 'block';
+        // Replace iOS instructions with Android button
+        banner.querySelector('p:nth-child(2)').innerHTML = 
+          '<button onclick="installPWA()" style="background:#C8922A;color:#0D0D0D;border:none;border-radius:8px;padding:8px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Install KIM App</button>';
+      });
+
+      window.installPWA = async function() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          document.getElementById('pwa-banner').style.display = 'none';
+          localStorage.setItem('pwa-dismissed', '1');
+        }
+        deferredPrompt = null;
+      };
+
+      window.addEventListener('appinstalled', () => {
+        document.getElementById('pwa-banner').style.display = 'none';
+        localStorage.setItem('pwa-dismissed', '1');
+      });
     }
   })();
 </script>
