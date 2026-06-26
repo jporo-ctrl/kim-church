@@ -88,6 +88,20 @@
       <div class="info-row"><span class="info-label">Check-In Time</span><span class="info-value" id="cc-checkin-time"></span></div>
       <div class="info-row" id="cc-allergy-row"><span class="info-label">Allergies</span><span class="info-value" id="cc-allergies"></span></div>
       <div class="pickup-action" id="cc-action"></div>
+      <div id="cc-contact" style="display:none;margin-top:16px;border-top:1px solid #ffffff0d;padding-top:16px;">
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:12px;">Contact Parent</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a id="cc-call-btn" href="" style="flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:#f5f0e8;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c9a84c'" onmouseout="this.style.borderColor='#333'">
+            📞 Call
+          </a>
+          <a id="cc-sms-btn" href="" style="flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:#f5f0e8;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c9a84c'" onmouseout="this.style.borderColor='#333'">
+            💬 Text
+          </a>
+          <button id="cc-copy-btn" onclick="copyPhone()" style="flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:#f5f0e8;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c9a84c'" onmouseout="this.style.borderColor='#333'">
+            📋 Copy
+          </button>
+        </div>
+      </div>
     </div>
     <div class="not-found-msg" id="not-found">No record found for that code. Double-check and try again.</div>
     <hr class="divider">
@@ -180,6 +194,19 @@
     document.getElementById('cc-child-name').textContent = rec.child_name;
     document.getElementById('cc-parent').textContent = rec.parent_name;
     document.getElementById('cc-phone').textContent = rec.parent_phone || '—';
+    // Contact panel
+    if (rec.parent_phone) {
+      const clean = rec.parent_phone.replace(/\D/g, '');
+      const phone = clean.startsWith('1') ? '+' + clean : '+1' + clean;
+      const childName = rec.child_name;
+      const smsBody = encodeURIComponent('Hi ' + rec.parent_name.split(' ')[0] + ', this is KIM Children\'s Ministry. We need to reach you regarding ' + childName + '. Please contact us as soon as possible.');
+      document.getElementById('cc-call-btn').href = 'tel:' + phone;
+      document.getElementById('cc-sms-btn').href = 'sms:' + phone + '?body=' + smsBody;
+      document.getElementById('cc-contact').style.display = 'block';
+      window._currentPhone = rec.parent_phone;
+    } else {
+      document.getElementById('cc-contact').style.display = 'none';
+    }
     if (rec.child_dob) {
       const parts = rec.child_dob.split('-');
       const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
@@ -241,6 +268,16 @@
         '<div><div class="child-row-name">' + rec.child_name + '</div><div class="child-row-meta">Parent: ' + rec.parent_name + ' &middot; In at ' + timeStr + '</div></div>' +
         '<span class="child-row-code">' + rec.pickup_code + '</span></div>';
     }).join('');
+  }
+
+  function copyPhone() {
+    if (window._currentPhone) {
+      navigator.clipboard.writeText(window._currentPhone).then(() => {
+        const btn = document.getElementById('cc-copy-btn');
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => { btn.innerHTML = '📋 Copy'; }, 2000);
+      });
+    }
   }
 
   function selectFromDashboard(code) {

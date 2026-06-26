@@ -96,6 +96,12 @@
     <button class="add-child-btn" onclick="addNewChildRow()">
       <span style="font-size:20px;line-height:1;">+</span> Add a child
     </button>
+    <div style="background:white;border:1.5px solid #E8E8E8;border-radius:12px;padding:16px 18px;margin-bottom:16px;">
+      <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
+        <input type="checkbox" id="waiver-cb" style="width:20px;height:20px;accent-color:#C8922A;margin-top:2px;flex-shrink:0;">
+        <span style="font-size:13px;line-height:1.6;color:#6B6560;">I grant Kingdom Insights Ministries permission to seek emergency medical treatment for my child if I cannot be reached. I acknowledge that KIM staff will exercise reasonable care during church programs and that KIM is not liable for pre-existing medical conditions or injuries unrelated to church activities. I confirm that all medical/allergy information provided is accurate.</span>
+      </label>
+    </div>
     <p class="error-msg" id="new-error"></p>
     <button class="btn" onclick="registerFamily()">Register & Check In</button>
     <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Back</button>
@@ -234,6 +240,8 @@ async function registerFamily() {
   errorEl.style.display = 'none';
 
   if (!parentName) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
+  const waiverCb = document.getElementById('waiver-cb');
+  if (waiverCb && !waiverCb.checked) { errorEl.textContent = 'Please read and accept the waiver to continue.'; errorEl.style.display = 'block'; return; }
 
   // Collect children
   const children = [];
