@@ -118,7 +118,7 @@
       hint.textContent = 'Code: ' + window._autoCode;
       document.getElementById('pin-gate').insertBefore(hint, document.querySelector('.pin-input'));
     }
-    if (sessionStorage.getItem('kim_attendant_unlocked') === '1') {
+    if (localStorage.getItem('kim_attendant_unlocked') === '1') {
       unlockScreen();
     }
   });
@@ -126,7 +126,7 @@
   function checkPin() {
     const val = document.getElementById('pin-input').value.trim();
     if (val === ATTENDANT_PIN) {
-      sessionStorage.setItem('kim_attendant_unlocked', '1');
+      localStorage.setItem('kim_attendant_unlocked', '1');
       unlockScreen();
     } else {
       document.getElementById('pin-error').style.display = 'block';
