@@ -1,4 +1,18 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/checkin",
+      "destination": "/children-checkin"
+    },
+    {
+      "source": "/pickup",
+      "destination": "/children-pickup"
+    },
+    {
+      "source": "/scan",
+      "destination": "/children-pickup-scan"
+    }
+  ]
 }
