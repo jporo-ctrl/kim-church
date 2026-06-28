@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
     try {
       await resend.emails.send({
         from: 'KIM Registration <info@kim.church>',
-        to: 'joshuaporo@gmail.com',
+        to: 'info@kim.church',
         subject: 'New Vision Night registration: ' + full_name,
         html: `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;">
           <h2 style="color:#C8922A;">New Vision Night Guest</h2>

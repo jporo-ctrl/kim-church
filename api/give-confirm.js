@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
     });
     await resend.emails.send({
       from: 'KIM Giving <giving@kim.church>',
-      to: 'joshuaporo@gmail.com',
+      to: 'give@kim.church',
       subject: `New gift: $${amountFmt} from ${full_name}`,
       html: `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;"><h2 style="color:#C8922A;">New Gift Received</h2><table style="width:100%;font-size:14px;"><tr><td style="padding:8px 0;color:#666;">Name</td><td style="padding:8px 0;font-weight:600;">${full_name}</td></tr><tr><td style="padding:8px 0;color:#666;">Email</td><td>${email}</td></tr><tr><td style="padding:8px 0;color:#666;">Amount</td><td style="font-weight:600;">$${amountFmt} (${freqLabel})</td></tr><tr><td style="padding:8px 0;color:#666;">Tier</td><td>${tier || 'Not selected'}</td></tr></table></div>`
     });
