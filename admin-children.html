@@ -44,6 +44,15 @@
   .badge-out{background:#F0FFF4;color:#27AE60}
   .empty{text-align:center;padding:32px;color:var(--muted);font-size:13px}
   @media(max-width:768px){.grid{grid-template-columns:1fr}}
+
+.date-bar{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.date-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.date-input{padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none;cursor:pointer}
+.date-input:focus{border-color:var(--gold)}
+.date-btn{padding:10px 20px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);cursor:pointer;transition:all 0.15s}
+.date-btn:hover{border-color:var(--gold);color:var(--gold)}
+.date-btn.active{background:var(--gold);border-color:var(--gold);color:white;font-weight:500}
+.date-viewing{font-size:13px;color:var(--muted);padding:6px 14px;background:var(--bg);border-radius:8px}
 </style>
 </head>
 <body>
@@ -70,6 +79,15 @@
   <div class="admin-body">
     <h1 class="page-title">Children</h1>
     <p class="page-sub" id="last-updated">Loading...</p>
+    <!-- DATE PICKER -->
+    <div class="date-bar">
+      <span class="date-label">Viewing date:</span>
+      <input type="date" class="date-input" id="date-picker" onchange="onDateChange()">
+      <button class="date-btn active" id="btn-today" onclick="setToday()">Today</button>
+      <button class="date-btn" id="btn-yesterday" onclick="setYesterday()">Yesterday</button>
+      <span class="date-viewing" id="date-viewing-label"></span>
+    </div>
+
 
     <div class="grid">
       <!-- ATTENDANTS -->
@@ -151,7 +169,7 @@ function login() {
 
 async function loadAttendants() {
   try {
-    const res = await fetch('/api/children?action=attendants');
+    const res = await fetch('/api/children?action=attendants&date=${getSelectedDate()}');
     const data = await res.json();
     const el = document.getElementById('attendants-list');
     const list = data.attendants || [];
@@ -164,7 +182,7 @@ async function loadAttendants() {
 }
 
 async function loadData() {
-  const childrenRes = await fetch('/api/children?action=dashboard-all');
+  const childrenRes = await fetch('/api/children?action=dashboard-all&date=${getSelectedDate()}');
   const childrenData = await childrenRes.json();
   renderChildren(childrenData.records || []);
   loadAttendants();
@@ -257,6 +275,57 @@ async function removeAttendant(id, name) {
   });
   loadData();
 }
+
+// ── DATE PICKER HELPERS ────────────────────────────────────────────────────
+function getTodayCST() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+}
+
+function getSelectedDate() {
+  return document.getElementById('date-picker').value || getTodayCST();
+}
+
+function updateDateLabel() {
+  const val = getSelectedDate();
+  const today = getTodayCST();
+  const yesterday = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yStr = yesterday.toLocaleDateString('en-CA');
+
+  const display = new Date(val + 'T12:00:00').toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+  });
+  document.getElementById('date-viewing-label').textContent = display;
+
+  document.getElementById('btn-today').classList.toggle('active', val === today);
+  document.getElementById('btn-yesterday').classList.toggle('active', val === yStr);
+}
+
+function setToday() {
+  document.getElementById('date-picker').value = getTodayCST();
+  updateDateLabel();
+  loadData();
+}
+
+function setYesterday() {
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  d.setDate(d.getDate() - 1);
+  document.getElementById('date-picker').value = d.toLocaleDateString('en-CA');
+  updateDateLabel();
+  loadData();
+}
+
+function onDateChange() {
+  updateDateLabel();
+  loadData();
+}
+
+// Initialize date picker to today on load
+(function initDatePicker() {
+  document.getElementById('date-picker').value = getTodayCST();
+  updateDateLabel();
+})();
+
 </script>
 </body>
 </html>

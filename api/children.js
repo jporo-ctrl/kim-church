@@ -86,28 +86,30 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true });
   }
 
-  // Get attendant sessions for today
+  // Get attendant sessions for a given date — defaults to today
   if (action === 'attendants') {
     const today = new Date().toISOString().split('T')[0];
+    const queryDate = req.query.date || today;
     const { data, error } = await supabase
       .from('kim_attendant_sessions')
       .select('*')
-      .eq('event_date', today)
+      .eq('event_date', queryDate)
       .order('signed_in_at', { ascending: true });
     if (error) return res.status(500).json({ error: error.message });
-    return res.status(200).json({ attendants: data || [] });
+    return res.status(200).json({ attendants: data || [], date: queryDate });
   }
 
-  // All children today (for admin)
+  // All children for a given date (for admin) — defaults to today
   if (action === 'dashboard-all') {
     const today = new Date().toISOString().split('T')[0];
+    const queryDate = req.query.date || today;
     const { data, error } = await supabase
       .from('kim_children_checkin')
       .select('*')
-      .eq('event_date', today)
+      .eq('event_date', queryDate)
       .order('checked_in_at', { ascending: true });
     if (error) return res.status(500).json({ error: error.message });
-    return res.status(200).json({ records: data || [] });
+    return res.status(200).json({ records: data || [], date: queryDate });
   }
 
   // Suspend/reinstate attendant
