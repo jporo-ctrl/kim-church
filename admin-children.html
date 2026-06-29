@@ -92,13 +92,13 @@
     <div class="grid">
       <!-- ATTENDANTS -->
       <div class="card">
-        <p class="card-title">Signed-In Attendants Today</p>
+        <p class="card-title" id="label-attendants">Signed-In Attendants</p>
         <div id="attendants-list"><p class="empty">Loading...</p></div>
       </div>
 
       <!-- STATS -->
       <div class="card">
-        <p class="card-title">Today's Summary</p>
+        <p class="card-title" id="label-summary">Summary</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div>
             <div style="font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Checked In</div>
@@ -130,13 +130,7 @@
     </div>
 
     <!-- ADD ATTENDANT -->
-    <div class="card" style="margin-bottom:24px;">
-      <p class="card-title">Add Attendant</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;">
-        <div>
-          <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">Name</label>
-          <input type="text" id="new-attendant-name" placeholder="Full name" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
-        </div>
+    
         <div>
           <label style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">PIN (numbers only)</label>
           <input type="text" id="new-attendant-pin" placeholder="e.g. 7823" maxlength="8" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;">
@@ -148,7 +142,7 @@
 
     <!-- CHILDREN LIST -->
     <div class="card">
-      <p class="card-title">All Children Today</p>
+      <p class="card-title" id="label-children">All Children</p>
       <div id="children-list"><p class="empty">Loading...</p></div>
     </div>
   </div>
@@ -173,7 +167,7 @@ async function loadAttendants() {
     const data = await res.json();
     const el = document.getElementById('attendants-list');
     const list = data.attendants || [];
-    if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in today.</p>'; return; }
+    if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in on ' + getSelectedDateLabel() + '.</p>'; return; }
     el.innerHTML = list.map(a => {
       const t = new Date(a.signed_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
       return '<div class="attendant-row"><div><div class="attendant-name">' + a.attendant_name + '</div><div class="attendant-time">Signed in at ' + t + '</div></div></div>';
@@ -191,7 +185,7 @@ async function loadData() {
 
 function renderAttendants(list) {
   const el = document.getElementById('attendants-list');
-  if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in today.</p>'; return; }
+  if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in on ' + getSelectedDateLabel() + '.</p>'; return; }
   el.innerHTML = list.map(a => {
     const t = new Date(a.signed_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
     const suspended = a.suspended;
@@ -212,7 +206,7 @@ function renderChildren(list) {
   document.getElementById('stat-checkedin').textContent = checkedIn;
   document.getElementById('stat-pickedup').textContent = pickedUp;
 
-  if (!list.length) { el.innerHTML = '<p class="empty">No children checked in today.</p>'; return; }
+  if (!list.length) { el.innerHTML = '<p class="empty">No children checked in on ' + getSelectedDateLabel() + '.</p>'; return; }
   el.innerHTML = list.map(rec => {
     const t = new Date(rec.checked_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
     const badge = rec.status === 'picked_up'
@@ -304,6 +298,7 @@ function updateDateLabel() {
 function setToday() {
   document.getElementById('date-picker').value = getTodayCST();
   updateDateLabel();
+  updateSectionLabels();
   loadData();
 }
 
@@ -312,18 +307,41 @@ function setYesterday() {
   d.setDate(d.getDate() - 1);
   document.getElementById('date-picker').value = d.toLocaleDateString('en-CA');
   updateDateLabel();
+  updateSectionLabels();
   loadData();
 }
 
 function onDateChange() {
   updateDateLabel();
+  updateSectionLabels();
   loadData();
+}
+
+
+function getSelectedDateLabel() {
+  const val = getSelectedDate();
+  const today = getTodayCST();
+  if (val === today) return 'today';
+  const d = new Date(val + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function updateSectionLabels() {
+  const label = getSelectedDateLabel();
+  const cap = label.charAt(0).toUpperCase() + label.slice(1);
+  const el1 = document.getElementById('label-attendants');
+  const el2 = document.getElementById('label-summary');
+  const el3 = document.getElementById('label-children');
+  if (el1) el1.textContent = 'Signed-In Attendants — ' + cap;
+  if (el2) el2.textContent = 'Summary — ' + cap;
+  if (el3) el3.textContent = 'All Children — ' + cap;
 }
 
 // Initialize date picker to today on load
 (function initDatePicker() {
   document.getElementById('date-picker').value = getTodayCST();
   updateDateLabel();
+  updateSectionLabels();
 })();
 
 </script>
