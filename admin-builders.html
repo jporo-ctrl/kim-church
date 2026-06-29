@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Builders Gathering — KIM Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#C8922A;--gold-light:#E8B84B;--deep:#0D0D0D;--ink:#1A1613;--muted:#6B6560;--bg:#F5F5F5;--white:#fff;--border:#E8E8E8}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+/* LOGIN */
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.login-card{background:var(--white);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.08);padding:48px 40px;width:100%;max-width:380px;text-align:center}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:32px;letter-spacing:0.05em}
+.login-input{width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--bg);outline:none;margin-bottom:12px;transition:border-color 0.15s}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;padding:14px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer}
+.login-btn:hover{background:var(--gold-light)}
+.login-error{color:#C0392B;font-size:13px;margin-top:10px;display:none}
+
+/* ADMIN */
+.admin-screen{display:none}
+.topbar{background:var(--deep);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.topbar-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#F5EDD8}
+.topbar-logo span{color:var(--gold)}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-link{font-size:13px;color:rgba(245,237,216,0.5);text-decoration:none}
+.topbar-link:hover{color:var(--gold)}
+
+.admin-body{max-width:1100px;margin:0 auto;padding:40px 24px}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.stat-card{background:var(--white);border-radius:12px;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.stat-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-value{font-size:32px;font-weight:300;color:var(--ink);line-height:1}
+.stat-sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* BLAST MESSAGE */
+.card{background:var(--white);border-radius:12px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:24px}
+.card-title{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.msg-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.msg-tab{padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);cursor:pointer;transition:all 0.15s}
+.msg-tab.active{background:var(--gold);border-color:var(--gold);color:white;font-weight:500}
+.msg-subject{width:100%;padding:12px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg);outline:none;margin-bottom:12px;display:none}
+.msg-subject.show{display:block}
+.msg-subject:focus{border-color:var(--gold)}
+.msg-textarea{width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg);outline:none;resize:none;height:100px;margin-bottom:12px}
+.msg-textarea:focus{border-color:var(--gold)}
+.msg-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.msg-count{font-size:13px;color:var(--muted)}
+.send-btn{padding:12px 28px;background:var(--gold);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer}
+.send-btn:hover{background:var(--gold-light)}
+.send-btn:disabled{opacity:0.6;cursor:not-allowed}
+.msg-status{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:8px;display:none}
+.msg-status.success{background:#F0FFF4;color:#27AE60;display:block}
+.msg-status.error{background:#FFF0F0;color:#C0392B;display:block}
+
+/* SEARCH & FILTER */
+.table-controls{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-input{flex:1;min-width:200px;padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none}
+.search-input:focus{border-color:var(--gold)}
+.filter-select{padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none;cursor:pointer}
+.export-btn{padding:10px 20px;background:var(--deep);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.export-btn:hover{background:#333}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:14px}
+thead{background:var(--deep)}
+th{padding:14px 16px;text-align:left;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,237,216,0.6);white-space:nowrap}
+td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FAFAFA}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500}
+.badge-yes{background:#E8F8EE;color:#27AE60}
+.badge-no{background:#F5F5F5;color:var(--muted)}
+.badge-email{background:#EFF6FF;color:#2563EB}
+.no-email{color:var(--muted);font-style:italic;font-size:13px}
+.empty-state{text-align:center;padding:64px 24px;color:var(--muted)}
+.empty-state p{font-size:16px;margin-bottom:8px}
+.empty-state span{font-size:13px}
+.loading{text-align:center;padding:48px;color:var(--muted);font-size:14px}
+
+@media(max-width:700px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .topbar{padding:14px 20px}
+  .admin-body{padding:24px 16px}
+}
+@media(max-width:480px){
+  .stats-row{grid-template-columns:1fr}
+  .login-card{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <p class="login-logo">KIM <span>Admin</span></p>
+    <p class="login-sub">Builders Gathering · July 25, 2026</p>
+    <input type="password" class="login-input" id="pw-input" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <p class="login-error" id="login-error">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-screen" id="admin-screen">
+
+  <div class="topbar">
+    <p class="topbar-logo">KIM <span>Admin</span> — Builders Gathering</p>
+    <div class="topbar-right">
+      <a href="/admin-givers.html" class="topbar-link">Givers</a>
+      <a href="/admin-checkins.html" class="topbar-link">Check-ins</a>
+      <a href="/admin-children.html" class="topbar-link">Children</a>
+      <a href="/" class="topbar-link">← Site</a>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <h1 class="page-title">Builders Gathering RSVPs</h1>
+    <p class="page-sub" id="last-updated">Saturday, July 25, 2026 · Compass Center, Grapevine TX</p>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <p class="stat-label">Total RSVPs</p>
+        <p class="stat-value" id="stat-total">—</p>
+        <p class="stat-sub">registered guests</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Total Attending</p>
+        <p class="stat-value" id="stat-attending">—</p>
+        <p class="stat-sub">incl. additional guests</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">With Email</p>
+        <p class="stat-value" id="stat-email">—</p>
+        <p class="stat-sub">can receive updates</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Bringing Others</p>
+        <p class="stat-value" id="stat-guests">—</p>
+        <p class="stat-sub">bringing extra guests</p>
+      </div>
+    </div>
+
+    <!-- BLAST MESSAGE -->
+    <div class="card">
+      <p class="card-title">Send Message to All Registrants</p>
+      <div class="msg-tabs">
+        <button class="msg-tab active" onclick="selectMsgType('sms',this)">SMS</button>
+        <button class="msg-tab" onclick="selectMsgType('email',this)">Email</button>
+      </div>
+      <input type="text" class="msg-subject" id="msg-subject" placeholder="Email subject line...">
+      <textarea class="msg-textarea" id="msg-body" placeholder="Type your message to all Builders Gathering registrants..."></textarea>
+      <div class="msg-footer">
+        <span class="msg-count" id="msg-count">0 recipients</span>
+        <button class="send-btn" id="send-btn" onclick="sendBlast()">Send Message</button>
+      </div>
+      <p class="msg-status" id="msg-status"></p>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <p class="card-title" style="margin:0;">Registrant List</p>
+        <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div style="padding:16px 24px;">
+        <div class="table-controls">
+          <input type="text" class="search-input" id="search-input" placeholder="Search by name, phone, or email..." oninput="filterTable()">
+          <select class="filter-select" id="filter-guests" onchange="filterTable()">
+            <option value="">All RSVPs</option>
+            <option value="yes">Bringing guests</option>
+            <option value="no">Solo</option>
+            <option value="email">Has email</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Bringing Others</th>
+              <th>Extra Guests</th>
+              <th>How Heard</th>
+              <th>Registered</th>
+            </tr>
+          </thead>
+          <tbody id="rsvp-table-body">
+            <tr><td colspan="8" class="loading">Loading registrants...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:14px 24px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);" id="table-footer">—</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const ADMIN_PW = 'KIM2026!';
+const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NTI2NzcsImV4cCI6MjA2MDMyODY3N30.wHGCTG_6F4NvIRsSTZiRuAl1GNtMsrJGxNE3BQ0MWWM';
+
+let allRsvps = [];
+let msgType = 'sms';
+
+function doLogin() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === ADMIN_PW) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    loadRsvps();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+async function loadRsvps() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/kim_vision_guests?event=eq.builders_gathering&order=registered_at.asc&select=*`,
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
+    );
+    const data = await res.json();
+    allRsvps = data;
+    renderStats(data);
+    renderTable(data);
+  } catch (err) {
+    document.getElementById('rsvp-table-body').innerHTML =
+      `<tr><td colspan="8" class="empty-state"><p>Failed to load data</p><span>${err.message}</span></td></tr>`;
+  }
+}
+
+function renderStats(data) {
+  const total = data.length;
+  const withEmail = data.filter(r => r.email).length;
+  const bringingOthers = data.filter(r => r.bringing_others === 'yes').length;
+  const totalAttending = data.reduce((sum, r) => {
+    const extra = (r.bringing_others === 'yes' && r.others_count) ? parseInt(r.others_count) || 0 : 0;
+    return sum + 1 + extra;
+  }, 0);
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-attending').textContent = totalAttending;
+  document.getElementById('stat-email').textContent = withEmail;
+  document.getElementById('stat-guests').textContent = bringingOthers;
+  document.getElementById('msg-count').textContent = `${total} recipients`;
+  document.getElementById('last-updated').textContent =
+    `${total} registered · Last refreshed ${new Date().toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit',hour12:true})}`;
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('rsvp-table-body');
+  if (!data.length) {
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><p>No registrants yet</p><span>RSVPs will appear here as they come in</span></div></td></tr>`;
+    document.getElementById('table-footer').textContent = '0 registrants';
+    return;
+  }
+
+  tbody.innerHTML = data.map((r, i) => {
+    const date = new Date(r.registered_at);
+    const dateStr = date.toLocaleDateString('en-US', {month:'short', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true, timeZone:'America/Chicago'});
+    const bringingBadge = r.bringing_others === 'yes'
+      ? `<span class="badge badge-yes">Yes</span>`
+      : `<span class="badge badge-no">No</span>`;
+    const emailCell = r.email
+      ? `<span class="badge badge-email">${r.email}</span>`
+      : `<span class="no-email">Not provided</span>`;
+    const extraGuests = (r.bringing_others === 'yes' && r.others_count) ? r.others_count : '—';
+
+    return `<tr>
+      <td style="color:var(--muted);font-size:13px;">${i + 1}</td>
+      <td style="font-weight:500;">${r.full_name || '—'}</td>
+      <td>${r.phone || '—'}</td>
+      <td>${emailCell}</td>
+      <td>${bringingBadge}</td>
+      <td style="color:var(--muted);">${extraGuests}</td>
+      <td style="color:var(--muted);font-size:13px;">${r.how_heard || '—'}</td>
+      <td style="color:var(--muted);font-size:12px;white-space:nowrap;">${dateStr} CST</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('table-footer').textContent = `Showing ${data.length} of ${allRsvps.length} registrants`;
+}
+
+function filterTable() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const filter = document.getElementById('filter-guests').value;
+
+  let filtered = allRsvps.filter(r => {
+    const matchSearch = !q ||
+      (r.full_name || '').toLowerCase().includes(q) ||
+      (r.phone || '').includes(q) ||
+      (r.email || '').toLowerCase().includes(q);
+
+    const matchFilter =
+      !filter ||
+      (filter === 'yes' && r.bringing_others === 'yes') ||
+      (filter === 'no' && r.bringing_others !== 'yes') ||
+      (filter === 'email' && r.email);
+
+    return matchSearch && matchFilter;
+  });
+
+  renderTable(filtered);
+}
+
+function selectMsgType(type, btn) {
+  msgType = type;
+  document.querySelectorAll('.msg-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const subjectEl = document.getElementById('msg-subject');
+  if (type === 'email') subjectEl.classList.add('show');
+  else subjectEl.classList.remove('show');
+  document.getElementById('msg-body').placeholder =
+    type === 'sms'
+      ? 'Type your SMS to all Builders Gathering registrants...'
+      : 'Type your email to all Builders Gathering registrants...';
+}
+
+async function sendBlast() {
+  const body = document.getElementById('msg-body').value.trim();
+  const subject = document.getElementById('msg-subject').value.trim();
+  const statusEl = document.getElementById('msg-status');
+  const btn = document.getElementById('send-btn');
+
+  if (!body) { statusEl.textContent = 'Please enter a message.'; statusEl.className = 'msg-status error'; return; }
+  if (msgType === 'email' && !subject) { statusEl.textContent = 'Please enter a subject line.'; statusEl.className = 'msg-status error'; return; }
+  if (!confirm(`Send ${msgType.toUpperCase()} to all ${allRsvps.length} Builders Gathering registrants?`)) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  statusEl.style.display = 'none';
+  statusEl.className = 'msg-status';
+
+  try {
+    const endpoint = msgType === 'sms' ? '/api/message-checkins' : '/api/checkin';
+    const recipients = msgType === 'sms'
+      ? allRsvps.map(r => r.phone).filter(Boolean)
+      : allRsvps.map(r => r.email).filter(Boolean);
+
+    const res = await fetch('/api/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: msgType === 'sms' ? 'blast_sms' : 'blast_email',
+        password: ADMIN_PW,
+        message: body,
+        subject: subject || undefined,
+        recipients,
+        event: 'builders_gathering'
+      })
+    });
+
+    const json = await res.json();
+    if (res.ok) {
+      statusEl.textContent = `✓ Message sent to ${recipients.length} ${msgType === 'sms' ? 'numbers' : 'emails'}.`;
+      statusEl.className = 'msg-status success';
+      document.getElementById('msg-body').value = '';
+      document.getElementById('msg-subject').value = '';
+    } else {
+      throw new Error(json.error || 'Send failed');
+    }
+  } catch (err) {
+    statusEl.textContent = `Error: ${err.message}`;
+    statusEl.className = 'msg-status error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  }
+}
+
+function exportCSV() {
+  if (!allRsvps.length) return;
+  const headers = ['#','Name','Phone','Email','Bringing Others','Extra Guests','How Heard','Registered'];
+  const rows = allRsvps.map((r, i) => [
+    i + 1,
+    r.full_name || '',
+    r.phone || '',
+    r.email || '',
+    r.bringing_others || '',
+    r.others_count || '',
+    r.how_heard || '',
+    r.registered_at ? new Date(r.registered_at).toLocaleString('en-US', {timeZone:'America/Chicago'}) : ''
+  ]);
+
+  const csv = [headers, ...rows].map(row =>
+    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+  ).join('\n');
+
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `KIM-Builders-RSVPs-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Auto-refresh every 60 seconds
+setInterval(() => {
+  if (document.getElementById('admin-screen').style.display !== 'none') loadRsvps();
+}, 60000);
+</script>
+</body>
+</html>
