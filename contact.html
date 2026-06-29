@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Kingdom Insights Ministries</title>
-<meta name="description" content="Get in touch with Kingdom Insights Ministries. Join our team, submit a prayer request, or just say hello.">
+<meta name="description" content="Get in touch with Kingdom Insights Ministries. Join our team or send us a message.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -30,7 +30,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .hero-title em { font-style: italic; color: var(--gold-light); }
 .hero-sub { font-size: 16px; font-weight: 300; color: rgba(245,237,216,0.5); max-width: 480px; margin: 0 auto; line-height: 1.7; }
 
-/* TABS */
+.prayer-banner { background: var(--gold); padding: 16px 24px; text-align: center; }
+.prayer-banner p { font-size: 14px; font-weight: 500; color: var(--deep); }
+.prayer-banner a { color: var(--deep); font-weight: 700; text-decoration: underline; }
+
 .tabs-wrap { max-width: 800px; margin: 0 auto; padding: 56px 24px 0; }
 .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
 .tab-btn { padding: 14px 28px; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s; margin-bottom: -1px; }
@@ -40,7 +43,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* FORM */
 .form-card { background: white; border: 1px solid rgba(200,146,42,0.15); padding: 48px; margin-bottom: 48px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
@@ -67,17 +69,12 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 
 .submit-btn { width: 100%; padding: 18px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; border: none; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
 .submit-btn:hover { background: var(--gold-light); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .success-msg { display: none; text-align: center; padding: 48px; background: var(--gold-pale); border: 1px solid var(--border); margin-bottom: 48px; }
 .success-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
 .success-body { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7; }
 
-/* PRAYER NOTE */
-.prayer-note { background: var(--deep); border: 1px solid rgba(200,146,42,0.2); padding: 28px 32px; margin-bottom: 32px; }
-.prayer-note p { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(245,237,216,0.55); }
-.prayer-note strong { color: rgba(245,237,216,0.85); font-weight: 400; }
-
-/* INFO CARDS */
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin: 0 0 80px; }
 .info-card { padding: 32px 28px; border: 1px solid var(--border); background: var(--gold-pale); }
 .info-label { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
@@ -112,13 +109,16 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 <section class="hero">
   <p class="hero-eyebrow">Kingdom Insights Ministries</p>
   <h1 class="hero-title">Get in <em>Touch</em></h1>
-  <p class="hero-sub">Whether you want to serve, submit a prayer request, or just say hello — we want to hear from you.</p>
+  <p class="hero-sub">Want to serve or just say hello? We want to hear from you.</p>
 </section>
+
+<div class="prayer-banner">
+  <p>🙏 Need prayer? <a href="/prayer">Submit a Prayer Request →</a></p>
+</div>
 
 <div class="tabs-wrap">
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('serve', this)">Join Our Team</button>
-    <button class="tab-btn" onclick="switchTab('prayer', this)">Prayer Request</button>
     <button class="tab-btn" onclick="switchTab('general', this)">General Inquiry</button>
   </div>
 
@@ -127,8 +127,7 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     <div class="form-card" id="serve-card">
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:8px;">Become a New Member</h3>
       <p style="font-size:14px; color:var(--muted); margin-bottom:28px;">All fields marked with * are required</p>
-      <form id="serve-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event,'serve')">
-        <input type="hidden" name="form_type" value="Join the Team">
+      <form id="serve-form" onsubmit="handleSubmit(event,'serve')">
         <div class="form-grid">
           <div class="form-group">
             <label for="s-first">First Name *</label>
@@ -186,80 +185,12 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     </div>
   </div>
 
-  <!-- TAB 2: PRAYER REQUEST -->
-  <div class="tab-panel" id="tab-prayer">
-    <div class="prayer-note">
-      <p><strong>Your prayer request is confidential.</strong> It will be shared only with the KIM leadership and intercessory prayer team. We take every request seriously and will be praying with you.</p>
-    </div>
-    <div class="form-card" id="prayer-card">
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:8px;">Submit a Prayer Request</h3>
-      <p style="font-size:14px; color:var(--muted); margin-bottom:28px;">Share what's on your heart. We're standing with you.</p>
-      <form id="prayer-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event,'prayer')">
-        <input type="hidden" name="form_type" value="Prayer Request">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="p-first">First Name *</label>
-            <input type="text" id="p-first" name="first_name" placeholder="First Name" required>
-          </div>
-          <div class="form-group">
-            <label for="p-last">Last Name</label>
-            <input type="text" id="p-last" name="last_name" placeholder="Last Name (optional)">
-          </div>
-          <div class="form-group full">
-            <label for="p-email">Email</label>
-            <input type="email" id="p-email" name="email" placeholder="So we can follow up with you (optional)">
-          </div>
-          <div class="form-group full">
-            <label for="p-category">Category</label>
-            <select id="p-category" name="category">
-              <option value="">— Select —</option>
-              <option>Health & Healing</option>
-              <option>Family & Relationships</option>
-              <option>Financial Breakthrough</option>
-              <option>Salvation of a Loved One</option>
-              <option>Spiritual Growth</option>
-              <option>Employment & Career</option>
-              <option>Mental & Emotional Health</option>
-              <option>Marriage & Restoration</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label for="p-request">Your Prayer Request *</label>
-            <textarea id="p-request" name="prayer_request" placeholder="Share what's on your heart..." style="min-height:160px;" required></textarea>
-          </div>
-          <div class="form-group full">
-            <div class="checkbox-row">
-              <input type="checkbox" id="p-anonymous" name="anonymous">
-              <label for="p-anonymous">I would like this request to remain anonymous to the congregation — share with leadership only</label>
-            </div>
-          </div>
-          <div class="form-group full">
-            <div class="checkbox-row">
-              <input type="checkbox" id="p-followup" name="followup">
-              <label for="p-followup">Please follow up with me personally</label>
-            </div>
-          </div>
-          <div class="form-group full">
-            <button type="submit" class="submit-btn">Submit Prayer Request</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="success-msg" id="prayer-success">
-      <div style="font-size:36px; color:var(--gold); margin-bottom:16px;">🙏</div>
-      <h2 class="success-title">We're Praying With You</h2>
-      <p class="success-body">Your request has been received and shared with our prayer team. You are not alone — we are standing with you in faith.</p>
-    </div>
-  </div>
-
-  <!-- TAB 3: GENERAL INQUIRY -->
+  <!-- TAB 2: GENERAL INQUIRY -->
   <div class="tab-panel" id="tab-general">
     <div class="form-card" id="general-card">
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:8px;">Say Hello</h3>
       <p style="font-size:14px; color:var(--muted); margin-bottom:28px;">Questions, feedback, or anything else — we'd love to hear from you.</p>
-      <form id="general-form" action="https://formspree.io/f/mwvjkwkg" method="POST" onsubmit="handleSubmit(event,'general')">
-        <input type="hidden" name="form_type" value="General Inquiry">
+      <form id="general-form" onsubmit="handleSubmit(event,'general')">
         <div class="form-grid">
           <div class="form-group">
             <label for="g-first">First Name *</label>
@@ -304,7 +235,7 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     <div class="info-card">
       <p class="info-label">Email</p>
       <h3 class="info-title">Reach Out</h3>
-      <p class="info-text"><a href="mailto:jporo@kim.church">jporo@kim.church</a><br><br>We respond within 24–48 hours.</p>
+      <p class="info-text"><a href="mailto:info@kim.church">info@kim.church</a><br><br>We respond within 24–48 hours.</p>
     </div>
     <div class="info-card">
       <p class="info-label">Connect</p>
@@ -327,6 +258,7 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
     <a href="/vision">Vision Night</a>
     <a href="/builders">Builders Gathering</a>
     <a href="/generosity">Give</a>
+    <a href="/prayer">Prayer Request</a>
     <a href="/register">Join Launch Team</a>
   </div>
 </footer>
@@ -347,25 +279,30 @@ async function handleSubmit(e, type) {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
+  const data = {};
+  new FormData(form).forEach((val, key) => { data[key] = val; });
+  data.form_type = type;
+
   try {
-    const response = await fetch('https://formspree.io/f/mwvjkwkg', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-    if (response.ok) {
+    if (res.ok) {
       document.getElementById(type + '-card').style.display = 'none';
       document.getElementById(type + '-success').style.display = 'block';
       window.scrollTo({ top: document.getElementById(type + '-success').offsetTop - 100, behavior: 'smooth' });
     } else {
+      const err = await res.json();
+      alert(err.error || 'Something went wrong. Please try again.');
       btn.textContent = origText;
       btn.disabled = false;
-      alert('Something went wrong. Please try again.');
     }
   } catch {
+    alert('Network error. Please check your connection.');
     btn.textContent = origText;
     btn.disabled = false;
-    alert('Network error. Please check your connection.');
   }
 }
 </script>

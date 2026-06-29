@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prayer Request — Kingdom Insights Ministries</title>
+<meta name="description" content="Submit a prayer request to Kingdom Insights Ministries. We are standing with you in faith.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C8922A; --gold-light: #E8B84B; --gold-pale: #FBF4E8;
+  --deep: #0D0D0D; --ink: #1A1613; --parchment: #FAF7F2;
+  --muted: #6B6560; --border: rgba(200,146,42,0.25);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: var(--ink); overflow-x: hidden; }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 72px; background: rgba(13,13,13,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,146,42,0.12); }
+.nav-back { font-size: 13px; color: rgba(245,237,216,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.nav-back:hover { color: var(--gold); }
+
+.hero { background: var(--deep); padding: 130px 24px 70px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,146,42,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 8vw, 76px); font-weight: 600; line-height: 1.05; color: #F5EDD8; margin-bottom: 16px; }
+.hero-title em { font-style: italic; color: var(--gold-light); }
+.hero-sub { font-size: 16px; font-weight: 300; color: rgba(245,237,216,0.5); max-width: 520px; margin: 0 auto; line-height: 1.8; }
+
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 56px 24px 80px; }
+
+.confidential-note { background: var(--deep); border: 1px solid rgba(200,146,42,0.2); padding: 28px 32px; margin-bottom: 36px; }
+.confidential-note p { font-size: 14px; font-weight: 300; line-height: 1.8; color: rgba(245,237,216,0.55); }
+.confidential-note strong { color: rgba(245,237,216,0.85); font-weight: 500; }
+
+.form-card { background: white; border: 1px solid rgba(200,146,42,0.15); padding: 48px; margin-bottom: 48px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+
+label { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.label-note { font-size: 11px; font-weight: 300; text-transform: none; letter-spacing: 0; color: rgba(107,101,96,0.6); margin-left: 6px; }
+
+input[type="text"], input[type="email"], select, textarea {
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: var(--ink);
+  background: var(--parchment); border: 1px solid rgba(26,22,19,0.18);
+  padding: 14px 16px; width: 100%; appearance: none; outline: none;
+  transition: border-color 0.2s; border-radius: 0;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+input::placeholder, textarea::placeholder { color: rgba(107,101,96,0.4); }
+select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8922A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+textarea { resize: vertical; min-height: 180px; line-height: 1.7; }
+
+.checkbox-row { display: flex; align-items: flex-start; gap: 10px; }
+.checkbox-row input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; border: 1px solid rgba(26,22,19,0.2); background: var(--parchment); appearance: none; cursor: pointer; padding: 0; position: relative; transition: all 0.15s; margin-top: 2px; }
+.checkbox-row input[type="checkbox"]:checked { background: var(--gold); border-color: var(--gold); }
+.checkbox-row input[type="checkbox"]:checked::after { content: ''; position: absolute; left: 4px; top: 1px; width: 8px; height: 5px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg); }
+.checkbox-row label { font-size: 13px; font-weight: 300; text-transform: none; letter-spacing: 0; color: var(--muted); cursor: pointer; line-height: 1.6; }
+
+.submit-btn { width: 100%; padding: 18px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; border: none; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+.submit-btn:hover { background: var(--gold-light); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.success-msg { display: none; text-align: center; padding: 56px 48px; background: var(--gold-pale); border: 1px solid var(--border); margin-bottom: 48px; }
+.success-icon { font-size: 40px; margin-bottom: 20px; }
+.success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.success-body { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 400px; margin: 0 auto; }
+.success-verse { font-size: 13px; font-style: italic; color: var(--gold); margin-top: 20px; }
+
+.footer { background: var(--deep); padding: 40px 24px; text-align: center; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
+.footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+
+@media (max-width: 600px) {
+  .nav { padding: 0 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .form-card { padding: 28px 20px; }
+  .confidential-note { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/"><img src="/kim-logo.png" alt="Kingdom Insights Ministries" style="height:44px;"></a>
+  <a href="/" class="nav-back">← kim.church</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Kingdom Insights Ministries</p>
+  <h1 class="hero-title">Prayer <em>Request</em></h1>
+  <p class="hero-sub">Nothing is too big or too small to bring before the Lord. Share what's on your heart — we are standing with you.</p>
+</section>
+
+<div class="page-wrap">
+
+  <div class="confidential-note">
+    <p><strong>Your request is confidential.</strong> It will be shared only with KIM leadership and our intercessory prayer team. We take every request seriously and will be praying with you in faith.</p>
+  </div>
+
+  <div class="form-card" id="prayer-card">
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:8px;">Submit a Prayer Request</h3>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:32px;">Share what's on your heart. We're here.</p>
+
+    <form id="prayer-form" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="p-first">First Name *</label>
+          <input type="text" id="p-first" name="first_name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+          <label for="p-last">Last Name <span class="label-note">optional</span></label>
+          <input type="text" id="p-last" name="last_name" placeholder="Last Name">
+        </div>
+        <div class="form-group full">
+          <label for="p-email">Email <span class="label-note">optional — for confirmation & follow-up</span></label>
+          <input type="email" id="p-email" name="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group full">
+          <label for="p-category">Category <span class="label-note">optional</span></label>
+          <select id="p-category" name="category">
+            <option value="">— Select —</option>
+            <option>Health & Healing</option>
+            <option>Family & Relationships</option>
+            <option>Financial Breakthrough</option>
+            <option>Salvation of a Loved One</option>
+            <option>Spiritual Growth</option>
+            <option>Employment & Career</option>
+            <option>Mental & Emotional Health</option>
+            <option>Marriage & Restoration</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="p-request">Your Prayer Request *</label>
+          <textarea id="p-request" name="prayer_request" placeholder="Share what's on your heart..." required></textarea>
+        </div>
+        <div class="form-group full" style="gap:14px;">
+          <div class="checkbox-row">
+            <input type="checkbox" id="p-anonymous" name="anonymous">
+            <label for="p-anonymous">Keep this anonymous to the congregation — share with KIM leadership only</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="p-followup" name="followup">
+            <label for="p-followup">Please follow up with me personally</label>
+          </div>
+        </div>
+        <div class="form-group full">
+          <button type="submit" class="submit-btn">Submit Prayer Request</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="success-msg" id="prayer-success">
+    <div class="success-icon">🙏</div>
+    <h2 class="success-title">We're Praying With You</h2>
+    <p class="success-body">Your request has been received and shared with our prayer team. You are not alone — we are standing with you in faith.</p>
+    <p class="success-verse">"The effective, fervent prayer of a righteous man avails much." — James 5:16</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p class="footer-logo">Kingdom Insights Ministries</p>
+  <p class="footer-sub">HURST, TEXAS · KIM.CHURCH</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/contact">Contact</a>
+    <a href="/vision">Vision Night</a>
+    <a href="/builders">Builders Gathering</a>
+    <a href="/generosity">Give</a>
+    <a href="/register">Join Launch Team</a>
+  </div>
+</footer>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('prayer-form');
+  const btn = form.querySelector('.submit-btn');
+  const origText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const data = { form_type: 'prayer' };
+  new FormData(form).forEach((val, key) => { data[key] = val; });
+  // capture unchecked checkboxes as false
+  ['anonymous', 'followup'].forEach(k => { if (!data[k]) data[k] = false; });
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      document.getElementById('prayer-card').style.display = 'none';
+      const success = document.getElementById('prayer-success');
+      success.style.display = 'block';
+      window.scrollTo({ top: success.offsetTop - 100, behavior: 'smooth' });
+    } else {
+      const err = await res.json();
+      alert(err.error || 'Something went wrong. Please try again.');
+      btn.textContent = origText;
+      btn.disabled = false;
+    }
+  } catch {
+    alert('Network error. Please check your connection.');
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
