@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vision — Kingdom Insights Ministries</title>
+<meta name="description" content="Seven levels of teaching that come from the altar of Kingdom Insights Ministries. You are becoming something intentional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C8922A; --gold-light: #E8B84B; --gold-pale: #FBF4E8;
+  --deep: #0D0D0D; --ink: #1A1613; --parchment: #FAF7F2;
+  --muted: #6B6560; --border: rgba(200,146,42,0.25);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: var(--ink); overflow-x: hidden; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 72px; background: rgba(13,13,13,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,146,42,0.12); }
+.nav-back { font-size: 13px; color: rgba(245,237,216,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.nav-back:hover { color: var(--gold); }
+
+/* HERO */
+.hero { min-height: 100vh; background: var(--deep); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(200,146,42,0.13) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 100%, rgba(200,146,42,0.06) 0%, transparent 60%); pointer-events: none; }
+
+.hero-ornament { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold)); margin: 0 auto 32px; opacity: 0; animation: fadeDown 1s ease 0.3s forwards; }
+.hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 10vw, 100px); font-weight: 600; line-height: 0.95; color: #F5EDD8; margin-bottom: 16px; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; }
+.hero-title em { font-style: italic; color: var(--gold-light); }
+.hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(17px, 2.5vw, 24px); font-style: italic; font-weight: 400; color: rgba(245,237,216,0.5); max-width: 560px; line-height: 1.7; margin-bottom: 56px; opacity: 0; animation: fadeUp 1s ease 0.9s forwards; }
+
+.hero-statement { max-width: 640px; border: 1px solid rgba(200,146,42,0.2); padding: 32px 40px; position: relative; opacity: 0; animation: fadeUp 1s ease 1.1s forwards; }
+.hero-statement::before, .hero-statement::after { content: ''; position: absolute; width: 8px; height: 8px; border: 1px solid var(--gold); }
+.hero-statement::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+.hero-statement::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+.hero-statement p { font-size: 16px; font-weight: 300; line-height: 1.85; color: rgba(245,237,216,0.55); }
+.hero-statement p strong { color: rgba(245,237,216,0.85); font-weight: 400; }
+
+.scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeIn 1s ease 2s forwards; }
+.scroll-hint span { font-size: 10px; letter-spacing: 0.25em; color: rgba(245,237,216,0.3); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--gold), transparent); animation: pulse 2s ease infinite; }
+
+/* INTRO */
+.intro { max-width: 760px; margin: 0 auto; padding: 100px 24px 60px; }
+.eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+.intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 28px; }
+.intro-title em { font-style: italic; color: var(--gold); }
+.intro-body { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--muted); }
+.intro-body p + p { margin-top: 20px; }
+.intro-body strong { font-weight: 500; color: var(--ink); }
+
+/* DIVIDER */
+.divider { display: flex; align-items: center; gap: 24px; padding: 0 24px; max-width: 760px; margin: 0 auto; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-mark { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); }
+
+/* PILLARS */
+.pillars-section { padding: 80px 24px 100px; }
+.pillars-header { text-align: center; max-width: 600px; margin: 0 auto 72px; }
+.pillars-header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.pillars-header-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 600; color: var(--ink); line-height: 1.2; }
+.pillars-header-title em { font-style: italic; color: var(--gold); }
+
+.pillar-row { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 2px; }
+
+.pillar { display: grid; grid-template-columns: 80px 1fr; background: white; border: 1px solid rgba(200,146,42,0.12); transition: border-color 0.2s; }
+.pillar:hover { border-color: var(--gold); }
+
+.pillar-num-col { background: var(--deep); display: flex; align-items: flex-start; justify-content: center; padding: 36px 0 0; }
+.pillar-number { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: rgba(200,146,42,0.35); line-height: 1; }
+
+.pillar-content { padding: 36px 40px; }
+.pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+.pillar-title em { font-style: italic; color: var(--gold); }
+.pillar-desc { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--muted); margin-bottom: 20px; }
+.pillar-desc strong { font-weight: 500; color: var(--ink); }
+.pillar-scripture { border-left: 2px solid var(--gold); padding-left: 16px; }
+.pillar-scripture p { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 6px; }
+.pillar-scripture span { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+/* CHARGE SECTION */
+.charge-section { background: var(--deep); padding: 100px 24px; }
+.charge-inner { max-width: 760px; margin: 0 auto; }
+.charge-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.charge-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(200,146,42,0.2); max-width: 60px; }
+.charge-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.15; color: #F5EDD8; margin-bottom: 28px; }
+.charge-title em { font-style: italic; color: var(--gold-light); }
+.charge-body { font-size: 17px; font-weight: 300; line-height: 1.85; color: rgba(245,237,216,0.5); }
+.charge-body p + p { margin-top: 20px; }
+.charge-body strong { color: rgba(245,237,216,0.85); font-weight: 400; }
+
+/* SCRIPTURE BAR */
+.scripture-bar { padding: 80px 24px; text-align: center; background: var(--gold-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.scripture-bar-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3.5vw, 32px); font-style: italic; font-weight: 400; color: var(--ink); line-height: 1.6; max-width: 680px; margin: 0 auto 16px; }
+.scripture-bar-ref { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+/* CTA */
+.cta-section { background: var(--deep); padding: 100px 24px; text-align: center; border-top: 1px solid rgba(200,146,42,0.1); }
+.cta-inner { max-width: 560px; margin: 0 auto; }
+.cta-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.1; color: #F5EDD8; margin-bottom: 16px; }
+.cta-title em { font-style: italic; color: var(--gold-light); }
+.cta-body { font-size: 16px; font-weight: 300; color: rgba(245,237,216,0.45); line-height: 1.8; margin-bottom: 48px; }
+.cta-btns { display: flex; flex-direction: column; gap: 14px; max-width: 360px; margin: 0 auto; }
+.btn-gold { display: flex; align-items: center; justify-content: center; padding: 18px 40px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-outline { display: flex; align-items: center; justify-content: center; padding: 18px 40px; background: transparent; color: rgba(245,237,216,0.7); border: 1px solid rgba(245,237,216,0.25); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+
+/* FOOTER */
+.footer { background: var(--deep); border-top: 1px solid rgba(200,146,42,0.08); padding: 40px 24px; text-align: center; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
+.footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+@media (max-width: 640px) {
+  .nav { padding: 0 20px; }
+  .pillar { grid-template-columns: 1fr; }
+  .pillar-num-col { padding: 24px 28px 0; align-items: flex-start; justify-content: flex-start; }
+  .pillar-content { padding: 20px 28px 32px; }
+  .hero-statement { padding: 24px 24px; }
+  .cta-btns { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/"><img src="/kim-logo.png" alt="Kingdom Insights Ministries" style="height:44px;"></a>
+  <a href="/" class="nav-back">← kim.church</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament"></div>
+  <p class="hero-eyebrow">Kingdom Insights Ministries</p>
+  <h1 class="hero-title">The<br><em>Vision</em></h1>
+  <p class="hero-subtitle">What you will hear from this altar — and why it matters</p>
+
+  <div class="hero-statement">
+    <p>The encounters we have as a ministry go beyond being merely spiritual. <strong>They affect every aspect of our lives.</strong> The messages that come from this altar are not trial and error. Vision is involved in what you are hearing. You are becoming something intentional.</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p class="eyebrow">The Foundation</p>
+  <h2 class="intro-title">This is a school<br>of the <em>Word</em>.</h2>
+  <div class="intro-body">
+    <p>Every teaching that comes from this ministry is intended to address very specific areas of our lives. A lecturer does not come to impress you. <strong>A lecturer comes to impart a body of knowledge that transforms you.</strong> Likewise, this is a school of the Word — and the responsibility of this altar is to teach, furnish, and equip you.</p>
+    <p>There are seven levels of teaching that flow from this house. Each one is deliberate. Each one builds on the last. Together, they form the complete picture of what God is doing in and through the people of Kingdom Insights Ministries.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+
+<!-- SEVEN PILLARS -->
+<section class="pillars-section">
+  <div class="pillars-header">
+    <p class="pillars-header-eyebrow">Seven Teachings</p>
+    <h2 class="pillars-header-title">What comes from<br>this <em>altar</em></h2>
+  </div>
+
+  <div class="pillar-row">
+
+    <!-- 1. SALVATION -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">01</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of <em>Salvation</em></h3>
+        <p class="pillar-desc">Salvation is more than an altar call. This teaching brings the unsaved into the Kingdom and gives every believer deep intelligence concerning what actually happened to them at salvation — the forgiveness of sins, righteousness through faith, and eternal life. <strong>By the time you have been part of this house for a year, you should be able to articulate, defend, and administer the message of salvation to another person.</strong></p>
+        <div class="pillar-scripture">
+          <p>"Every man comes to Jesus through the convicting power of the Spirit of God. By confessing His Lordship, you receive the gifts that accompany salvation."</p>
+          <span>Acts 2:38</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. TRANSFORMATION -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">02</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of <em>Transformation</em></h3>
+        <p class="pillar-desc">Being saved does not automatically manifest the riches of the life you have received. The supernatural life of God is knowledge-dependent — it finds expression through a renewed mind. <strong>Transformation is you and the Holy Spirit working together through the Word.</strong> Every message from this altar is a partnership with the Holy Spirit to close the gap between who you are and who God has made you to be.</p>
+        <div class="pillar-scripture">
+          <p>"And do not be conformed to this world, but be transformed by the renewing of your mind."</p>
+          <span>Romans 12:2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. EMPOWERMENT -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">03</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of <em>Empowerment</em></h3>
+        <p class="pillar-desc">A believer may be a good Christian and yet not be an effective witness. <strong>It takes more than transformation to become an ambassador of Christ.</strong> Through repeated teachings specifically designed for this purpose, you will receive the keys that enable men to have power with God — and carry that power into every room you enter.</p>
+        <div class="pillar-scripture">
+          <p>"But you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me."</p>
+          <span>Acts 1:8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SUPERNATURAL -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">04</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of the <em>Supernatural</em></h3>
+        <p class="pillar-desc">We are not just called to tell the story — we are called to validate it. <strong>Signs, wonders, miracles, breakthroughs, and a life of victory are the inheritance of every believer, not just the ministers.</strong> These teachings will help you access power, understand how it works, and walk in consistent testimony.</p>
+        <div class="pillar-scripture">
+          <p>"And with great power the apostles gave witness to the resurrection of the Lord Jesus. And great grace was upon them all."</p>
+          <span>Acts 4:33</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PURPOSE -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">05</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of <em>Purpose</em></h3>
+        <p class="pillar-desc">Everybody has a purpose in Christ. Everybody has a destiny. The Great Commission captures salvation for sinners, transformation for the saints, and transformation for territories. <strong>You will hear messages about values, relationships, destiny, and your specific assignment as an agent of Kingdom advancement and societal transformation.</strong></p>
+        <div class="pillar-scripture">
+          <p>"For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them."</p>
+          <span>Ephesians 2:10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. UNITY -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">06</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of <em>Unity & Love</em></h3>
+        <p class="pillar-desc">There is a unique investment of the Holy Spirit upon this ministry to bring the Body of Christ into a higher state of love and unity. <strong>The strengths we carry are not the basis for competition — they are the basis for contribution.</strong> You will see this expressed in our pursuit of balance, our mending of divisions, and our commitment to walking together rather than apart.</p>
+        <div class="pillar-scripture">
+          <p>"Behold, how good and how pleasant it is for brethren to dwell together in unity!"</p>
+          <span>Psalm 133:1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. PEACE -->
+    <div class="pillar">
+      <div class="pillar-num-col"><span class="pillar-number">07</span></div>
+      <div class="pillar-content">
+        <h3 class="pillar-title">The Message of Lasting <em>Peace & Fulfillment</em></h3>
+        <p class="pillar-desc">God is not only interested in your spiritual life — He is interested in your finding lasting peace and fulfillment in every dimension of living. <strong>Human relations, leadership, prosperity, meaningful work, and your eternal destiny are all within the scope of what this altar addresses.</strong> The goal is a life that is not just saved, but whole.</p>
+        <div class="pillar-scripture">
+          <p>"Peace I leave with you, My peace I give to you; not as the world gives do I give to you. Let not your heart be troubled, neither let it be afraid."</p>
+          <span>John 14:27</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHARGE -->
+<section class="charge-section">
+  <div class="charge-inner">
+    <p class="charge-eyebrow">The Charge</p>
+    <h2 class="charge-title">You are becoming<br>something <em>intentional</em>.</h2>
+    <div class="charge-body">
+      <p>It is impossible to hear any message from this altar that does not address one, several, or all of these areas in their various expressions. <strong>The messages that come from this altar are not trial and error. We are not guessing what you should hear.</strong> Vision is involved in what you are hearing.</p>
+      <p>So if someone asks you, "Why do you come to Kingdom Insights Ministries?" — you should be able to answer. Not just, "I like the pastor," but: <strong>"In my coming, I have been taught along the lines of salvation, transformation, empowerment, the supernatural, purpose, unity, and lasting peace."</strong> When you speak like that, it becomes a wise and powerful invitation.</p>
+      <p>Sit down. Grow. The altar is ready.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTURE BAR -->
+<section class="scripture-bar">
+  <p class="scripture-bar-text">"As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God."</p>
+  <p class="scripture-bar-ref">1 Peter 4:10</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">What's Next</p>
+    <h2 class="cta-title">Come and<br><em>receive</em>.</h2>
+    <p class="cta-body">The Builders Gathering on July 25 is where this vision becomes personal. Come hear how you fit into what God is building — and take your place in the foundation.</p>
+    <div class="cta-btns">
+      <a href="/builders" class="btn-gold">Reserve a Seat — July 25</a>
+      <a href="/generosity" class="btn-outline">Become a Founding Partner</a>
+      <a href="/contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p class="footer-logo">Kingdom Insights Ministries</p>
+  <p class="footer-sub">GRAPEVINE, TEXAS · KIM.CHURCH</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/vision">Vision Night</a>
+    <a href="/builders">Builders Gathering</a>
+    <a href="/generosity">Give</a>
+    <a href="/prayer">Prayer Request</a>
+    <a href="/contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
