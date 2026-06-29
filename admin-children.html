@@ -25,10 +25,22 @@
   .topbar-link:hover{color:var(--gold)}
   .admin-body{max-width:1100px;margin:0 auto;padding:40px 24px}
   .page-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--ink);margin-bottom:8px}
-  .page-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
-  .card{background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-  .card-title{font-size:14px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .page-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+
+  /* DATE BAR */
+  .date-bar{display:flex;align-items:center;gap:10px;margin-bottom:28px;flex-wrap:wrap;padding:16px 20px;background:var(--white);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+  .date-bar-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+  .date-input{padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg);outline:none;cursor:pointer}
+  .date-input:focus{border-color:var(--gold)}
+  .date-btn{padding:9px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+  .date-btn:hover{border-color:var(--gold);color:var(--gold)}
+  .date-btn.active{background:var(--gold);border-color:var(--gold);color:white;font-weight:500}
+  .date-display{font-size:13px;color:var(--muted);margin-left:4px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+  .card{background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:24px}
+  .card:last-child{margin-bottom:0}
+  .card-title{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
   .attendant-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F5F5F5}
   .attendant-row:last-child{border-bottom:none}
   .attendant-name{font-size:14px;font-weight:500;color:var(--ink)}
@@ -44,19 +56,12 @@
   .badge-out{background:#F0FFF4;color:#27AE60}
   .empty{text-align:center;padding:32px;color:var(--muted);font-size:13px}
   @media(max-width:768px){.grid{grid-template-columns:1fr}}
-
-.date-bar{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
-.date-label{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
-.date-input{padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none;cursor:pointer}
-.date-input:focus{border-color:var(--gold)}
-.date-btn{padding:10px 20px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);cursor:pointer;transition:all 0.15s}
-.date-btn:hover{border-color:var(--gold);color:var(--gold)}
-.date-btn.active{background:var(--gold);border-color:var(--gold);color:white;font-weight:500}
-.date-viewing{font-size:13px;color:var(--muted);padding:6px 14px;background:var(--bg);border-radius:8px}
+  @media(max-width:500px){.date-bar{flex-wrap:wrap}}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div class="login-screen" id="login-screen">
   <div class="login-card">
     <div class="login-logo">KIM Admin</div>
@@ -67,37 +72,40 @@
   </div>
 </div>
 
+<!-- ADMIN -->
 <div class="admin-screen" id="admin-screen">
   <div class="topbar">
     <div class="topbar-logo">KIM <span>Admin</span></div>
     <div>
+      <a href="/admin" class="topbar-link">Command Center</a>
       <a href="/admin-givers" class="topbar-link">Givers</a>
-      <a href="/" class="topbar-link">← kim.church</a>
-      <a href="#" onclick="document.getElementById('admin-screen').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-password').value='';" class="topbar-link">Sign Out</a>
+      <a href="/admin-checkins" class="topbar-link">Check-ins</a>
+      <a href="/admin-builders" class="topbar-link">Builders</a>
+      <a href="/" class="topbar-link">← Site</a>
+      <a href="#" onclick="signOut()" class="topbar-link">Sign Out</a>
     </div>
   </div>
+
   <div class="admin-body">
-    <h1 class="page-title">Children</h1>
+    <h1 class="page-title">Children's Ministry</h1>
     <p class="page-sub" id="last-updated">Loading...</p>
-    <!-- DATE PICKER -->
+
+    <!-- DATE BAR -->
     <div class="date-bar">
-      <span class="date-label">Viewing date:</span>
+      <span class="date-bar-label">Viewing:</span>
       <input type="date" class="date-input" id="date-picker" onchange="onDateChange()">
       <button class="date-btn active" id="btn-today" onclick="setToday()">Today</button>
       <button class="date-btn" id="btn-yesterday" onclick="setYesterday()">Yesterday</button>
-      <span class="date-viewing" id="date-viewing-label"></span>
+      <span class="date-display" id="date-display"></span>
     </div>
 
-
+    <!-- STATS + ATTENDANTS -->
     <div class="grid">
-      <!-- ATTENDANTS -->
-      <div class="card">
+      <div class="card" style="margin-bottom:0">
         <p class="card-title" id="label-attendants">Signed-In Attendants</p>
         <div id="attendants-list"><p class="empty">Loading...</p></div>
       </div>
-
-      <!-- STATS -->
-      <div class="card">
+      <div class="card" style="margin-bottom:0">
         <p class="card-title" id="label-summary">Summary</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div>
@@ -113,7 +121,7 @@
     </div>
 
     <!-- ADD ATTENDANT -->
-    <div class="card" style="margin-bottom:24px;">
+    <div class="card">
       <p class="card-title">Add Attendant</p>
       <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;">
         <div>
@@ -129,90 +137,166 @@
       <p id="attendant-msg" style="font-size:13px;margin-top:10px;display:none;"></p>
     </div>
 
-
-
     <!-- CHILDREN LIST -->
     <div class="card">
       <p class="card-title" id="label-children">All Children</p>
       <div id="children-list"><p class="empty">Loading...</p></div>
     </div>
+
   </div>
 </div>
 
 <script>
 const PASS = 'KIM2026!';
 
+// ── AUTH ───────────────────────────────────────────────────────────────────
 function login() {
   if (document.getElementById('admin-password').value === PASS) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-screen').style.display = 'block';
+    initDatePicker();
     loadData();
   } else {
     document.getElementById('login-error').style.display = 'block';
   }
 }
 
-async function loadAttendants() {
-  try {
-    const res = await fetch('/api/children?action=attendants&date=${getSelectedDate()}');
-    const data = await res.json();
-    const el = document.getElementById('attendants-list');
-    const list = data.attendants || [];
-    if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in on ' + getSelectedDateLabel() + '.</p>'; return; }
-    el.innerHTML = list.map(a => {
-      const t = new Date(a.signed_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
-      return '<div class="attendant-row"><div><div class="attendant-name">' + a.attendant_name + '</div><div class="attendant-time">Signed in at ' + t + '</div></div></div>';
-    }).join('');
-  } catch(e) { document.getElementById('attendants-list').innerHTML = '<p class="empty">Error loading.</p>'; }
+function signOut() {
+  document.getElementById('admin-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-password').value = '';
 }
 
+// ── DATE HELPERS ───────────────────────────────────────────────────────────
+function getTodayCST() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+}
+
+function getSelectedDate() {
+  return document.getElementById('date-picker').value || getTodayCST();
+}
+
+function getDateLabel(val) {
+  const today = getTodayCST();
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  d.setDate(d.getDate() - 1);
+  const yesterday = d.toLocaleDateString('en-CA');
+  if (val === today) return 'Today';
+  if (val === yesterday) return 'Yesterday';
+  return new Date(val + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function updateDateUI() {
+  const val = getSelectedDate();
+  const today = getTodayCST();
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  d.setDate(d.getDate() - 1);
+  const yesterday = d.toLocaleDateString('en-CA');
+
+  document.getElementById('btn-today').classList.toggle('active', val === today);
+  document.getElementById('btn-yesterday').classList.toggle('active', val === yesterday);
+
+  const label = getDateLabel(val);
+  const fullDate = new Date(val + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  document.getElementById('date-display').textContent = val === today || val === yesterday ? '· ' + fullDate : '';
+
+  // Update section labels
+  document.getElementById('label-attendants').textContent = 'Signed-In Attendants — ' + label;
+  document.getElementById('label-summary').textContent = 'Summary — ' + label;
+  document.getElementById('label-children').textContent = 'All Children — ' + label;
+}
+
+function initDatePicker() {
+  document.getElementById('date-picker').value = getTodayCST();
+  updateDateUI();
+}
+
+function setToday() {
+  document.getElementById('date-picker').value = getTodayCST();
+  updateDateUI();
+  loadData();
+}
+
+function setYesterday() {
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  d.setDate(d.getDate() - 1);
+  document.getElementById('date-picker').value = d.toLocaleDateString('en-CA');
+  updateDateUI();
+  loadData();
+}
+
+function onDateChange() {
+  updateDateUI();
+  loadData();
+}
+
+// ── DATA ───────────────────────────────────────────────────────────────────
 async function loadData() {
-  const childrenRes = await fetch('/api/children?action=dashboard-all&date=${getSelectedDate()}');
-  const childrenData = await childrenRes.json();
-  renderChildren(childrenData.records || []);
-  loadAttendants();
-  document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CST';
+  const date = getSelectedDate();
+  try {
+    const [childrenRes, attendantsRes] = await Promise.all([
+      fetch(`/api/children?action=dashboard-all&date=${date}`),
+      fetch(`/api/children?action=attendants&date=${date}`)
+    ]);
+    const childrenData = await childrenRes.json();
+    const attendantsData = await attendantsRes.json();
+    renderChildren(childrenData.records || []);
+    renderAttendants(attendantsData.attendants || []);
+    document.getElementById('last-updated').textContent =
+      'Last updated: ' + new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CST';
+  } catch(e) {
+    document.getElementById('children-list').innerHTML = '<p class="empty">Error loading data.</p>';
+  }
 }
 
 function renderAttendants(list) {
   const el = document.getElementById('attendants-list');
-  if (!list.length) { el.innerHTML = '<p class="empty">No attendants signed in on ' + getSelectedDateLabel() + '.</p>'; return; }
+  const label = getDateLabel(getSelectedDate()).toLowerCase();
+  if (!list.length) {
+    el.innerHTML = `<p class="empty">No attendants signed in ${label}.</p>`;
+    return;
+  }
   el.innerHTML = list.map(a => {
     const t = new Date(a.signed_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
     const suspended = a.suspended;
-    return '<div class="attendant-row">' +
-      '<div>' +
-        '<div class="attendant-name" style="' + (suspended ? 'text-decoration:line-through;color:#999;' : '') + '">' + a.attendant_name + '</div>' +
-        '<div class="attendant-time">Signed in at ' + t + (suspended ? ' · Suspended' : '') + '</div>' +
-      '</div>' +
-      '<button class="suspend-btn" onclick="toggleSuspend(\'' + a.id + '\',' + suspended + ')">' + (suspended ? 'Reinstate' : 'Suspend') + '</button>' +
-    '</div>';
+    return `<div class="attendant-row">
+      <div>
+        <div class="attendant-name" style="${suspended ? 'text-decoration:line-through;color:#999;' : ''}">${a.attendant_name}</div>
+        <div class="attendant-time">Signed in at ${t}${suspended ? ' · Suspended' : ''}</div>
+      </div>
+      <button class="suspend-btn" onclick="toggleSuspend('${a.id}',${suspended})">${suspended ? 'Reinstate' : 'Suspend'}</button>
+    </div>`;
   }).join('');
 }
 
 function renderChildren(list) {
   const el = document.getElementById('children-list');
+  const label = getDateLabel(getSelectedDate()).toLowerCase();
   const checkedIn = list.filter(r => r.status === 'checked_in').length;
   const pickedUp = list.filter(r => r.status === 'picked_up').length;
   document.getElementById('stat-checkedin').textContent = checkedIn;
   document.getElementById('stat-pickedup').textContent = pickedUp;
 
-  if (!list.length) { el.innerHTML = '<p class="empty">No children checked in on ' + getSelectedDateLabel() + '.</p>'; return; }
+  if (!list.length) {
+    el.innerHTML = `<p class="empty">No children checked in ${label}.</p>`;
+    return;
+  }
   el.innerHTML = list.map(rec => {
     const t = new Date(rec.checked_in_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', hour12: true });
     const badge = rec.status === 'picked_up'
       ? '<span class="badge badge-out">Picked Up</span>'
       : '<span class="badge badge-in">Checked In</span>';
-    return '<div class="child-row-admin">' +
-      '<div>' +
-        '<div class="child-row-name">' + rec.child_name + '</div>' +
-        '<div class="child-row-meta">Parent: ' + rec.parent_name + ' · In at ' + t + (rec.allergies ? ' · ⚠️ ' + rec.allergies : '') + '</div>' +
-      '</div>' +
-      badge +
-    '</div>';
+    return `<div class="child-row-admin">
+      <div>
+        <div class="child-row-name">${rec.child_name}</div>
+        <div class="child-row-meta">Parent: ${rec.parent_name} · In at ${t}${rec.allergies ? ' · ⚠️ ' + rec.allergies : ''}</div>
+      </div>
+      ${badge}
+    </div>`;
   }).join('');
 }
 
+// ── ATTENDANT MANAGEMENT ───────────────────────────────────────────────────
 async function toggleSuspend(id, currentlySuspended) {
   await fetch('/api/children?action=suspend-attendant', {
     method: 'POST',
@@ -250,91 +334,6 @@ async function addAttendant() {
     msg.style.display = 'block';
   }
 }
-
-async function removeAttendant(id, name) {
-  if (!confirm('Remove ' + name + '?')) return;
-  await fetch('/api/children?action=remove-attendant', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-admin-password': PASS },
-    body: JSON.stringify({ id })
-  });
-  loadData();
-}
-
-// ── DATE PICKER HELPERS ────────────────────────────────────────────────────
-function getTodayCST() {
-  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
-}
-
-function getSelectedDate() {
-  return document.getElementById('date-picker').value || getTodayCST();
-}
-
-function updateDateLabel() {
-  const val = getSelectedDate();
-  const today = getTodayCST();
-  const yesterday = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yStr = yesterday.toLocaleDateString('en-CA');
-
-  const display = new Date(val + 'T12:00:00').toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
-  });
-  document.getElementById('date-viewing-label').textContent = display;
-
-  document.getElementById('btn-today').classList.toggle('active', val === today);
-  document.getElementById('btn-yesterday').classList.toggle('active', val === yStr);
-}
-
-function setToday() {
-  document.getElementById('date-picker').value = getTodayCST();
-  updateDateLabel();
-  updateSectionLabels();
-  loadData();
-}
-
-function setYesterday() {
-  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
-  d.setDate(d.getDate() - 1);
-  document.getElementById('date-picker').value = d.toLocaleDateString('en-CA');
-  updateDateLabel();
-  updateSectionLabels();
-  loadData();
-}
-
-function onDateChange() {
-  updateDateLabel();
-  updateSectionLabels();
-  loadData();
-}
-
-
-function getSelectedDateLabel() {
-  const val = getSelectedDate();
-  const today = getTodayCST();
-  if (val === today) return 'today';
-  const d = new Date(val + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function updateSectionLabels() {
-  const label = getSelectedDateLabel();
-  const cap = label.charAt(0).toUpperCase() + label.slice(1);
-  const el1 = document.getElementById('label-attendants');
-  const el2 = document.getElementById('label-summary');
-  const el3 = document.getElementById('label-children');
-  if (el1) el1.textContent = 'Signed-In Attendants — ' + cap;
-  if (el2) el2.textContent = 'Summary — ' + cap;
-  if (el3) el3.textContent = 'All Children — ' + cap;
-}
-
-// Initialize date picker to today on load
-(function initDatePicker() {
-  document.getElementById('date-picker').value = getTodayCST();
-  updateDateLabel();
-  updateSectionLabels();
-})();
-
 </script>
 </body>
 </html>
