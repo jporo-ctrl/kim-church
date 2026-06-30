@@ -216,6 +216,7 @@
             <p class="kim-nav-group-label">Ministry</p>
             <a href="/" class="${isActive('/')}">Home</a>
             <a href="/thevision" class="${isActive('/thevision')}">The <em>Vision</em></a>
+            <a href="/kids" class="${isActive('/kids')}">KIM <em>Kids</em></a>
           </div>
 
           <div class="kim-nav-group">
