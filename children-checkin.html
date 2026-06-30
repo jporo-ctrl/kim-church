@@ -266,7 +266,7 @@ async function registerFamily() {
 
   // Create children and check in
   checkedInCodes = [];
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
 
   for (const child of children) {
     await supabaseFetch('/rest/v1/kim_children', {
@@ -357,7 +357,7 @@ async function checkInSelected() {
   errorEl.style.display = 'none';
 
   checkedInCodes = [];
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
 
   for (const child of selected) {
     const code = generateCode(child.child_name);
