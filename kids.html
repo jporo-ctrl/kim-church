@@ -1,1 +1,315 @@
-[paste the HTML here]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIM Kids — Kingdom Insights Ministries</title>
+<meta name="description" content="Big faith. Young hearts. Kingdom identity — starting now. KIM Kids runs every Saturday 6–8 PM at Compass Center, Grapevine TX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C8922A; --gold-light: #E8B84B; --gold-pale: #FBF4E8;
+  --deep: #0D0D0D; --ink: #1A1613; --parchment: #FAF7F2;
+  --muted: #6B6560; --border: rgba(200,146,42,0.25);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--deep); color: #F0EAD6; overflow-x: hidden; }
+
+/* HERO */
+.hero { position: relative; overflow: hidden; padding: 140px 24px 100px; text-align: center; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,146,42,0.1) 0%, transparent 70%); pointer-events: none; }
+.hero-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.hero-ring { position: absolute; border-radius: 50%; border: 1px solid; }
+.hero-crown { font-size: 64px; margin-bottom: 16px; line-height: 1; position: relative; z-index: 1; }
+.hero-badge { display: inline-block; background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.3); padding: 4px 14px; font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 20px; position: relative; z-index: 1; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 10vw, 96px); font-weight: 600; line-height: 1; margin-bottom: 16px; color: #F5EDD8; position: relative; z-index: 1; }
+.hero-title em { font-style: italic; color: var(--gold-light); }
+.hero-sub { font-size: clamp(16px, 3vw, 20px); color: rgba(245,237,216,0.5); max-width: 500px; margin: 0 auto 40px; line-height: 1.7; position: relative; z-index: 1; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+.btn-gold { padding: 14px 32px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s; display: inline-block; }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline { padding: 14px 32px; border: 1px solid rgba(245,237,216,0.25); color: #F5EDD8; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; display: inline-block; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+.hero-detail { margin-top: 24px; font-size: 13px; color: rgba(245,237,216,0.3); letter-spacing: 0.1em; position: relative; z-index: 1; }
+
+/* DIVIDER */
+.gold-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(200,146,42,0.3), transparent); margin: 0 48px; }
+
+/* SECTIONS */
+.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.section-eyebrow { text-align: center; font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 12px; }
+.section-title { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; margin-bottom: 16px; color: #F5EDD8; line-height: 1.15; }
+.section-sub { text-align: center; color: rgba(245,237,216,0.4); font-size: 15px; max-width: 480px; margin: 0 auto 56px; line-height: 1.7; }
+
+/* PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; }
+.pillar-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; transition: border-color 0.2s; }
+.pillar-card:hover { border-color: rgba(200,146,42,0.4); }
+.pillar-icon { font-size: 32px; margin-bottom: 16px; }
+.pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #F5EDD8; margin-bottom: 10px; }
+.pillar-desc { color: rgba(245,237,216,0.4); font-size: 14px; line-height: 1.7; }
+
+/* AGE GROUPS */
+.ages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.age-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+.age-card-header { background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 24px; display: flex; align-items: center; gap: 14px; }
+.age-emoji { font-size: 28px; }
+.age-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; }
+.age-range { font-size: 12px; color: var(--gold); font-weight: 500; margin-top: 2px; }
+.age-desc { padding: 20px 24px; color: rgba(245,237,216,0.45); font-size: 14px; line-height: 1.7; }
+
+/* CHECKIN BANNER */
+.checkin-banner { margin: 0 24px 80px; max-width: 1052px; margin-left: auto; margin-right: auto; }
+.checkin-inner { background: linear-gradient(135deg, #1A1500 0%, #111 60%, #1A1500 100%); border: 1px solid rgba(200,146,42,0.3); padding: 52px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; }
+.checkin-text { flex: 1; min-width: 260px; }
+.checkin-eyebrow { font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 10px; }
+.checkin-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 36px); font-weight: 600; color: #F5EDD8; line-height: 1.2; margin-bottom: 12px; }
+.checkin-desc { color: rgba(245,237,216,0.45); font-size: 15px; line-height: 1.7; max-width: 440px; }
+.checkin-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+
+/* FAQ */
+.faq-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
+.faq-item { border: 1px solid rgba(255,255,255,0.06); margin-bottom: 2px; overflow: hidden; }
+.faq-btn { width: 100%; background: rgba(255,255,255,0.02); border: none; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; gap: 16px; transition: background 0.15s; }
+.faq-btn:hover { background: rgba(255,255,255,0.04); }
+.faq-btn.open { background: rgba(255,255,255,0.04); }
+.faq-q { font-weight: 500; font-size: 15px; color: #F5EDD8; font-family: 'DM Sans', sans-serif; }
+.faq-icon { color: var(--gold); font-size: 20px; flex-shrink: 0; transition: transform 0.2s; }
+.faq-icon.open { transform: rotate(45deg); }
+.faq-answer { display: none; background: rgba(255,255,255,0.02); padding: 0 24px 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+.faq-answer.open { display: block; }
+.faq-answer p { color: rgba(245,237,216,0.45); font-size: 14px; line-height: 1.8; margin-top: 16px; }
+
+/* FOOTER CTA */
+.footer-cta { background: var(--gold); padding: 64px 24px; text-align: center; }
+.footer-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; color: var(--deep); margin-bottom: 12px; }
+.footer-cta p { color: rgba(13,13,13,0.6); font-size: 16px; margin-bottom: 32px; }
+.footer-cta a { display: inline-block; background: var(--deep); color: var(--gold); padding: 14px 36px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s; }
+.footer-cta a:hover { opacity: 0.85; }
+
+/* FOOTER */
+.footer { background: var(--deep); border-top: 1px solid rgba(200,146,42,0.1); padding: 40px 24px; text-align: center; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
+.footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
+.footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+
+@media(max-width: 600px) {
+  .checkin-inner { padding: 32px 24px; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .gold-divider { margin: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-rings">
+    <div class="hero-ring" style="width:600px;height:600px;border-color:rgba(200,146,42,0.06);"></div>
+    <div class="hero-ring" style="width:440px;height:440px;border-color:rgba(200,146,42,0.09);"></div>
+    <div class="hero-ring" style="width:280px;height:280px;border-color:rgba(200,146,42,0.12);"></div>
+  </div>
+  <div class="hero-crown">👑</div>
+  <div class="hero-badge">Kingdom Insights Ministries</div>
+  <h1 class="hero-title">KIM <em>Kids</em></h1>
+  <p class="hero-sub">Big faith. Young hearts. Kingdom identity — starting now.</p>
+  <div class="hero-btns">
+    <a href="/checkin" class="btn-gold">Check In Your Child →</a>
+    <a href="mailto:serve@kim.church" class="btn-outline">Serve in KIM Kids</a>
+  </div>
+  <p class="hero-detail">Saturdays · 6–8 PM · Compass Center, Grapevine TX</p>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- WHAT TO EXPECT -->
+<section class="section">
+  <p class="section-eyebrow">What to Expect</p>
+  <h2 class="section-title">A place where every child belongs</h2>
+  <p class="section-sub" style="margin-bottom:48px;"></p>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-icon">📖</div>
+      <h3 class="pillar-title">Bible-Based</h3>
+      <p class="pillar-desc">Every lesson rooted in Scripture, age-adapted but never watered down.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🛡️</div>
+      <h3 class="pillar-title">Safe Environment</h3>
+      <p class="pillar-desc">Background-checked volunteers. Structured check-in and pickup. Always.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🎉</div>
+      <h3 class="pillar-title">Fun & Worship</h3>
+      <p class="pillar-desc">Kids encounter God through joy. We sing, move, create, and celebrate.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">👨‍👩‍👧</div>
+      <h3 class="pillar-title">Parent Partnership</h3>
+      <p class="pillar-desc">Take-home materials keep the conversation going at the dinner table.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- AGE GROUPS -->
+<section class="section">
+  <p class="section-eyebrow">Age Groups</p>
+  <h2 class="section-title">Teaching that meets them where they are</h2>
+  <p class="section-sub">Every age group runs simultaneously with the main service — no one has to choose.</p>
+  <div class="ages-grid">
+    <div class="age-card">
+      <div class="age-card-header">
+        <span class="age-emoji">🍼</span>
+        <div>
+          <div class="age-name">Little Ones</div>
+          <div class="age-range">Ages 0–2</div>
+        </div>
+      </div>
+      <div class="age-desc">A safe, loving nursery environment with worship music, sensory play, and devoted caregivers so parents can worship freely.</div>
+    </div>
+    <div class="age-card">
+      <div class="age-card-header">
+        <span class="age-emoji">🌱</span>
+        <div>
+          <div class="age-name">Little Builders</div>
+          <div class="age-range">Ages 3–5</div>
+        </div>
+      </div>
+      <div class="age-desc">Hands-on Bible stories, songs with motion, simple crafts, and repetition of Kingdom truths in age-appropriate language.</div>
+    </div>
+    <div class="age-card">
+      <div class="age-card-header">
+        <span class="age-emoji">⚡</span>
+        <div>
+          <div class="age-name">Kingdom Kids</div>
+          <div class="age-range">Ages 6–10</div>
+        </div>
+      </div>
+      <div class="age-desc">Deeper Word engagement, object lessons, group activities, and discussion that builds real faith — not just knowledge.</div>
+    </div>
+    <div class="age-card">
+      <div class="age-card-header">
+        <span class="age-emoji">🔥</span>
+        <div>
+          <div class="age-name">Kingdom Builders Jr.</div>
+          <div class="age-range">Ages 11–12</div>
+        </div>
+      </div>
+      <div class="age-desc">Discussion-led, identity-focused teaching that treats them like the young leaders they already are in God's eyes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKIN BANNER -->
+<div class="checkin-banner">
+  <div class="checkin-inner">
+    <div class="checkin-text">
+      <p class="checkin-eyebrow">Secure Drop-Off</p>
+      <h2 class="checkin-title">QR Check-In & Pickup</h2>
+      <p class="checkin-desc">We use a secure QR code system for every child. You get a unique pickup code at check-in — no code, no pickup. First-time families get registered in under 2 minutes.</p>
+    </div>
+    <div class="checkin-btns">
+      <a href="/checkin" class="btn-gold">Check In Now →</a>
+      <a href="/children-pickup" class="btn-outline">Pickup Lookup</a>
+    </div>
+  </div>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- VOLUNTEER -->
+<section class="section" style="text-align:center;">
+  <p class="section-eyebrow">Serve</p>
+  <h2 class="section-title">The next generation needs builders too</h2>
+  <p style="color:rgba(245,237,216,0.4);font-size:16px;max-width:520px;margin:0 auto 36px;line-height:1.7;">You don't need a theology degree — just a heart for kids and a willingness to show up. We'll train you on everything else.</p>
+  <a href="mailto:serve@kim.church?subject=KIM Kids Volunteer" style="display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:14px 36px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s;" onmouseover="this.style.background='rgba(200,146,42,0.1)'" onmouseout="this.style.background='transparent'">Email serve@kim.church →</a>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- FAQ -->
+<div style="padding-top:80px;">
+  <p class="section-eyebrow">FAQ</p>
+  <h2 class="section-title" style="margin-bottom:48px;">Common questions from parents</h2>
+  <div class="faq-wrap" style="padding-top:0;">
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span class="faq-q">When does KIM Kids meet?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>KIM Kids runs during every KIM service — currently Saturdays 6–8 PM at Compass Center, 4201 Pool Road, Grapevine, TX 76051.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span class="faq-q">How does check-in work?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>We use a QR-based check-in system. On your first visit, a volunteer will register your child and issue a secure pickup code. It takes about 2 minutes.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span class="faq-q">Is there a nursery?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Yes — our Little Ones room (ages 0–2) runs simultaneously with the main service. Caregivers are background-checked and trained.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span class="faq-q">What curriculum do you use?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>We use a combination of Ministry-To-Children resources and KIM-original lessons built around KIM's seven Kingdom pillars — adapted for every age group.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        <span class="faq-q">How can I volunteer?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>We'd love to have you. Email <a href="mailto:serve@kim.church" style="color:var(--gold);">serve@kim.church</a> and someone from the KIM Kids team will be in touch.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <h2>Your kids belong here.</h2>
+  <p>Bring them this Saturday — Compass Center, Grapevine TX, 6 PM.</p>
+  <a href="/checkin">Register & Check In →</a>
+</div>
+
+<footer class="footer">
+  <p class="footer-logo">Kingdom Insights Ministries</p>
+  <p class="footer-sub">GRAPEVINE, TEXAS · KIM.CHURCH</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/thevision">The Vision</a>
+    <a href="/builders">Builders Gathering</a>
+    <a href="/checkin">Check In</a>
+    <a href="/generosity">Give</a>
+    <a href="/contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+  document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { answer.classList.add('open'); icon.classList.add('open'); btn.classList.add('open'); }
+}
+</script>
+
+<script src="/nav.js"></script>
+</body>
+</html>
