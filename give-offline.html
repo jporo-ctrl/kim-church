@@ -256,10 +256,10 @@ async function syncGivingQueue() {
 
   for (const record of pending) {
     try {
-      const res = await fetch('/api/give-offline-intent', {
+      const res = await fetch('/api/give-confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(record)
+        body: JSON.stringify({ ...record, action: 'offline-intent' })
       });
       if (res.ok) {
         const allQueue = getGivingQueue();
