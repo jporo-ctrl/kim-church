@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Give — Kingdom Insights Ministries</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --gold: #C8922A; --gold-light: #E8B84B; --gold-pale: #FBF4E8; --deep: #0D0D0D; --ink: #1A1613; --parchment: #FAF7F2; --muted: #6B6560; --border: #E8E8E8; }
+body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: var(--ink); min-height: 100vh; }
+
+/* SYNC BANNER */
+.sync-banner { display: none; padding: 10px 16px; font-size: 13px; font-weight: 500; text-align: center; position: sticky; top: 0; z-index: 100; }
+.sync-banner.offline { display: block; background: #E05555; color: white; }
+.sync-banner.pending { display: block; background: #C8922A; color: white; }
+.sync-banner.syncing { display: block; background: #2563EB; color: white; }
+.sync-banner.synced { display: block; background: #27AE60; color: white; }
+
+.nav { background: rgba(13,13,13,0.95); padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.nav a img { height: 40px; }
+.nav-back { font-size: 13px; color: rgba(245,237,216,0.5); text-decoration: none; letter-spacing: 0.1em; }
+.nav-back:hover { color: var(--gold); }
+
+.hero { background: var(--deep); padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,146,42,0.1) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 7vw, 64px); font-weight: 600; color: #F5EDD8; line-height: 1.05; margin-bottom: 12px; }
+.hero-title em { font-style: italic; color: var(--gold-light); }
+.hero-sub { font-size: 15px; font-weight: 300; color: rgba(245,237,216,0.45); max-width: 400px; margin: 0 auto; line-height: 1.7; }
+
+.page-wrap { max-width: 520px; margin: 0 auto; padding: 48px 20px 80px; }
+
+/* FREE METHODS FIRST */
+.free-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+.free-card { background: white; border: 2px solid var(--border); border-radius: 16px; padding: 24px 18px; text-align: center; }
+.free-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+.free-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.free-value { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.free-note { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 100px; }
+.free-note.zelle { background: #F3E8FF; color: #6D1ED4; }
+.free-note.cash { background: #E8F8EE; color: #00A83A; }
+
+.divider-text { text-align: center; font-size: 12px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.divider-text::before, .divider-text::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* GIVE CARD */
+.give-card { background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 16px; }
+.give-success { display: none; text-align: center; padding: 48px 24px; background: white; border-radius: 20px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+
+.amount-hero { padding: 36px 28px 24px; text-align: center; }
+.amount-label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.amount-row-big { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 20px; }
+.amount-dollar { font-size: 40px; font-weight: 300; color: var(--muted); line-height: 1; margin-top: 8px; }
+.amount-big-input { font-family: 'DM Sans', sans-serif; font-size: 64px; font-weight: 300; color: var(--ink); border: none; outline: none; background: transparent; width: 200px; text-align: left; line-height: 1; caret-color: var(--gold); -moz-appearance: textfield; }
+.amount-big-input::-webkit-outer-spin-button, .amount-big-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.amount-big-input::placeholder { color: #DDD; }
+.preset-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.pill { padding: 7px 18px; border-radius: 100px; border: 1.5px solid #E0E0E0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); cursor: pointer; transition: all 0.15s; }
+.pill.active { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
+.pill:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+.give-divider { height: 1px; background: #F0F0F0; margin: 0 24px; }
+.give-section { padding: 20px 28px; }
+.give-section-title { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.give-field { width: 100%; padding: 13px 16px; border: 1.5px solid #E8E8E8; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: var(--ink); background: #FAFAFA; outline: none; transition: border-color 0.15s; margin-bottom: 10px; }
+.give-field:last-child { margin-bottom: 0; }
+.give-field:focus { border-color: var(--gold); background: white; }
+.give-field::placeholder { color: #BBB; }
+.fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+/* OFFLINE MODE */
+.offline-mode-notice { background: #FBF4E8; border: 1px solid rgba(200,146,42,0.3); border-radius: 12px; padding: 16px 18px; margin: 0 28px 20px; font-size: 13px; color: var(--gold); line-height: 1.6; display: none; }
+.offline-mode-notice.show { display: block; }
+
+.give-now-btn { width: 100%; padding: 18px 24px; background: var(--gold); color: white; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+.give-now-btn:hover { background: var(--gold-light); }
+.give-now-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.secured-note { text-align: center; font-size: 11px; color: #BBB; margin-top: 10px; padding-bottom: 4px; }
+.error-banner { display: none; margin: 0 28px 12px; padding: 10px 14px; background: #FFF0F0; border-radius: 10px; font-size: 13px; color: #C0392B; }
+
+.success-icon { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold); margin-bottom: 16px; }
+.success-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.success-body { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--muted); max-width: 320px; margin: 0 auto 20px; }
+.success-offline { background: #FBF4E8; border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--gold); line-height: 1.6; display: none; margin-top: 16px; }
+.success-offline.show { display: block; }
+
+@media(max-width: 480px) {
+  .free-methods { grid-template-columns: 1fr; }
+  .fields-row { grid-template-columns: 1fr; }
+  .amount-big-input { font-size: 52px; width: 160px; }
+  .give-section { padding: 16px 20px; }
+  .offline-mode-notice { margin: 0 20px 16px; }
+  .error-banner { margin: 0 20px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="sync-banner" id="sync-banner"></div>
+
+<nav class="nav">
+  <a href="/"><img src="/kim-logo.png" alt="Kingdom Insights Ministries"></a>
+  <a href="/" class="nav-back">← Home</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Generosity</p>
+  <h1 class="hero-title">Give to the<br><em>Kingdom</em></h1>
+  <p class="hero-sub">Every gift — no matter the amount or method — is an act of faith.</p>
+</section>
+
+<div class="page-wrap">
+
+  <!-- FREE METHODS -->
+  <div class="free-methods">
+    <div class="free-card">
+      <div class="free-icon" style="background:#6D1ED4;">
+        <svg width="24" height="24" viewBox="0 0 48 48" fill="none"><path d="M8 12h24L14 28h18" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 34h20" stroke="white" stroke-width="4" stroke-linecap="round"/></svg>
+      </div>
+      <p class="free-tag">Zelle · Free</p>
+      <p class="free-value">give@kim.church</p>
+      <span class="free-note zelle">✓ Zero fees</span>
+    </div>
+    <div class="free-card">
+      <div class="free-icon" style="background:#00C244;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+      </div>
+      <p class="free-tag">Cash App · Free</p>
+      <p class="free-value">$kimgenerosity</p>
+      <span class="free-note cash">✓ Zero fees</span>
+    </div>
+  </div>
+
+  <div class="divider-text">or give by card</div>
+
+  <!-- OFFLINE NOTICE -->
+  <div class="offline-mode-notice" id="offline-notice">
+    📡 You're offline. Enter your giving details and we'll send you a secure payment link by email when you're back online. Your gift will be completed then.
+  </div>
+
+  <!-- GIVE CARD -->
+  <div class="give-card" id="give-card">
+    <div class="amount-hero">
+      <p class="amount-label">Enter amount</p>
+      <div class="amount-row-big">
+        <span class="amount-dollar">$</span>
+        <input type="number" id="amount-input" class="amount-big-input" placeholder="0" min="1" step="1" oninput="onAmountInput()" onfocus="clearPresets()">
+      </div>
+      <div class="preset-pills">
+        <button class="pill" onclick="setPreset(this,25)">$25</button>
+        <button class="pill" onclick="setPreset(this,50)">$50</button>
+        <button class="pill" onclick="setPreset(this,100)">$100</button>
+        <button class="pill" onclick="setPreset(this,250)">$250</button>
+        <button class="pill" onclick="setPreset(this,500)">$500</button>
+      </div>
+    </div>
+
+    <div class="give-divider"></div>
+    <div class="give-section">
+      <p class="give-section-title">Your Details</p>
+      <div class="fields-row">
+        <input type="text" class="give-field" id="give-first" placeholder="First Name" autocomplete="given-name">
+        <input type="text" class="give-field" id="give-last" placeholder="Last Name" autocomplete="family-name">
+      </div>
+      <input type="email" class="give-field" id="give-email" placeholder="Email address" autocomplete="email">
+    </div>
+
+    <div class="error-banner" id="give-error"></div>
+
+    <div class="give-section" style="padding-top:0;">
+      <button class="give-now-btn" id="give-btn" onclick="handleGive()">
+        <span id="give-btn-text">Give $0.00</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
+      <p class="secured-note" id="secured-note">Powered and Secured by Stripe</p>
+    </div>
+  </div>
+
+  <div class="give-success" id="give-success">
+    <div class="success-icon">✦</div>
+    <h2 class="success-title" id="success-title">Thank you.</h2>
+    <p class="success-body" id="success-body">Your gift has been received. A confirmation will be sent to your email. You are a Founding Partner of Kingdom Insights Ministries.</p>
+    <div class="success-offline" id="success-offline">
+      📧 You're currently offline. We've saved your giving intention and will email you a secure payment link at <strong id="success-email"></strong> as soon as you're back online. Your gift will be completed then.
+    </div>
+  </div>
+
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+let stripe, cardElement, currentAmount = 0;
+let isOnline = navigator.onLine;
+const OFFLINE_GIVING_KEY = 'kim_giving_queue';
+
+// ── NETWORK ───────────────────────────────────────────────────────────────────
+function updateOnlineStatus() {
+  isOnline = navigator.onLine;
+  updateUI();
+  if (isOnline) { syncGivingQueue(); if (!stripe) initStripe(); }
+}
+
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+function updateUI() {
+  const banner = document.getElementById('sync-banner');
+  const notice = document.getElementById('offline-notice');
+  const securedNote = document.getElementById('secured-note');
+  const queue = getGivingQueue();
+  const pending = queue.filter(r => !r.synced).length;
+
+  if (!isOnline) {
+    banner.className = 'sync-banner offline';
+    banner.textContent = '📡 Offline mode — your giving intention will be saved and completed when wifi returns';
+    notice.classList.add('show');
+    securedNote.textContent = 'Your details are saved locally until wifi returns';
+    document.getElementById('give-btn-text').textContent = currentAmount > 0 ? 'Save Giving Intention — $' + currentAmount.toFixed(2) : 'Save Giving Intention';
+  } else if (pending > 0) {
+    banner.className = 'sync-banner pending';
+    banner.textContent = `⏳ ${pending} pending gift${pending > 1 ? 's' : ''} — sending payment link${pending > 1 ? 's' : ''}...`;
+    notice.classList.remove('show');
+    securedNote.textContent = 'Powered and Secured by Stripe';
+  } else {
+    banner.className = 'sync-banner';
+    banner.textContent = '';
+    notice.classList.remove('show');
+    securedNote.textContent = 'Powered and Secured by Stripe';
+  }
+}
+
+// ── OFFLINE QUEUE ─────────────────────────────────────────────────────────────
+function getGivingQueue() {
+  try { return JSON.parse(localStorage.getItem(OFFLINE_GIVING_KEY) || '[]'); }
+  catch { return []; }
+}
+
+function addToGivingQueue(record) {
+  const queue = getGivingQueue();
+  queue.push({ ...record, synced: false, queued_at: new Date().toISOString(), id: 'give_' + Date.now() });
+  localStorage.setItem(OFFLINE_GIVING_KEY, JSON.stringify(queue));
+}
+
+async function syncGivingQueue() {
+  const queue = getGivingQueue();
+  const pending = queue.filter(r => !r.synced);
+  if (!pending.length) { updateUI(); return; }
+
+  const banner = document.getElementById('sync-banner');
+  banner.className = 'sync-banner syncing';
+  banner.textContent = `🔄 Sending payment link${pending.length > 1 ? 's' : ''}...`;
+
+  for (const record of pending) {
+    try {
+      const res = await fetch('/api/give-offline-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+      if (res.ok) {
+        const allQueue = getGivingQueue();
+        const idx = allQueue.findIndex(r => r.id === record.id);
+        if (idx >= 0) { allQueue[idx].synced = true; localStorage.setItem(OFFLINE_GIVING_KEY, JSON.stringify(allQueue)); }
+      }
+    } catch(e) { console.warn('Giving sync failed:', e); }
+  }
+
+  const remaining = getGivingQueue().filter(r => !r.synced).length;
+  if (remaining === 0) {
+    banner.className = 'sync-banner synced';
+    banner.textContent = '✓ Payment link sent — check your email to complete your gift';
+    setTimeout(() => updateUI(), 4000);
+  } else {
+    updateUI();
+  }
+}
+
+// ── STRIPE ────────────────────────────────────────────────────────────────────
+async function initStripe() {
+  try {
+    const res = await fetch('/api/stripe-key');
+    const { publishableKey } = await res.json();
+    stripe = Stripe(publishableKey);
+    const elements = stripe.elements();
+    cardElement = elements.create('card', {
+      style: { base: { fontFamily: "'DM Sans', sans-serif", fontSize: '15px', color: '#1A1613', '::placeholder': { color: '#BBB' } } }
+    });
+
+    // Insert card element
+    const cardWrap = document.getElementById('card-element-wrap');
+    if (cardWrap) {
+      cardElement.mount('#card-element');
+      cardElement.on('change', e => {
+        const el = document.getElementById('card-errors');
+        if (el) { el.textContent = e.error ? e.error.message : ''; }
+      });
+    }
+  } catch(e) { console.warn('Stripe init failed:', e); }
+}
+
+// ── AMOUNT ────────────────────────────────────────────────────────────────────
+function setPreset(btn, val) {
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentAmount = val;
+  document.getElementById('amount-input').value = val;
+  updateGiveBtn();
+}
+
+function clearPresets() {
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+}
+
+function onAmountInput() {
+  clearPresets();
+  currentAmount = parseFloat(document.getElementById('amount-input').value) || 0;
+  updateGiveBtn();
+}
+
+function updateGiveBtn() {
+  const label = isOnline
+    ? (currentAmount > 0 ? 'Give $' + currentAmount.toFixed(2) : 'Give $0.00')
+    : (currentAmount > 0 ? 'Save Giving Intention — $' + currentAmount.toFixed(2) : 'Save Giving Intention');
+  document.getElementById('give-btn-text').textContent = label;
+}
+
+// ── GIVE ──────────────────────────────────────────────────────────────────────
+async function handleGive() {
+  const amount = currentAmount;
+  const firstName = document.getElementById('give-first').value.trim();
+  const lastName = document.getElementById('give-last').value.trim();
+  const email = document.getElementById('give-email').value.trim();
+  const errorEl = document.getElementById('give-error');
+  errorEl.style.display = 'none';
+
+  if (!amount || amount < 1) { errorEl.textContent = 'Please enter a gift amount.'; errorEl.style.display = 'block'; return; }
+  if (!firstName) { errorEl.textContent = 'Please enter your first name.'; errorEl.style.display = 'block'; return; }
+  if (!email) { errorEl.textContent = 'Please enter your email address.'; errorEl.style.display = 'block'; return; }
+
+  const btn = document.getElementById('give-btn');
+  btn.disabled = true;
+
+  // OFFLINE PATH
+  if (!isOnline) {
+    document.getElementById('give-btn-text').textContent = 'Saving...';
+    addToGivingQueue({ full_name: (firstName + ' ' + lastName).trim(), email, amount, queued_at: new Date().toISOString() });
+    document.getElementById('give-card').style.display = 'none';
+    const success = document.getElementById('give-success');
+    success.style.display = 'block';
+    document.getElementById('success-title').textContent = 'Gift saved.';
+    document.getElementById('success-body').textContent = "We've recorded your giving intention. You'll receive a secure payment link by email once you're back online.";
+    document.getElementById('success-email').textContent = email;
+    document.getElementById('success-offline').classList.add('show');
+    updateUI();
+    return;
+  }
+
+  // ONLINE PATH — Stripe
+  if (!stripe || !cardElement) {
+    errorEl.textContent = 'Payment system loading. Please try again in a moment.';
+    errorEl.style.display = 'block';
+    btn.disabled = false;
+    return;
+  }
+
+  document.getElementById('give-btn-text').textContent = 'Processing...';
+
+  try {
+    const res = await fetch('/api/give', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount, frequency: 'one-time', full_name: (firstName + ' ' + lastName).trim(), email, tier: 'General' })
+    });
+    const { clientSecret, error } = await res.json();
+    if (error) throw new Error(error);
+
+    const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: cardElement, billing_details: { name: (firstName + ' ' + lastName).trim(), email } }
+    });
+    if (stripeError) throw new Error(stripeError.message);
+
+    await fetch('/api/give-confirm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paymentIntentId: paymentIntent.id, full_name: (firstName + ' ' + lastName).trim(), email, amount, frequency: 'one-time', tier: 'General' })
+    });
+
+    document.getElementById('give-card').style.display = 'none';
+    document.getElementById('give-success').style.display = 'block';
+    document.getElementById('success-offline').classList.remove('show');
+
+  } catch(err) {
+    errorEl.textContent = err.message;
+    errorEl.style.display = 'block';
+    btn.disabled = false;
+    document.getElementById('give-btn-text').textContent = 'Give $' + amount.toFixed(2);
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+updateUI();
+if (isOnline) { initStripe(); syncGivingQueue(); }
+setInterval(() => { if (isOnline) syncGivingQueue(); }, 30000);
+</script>
+
+<script src="/nav.js"></script>
+</body>
+</html>

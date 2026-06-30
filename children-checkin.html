@@ -11,7 +11,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --gold: #C8922A; --gold-light: #E8B84B; --deep: #0D0D0D; --ink: #1A1613; --muted: #888; --bg: #F5F5F5; --white: #fff; --border: #E8E8E8; }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
-    .header { background: var(--deep); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+
+    /* OFFLINE BANNER */
+    .sync-banner { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 999; padding: 10px 16px; font-size: 13px; font-weight: 500; text-align: center; }
+    .sync-banner.offline { display: block; background: #E05555; color: white; }
+    .sync-banner.pending { display: block; background: #C8922A; color: white; }
+    .sync-banner.syncing { display: block; background: #2563EB; color: white; }
+    .sync-banner.synced { display: block; background: #27AE60; color: white; }
+
+    .header { background: var(--deep); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; margin-top: 0; }
     .header img { height: 40px; }
     .header-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #F5EDD8; }
     .container { max-width: 480px; margin: 0 auto; padding: 24px 16px 60px; }
@@ -55,10 +63,15 @@
     .qr-container { display: flex; justify-content: center; margin-bottom: 12px; }
     .qr-container > div { padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: inline-block; }
     .qr-code-label { font-family: monospace; font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 3px; }
+    .offline-note { background: #FBF4E8; border: 1px solid rgba(200,146,42,0.3); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: var(--gold); margin-bottom: 16px; text-align: center; display: none; }
+    .offline-note.show { display: block; }
     .gap { margin-top: 10px; }
   </style>
 </head>
 <body>
+
+<!-- SYNC BANNER -->
+<div class="sync-banner" id="sync-banner"></div>
 
 <div class="header">
   <a href="/"><img src="/kim-logo.png" alt="KIM"></a>
@@ -98,70 +111,236 @@
       <span style="font-size:20px;line-height:1;">+</span> Add a child
     </button>
     <div style="background:white;border:1.5px solid #E8E8E8;border-radius:12px;padding:16px 18px;margin-bottom:16px;">
-      <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
-        <input type="checkbox" id="waiver-cb" style="width:20px;height:20px;accent-color:#C8922A;margin-top:2px;flex-shrink:0;">
-        <span style="font-size:13px;line-height:1.6;color:#6B6560;">I grant Kingdom Insights Ministries permission to seek emergency medical treatment for my child if I cannot be reached. I acknowledge that KIM staff will exercise reasonable care during church programs and that KIM is not liable for pre-existing medical conditions or injuries unrelated to church activities. I confirm that all medical/allergy information provided is accurate.</span>
-      </label>
+      <p style="font-size:13px;color:#888;line-height:1.6;">By checking in, you confirm that the listed guardian(s) are authorized to pick up your child(ren). A unique QR code will be generated for secure pickup.</p>
     </div>
     <p class="error-msg" id="new-error"></p>
-    <button class="btn" onclick="registerFamily()">Register & Check In</button>
+    <button class="btn" onclick="registerNewFamily()">Check In</button>
     <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Back</button>
   </div>
 
   <!-- SCREEN 3: Returning family -->
   <div class="screen" id="screen-family">
-    <h1 class="screen-title">Welcome back!</h1>
-    <p class="screen-sub">Select the children attending today.</p>
+    <h1 class="screen-title">Welcome Back</h1>
     <div class="parent-info">
       <div class="parent-name" id="family-parent-name"></div>
       <div class="parent-phone" id="family-parent-phone"></div>
     </div>
-    <span class="section-label">Your Children</span>
+    <span class="section-label">Select Children Attending Today</span>
     <div id="children-list"></div>
     <button class="add-child-btn" onclick="toggleAddChild()">
-      <span style="font-size:20px;line-height:1;">+</span> Add another child
+      <span style="font-size:20px;line-height:1;">+</span> Add a child
     </button>
     <div class="add-child-form" id="add-child-form">
-      <p class="add-child-title">New Child</p>
-      <div class="field">
-        <label>Child's Full Name *</label>
-        <input type="text" id="new-child-name" placeholder="First Last">
-      </div>
+      <p class="add-child-title">Add a Child</p>
       <div class="form-row">
-        <div class="field">
+        <div class="field" style="margin:0">
+          <label>Name *</label>
+          <input type="text" id="new-child-name" placeholder="Child's name">
+        </div>
+        <div class="field" style="margin:0">
           <label>Date of Birth *</label>
           <input type="date" id="new-child-dob">
         </div>
-        <div class="field">
-          <label>Allergies</label>
-          <input type="text" id="new-child-allergies" placeholder="None">
-        </div>
       </div>
-      <button class="btn" onclick="saveNewChild()">Save Child</button>
+      <div class="field" style="margin-top:12px;">
+        <label>Allergies / Notes</label>
+        <input type="text" id="new-child-allergies" placeholder="e.g. peanuts (optional)">
+      </div>
+      <button class="btn" style="margin-top:8px;" onclick="saveNewChild()">Add Child</button>
     </div>
     <p class="error-msg" id="family-error">Please select at least one child.</p>
-    <button class="btn" onclick="checkInSelected()">Check In Selected Children</button>
-    <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Different family</button>
+    <button class="btn" onclick="checkInSelected()">Check In</button>
+    <button class="btn btn-outline gap" onclick="showScreen('screen-phone')">← Back</button>
   </div>
 
   <!-- SCREEN 4: Success -->
   <div class="screen" id="screen-success">
-    <h1 class="screen-title">Checked In!</h1>
-    <p class="screen-sub">Show each QR code to the attendant at pickup time.</p>
+    <h1 class="screen-title">Checked In ✓</h1>
+    <p class="screen-sub">Show this QR code to the attendant at pickup time.</p>
+    <div class="offline-note" id="offline-checkin-note">
+      ⚡ Checked in offline — your record will sync automatically when wifi is available.
+    </div>
     <div id="qr-cards"></div>
-    <button class="btn btn-outline gap" onclick="resetAll()">Check In Another Family</button>
+    <button class="btn btn-outline" onclick="resetAll()">Done — Check In Another Family</button>
   </div>
 
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mzc5OTcsImV4cCI6MjA4OTUxMzk5N30.nd1Vzmkhi0gklchYnu6OmW4C_LZ_CkS1_G7wQ2SPGW4';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NTI2NzcsImV4cCI6MjA2MDMyODY3N30.wHGCTG_6F4NvIRsSTZiRuAl1GNtMsrJGxNE3BQ0MWWM';
+const OFFLINE_QUEUE_KEY = 'kim_checkin_queue';
+const OFFLINE_FAMILIES_KEY = 'kim_families_cache';
 
 let currentFamily = null;
 let currentChildren = [];
 let newChildRows = [];
 let checkedInCodes = [];
+let isOnline = navigator.onLine;
+
+// ── NETWORK STATUS ────────────────────────────────────────────────────────────
+function updateOnlineStatus() {
+  isOnline = navigator.onLine;
+  updateBanner();
+  if (isOnline) syncQueue();
+}
+
+function updateBanner() {
+  const banner = document.getElementById('sync-banner');
+  const queue = getQueue();
+  const pending = queue.filter(r => !r.synced).length;
+
+  // Push header down when banner visible
+  document.querySelector('.header').style.marginTop = isOnline && pending === 0 ? '0' : '40px';
+
+  if (!isOnline) {
+    banner.className = 'sync-banner offline';
+    banner.textContent = '📡 Offline mode — check-ins save locally and sync when wifi returns';
+  } else if (pending > 0) {
+    banner.className = 'sync-banner pending';
+    banner.textContent = `⏳ ${pending} check-in${pending > 1 ? 's' : ''} pending sync...`;
+  } else {
+    banner.className = 'sync-banner';
+    banner.textContent = '';
+    document.querySelector('.header').style.marginTop = '0';
+  }
+}
+
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+// ── OFFLINE QUEUE ─────────────────────────────────────────────────────────────
+function getQueue() {
+  try { return JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]'); }
+  catch { return []; }
+}
+
+function saveQueue(queue) {
+  localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue));
+}
+
+function addToQueue(record) {
+  const queue = getQueue();
+  queue.push({ ...record, synced: false, queued_at: new Date().toISOString(), id: 'local_' + Date.now() + '_' + Math.random().toString(36).slice(2) });
+  saveQueue(queue);
+  updateBanner();
+}
+
+// ── FAMILY CACHE (for offline lookup) ────────────────────────────────────────
+function getFamilyCache() {
+  try { return JSON.parse(localStorage.getItem(OFFLINE_FAMILIES_KEY) || '[]'); }
+  catch { return []; }
+}
+
+function cacheFamilies(families) {
+  const cache = getFamilyCache();
+  families.forEach(fam => {
+    const idx = cache.findIndex(f => f.parent_phone === fam.parent_phone);
+    if (idx >= 0) cache[idx] = fam;
+    else cache.push(fam);
+  });
+  localStorage.setItem(OFFLINE_FAMILIES_KEY, JSON.stringify(cache));
+}
+
+function lookupFamilyOffline(phone) {
+  return getFamilyCache().find(f => f.parent_phone === phone) || null;
+}
+
+// ── SYNC ENGINE ───────────────────────────────────────────────────────────────
+async function syncQueue() {
+  const queue = getQueue();
+  const pending = queue.filter(r => !r.synced);
+  if (!pending.length) { updateBanner(); return; }
+
+  const banner = document.getElementById('sync-banner');
+  banner.className = 'sync-banner syncing';
+  banner.textContent = `🔄 Syncing ${pending.length} check-in${pending.length > 1 ? 's' : ''}...`;
+  document.querySelector('.header').style.marginTop = '40px';
+
+  let synced = 0;
+  for (const record of pending) {
+    try {
+      // Sync family if new
+      if (record.type === 'new_family') {
+        const famRes = await supabaseFetch('/rest/v1/kim_families', {
+          method: 'POST',
+          headers: { 'Prefer': 'return=representation' },
+          body: JSON.stringify({
+            parent_name: record.parent_name,
+            parent_phone: record.parent_phone,
+            parent_email: record.parent_email || null
+          })
+        });
+        if (!famRes.ok) continue;
+        const famData = await famRes.json();
+        const familyId = famData[0]?.id;
+
+        // Sync children profiles
+        if (record.children_profiles && familyId) {
+          for (const child of record.children_profiles) {
+            await supabaseFetch('/rest/v1/kim_children', {
+              method: 'POST',
+              headers: { 'Prefer': 'return=minimal' },
+              body: JSON.stringify({ family_id: familyId, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null })
+            });
+          }
+        }
+      }
+
+      // Sync check-in records
+      if (record.checkins) {
+        for (const checkin of record.checkins) {
+          await supabaseFetch('/rest/v1/kim_children_checkin', {
+            method: 'POST',
+            headers: { 'Prefer': 'return=minimal' },
+            body: JSON.stringify(checkin)
+          });
+        }
+      }
+
+      // Mark as synced
+      const allQueue = getQueue();
+      const idx = allQueue.findIndex(r => r.id === record.id);
+      if (idx >= 0) { allQueue[idx].synced = true; saveQueue(allQueue); }
+      synced++;
+    } catch (e) {
+      console.warn('Sync failed for record:', record.id, e);
+    }
+  }
+
+  const remaining = getQueue().filter(r => !r.synced).length;
+  if (remaining === 0) {
+    banner.className = 'sync-banner synced';
+    banner.textContent = `✓ All check-ins synced successfully`;
+    document.querySelector('.header').style.marginTop = '40px';
+    setTimeout(() => { updateBanner(); }, 3000);
+  } else {
+    updateBanner();
+  }
+}
+
+// ── SUPABASE FETCH ────────────────────────────────────────────────────────────
+async function supabaseFetch(path, options = {}) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+    ...options.headers
+  };
+  return fetch(SUPABASE_URL + path, { ...options, headers });
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function generateCode(name) {
+  const initials = name.trim().split(' ').map(w => w[0].toUpperCase()).join('');
+  const num = Math.floor(1000 + Math.random() * 9000);
+  return initials + '-' + num;
+}
+
+function getTodayCST() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+}
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -169,45 +348,54 @@ function showScreen(id) {
   window.scrollTo(0, 0);
 }
 
-function generateCode(name) {
-  const initials = name.trim().split(' ').map(w => w[0].toUpperCase()).join('');
-  const num = Math.floor(1000 + Math.random() * 9000);
-  return initials + '-' + num;
-}
-
-async function supabaseFetch(path, options = {}) {
-  const headers = { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, ...options.headers };
-  return fetch(SUPABASE_URL + path, { ...options, headers });
-}
-
-// PHONE LOOKUP
+// ── PHONE LOOKUP ──────────────────────────────────────────────────────────────
 async function lookupFamily() {
   const phone = document.getElementById('lookup-phone').value.trim().replace(/\D/g, '');
   const errorEl = document.getElementById('phone-error');
   errorEl.style.display = 'none';
   if (phone.length < 10) { errorEl.style.display = 'block'; return; }
 
-  const res = await supabaseFetch('/rest/v1/kim_families?parent_phone=eq.' + phone + '&select=*');
-  const data = await res.json();
-
-  if (!data || data.length === 0) {
-    window._newPhone = phone;
-    newChildRows = [];
-    document.getElementById('new-parent-name').value = '';
-    document.getElementById('new-parent-email').value = '';
-    document.getElementById('new-children-list').innerHTML = '';
-    addNewChildRow();
-    showScreen('screen-new');
-  } else {
-    currentFamily = data[0];
-    document.getElementById('family-parent-name').textContent = currentFamily.parent_name;
-    document.getElementById('family-parent-phone').textContent = phone;
-    await loadFamilyChildren();
-    showScreen('screen-family');
+  if (isOnline) {
+    try {
+      const res = await supabaseFetch('/rest/v1/kim_families?parent_phone=eq.' + phone + '&select=*');
+      const data = await res.json();
+      if (data && data.length) {
+        cacheFamilies(data);
+        currentFamily = data[0];
+        document.getElementById('family-parent-name').textContent = currentFamily.parent_name;
+        document.getElementById('family-parent-phone').textContent = phone;
+        await loadFamilyChildren();
+        showScreen('screen-family');
+        return;
+      }
+    } catch (e) {
+      console.warn('Online lookup failed, trying cache:', e);
+    }
   }
+
+  // Offline fallback — check local cache
+  const cached = lookupFamilyOffline(phone);
+  if (cached) {
+    currentFamily = cached;
+    document.getElementById('family-parent-name').textContent = cached.parent_name;
+    document.getElementById('family-parent-phone').textContent = phone;
+    currentChildren = cached.children || [];
+    renderChildrenList();
+    showScreen('screen-family');
+    return;
+  }
+
+  // New family
+  window._newPhone = phone;
+  newChildRows = [];
+  document.getElementById('new-parent-name').value = '';
+  document.getElementById('new-parent-email').value = '';
+  document.getElementById('new-children-list').innerHTML = '';
+  addNewChildRow();
+  showScreen('screen-new');
 }
 
-// NEW FAMILY - add child rows dynamically
+// ── NEW FAMILY ROW BUILDER ────────────────────────────────────────────────────
 function addNewChildRow() {
   const idx = newChildRows.length;
   newChildRows.push({ name: '', dob: '', allergies: '' });
@@ -218,33 +406,34 @@ function addNewChildRow() {
   div.innerHTML =
     '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
       '<span style="font-size:13px;font-weight:500;color:#1A1613;">Child ' + (idx + 1) + '</span>' +
-      (idx > 0 ? '<button onclick="removeChildRow(' + idx + ')" style="background:none;border:none;color:#CCC;font-size:18px;cursor:pointer;" onmouseover="this.style.color=\'#E05555\'" onmouseout="this.style.color=\'#CCC\'">✕</button>' : '') +
+      (idx > 0 ? '<button onclick="removeNewChildRow(' + idx + ')" style="background:none;border:none;color:#CCC;font-size:16px;cursor:pointer;">✕</button>' : '') +
     '</div>' +
-    '<div class="field"><label>Full Name *</label><input type="text" id="nc-name-' + idx + '" placeholder="Child\'s full name"></div>' +
-    '<div class="form-row">' +
-      '<div class="field"><label>Date of Birth *</label><input type="date" id="nc-dob-' + idx + '"></div>' +
-      '<div class="field"><label>Allergies</label><input type="text" id="nc-allergy-' + idx + '" placeholder="None"></div>' +
-    '</div>';
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">' +
+      '<div><label style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#888;display:block;margin-bottom:6px;">Name *</label>' +
+      '<input type="text" id="nc-name-' + idx + '" placeholder="Child\'s name" style="width:100%;padding:11px 14px;border:1.5px solid #E8E8E8;border-radius:10px;font-family:\'DM Sans\',sans-serif;font-size:14px;color:#1A1613;outline:none;"></div>' +
+      '<div><label style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#888;display:block;margin-bottom:6px;">Date of Birth *</label>' +
+      '<input type="date" id="nc-dob-' + idx + '" style="width:100%;padding:11px 14px;border:1.5px solid #E8E8E8;border-radius:10px;font-family:\'DM Sans\',sans-serif;font-size:14px;color:#1A1613;outline:none;"></div>' +
+    '</div>' +
+    '<div><label style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#888;display:block;margin-bottom:6px;">Allergies / Notes</label>' +
+    '<input type="text" id="nc-allergy-' + idx + '" placeholder="e.g. peanuts (optional)" style="width:100%;padding:11px 14px;border:1.5px solid #E8E8E8;border-radius:10px;font-family:\'DM Sans\',sans-serif;font-size:14px;color:#1A1613;outline:none;"></div>';
   list.appendChild(div);
 }
 
-function removeChildRow(idx) {
+function removeNewChildRow(idx) {
+  newChildRows[idx] = null;
   const el = document.getElementById('new-child-row-' + idx);
   if (el) el.remove();
-  newChildRows[idx] = null;
 }
 
-async function registerFamily() {
+// ── REGISTER NEW FAMILY ───────────────────────────────────────────────────────
+async function registerNewFamily() {
   const parentName = document.getElementById('new-parent-name').value.trim();
   const parentEmail = document.getElementById('new-parent-email').value.trim();
   const errorEl = document.getElementById('new-error');
   errorEl.style.display = 'none';
 
   if (!parentName) { errorEl.textContent = 'Please enter your name.'; errorEl.style.display = 'block'; return; }
-  const waiverCb = document.getElementById('waiver-cb');
-  if (waiverCb && !waiverCb.checked) { errorEl.textContent = 'Please read and accept the waiver to continue.'; errorEl.style.display = 'block'; return; }
 
-  // Collect children
   const children = [];
   for (let i = 0; i < newChildRows.length; i++) {
     if (newChildRows[i] === null) continue;
@@ -256,39 +445,91 @@ async function registerFamily() {
   }
   if (!children.length) { errorEl.textContent = 'Please add at least one child.'; errorEl.style.display = 'block'; return; }
 
-  // Create family
-  const famRes = await supabaseFetch('/rest/v1/kim_families', {
-    method: 'POST', headers: { 'Prefer': 'return=representation' },
-    body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null })
-  });
-  const famData = await famRes.json();
-  currentFamily = famData[0];
-
-  // Create children and check in
   checkedInCodes = [];
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+  const today = getTodayCST();
 
-  for (const child of children) {
-    await supabaseFetch('/rest/v1/kim_children', {
-      method: 'POST', headers: { 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ family_id: currentFamily.id, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null })
-    });
+  const checkins = children.map(child => {
     const code = generateCode(child.name);
-    await supabaseFetch('/rest/v1/kim_children_checkin', {
-      method: 'POST', headers: { 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null, pickup_code: code, status: 'checked_in', event_date: today })
-    });
     checkedInCodes.push({ name: child.name, code });
+    return {
+      parent_name: parentName,
+      parent_phone: window._newPhone,
+      parent_email: parentEmail || null,
+      child_name: child.name,
+      child_dob: child.dob,
+      allergies: child.allergies || null,
+      pickup_code: code,
+      status: 'checked_in',
+      event_date: today
+    };
+  });
+
+  // Cache family locally for future offline lookups
+  const localFamily = {
+    id: 'local_' + Date.now(),
+    parent_name: parentName,
+    parent_phone: window._newPhone,
+    parent_email: parentEmail || null,
+    children: children.map((c, i) => ({ child_name: c.name, child_dob: c.dob, allergies: c.allergies, id: 'local_child_' + i }))
+  };
+  cacheFamilies([localFamily]);
+
+  if (isOnline) {
+    try {
+      const famRes = await supabaseFetch('/rest/v1/kim_families', {
+        method: 'POST',
+        headers: { 'Prefer': 'return=representation' },
+        body: JSON.stringify({ parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null })
+      });
+      const famData = await famRes.json();
+      const familyId = famData[0]?.id;
+
+      for (const child of children) {
+        await supabaseFetch('/rest/v1/kim_children', {
+          method: 'POST',
+          headers: { 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ family_id: familyId, child_name: child.name, child_dob: child.dob, allergies: child.allergies || null })
+        });
+      }
+      for (const checkin of checkins) {
+        await supabaseFetch('/rest/v1/kim_children_checkin', {
+          method: 'POST',
+          headers: { 'Prefer': 'return=minimal' },
+          body: JSON.stringify(checkin)
+        });
+      }
+      document.getElementById('offline-checkin-note').classList.remove('show');
+    } catch(e) {
+      // Online but request failed — queue it
+      addToQueue({ type: 'new_family', parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null, children_profiles: children, checkins });
+      document.getElementById('offline-checkin-note').classList.add('show');
+    }
+  } else {
+    // Offline — queue everything
+    addToQueue({ type: 'new_family', parent_name: parentName, parent_phone: window._newPhone, parent_email: parentEmail || null, children_profiles: children, checkins });
+    document.getElementById('offline-checkin-note').classList.add('show');
   }
 
   renderSuccessScreen();
   showScreen('screen-success');
 }
 
-// RETURNING FAMILY
+// ── RETURNING FAMILY ──────────────────────────────────────────────────────────
 async function loadFamilyChildren() {
-  const res = await supabaseFetch('/rest/v1/kim_children?family_id=eq.' + currentFamily.id + '&select=*&order=created_at.asc');
-  currentChildren = await res.json();
+  if (isOnline) {
+    try {
+      const res = await supabaseFetch('/rest/v1/kim_children?family_id=eq.' + currentFamily.id + '&select=*&order=created_at.asc');
+      currentChildren = await res.json();
+      // Update cache
+      const cache = getFamilyCache();
+      const idx = cache.findIndex(f => f.parent_phone === currentFamily.parent_phone);
+      if (idx >= 0) { cache[idx].children = currentChildren; localStorage.setItem(OFFLINE_FAMILIES_KEY, JSON.stringify(cache)); }
+    } catch(e) {
+      currentChildren = currentFamily.children || [];
+    }
+  } else {
+    currentChildren = currentFamily.children || [];
+  }
   renderChildrenList();
 }
 
@@ -299,11 +540,12 @@ function renderChildrenList() {
     return;
   }
   list.innerHTML = currentChildren.map((child, i) => {
+    const name = child.child_name || child.name;
     const dob = child.child_dob ? new Date(child.child_dob + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
     return '<div class="child-checkbox selected" id="child-label-' + i + '">' +
       '<input type="checkbox" id="child-cb-' + i + '" checked onchange="toggleChildSelect(' + i + ')">' +
       '<div class="child-info" onclick="document.getElementById(\'child-cb-' + i + '\').click()">' +
-        '<div class="child-check-name">' + child.child_name + '</div>' +
+        '<div class="child-check-name">' + name + '</div>' +
         '<div class="child-check-detail">' + (dob || '') + (child.allergies ? ' · ⚠️ ' + child.allergies : '') + '</div>' +
       '</div>' +
       '<button class="delete-child-btn" onclick="deleteChild(\'' + child.id + '\',' + i + ')" title="Remove child">✕</button>' +
@@ -318,8 +560,10 @@ function toggleChildSelect(i) {
 }
 
 async function deleteChild(id, i) {
-  if (!confirm('Remove ' + currentChildren[i].child_name + ' from your family profile?')) return;
-  await supabaseFetch('/rest/v1/kim_children?id=eq.' + id, { method: 'DELETE' });
+  if (!confirm('Remove ' + (currentChildren[i].child_name || currentChildren[i].name) + ' from your family profile?')) return;
+  if (isOnline && !String(id).startsWith('local_')) {
+    await supabaseFetch('/rest/v1/kim_children?id=eq.' + id, { method: 'DELETE' });
+  }
   currentChildren.splice(i, 1);
   renderChildrenList();
 }
@@ -334,12 +578,24 @@ async function saveNewChild() {
   const allergies = document.getElementById('new-child-allergies').value.trim();
   if (!name || !dob) { alert('Please enter child name and date of birth.'); return; }
 
-  const res = await supabaseFetch('/rest/v1/kim_children', {
-    method: 'POST', headers: { 'Prefer': 'return=representation' },
-    body: JSON.stringify({ family_id: currentFamily.id, child_name: name, child_dob: dob, allergies: allergies || null })
-  });
-  const data = await res.json();
-  currentChildren.push(data[0]);
+  const newChild = { child_name: name, child_dob: dob, allergies: allergies || null, id: 'local_' + Date.now() };
+
+  if (isOnline && !String(currentFamily.id).startsWith('local_')) {
+    try {
+      const res = await supabaseFetch('/rest/v1/kim_children', {
+        method: 'POST',
+        headers: { 'Prefer': 'return=representation' },
+        body: JSON.stringify({ family_id: currentFamily.id, child_name: name, child_dob: dob, allergies: allergies || null })
+      });
+      const data = await res.json();
+      currentChildren.push(data[0]);
+    } catch(e) {
+      currentChildren.push(newChild);
+    }
+  } else {
+    currentChildren.push(newChild);
+  }
+
   renderChildrenList();
   document.getElementById('add-child-form').classList.remove('show');
   document.getElementById('new-child-name').value = '';
@@ -357,21 +613,49 @@ async function checkInSelected() {
   errorEl.style.display = 'none';
 
   checkedInCodes = [];
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+  const today = getTodayCST();
 
-  for (const child of selected) {
-    const code = generateCode(child.child_name);
-    await supabaseFetch('/rest/v1/kim_children_checkin', {
-      method: 'POST', headers: { 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ parent_name: currentFamily.parent_name, parent_phone: currentFamily.parent_phone, parent_email: currentFamily.parent_email || null, child_name: child.child_name, child_dob: child.child_dob || null, allergies: child.allergies || null, pickup_code: code, status: 'checked_in', event_date: today })
-    });
-    checkedInCodes.push({ name: child.child_name, code });
+  const checkins = selected.map(child => {
+    const name = child.child_name || child.name;
+    const code = generateCode(name);
+    checkedInCodes.push({ name, code });
+    return {
+      parent_name: currentFamily.parent_name,
+      parent_phone: currentFamily.parent_phone,
+      parent_email: currentFamily.parent_email || null,
+      child_name: name,
+      child_dob: child.child_dob || null,
+      allergies: child.allergies || null,
+      pickup_code: code,
+      status: 'checked_in',
+      event_date: today
+    };
+  });
+
+  if (isOnline) {
+    try {
+      for (const checkin of checkins) {
+        await supabaseFetch('/rest/v1/kim_children_checkin', {
+          method: 'POST',
+          headers: { 'Prefer': 'return=minimal' },
+          body: JSON.stringify(checkin)
+        });
+      }
+      document.getElementById('offline-checkin-note').classList.remove('show');
+    } catch(e) {
+      addToQueue({ type: 'returning_family', checkins });
+      document.getElementById('offline-checkin-note').classList.add('show');
+    }
+  } else {
+    addToQueue({ type: 'returning_family', checkins });
+    document.getElementById('offline-checkin-note').classList.add('show');
   }
 
   renderSuccessScreen();
   showScreen('screen-success');
 }
 
+// ── SUCCESS / QR ──────────────────────────────────────────────────────────────
 function renderSuccessScreen() {
   const container = document.getElementById('qr-cards');
   container.innerHTML = checkedInCodes.map(({ name, code }) =>
@@ -396,10 +680,18 @@ function renderSuccessScreen() {
 function resetAll() {
   currentFamily = null; currentChildren = []; newChildRows = []; checkedInCodes = [];
   document.getElementById('lookup-phone').value = '';
+  document.getElementById('offline-checkin-note').classList.remove('show');
   showScreen('screen-phone');
 }
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+updateBanner();
+if (isOnline) syncQueue();
+
+// Auto-sync every 30 seconds when online
+setInterval(() => { if (isOnline) syncQueue(); }, 30000);
 </script>
 
-  <script src="/nav.js"></script>
+<script src="/nav.js"></script>
 </body>
 </html>
