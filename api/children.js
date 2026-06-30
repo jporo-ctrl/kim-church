@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
     const { name } = req.body;
     await supabase.from('kim_attendant_sessions').insert({
       attendant_name: name || 'Attendant',
-      event_date: new Date().toISOString().split('T')[0]
+      event_date: new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' })
     });
     return res.status(200).json({ success: true });
   }
