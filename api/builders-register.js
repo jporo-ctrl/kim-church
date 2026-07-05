@@ -35,7 +35,7 @@ module.exports = async function handler(req, res) {
       ? `${others_count} additional guest(s)`
       : 'None indicated';
 
-    const logoBlock = `<div style="background:#0D0D0D;padding:24px;text-align:center;">
+    const logoBlock = `<div style="background:#ffffff;padding:24px 24px 16px;text-align:center;border-bottom:3px solid #C8922A;">
       <img src="https://kim.church/kim-logo-email.png" alt="Kingdom Insights Ministries" style="height:60px;">
     </div>`;
 
