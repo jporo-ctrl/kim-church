@@ -342,7 +342,7 @@ async function handleRSVP(e) {
     });
     if (res.ok) {
       document.getElementById('rsvp-card').style.display = 'none';
-      document.getElementById('rsvp-success').style.display = 'block';
+      document.getElementById('rsvp-success').style.display = 'block'; setTimeout(downloadICS, 800);
       window.scrollTo({ top: document.getElementById('rsvp-success').offsetTop - 80, behavior: 'smooth' });
     } else {
       const err = await res.json();
