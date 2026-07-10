@@ -1,317 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KIM Kids — Kingdom Insights Ministries</title>
-<meta name="description" content="Big faith. Young hearts. Kingdom identity — starting now. KIM Kids runs every Saturday 6–8 PM at Compass Center, Grapevine TX.">
+<title>KIM Kids — The Story Way | Teacher's Curriculum</title>
+<meta name="description" content="The Story Way — a 12-lesson Bible story curriculum for the KIM Kids children's ministry. Tell the story, retell it together, talk about it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --gold: #C8922A; --gold-light: #E8B84B; --gold-pale: #FBF4E8;
-  --deep: #0D0D0D; --ink: #1A1613; --parchment: #FAF7F2;
-  --muted: #6B6560; --border: rgba(200,146,42,0.25);
-}
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--deep); color: #F0EAD6; overflow-x: hidden; }
+  :root{
+    --gold:#C9A227;
+    --gold-soft:#E5D9A8;
+    --gold-wash:#FBF6E4;
+    --ink:#141414;
+    --ink-soft:#3a3a3a;
+    --grey:#6b6b6b;
+    --paper:#faf8f3;
+    --line:#e8e2d0;
+    --shadow:0 1px 2px rgba(20,20,20,.04),0 8px 30px rgba(20,20,20,.06);
+    --display:"Fraunces",Georgia,serif;
+    --body:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--gold);color:#fff}
 
-/* HERO */
-.hero { position: relative; overflow: hidden; padding: 140px 24px 100px; text-align: center; }
-.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,146,42,0.1) 0%, transparent 70%); pointer-events: none; }
-.hero-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.hero-ring { position: absolute; border-radius: 50%; border: 1px solid; }
-.hero-crown { font-size: 64px; margin-bottom: 16px; line-height: 1; position: relative; z-index: 1; }
-.hero-badge { display: inline-block; background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.3); padding: 4px 14px; font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 20px; position: relative; z-index: 1; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 10vw, 96px); font-weight: 600; line-height: 1; margin-bottom: 16px; color: #F5EDD8; position: relative; z-index: 1; }
-.hero-title em { font-style: italic; color: var(--gold-light); }
-.hero-sub { font-size: clamp(16px, 3vw, 20px); color: rgba(245,237,216,0.5); max-width: 500px; margin: 0 auto 40px; line-height: 1.7; position: relative; z-index: 1; }
-.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-.btn-gold { padding: 14px 32px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s; display: inline-block; }
-.btn-gold:hover { background: var(--gold-light); }
-.btn-outline { padding: 14px 32px; border: 1px solid rgba(245,237,216,0.25); color: #F5EDD8; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; display: inline-block; }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
-.hero-detail { margin-top: 24px; font-size: 13px; color: rgba(245,237,216,0.3); letter-spacing: 0.1em; position: relative; z-index: 1; }
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--ink);
+    color:#fff;
+    padding:72px 24px 60px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:3px solid var(--gold);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(201,162,39,.16), transparent 42%),
+      radial-gradient(circle at 12% 92%, rgba(201,162,39,.08), transparent 40%);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:940px;margin:0 auto;position:relative}
+  .eyebrow{
+    font-size:.78rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:22px;display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--gold-soft),transparent);opacity:.4}
+  .hero h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2.8rem,7vw,5rem);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin-bottom:20px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero-sub{font-size:clamp(1.05rem,2.2vw,1.28rem);color:#d9d5cb;max-width:600px;font-weight:400}
+  .rhythm{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;
+  }
+  .rhythm span{
+    font-size:.9rem;font-weight:500;color:#eee;
+    padding:8px 16px;border:1px solid rgba(229,217,168,.28);border-radius:100px;
+    display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.02);
+  }
+  .rhythm span b{color:var(--gold);font-weight:700}
 
-/* DIVIDER */
-.gold-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(200,146,42,0.3), transparent); margin: 0 48px; }
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{
+    max-width:940px;margin:26px auto 0;padding:0 24px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  }
+  .downloads{display:flex;flex-wrap:wrap;gap:10px}
+  .dl{
+    font-size:.86rem;font-weight:600;color:var(--ink);text-decoration:none;
+    padding:9px 15px;border:1px solid var(--line);border-radius:10px;background:#fff;
+    display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow);transition:.18s;
+  }
+  .dl:hover{border-color:var(--gold);transform:translateY(-1px)}
+  .dl svg{width:15px;height:15px;color:var(--gold)}
+  .expand-all{
+    font-size:.82rem;font-weight:600;color:var(--grey);background:none;border:none;
+    cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:8px;
+  }
+  .expand-all:hover{color:var(--ink)}
 
-/* SECTIONS */
-.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-.section-eyebrow { text-align: center; font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 12px; }
-.section-title { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; margin-bottom: 16px; color: #F5EDD8; line-height: 1.15; }
-.section-sub { text-align: center; color: rgba(245,237,216,0.4); font-size: 15px; max-width: 480px; margin: 0 auto 56px; line-height: 1.7; }
+  /* ---------- LESSON LIST ---------- */
+  main{max-width:940px;margin:0 auto;padding:34px 24px 90px}
+  .lesson{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    margin-bottom:14px;overflow:hidden;box-shadow:var(--shadow);
+    transition:border-color .2s;
+  }
+  .lesson[open]{border-color:var(--gold-soft)}
+  .lesson summary{
+    list-style:none;cursor:pointer;padding:20px 24px;
+    display:flex;align-items:center;gap:20px;position:relative;
+  }
+  .lesson summary::-webkit-details-marker{display:none}
+  .num{
+    font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--gold);
+    min-width:52px;height:52px;border:2px solid var(--gold-soft);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    background:var(--gold-wash);transition:.2s;
+  }
+  .lesson[open] .num{background:var(--ink);border-color:var(--ink);color:var(--gold)}
+  .sum-text{flex:1;min-width:0}
+  .sum-text h2{
+    font-family:var(--display);font-weight:600;font-size:1.32rem;line-height:1.2;
+    letter-spacing:-.01em;margin-bottom:3px;
+  }
+  .sum-text .ref{font-size:.85rem;color:var(--grey);font-weight:500}
+  .chev{width:20px;height:20px;color:var(--grey);flex-shrink:0;transition:transform .25s}
+  .lesson[open] .chev{transform:rotate(180deg);color:var(--gold)}
 
-/* PILLARS */
-.pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; }
-.pillar-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; transition: border-color 0.2s; }
-.pillar-card:hover { border-color: rgba(200,146,42,0.4); }
-.pillar-icon { font-size: 32px; margin-bottom: 16px; }
-.pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #F5EDD8; margin-bottom: 10px; }
-.pillar-desc { color: rgba(245,237,216,0.4); font-size: 14px; line-height: 1.7; }
+  .body{padding:4px 24px 28px;border-top:1px solid var(--line)}
+  .bigidea{
+    background:var(--ink);color:#fff;border-radius:12px;padding:18px 22px;margin:22px 0 26px;
+  }
+  .bigidea .lab{font-size:.72rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+  .bigidea p{font-family:var(--display);font-style:italic;font-size:1.15rem;line-height:1.4}
 
-/* AGE GROUPS */
-.ages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.age-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
-.age-card-header { background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 24px; display: flex; align-items: center; gap: 14px; }
-.age-emoji { font-size: 28px; }
-.age-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; }
-.age-range { font-size: 12px; color: var(--gold); font-weight: 500; margin-top: 2px; }
-.age-desc { padding: 20px 24px; color: rgba(245,237,216,0.45); font-size: 14px; line-height: 1.7; }
+  .sect-lab{
+    font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);
+  }
+  .verse{
+    border-left:3px solid var(--gold);background:var(--gold-wash);
+    padding:14px 20px;border-radius:0 10px 10px 0;margin-bottom:4px;
+  }
+  .verse p{font-family:var(--display);font-style:italic;font-size:1.08rem;color:var(--ink-soft)}
+  .verse cite{display:block;font-family:var(--body);font-style:normal;font-weight:700;font-size:.82rem;color:var(--gold);margin-top:6px}
+  .story p{margin-bottom:14px;font-size:1.02rem;color:var(--ink-soft)}
+  .story p:first-letter{}
+  .retell{background:#fbfaf6;border:1px dashed var(--gold-soft);border-radius:10px;padding:16px 20px;font-size:1rem;color:var(--ink-soft)}
 
-/* CHECKIN BANNER */
-.checkin-banner { margin: 0 24px 80px; max-width: 1052px; margin-left: auto; margin-right: auto; }
-.checkin-inner { background: linear-gradient(135deg, #1A1500 0%, #111 60%, #1A1500 100%); border: 1px solid rgba(200,146,42,0.3); padding: 52px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; }
-.checkin-text { flex: 1; min-width: 260px; }
-.checkin-eyebrow { font-size: 11px; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; text-transform: uppercase; margin-bottom: 10px; }
-.checkin-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 36px); font-weight: 600; color: #F5EDD8; line-height: 1.2; margin-bottom: 12px; }
-.checkin-desc { color: rgba(245,237,216,0.45); font-size: 15px; line-height: 1.7; max-width: 440px; }
-.checkin-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+  .qgroup{margin-top:6px}
+  .qtier{font-size:.82rem;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .qtier .age{font-weight:500;color:var(--grey)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+  ul.q{list-style:none}
+  ul.q li{
+    position:relative;padding:7px 0 7px 26px;font-size:1.01rem;color:var(--ink-soft);
+    border-bottom:1px solid #f2eee2;
+  }
+  ul.q li:last-child{border-bottom:none}
+  ul.q li::before{content:"";position:absolute;left:6px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
 
-/* FAQ */
-.faq-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
-.faq-item { border: 1px solid rgba(255,255,255,0.06); margin-bottom: 2px; overflow: hidden; }
-.faq-btn { width: 100%; background: rgba(255,255,255,0.02); border: none; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; gap: 16px; transition: background 0.15s; }
-.faq-btn:hover { background: rgba(255,255,255,0.04); }
-.faq-btn.open { background: rgba(255,255,255,0.04); }
-.faq-q { font-weight: 500; font-size: 15px; color: #F5EDD8; font-family: 'DM Sans', sans-serif; }
-.faq-icon { color: var(--gold); font-size: 20px; flex-shrink: 0; transition: transform 0.2s; }
-.faq-icon.open { transform: rotate(45deg); }
-.faq-answer { display: none; background: rgba(255,255,255,0.02); padding: 0 24px 20px; border-top: 1px solid rgba(255,255,255,0.05); }
-.faq-answer.open { display: block; }
-.faq-answer p { color: rgba(245,237,216,0.45); font-size: 14px; line-height: 1.8; margin-top: 16px; }
+  .learned{border-left:3px solid var(--gold);background:var(--gold-wash);padding:14px 20px;border-radius:0 10px 10px 0;font-size:1.02rem;color:var(--ink-soft)}
+  .prayer{font-family:var(--display);font-style:italic;font-size:1.08rem;color:var(--ink-soft);line-height:1.5}
+  .tnote{font-size:.94rem;color:var(--grey);background:#f7f5ef;border-radius:10px;padding:14px 18px}
+  .tnote b{color:var(--ink-soft)}
 
-/* FOOTER CTA */
-.footer-cta { background: var(--gold); padding: 64px 24px; text-align: center; }
-.footer-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; color: var(--deep); margin-bottom: 12px; }
-.footer-cta p { color: rgba(13,13,13,0.6); font-size: 16px; margin-bottom: 32px; }
-.footer-cta a { display: inline-block; background: var(--deep); color: var(--gold); padding: 14px 36px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s; }
-.footer-cta a:hover { opacity: 0.85; }
+  footer{
+    background:var(--ink);color:#cfcabd;text-align:center;padding:44px 24px;border-top:3px solid var(--gold);
+  }
+  footer .fverse{font-family:var(--display);font-style:italic;font-size:1.3rem;color:var(--gold);margin-bottom:10px}
+  footer .fname{font-weight:600;letter-spacing:.16em;font-size:.82rem;color:#fff;text-transform:uppercase}
+  footer a{color:var(--gold-soft)}
 
-/* FOOTER */
-.footer { background: var(--deep); border-top: 1px solid rgba(200,146,42,0.1); padding: 40px 24px; text-align: center; }
-.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
-.footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
-.footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
-.footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--gold); }
-
-@media(max-width: 600px) {
-  .checkin-inner { padding: 32px 24px; }
-  .hero-btns { flex-direction: column; align-items: center; }
-  .gold-divider { margin: 0 20px; }
-}
+  @media(max-width:560px){
+    .hero{padding:52px 20px 44px}
+    .lesson summary{padding:16px 16px;gap:14px}
+    .num{min-width:44px;height:44px;font-size:1.2rem}
+    .sum-text h2{font-size:1.12rem}
+    .body{padding:4px 16px 24px}
+    main{padding:24px 14px 70px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-rings">
-    <div class="hero-ring" style="width:600px;height:600px;border-color:rgba(200,146,42,0.06);"></div>
-    <div class="hero-ring" style="width:440px;height:440px;border-color:rgba(200,146,42,0.09);"></div>
-    <div class="hero-ring" style="width:280px;height:280px;border-color:rgba(200,146,42,0.12);"></div>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">KIM Kids &nbsp;·&nbsp; Children's Ministry Curriculum</div>
+    <h1>The <em>Story</em> Way</h1>
+    <p class="hero-sub">Twelve Bible stories that carry a child through the whole arc of Scripture — told simply, retold together, and talked about out loud.</p>
+    <div class="rhythm">
+      <span><b>1</b> Tell the story</span>
+      <span><b>2</b> Retell it together</span>
+      <span><b>3</b> Talk about it</span>
+    </div>
   </div>
-  <div class="hero-badge" style="margin-bottom:24px;">Kingdom Insights Ministries</div>
-  <div style="position:relative;z-index:1;margin-bottom:12px;">
-    <img src="/kim-logo.png" alt="KIM" style="height:110px;display:inline-block;">
-  </div>
-  <h1 class="hero-title" style="margin-top:8px;"><em>Kids</em></h1>
-  <p class="hero-sub">Big faith. Young hearts. Kingdom identity — starting now.</p>
-  <div class="hero-btns">
-    <a href="/checkin" class="btn-gold">Check In Your Child →</a>
-    <a href="mailto:serve@kim.church" class="btn-outline">Serve in KIM Kids</a>
-  </div>
-  <p class="hero-detail">Saturdays · 6–8 PM · Compass Center, Grapevine TX</p>
-</section>
+</header>
 
-<div class="gold-divider"></div>
-
-<!-- WHAT TO EXPECT -->
-<section class="section">
-  <p class="section-eyebrow">What to Expect</p>
-  <h2 class="section-title">A place where every child belongs</h2>
-  <p class="section-sub" style="margin-bottom:48px;"></p>
-  <div class="pillars-grid">
-    <div class="pillar-card">
-      <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-      <h3 class="pillar-title">Bible-Based</h3>
-      <p class="pillar-desc">Every lesson rooted in Scripture, age-adapted but never watered down.</p>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3 class="pillar-title">Safe Environment</h3>
-      <p class="pillar-desc">Background-checked volunteers. Structured check-in and pickup. Always.</p>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-      <h3 class="pillar-title">Fun & Worship</h3>
-      <p class="pillar-desc">Kids encounter God through joy. We sing, move, create, and celebrate.</p>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <h3 class="pillar-title">Parent Partnership</h3>
-      <p class="pillar-desc">Take-home materials keep the conversation going at the dinner table.</p>
-    </div>
+<div class="toolbar">
+  <div class="downloads">
+    <a class="dl" href="/downloads/KIM_Kids_The_Story_Way.docx" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+      Teacher's Guide
+    </a>
+    <a class="dl" href="/downloads/KIM_Kids_Parent_Take-Home_Sheets.docx" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+      Parent Sheets
+    </a>
+    <a class="dl" href="/downloads/KIM_Kids_Activity_Coloring_Pages.docx" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+      Coloring Pages
+    </a>
   </div>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- AGE GROUPS -->
-<section class="section">
-  <p class="section-eyebrow">Age Groups</p>
-  <h2 class="section-title">Teaching that meets them where they are</h2>
-  <p class="section-sub">Every age group runs simultaneously with the main service — no one has to choose.</p>
-  <div class="ages-grid">
-    <div class="age-card">
-      <div class="age-card-header">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;">01</span>
-        <div>
-          <div class="age-name">Little Ones</div>
-          <div class="age-range">Ages 0–2</div>
-        </div>
-      </div>
-      <div class="age-desc">A safe, loving nursery environment with worship music, sensory play, and devoted caregivers so parents can worship freely.</div>
-    </div>
-    <div class="age-card">
-      <div class="age-card-header">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;">02</span>
-        <div>
-          <div class="age-name">Little Builders</div>
-          <div class="age-range">Ages 3–5</div>
-        </div>
-      </div>
-      <div class="age-desc">Hands-on Bible stories, songs with motion, simple crafts, and repetition of Kingdom truths in age-appropriate language.</div>
-    </div>
-    <div class="age-card">
-      <div class="age-card-header">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;">03</span>
-        <div>
-          <div class="age-name">Kingdom Kids</div>
-          <div class="age-range">Ages 6–10</div>
-        </div>
-      </div>
-      <div class="age-desc">Deeper Word engagement, object lessons, group activities, and discussion that builds real faith — not just knowledge.</div>
-    </div>
-    <div class="age-card">
-      <div class="age-card-header">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;">04</span>
-        <div>
-          <div class="age-name">Kingdom Builders Jr.</div>
-          <div class="age-range">Ages 11–12</div>
-        </div>
-      </div>
-      <div class="age-desc">Discussion-led, identity-focused teaching that treats them like the young leaders they already are in God's eyes.</div>
-    </div>
-  </div>
-</section>
-
-<!-- CHECKIN BANNER -->
-<div class="checkin-banner">
-  <div class="checkin-inner">
-    <div class="checkin-text">
-      <p class="checkin-eyebrow">Secure Drop-Off</p>
-      <h2 class="checkin-title">QR Check-In & Pickup</h2>
-      <p class="checkin-desc">We use a secure QR code system for every child. You get a unique pickup code at check-in — no code, no pickup. First-time families get registered in under 2 minutes.</p>
-    </div>
-    <div class="checkin-btns">
-      <a href="/checkin" class="btn-gold">Check In Now →</a>
-      <a href="/children-pickup" class="btn-outline">Pickup Lookup</a>
-    </div>
-  </div>
+  <button class="expand-all" id="toggleAll">Expand all lessons</button>
 </div>
 
-<div class="gold-divider"></div>
+<main id="lessons"></main>
 
-<!-- VOLUNTEER -->
-<section class="section" style="text-align:center;">
-  <p class="section-eyebrow">Serve</p>
-  <h2 class="section-title">The next generation needs builders too</h2>
-  <p style="color:rgba(245,237,216,0.4);font-size:16px;max-width:520px;margin:0 auto 36px;line-height:1.7;">You don't need a theology degree — just a heart for kids and a willingness to show up. We'll train you on everything else.</p>
-  <a href="mailto:serve@kim.church?subject=KIM Kids Volunteer" style="display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:14px 36px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s;" onmouseover="this.style.background='rgba(200,146,42,0.1)'" onmouseout="this.style.background='transparent'">Email serve@kim.church →</a>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- FAQ -->
-<div style="padding-top:80px;">
-  <p class="section-eyebrow">FAQ</p>
-  <h2 class="section-title" style="margin-bottom:48px;">Common questions from parents</h2>
-  <div class="faq-wrap" style="padding-top:0;">
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        <span class="faq-q">When does KIM Kids meet?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer"><p>KIM Kids runs during every KIM service — currently Saturdays 6–8 PM at Compass Center, 4201 Pool Road, Grapevine, TX 76051.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        <span class="faq-q">How does check-in work?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer"><p>We use a QR-based check-in system. On your first visit, a volunteer will register your child and issue a secure pickup code. It takes about 2 minutes.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        <span class="faq-q">Is there a nursery?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer"><p>Yes — our Little Ones room (ages 0–2) runs simultaneously with the main service. Caregivers are background-checked and trained.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        <span class="faq-q">What curriculum do you use?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer"><p>We use a combination of Ministry-To-Children resources and KIM-original lessons built around KIM's seven Kingdom pillars — adapted for every age group.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        <span class="faq-q">How can I volunteer?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer"><p>We'd love to have you. Email <a href="mailto:serve@kim.church" style="color:var(--gold);">serve@kim.church</a> and someone from the KIM Kids team will be in touch.</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER CTA -->
-<div class="footer-cta">
-  <h2>Your kids belong here.</h2>
-  <p>Bring them this Saturday — Compass Center, Grapevine TX, 6 PM.</p>
-  <a href="/checkin">Register & Check In →</a>
-</div>
-
-<footer class="footer">
-  <p class="footer-logo">Kingdom Insights Ministries</p>
-  <p class="footer-sub">GRAPEVINE, TEXAS · KIM.CHURCH</p>
-  <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/thevision">The Vision</a>
-    <a href="/builders">Builders Gathering</a>
-    <a href="/checkin">Check In</a>
-    <a href="/generosity">Give</a>
-    <a href="/contact">Contact</a>
-  </div>
+<footer>
+  <p class="fverse">"Let the little children come to me."</p>
+  <p style="font-size:.82rem;margin-bottom:22px">— Jesus, Matthew 19:14</p>
+  <p class="fname">Kingdom Insights Ministries</p>
+  <p style="font-size:.82rem;margin-top:6px"><a href="/">kim.church</a></p>
 </footer>
 
 <script>
-function toggleFaq(btn) {
-  const answer = btn.nextElementSibling;
-  const icon = btn.querySelector('.faq-icon');
-  const isOpen = answer.classList.contains('open');
-  document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
-  document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
-  document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
-  if (!isOpen) { answer.classList.add('open'); icon.classList.add('open'); btn.classList.add('open'); }
+const LESSONS = [
+  {n:1,title:"The World God Made",ref:"Genesis 1–2",
+   bigidea:"God made everything on purpose, and He made you on purpose too.",
+   verse:"God saw all that he had made, and it was very good.",verseref:"Genesis 1:31",
+   story:["Before there was anything at all — no sky, no ground, no light — there was God. And God decided to make a world.","On the first day, God spoke into the darkness and said, \u201cLet there be light.\u201d And just like that, there was light! God called the light \u201cday\u201d and the darkness \u201cnight.\u201d","Day by day, God kept making things. He made the sky and the oceans. He gathered the water so dry land could appear, and He filled the land with grass, flowers, and tall trees. He set the sun in the sky for daytime and the moon and stars for night.","Then God filled His world with life — fish to swim, birds to fly, and animals of every kind. God looked at it all and He was pleased.","But God saved something very special for last. He made a man named Adam, and then a woman named Eve. God made people to be like Him — able to love, to think, and to care for the world.","When everything was finished, God looked at the whole world and said it was VERY good. Then, on the seventh day, God rested — and He made that a special day too."],
+   retell:"Ask the children to tell it back in order: \u201cWhat did God make first? What did He make each day? What was the very last and most special thing He made?\u201d Let several children each add a piece.",
+   q47:["What is your favorite thing that God made? Why?","God said everything He made was \u2018very good.\u2019 Are YOU part of what God made? (Yes!)","What are two things we should do to take care of the world God gave us?"],
+   q812:["Why do you think God made people last, and different from the animals?","People are made \u2018in God\u2019s image.\u2019 What does that mean about how we treat others?","God rested on the seventh day. Why do you think rest matters, even to God?"],
+   learned:"Nothing exists by accident. God made the world on purpose, He made it good, and He made YOU on purpose too. That means you have great value.",
+   prayer:"God, thank You for making such a beautiful world, and thank You for making me. Help me to take care of the things You made. Amen.",
+   tnote:"For young children, use hand motions for each day (wiggle fingers for light, swim for fish, flap for birds). Challenge older kids to name all seven days in order."},
+  {n:2,title:"Noah Trusts God",ref:"Genesis 6–9",
+   bigidea:"When we obey God even when it\u2019s hard or strange, God takes care of us.",
+   verse:"Noah did everything just as God commanded him.",verseref:"Genesis 6:22",
+   story:["Long after the world was made, people had become very unkind. It made God sad. But one man named Noah still loved God and tried to do what was right.","One day God gave Noah a surprising message: \u201cA great flood is coming. Build a huge boat — an ark — to keep your family and the animals safe.\u201d","Noah lived nowhere near a big lake or ocean. Building a giant boat on dry land seemed strange, and people probably laughed. But Noah trusted God, so he started building.","God sent the animals — two of every kind — right up to the ark. Noah brought his family inside, and God shut the door.","Then the rain came, for forty days and nights, until water covered the earth. But Noah, his family, and the animals were safe inside, just as God promised.","When the water went down, God put a rainbow in the sky and promised never again to flood the whole earth. Every rainbow reminds us that God keeps His promises."],
+   retell:"Prompt: \u201cWhat did God ask Noah to do? Did Noah do it, even though it was strange? What did God send at the end as a promise?\u201d Let them act out building the ark or bringing in animals.",
+   q47:["What did God ask Noah to build?","Do you think it was easy or hard for Noah to obey? Why?","What does a rainbow help us remember?"],
+   q812:["Noah obeyed even though people laughed. Have you ever done right when others didn\u2019t understand?","Why obey God even when we don\u2019t fully understand His reasons?","God kept His promise to Noah. What does that tell us about trusting God\u2019s promises to us?"],
+   learned:"Obeying God sometimes looks strange to other people. But God always has a reason, and He always keeps His promises to those who trust Him.",
+   prayer:"God, help me to trust and obey You, even when it\u2019s hard or when others don\u2019t understand. Thank You for always keeping Your promises. Amen.",
+   tnote:"Younger kids love animal sounds — have them voice each animal entering the ark. With older kids, discuss what obedience costs and why it\u2019s still worth it."},
+  {n:3,title:"God\u2019s Promise to Abraham",ref:"Genesis 12; 15; 21",
+   bigidea:"God keeps His promises, even when we have to wait.",
+   verse:"Abram believed the LORD, and he credited it to him as righteousness.",verseref:"Genesis 15:6",
+   story:["A man named Abraham loved God. One day God said: \u201cLeave your home and go to a land I will show you. I will make you into a great nation.\u201d","Abraham didn\u2019t even know exactly where he was going! But he trusted God, packed up, and left with his wife Sarah.","God made a huge promise: \u201cCan you count the stars? That\u2019s how big your family will be one day.\u201d This was surprising — Abraham and Sarah were very old and had no children.","Years went by. They waited and waited. Sometimes it was hard to keep believing. But God had not forgotten.","When they were very old, God gave them a baby boy named Isaac. They laughed with joy! God had done exactly what He said.","From Abraham\u2019s family came a whole nation of people who loved God — as many as the stars, just as promised."],
+   retell:"Prompt: \u201cWhat did God ask Abraham to leave? What big promise did God make? How long did Abraham wait? Did God keep His promise?\u201d",
+   q47:["What did God promise to give Abraham?","Was it easy or hard to wait a long time?","Did God keep His promise in the end?"],
+   q812:["Abraham left home without knowing where he was going. What does that show about his faith?","Have you waited a long time for something you really wanted? How did it feel?","Why do you think God sometimes makes us wait?"],
+   learned:"God\u2019s promises are always true, but sometimes we have to wait for them. Waiting is part of trusting God. He is never late.",
+   prayer:"God, help me to trust You even when I have to wait. Thank You that You always keep Your promises. Amen.",
+   tnote:"Use star stickers to show \u2018too many to count.\u2019 With older kids, introduce faith as trusting God\u2019s word before we see the result."},
+  {n:4,title:"Joseph Forgives His Brothers",ref:"Genesis 37; 39–45",
+   bigidea:"God can turn bad things into good, and we can choose to forgive.",
+   verse:"You intended to harm me, but God intended it for good.",verseref:"Genesis 50:20",
+   story:["Joseph\u2019s father gave him a beautiful colorful coat, which made his brothers jealous and angry.","One day, far from home, the brothers did something terrible: they sold Joseph to traders who took him to Egypt. He was all alone in a strange land.","Life was hard — Joseph was even thrown in prison for something he didn\u2019t do. But he kept trusting God, and God was with him.","God helped Joseph understand the king\u2019s dream: a famine was coming. The king put Joseph in charge of storing food for the whole country.","When the famine came, Joseph\u2019s own brothers came to Egypt to buy food. They didn\u2019t recognize him, but he recognized them.","Joseph could have punished them. Instead he forgave them: \u201cYou meant to hurt me, but God used it for good.\u201d He hugged his brothers and saved his whole family."],
+   retell:"Ask: \u201cWhy were the brothers jealous? What bad things happened to Joseph? How did God use it for good? What did Joseph choose to do?\u201d",
+   q47:["Why were Joseph\u2019s brothers jealous of him?","How do you feel when someone is unkind to you?","Joseph chose to forgive. Is forgiving easy or hard?"],
+   q812:["Many bad things happened, but Joseph kept trusting God. How do you think he did that?","Can you think of a hard time that later turned out okay?","Why is forgiving someone better than getting revenge?"],
+   learned:"People may hurt us, but God is bigger than their bad choices. We can trust Him to work things out — and choose forgiveness instead of revenge.",
+   prayer:"God, when someone hurts me, help me to forgive like Joseph did. Thank You that You can turn bad things into good. Amen.",
+   tnote:"A longer story — tell it in two parts if attention fades. Emphasize the feelings (jealousy, loneliness, reunion) so kids connect with Joseph."},
+  {n:5,title:"Baby Moses and the Brave Rescue",ref:"Exodus 1–2",
+   bigidea:"God watches over us and can use even children to do brave, important things.",
+   verse:"The LORD is my strength and my defense; he has become my salvation.",verseref:"Exodus 15:2",
+   story:["God\u2019s people lived in Egypt, and there were a LOT of them. Pharaoh grew afraid and made a terrible rule against their baby boys.","One mother had a beautiful baby boy. To keep him safe, she made a little basket, laid him inside, and placed it gently among the reeds at the river\u2019s edge. His sister Miriam hid nearby to watch.","Pharaoh\u2019s daughter, a princess, came to the river, opened the basket, and saw the crying baby. Her heart filled with love, and she decided to keep him.","Brave Miriam stepped forward: \u201cShall I find someone to help care for the baby?\u201d The princess said yes — and Miriam ran to get the baby\u2019s own mother!","The princess named the baby Moses. He grew up safe in the palace. God had big plans to use him one day to rescue all His people.","God protected Moses through a basket, a brave sister, and a kind princess. He was watching the whole time."],
+   retell:"Prompt: \u201cWhy was baby Moses in danger? What did his mom and sister do? Who found him? Who ended up caring for him?\u201d",
+   q47:["How did Moses\u2019s family keep him safe?","Who found baby Moses in the river?","Do you think God was watching over Moses? How?"],
+   q812:["Several brave people helped save Moses. Can you name them and what each did?","God used a baby, a sister, and a princess. What does that say about who God can use?","Have you ever been brave to help someone, even when it was scary?"],
+   learned:"God sees us and watches over us, even in danger. And He can use ordinary, brave people — even children — to do important things.",
+   prayer:"God, thank You for watching over me like You watched over baby Moses. Help me to be brave and to help others. Amen.",
+   tnote:"Let kids act out floating the basket and Miriam watching from the reeds. Highlight Miriam — a child — as a hero."},
+  {n:6,title:"God Rescues His People",ref:"Exodus 3–14",
+   bigidea:"God can make a way even when we feel completely stuck.",
+   verse:"The LORD will fight for you; you need only to be still.",verseref:"Exodus 14:14",
+   story:["God gave Moses a big job: tell Pharaoh to let God\u2019s people go free, because they had been slaves for a very long time.","Moses obeyed: \u201cGod says, let my people go!\u201d But Pharaoh said no, again and again.","God showed His power through many wonders. Finally Pharaoh gave in: \u201cGo!\u201d The people packed up and left Egypt, free at last, with Moses leading them.","But Pharaoh changed his mind and sent his army chasing them. The people reached a great sea — water in front, army behind. They were trapped and terrified.","Moses said, \u201cDon\u2019t be afraid. God will fight for you.\u201d God told Moses to stretch out his hand, and the water split apart, leaving a dry path through the middle!","Everyone walked across safely, with walls of water on both sides. Then the water rushed back. God had rescued His people in a way no one thought possible."],
+   retell:"Ask: \u201cWhat job did God give Moses? Did Pharaoh let them go easily? What happened when they got trapped at the sea? How did God rescue them?\u201d",
+   q47:["What did Moses tell Pharaoh?","How did the people feel when they were trapped at the sea?","How did God make a way for them to escape?"],
+   q812:["Have you ever felt \u2018stuck\u2019 with no way out?","Moses said, \u2018Be still, God will fight for you.\u2019 What does it mean to be still and trust God?","God made a way where there seemed to be none. How can remembering this help us when we\u2019re scared?"],
+   learned:"Sometimes we feel completely stuck. But God is more powerful than any problem. He can make a way where there seems to be no way.",
+   prayer:"God, when I feel trapped or scared, help me to be still and trust that You will make a way. You are so powerful. Amen.",
+   tnote:"Use a blue sheet or two lines of children to \u2018part the sea.\u2019 With older kids, focus on staying calm and trusting under pressure."},
+  {n:7,title:"David and Goliath",ref:"1 Samuel 17",
+   bigidea:"You don\u2019t have to be big or strong for God to use you.",
+   verse:"The battle is the LORD\u2019s.",verseref:"1 Samuel 17:47",
+   story:["God\u2019s people faced an enemy army with a giant soldier named Goliath — over nine feet tall! Every day he shouted, daring anyone to fight him, and the soldiers were too scared to move.","A young shepherd boy named David came to bring food to his brothers in the army. When he heard Goliath insulting God\u2019s people, he wasn\u2019t afraid — he was upset that no one would stand up.","\u201cI will fight him!\u201d David said. People thought he was crazy — just a boy, no armor, no sword. But David said, \u201cGod helped me protect my sheep from a lion and a bear. He will help me now too.\u201d","David picked five smooth stones and took his sling — the simple tool he used as a shepherd — and walked out to face the giant.","Goliath laughed. But David said, \u201cYou come with a sword; I come in the name of the LORD. The battle belongs to God!\u201d He swung his sling, and the stone struck Goliath on the forehead. The giant fell.","God gave the victory through a young boy who trusted Him. God\u2019s people were saved."],
+   retell:"Prompt: \u201cWho was Goliath, and why was everyone afraid? Who was brave enough? What did David bring? Who did David say would win the battle?\u201d",
+   q47:["Why was everyone afraid of Goliath?","David was just a boy. Why wasn\u2019t he afraid?","Who did David say the battle belonged to?"],
+   q812:["David remembered how God helped him before. How can remembering past help build courage now?","Have people ever said you were too young or too small to do something?","What are some \u2018giants\u2019 (big problems or fears) you could ask God to help you face?"],
+   learned:"You don\u2019t have to be big, old, or strong for God to use you. When we trust God, He gives us courage to face even the biggest \u2018giants.\u2019",
+   prayer:"God, when I face something too big for me, help me to be brave like David and remember the battle belongs to You. Amen.",
+   tnote:"Let kids name their own \u2018giants\u2019 (fears, bullies, hard subjects). The point is David\u2019s trust in God, not his skill. Keep the giant scary, not gory."},
+  {n:8,title:"Daniel and the Lions\u2019 Den",ref:"Daniel 6",
+   bigidea:"Keep loving and praying to God no matter what — He is with us.",
+   verse:"My God sent his angel, and he shut the mouths of the lions.",verseref:"Daniel 6:22",
+   story:["Daniel was one of God\u2019s people, living in a faraway kingdom. He was so wise and honest that the king put him in charge of many things — which made others jealous.","The jealous men couldn\u2019t find anything wrong with Daniel, so they had a sneaky idea. They knew he prayed to God every single day.","They tricked the king into a new law: for thirty days, no one could pray to anyone but the king — or be thrown to hungry lions!","When Daniel heard, he went home, opened his window, got on his knees, and prayed to God — just like always. He would not stop loving God, even to save his life.","The men caught him and told the king, who was very sad but couldn\u2019t change the law. Daniel was put in the lions\u2019 den, and a stone was rolled over the door. The king couldn\u2019t sleep all night.","At sunrise the king ran to the den: \u201cDaniel! Did your God save you?\u201d Daniel answered, \u201cYes! God sent an angel and shut the lions\u2019 mouths!\u201d The king was overjoyed and told everyone to honor Daniel\u2019s God."],
+   retell:"Ask: \u201cWhy were the men jealous? What tricky law did they make? What did Daniel do anyway? What happened in the den?\u201d",
+   q47:["What did Daniel do every day that got him in trouble?","Did Daniel stop praying when it became dangerous?","Who protected Daniel in the lions\u2019 den?"],
+   q812:["Daniel kept praying even when it was dangerous. What made his faith so strong?","Is there anything that makes it hard for YOU to pray or do right? What could help?","God didn\u2019t stop Daniel from going in the den, but was with him inside it. Why does that matter?"],
+   learned:"Loving God is worth more than being safe or popular. Daniel stayed faithful, and God was with him — even in the scariest place.",
+   prayer:"God, help me to love You and pray to You every day, even when it\u2019s hard. Thank You that You are with me even in scary times. Amen.",
+   tnote:"Key point for older kids: God didn\u2019t remove the danger, He met Daniel in it. Younger kids can roar like (gently) tamed lions."},
+  {n:9,title:"Jesus Is Born",ref:"Luke 1–2; Matthew 1–2",
+   bigidea:"God loved us so much He sent His Son, Jesus, to be our Savior.",
+   verse:"Today in the town of David a Savior has been born to you; he is the Messiah, the Lord.",verseref:"Luke 2:11",
+   story:["Long ago God promised to send a Savior to rescue people and bring them back to God. For hundreds of years, people waited.","God sent an angel to a young woman named Mary: she would have a baby, the Son of God! Mary trusted God and said yes.","When it was almost time, Mary and Joseph traveled to Bethlehem. The town was so crowded there was no room — so they stayed where the animals were kept.","That night, in that humble place, baby Jesus was born. Mary wrapped Him and laid Him in a manger, because there was no crib.","Out in the fields, shepherds were watching their sheep. The sky lit up and angels appeared: \u201cGood news! A Savior has been born in Bethlehem!\u201d The shepherds hurried to worship Him.","Later, wise men followed a special star, brought gifts, and bowed to worship Jesus. The Savior the whole world waited for had come — as a tiny baby."],
+   retell:"Prompt: \u201cWho told Mary about the special baby? Where was Jesus born, and why in a humble place? Who came to visit — from the fields, and from far away?\u201d",
+   q47:["Where was baby Jesus born? Where did they lay Him?","Who came to visit Jesus that first night?","Why is Jesus\u2019s birthday so special?"],
+   q812:["The Savior was born humbly with animals, not in a palace. Why do you think God chose it that way?","God kept a promise made hundreds of years earlier. What does that tell us about God?","The angels called it \u2018good news of great joy.\u2019 Why is Jesus coming such good news for us?"],
+   learned:"God kept His biggest promise by sending Jesus. He came humbly, not as a rich king — showing He came for everyone, including you.",
+   prayer:"God, thank You for loving the world so much that You sent Jesus. Thank You for keeping Your promise. Help me make room for Jesus in my heart. Amen.",
+   tnote:"Works any time of year. Connect back to Abraham and the promises to show God\u2019s big plan unfolding. Let kids play shepherds and wise men."},
+  {n:10,title:"Jesus Calms the Storm",ref:"Mark 4:35–41",
+   bigidea:"Jesus is with us in the storm, and we can trust Him when we\u2019re afraid.",
+   verse:"Who is this? Even the wind and the waves obey him!",verseref:"Mark 4:41",
+   story:["One evening, Jesus and His friends got into a boat to cross a large lake. Jesus was tired, so He lay down in the back and fell fast asleep.","Suddenly a huge storm blew in. Wind howled, giant waves crashed over the sides, and water filled the boat. The disciples were terrified they would sink!","Some were fishermen who knew this lake well — but even they had never seen a storm this bad. They were sure they were in danger.","And there was Jesus — still asleep! They woke Him: \u201cTeacher! Don\u2019t You care that we\u2019re about to drown?\u201d","Jesus stood up, looked at the wind and waves, and said, \u201cQuiet! Be still!\u201d Instantly the wind stopped and the water became completely calm.","The disciples were amazed: \u201cWho IS this? Even the wind and waves obey Him!\u201d Then Jesus asked gently, \u201cWhy were you so afraid? Where is your faith?\u201d"],
+   retell:"Ask: \u201cWhere were they going? What happened on the lake? What was Jesus doing? What did Jesus say, and what happened?\u201d",
+   q47:["What was Jesus doing while the storm was happening?","What did Jesus say to the storm?","How did the disciples feel after the storm stopped?"],
+   q812:["The disciples asked, \u2018Don\u2019t you care?\u2019 Have you ever felt like God didn\u2019t notice your problem?","Jesus asked, \u2018Where is your faith?\u2019 What do you think He meant?","What \u2018storms\u2019 might we face, and how can trusting Jesus help?"],
+   learned:"Life has \u2018storms\u2019 — scary and hard times. But Jesus has power over everything, and He is in the boat with us. We can bring our fears to Him.",
+   prayer:"Jesus, thank You that You are more powerful than any storm in my life. When I\u2019m scared, help me to trust You instead of being afraid. Amen.",
+   tnote:"Have kids build storm sounds (rain on knees, wind whoosh), then go silent when Jesus says \u2018Be still.\u2019 The contrast is powerful."},
+  {n:11,title:"The Good Shepherd and the Lost Sheep",ref:"Luke 15:1–7",
+   bigidea:"You are never \u2018just one of many\u2019 to God — He treasures you.",
+   verse:"Rejoice with me; I have found my lost sheep.",verseref:"Luke 15:6",
+   story:["Jesus loved to teach using stories. One day He told about a shepherd and his sheep.","A shepherd had one hundred sheep. He knew every one and counted them each evening: one, two, three... all the way to a hundred.","But one evening he only reached ninety-nine. One sheep was missing! It had wandered off into the wild country, where it could be in danger.","He still had ninety-nine safe. He could have said, \u201cOh well, it\u2019s just one.\u201d But he didn\u2019t. That one lost sheep mattered so much that he left the ninety-nine and went searching.","He searched over the hills until — there it was! Overjoyed, he lifted the sheep onto his shoulders and carried it all the way home.","He called his friends: \u201cBe happy with me! I found my lost sheep!\u201d Jesus explained: God is like that shepherd. Every single person matters to Him."],
+   retell:"Prompt: \u201cHow many sheep did the shepherd have? How many got lost? What did he do about the one? How did he feel when he found it?\u201d",
+   q47:["How many sheep were lost?","What did the shepherd do to find it?","How did the shepherd feel when he found the lost sheep?"],
+   q812:["The shepherd left ninety-nine for just one. What does that say about how much God values each person?","God rejoices when one person comes back. How does it feel to be wanted like that?","Is there someone who feels \u2018lost\u2019 or left out? How could you show them they matter?"],
+   learned:"You are never \u2018just one of many\u2019 to God. He knows you, loves you, and would go looking for you. And we can help others feel that they matter too.",
+   prayer:"God, thank You for loving me so much that I matter to You like the lost sheep. Help me to show others that they matter too. Amen.",
+   tnote:"Let kids count to 100, then \u2018discover\u2019 one is missing. Emphasize personal worth — this lands deeply with kids who feel overlooked."},
+  {n:12,title:"Jesus Is Alive!",ref:"Matthew 27–28; John 20",
+   bigidea:"Jesus died for us and rose again, giving us forgiveness and new life.",
+   verse:"He is not here; he has risen, just as he said.",verseref:"Matthew 28:6",
+   story:["Jesus did many wonderful things — healing, feeding, calming storms, teaching about God\u2019s love. Crowds followed Him, but some powerful people did not like Him.","They arrested Jesus, though He had done nothing wrong, and He was put on a cross and died. He did this on purpose, out of love — to take the punishment for our wrongs, so we could be forgiven.","His friends were heartbroken. They placed His body in a tomb and rolled a huge stone in front. Everyone was very sad. It seemed like the end.","But it was NOT the end. Early Sunday morning, some women came to the tomb — and the giant stone was rolled away and the tomb was empty! An angel said, \u201cDon\u2019t be afraid. Jesus is not here. He has risen, just as He said!\u201d","It was true! Soon Jesus Himself appeared to His friends. They saw Him, talked with Him, even ate with Him. They were filled with joy. Jesus had beaten death itself.","Because Jesus is alive, we know God\u2019s love is stronger than anything — even death. Jesus offers each of us forgiveness and brand-new life, now and forever."],
+   retell:"Ask: \u201cWhy did Jesus die — was it an accident? What did His friends do with His body? What surprise did the women find Sunday morning? Why is this the best news of all?\u201d",
+   q47:["What did Jesus\u2019s friends find when they went to the tomb?","Is Jesus still dead, or is He alive?","How do you think His friends felt when they saw Him alive?"],
+   q812:["The Bible says Jesus died on purpose, out of love. What was He doing for us?","Jesus rising proved He is stronger than death. Why is that the best news for us?","Because Jesus offers new life, how might that change the way we live each day?"],
+   learned:"The greatest story of all: Jesus loved us enough to die for us, and rose again, proving God\u2019s love is stronger than everything. He offers each of us forgiveness and new life.",
+   prayer:"Jesus, thank You for loving me enough to die for me, and thank You that You are alive today. Help me to follow You and live in Your new life. Amen.",
+   tnote:"The capstone — handle the cross gently (love and rescue, not graphic detail), and end on the joy of the resurrection. Consider inviting ready children to talk with a teacher about following Jesus."},
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const chev = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>';
+
+const html = LESSONS.map(l => `
+  <details class="lesson" id="lesson-${l.n}">
+    <summary>
+      <div class="num">${l.n}</div>
+      <div class="sum-text"><h2>${esc(l.title)}</h2><div class="ref">${esc(l.ref)}</div></div>
+      ${chev}
+    </summary>
+    <div class="body">
+      <div class="bigidea"><span class="lab">Big Idea</span><p>${esc(l.bigidea)}</p></div>
+
+      <div class="sect-lab">Memory Verse</div>
+      <div class="verse"><p>\u201c${esc(l.verse)}\u201d</p><cite>\u2014 ${esc(l.verseref)}</cite></div>
+
+      <div class="sect-lab">The Story \u2014 read aloud</div>
+      <div class="story">${l.story.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+
+      <div class="sect-lab">Now Retell It Together</div>
+      <div class="retell">${esc(l.retell)}</div>
+
+      <div class="sect-lab">Talk About It</div>
+      <div class="qgroup">
+        <div class="qtier"><span class="dot"></span>For younger children <span class="age">&nbsp;· ages 4\u20137</span></div>
+        <ul class="q">${l.q47.map(q=>`<li>${esc(q)}</li>`).join("")}</ul>
+        <div class="qtier"><span class="dot"></span>For older children <span class="age">&nbsp;· ages 8\u201312</span></div>
+        <ul class="q">${l.q812.map(q=>`<li>${esc(q)}</li>`).join("")}</ul>
+      </div>
+
+      <div class="sect-lab">What We Learned</div>
+      <div class="learned">${esc(l.learned)}</div>
+
+      <div class="sect-lab">Closing Prayer</div>
+      <p class="prayer">${esc(l.prayer)}</p>
+
+      <div class="sect-lab">Teacher\u2019s Note</div>
+      <div class="tnote">${esc(l.tnote)}</div>
+    </div>
+  </details>
+`).join("");
+
+document.getElementById("lessons").innerHTML = html;
+
+const btn = document.getElementById("toggleAll");
+btn.addEventListener("click", () => {
+  const all = document.querySelectorAll(".lesson");
+  const anyClosed = [...all].some(d => !d.open);
+  all.forEach(d => d.open = anyClosed);
+  btn.textContent = anyClosed ? "Collapse all lessons" : "Expand all lessons";
+});
+// deep-link support: /kids#lesson-7 opens that lesson
+if (location.hash){
+  const t = document.querySelector(location.hash);
+  if (t && t.classList.contains("lesson")){ t.open = true; t.scrollIntoView(); }
 }
 </script>
-
-<script src="/nav.js"></script>
 </body>
 </html>
