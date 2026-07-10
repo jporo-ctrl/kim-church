@@ -236,6 +236,10 @@ async function loadRsvps() {
       { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
     );
     const data = await res.json();
+    if (!res.ok || !Array.isArray(data)) {
+      const msg = (data && data.message) ? data.message : `HTTP ${res.status}`;
+      throw new Error(msg);
+    }
     allRsvps = data;
     renderStats(data);
     renderTable(data);
