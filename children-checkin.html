@@ -167,6 +167,7 @@
 </div>
 
 <script>
+let isOnline = navigator.onLine;
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://swxhwdyszgmjznvhmavq.supabase.co';
 const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3eGh3ZHlzemdtanpudmhtYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Mzc5OTcsImV4cCI6MjA4OTUxMzk5N30.nd1Vzmkhi0gklchYnu6OmW4C_LZ_CkS1_G7wQ2SPGW4;
@@ -177,7 +178,7 @@ let currentFamily = null;
 let currentChildren = [];
 let newChildRows = [];
 let checkedInCodes = [];
-let isOnline = navigator.onLine;
+
 
 // ── NETWORK STATUS ────────────────────────────────────────────────────────────
 function updateOnlineStatus() {
