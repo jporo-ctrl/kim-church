@@ -36,7 +36,7 @@ module.exports = async function handler(req, res) {
       const cleanPhone = phone.replace(/\D/g, '');
       const toPhone = cleanPhone.startsWith('1') ? '+' + cleanPhone : '+1' + cleanPhone;
       await twilioClient.messages.create({
-        body: 'Hey ' + firstName + '! You\'re registered for KIM Vision Night\n\nSaturday, June 27 | 6-8 PM\nCompass Center, 4201 Pool Rd, Grapevine TX\n\nCome ready - something is being born.\n- Apostle Joshua & KIM',
+        body: 'Hey ' + firstName + '! You\'re registered for KIM Vision Night\n\nSaturday, July 25 | 5:00 PM\nCompass Center, 4201 Pool Rd, Grapevine TX\n\nCome ready - something is being born.\n- Apostle Joshua & KIM',
         from: process.env.TWILIO_PHONE_NUMBER,
         to: toPhone
       });
@@ -59,7 +59,7 @@ module.exports = async function handler(req, res) {
             <p style="font-size:16px;line-height:1.8;color:#6B6560;">We're expecting you at <strong style="color:#1A1613;">Vision Night</strong> — come ready, because something is being born.</p>
             <div style="margin:32px 0;padding:24px;background:#FBF4E8;border-left:3px solid #C8922A;">
               <p style="font-size:14px;color:#1A1613;margin:0 0 8px;"><strong>Saturday, June 27, 2026</strong></p>
-              <p style="font-size:14px;color:#6B6560;margin:0 0 4px;">6:00 - 8:00 PM</p>
+              <p style="font-size:14px;color:#6B6560;margin:0 0 4px;">5:00 PM CST</p>
               <p style="font-size:14px;color:#6B6560;margin:0;">Compass Center · 4201 Pool Rd, Grapevine TX</p>
             </div>
             <p style="font-size:15px;line-height:1.8;color:#6B6560;">Bring someone with you. There is a place here for everyone.</p>
