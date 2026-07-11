@@ -66,7 +66,7 @@ module.exports = async function handler(req, res) {
             '<p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C8922A;margin-bottom:24px;">Kingdom Insights Ministries</p>' +
             '<h1 style="font-size:28px;font-weight:600;margin-bottom:16px;">' + rec.child_name + ' has been picked up</h1>' +
             '<p style="font-size:16px;line-height:1.8;color:#6B6560;">This is to confirm that <strong style="color:#1A1613;">' + rec.child_name + '</strong> was released to <strong style="color:#1A1613;">' + rec.parent_name + '</strong> at <strong style="color:#1A1613;">' + timeStr + ' CST</strong>.</p>' +
-            '<p style="font-size:14px;color:#6B6560;margin-top:24px;">If you did not authorize this pickup, please contact us immediately at jporo@kim.church.</p>' +
+            '<p style="font-size:14px;color:#6B6560;margin-top:24px;">If you did not authorize this pickup, please contact us immediately at kids@kim.church.</p>' +
             '<p style="font-size:13px;color:#6B6560;margin-top:32px;">— Kingdom Insights Ministries<br>kim.church</p>' +
             '</div>'
         });
