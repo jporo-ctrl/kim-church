@@ -83,7 +83,8 @@ function showScreen(id) {
 }
 
 async function lookupChildren() {
-  const phone = document.getElementById('lookup-phone').value.trim().replace(/\D/g, '');
+  let phone = document.getElementById('lookup-phone').value.trim().replace(/\D/g, '');
+  if (phone.length === 11 && phone.startsWith('1')) phone = phone.slice(1);
   const errorEl = document.getElementById('phone-error');
   errorEl.style.display = 'none';
   if (phone.length < 10) { errorEl.style.display = 'block'; return; }
