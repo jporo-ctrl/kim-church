@@ -80,43 +80,6 @@
   .scripture-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 4vw, 36px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--ink); max-width: 680px; margin: 0 auto 20px; }
   .scripture-ref { font-size: 13px; font-weight: 500; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
 
-  /* RSVP FORM */
-  .rsvp-section { background: var(--deep); padding: 100px 24px; }
-  .rsvp-inner { max-width: 640px; margin: 0 auto; }
-  .rsvp-header { text-align: center; margin-bottom: 56px; }
-  .rsvp-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .rsvp-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.1; color: #F5EDD8; }
-  .rsvp-title em { font-style: italic; color: var(--gold-light); }
-  .rsvp-sub { font-size: 15px; font-weight: 300; color: rgba(245,237,216,0.45); line-height: 1.7; margin-top: 16px; }
-
-  .rsvp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,146,42,0.2); padding: 48px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group.full { grid-column: 1 / -1; }
-  label { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,237,216,0.4); }
-
-  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select {
-    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: #F5EDD8;
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(200,146,42,0.2);
-    padding: 14px 16px; width: 100%; appearance: none; outline: none;
-    transition: border-color 0.2s; border-radius: 0;
-  }
-  input:focus, select:focus { border-color: var(--gold); }
-  input::placeholder { color: rgba(245,237,216,0.2); }
-  select { cursor: pointer; color: #F5EDD8; background-color: #1a1613; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8922A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
-  select option { background: #1a1613; color: #F5EDD8; }
-
-  .guests-row { display: none; }
-  .guests-row.visible { display: flex; flex-direction: column; gap: 8px; }
-
-  .submit-btn { width: 100%; padding: 18px; background: var(--gold); color: var(--deep); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; border: none; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
-  .submit-btn:hover { background: var(--gold-light); }
-  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-  .rsvp-success { display: none; text-align: center; padding: 56px 32px; }
-  .rsvp-success-icon { font-size: 40px; margin-bottom: 20px; }
-  .rsvp-success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: #F5EDD8; margin-bottom: 12px; }
-  .rsvp-success-body { font-size: 15px; font-weight: 300; color: rgba(245,237,216,0.5); line-height: 1.8; max-width: 400px; margin: 0 auto 28px; }
 
   /* FOOTER */
   .footer { background: var(--deep); border-top: 1px solid rgba(200,146,42,0.1); padding: 48px 24px; text-align: center; }
@@ -156,14 +119,10 @@
   </div>
 
   <div class="cta-group">
-    <a href="#rsvp" class="btn btn-primary">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Reserve My Seat
+    <a href="/give" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Support the Vision
     </a>
-    <button class="btn btn-secondary" onclick="downloadICS()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Add to Calendar
-    </button>
     <a href="/generosity" class="btn btn-secondary">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       Become a Founding Partner
@@ -193,7 +152,7 @@
 <section class="pillars">
   <div class="pillars-inner">
     <div class="pillars-header">
-      <p class="rsvp-eyebrow">What We'll Cover</p>
+      <p class="section-eyebrow">What We'll Cover</p>
       <h2 class="pillars-title">Five foundations<br>of a Kingdom house</h2>
     </div>
     <div class="pillars-grid">
@@ -232,85 +191,6 @@
   <p class="scripture-ref">Psalm 127:1</p>
 </section>
 
-<!-- RSVP FORM -->
-<section class="rsvp-section" id="rsvp">
-  <div class="rsvp-inner">
-    <div class="rsvp-header">
-      <p class="rsvp-eyebrow">You're Invited</p>
-      <h2 class="rsvp-title">Reserve your seat.<br>Build with <em>us</em>.</h2>
-      <p class="rsvp-sub">Seating is limited. Let us know you're coming so we can prepare a place for you and your household.</p>
-    </div>
-
-    <div class="rsvp-card" id="rsvp-card">
-      <form id="rsvp-form" onsubmit="handleRSVP(event)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="r-first">First Name *</label>
-            <input type="text" id="r-first" name="first_name" placeholder="First" required>
-          </div>
-          <div class="form-group">
-            <label for="r-last">Last Name *</label>
-            <input type="text" id="r-last" name="last_name" placeholder="Last" required>
-          </div>
-          <div class="form-group full">
-            <label for="r-phone">Phone *</label>
-            <input type="tel" id="r-phone" name="phone" placeholder="(817) 555-0100" required>
-          </div>
-          <div class="form-group full">
-            <label for="r-email">Email</label>
-            <input type="email" id="r-email" name="email" placeholder="you@example.com (for confirmation)">
-          </div>
-          <div class="form-group full">
-            <label for="r-heard">How did you hear about this?</label>
-            <select id="r-heard" name="how_heard">
-              <option value="">— Select —</option>
-              <option>Personal invitation</option>
-              <option>Social media</option>
-              <option>WhatsApp</option>
-              <option>kim.church website</option>
-              <option>Friend or family</option>
-              <option>Attended Vision Night</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label for="r-others">Are you bringing others?</label>
-            <select id="r-others" name="bringing_others" onchange="toggleGuests(this.value)">
-              <option value="">— Select —</option>
-              <option value="yes">Yes</option>
-              <option value="no">No, just me</option>
-            </select>
-          </div>
-          <div class="form-group full guests-row" id="guests-row">
-            <label for="r-count">How many additional guests?</label>
-            <input type="number" id="r-count" name="others_count" min="1" max="20" placeholder="e.g. 2">
-          </div>
-          <div class="form-group full">
-            <button type="submit" class="submit-btn" id="rsvp-btn">Reserve My Seat →</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="rsvp-success" id="rsvp-success">
-      <div class="rsvp-success-icon">✦</div>
-      <h2 class="rsvp-success-title">You're registered.</h2>
-      <p class="rsvp-success-body">We're expecting you on July 25. Come ready — foundations are being laid and there is a place here for you.</p>
-      <p style="font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,237,216,0.35);margin-bottom:16px;">Add to your calendar</p>
-      <div style="display:flex;flex-direction:column;gap:10px;max-width:280px;margin:0 auto;">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=The+Builders+Gathering+%E2%80%94+Kingdom+Insights+Ministries&dates=20260725T180000/20260725T200000&ctz=America/Chicago&details=An+evening+to+lay+the+foundation+together.+Culture,+structure,+mission,+discipleship,+and+your+place+in+the+Kingdom.&location=Compass+Center,+4201+Pool+Road,+Grapevine,+TX+76051" target="_blank" class="btn btn-secondary" style="margin:0;display:flex;align-items:center;justify-content:center;gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
-          Google Calendar
-        </a>
-        <button onclick="downloadICS()" class="btn btn-secondary" style="margin:0;display:flex;align-items:center;justify-content:center;gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
-          Apple / Outlook Calendar
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="footer">
   <p class="footer-logo">Kingdom Insights Ministries</p>
@@ -324,45 +204,6 @@
 </footer>
 
 <script>
-function toggleGuests(val) {
-  const row = document.getElementById('guests-row');
-  if (val === 'yes') row.classList.add('visible');
-  else row.classList.remove('visible');
-}
-
-async function handleRSVP(e) {
-  e.preventDefault();
-  const form = document.getElementById('rsvp-form');
-  const btn = document.getElementById('rsvp-btn');
-  btn.textContent = 'Reserving...';
-  btn.disabled = true;
-
-  const data = {};
-  new FormData(form).forEach((val, key) => { data[key] = val; });
-  data.full_name = `${data.first_name} ${data.last_name}`.trim();
-
-  try {
-    const res = await fetch('/api/builders-register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (res.ok) {
-      document.getElementById('rsvp-card').style.display = 'none';
-      document.getElementById('rsvp-success').style.display = 'block'; setTimeout(downloadICS, 800);
-      window.scrollTo({ top: document.getElementById('rsvp-success').offsetTop - 80, behavior: 'smooth' });
-    } else {
-      const err = await res.json();
-      alert(err.error || 'Something went wrong. Please try again.');
-      btn.textContent = 'Reserve My Seat →';
-      btn.disabled = false;
-    }
-  } catch {
-    alert('Network error. Please check your connection.');
-    btn.textContent = 'Reserve My Seat →';
-    btn.disabled = false;
-  }
-}
 
 function downloadICS() {
   const ics = [
