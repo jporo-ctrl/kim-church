@@ -236,6 +236,7 @@
             <p class="kim-nav-group-label">Give</p>
             <a href="/generosity" class="${isActive('/generosity')}">Generosity</a>
             <a href="/give" class="${isActive('/give')}">Give <em>Now</em></a>
+            <a href="/equipment" class="${isActive('/equipment')}">Instrument <em>Needs</em></a>
           </div>
 
         </div>
