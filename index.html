@@ -10,9 +10,9 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBEMEQwRCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ3IiBmaWxsPSJub25lIiBzdHJva2U9IiNDODkyMkEiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjUwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5LPC90ZXh0Pjwvc3ZnPg==">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kingdom Insights Ministries | Grapevine, TX</title>
+<title>Kingdom Insights Ministries | Bedford, TX</title>
 <meta name="description" content="At Kingdom Insights Ministries, we believe that serving is one of the highest expressions of love. Join us to serve, volunteer, and be part of what God is doing.">
-<meta property="og:title" content="Kingdom Insights Ministries | Grapevine, TX">
+<meta property="og:title" content="Kingdom Insights Ministries | Bedford, TX">
 <meta property="og:description" content="A ministry built on seven teaching pillars — salvation, transformation, empowerment, the supernatural, purpose, unity, and lasting peace.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,6 +132,16 @@ body {
 
 .hero-content { position: relative; z-index: 1; max-width: 760px; }
 
+.moved-bar { position:relative; z-index:60; background:var(--gold); color:#1a1408;
+  font-size:14px; font-weight:500; letter-spacing:.01em; padding:11px 44px 11px 18px; text-align:center; }
+.moved-bar a { color:#1a1408; font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.moved-bar .close { position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  background:none; border:none; font-size:20px; line-height:1; color:#1a1408; cursor:pointer; opacity:.6; padding:4px 8px; }
+.moved-bar .close:hover { opacity:1; }
+.hero-meta { margin-top:26px; font-size:15px; font-weight:300; line-height:1.9; color:rgba(245,237,216,0.72); }
+.hero-meta strong { color:var(--gold-light); font-weight:600; }
+.hero-meta a { color:var(--gold-light); text-decoration:underline; text-underline-offset:3px; }
+@media (max-width:600px){ .moved-bar{ font-size:13px; padding:10px 40px 10px 14px; } .hero-meta{ font-size:14px; } }
 .hero-eyebrow {
   font-size: 11px; font-weight: 500;
   letter-spacing: 0.3em; text-transform: uppercase;
@@ -315,6 +325,12 @@ body {
   font-size: 14px; font-weight: 300;
   line-height: 1.7; color: rgba(245,237,216,0.5);
 }
+
+/* Pastoral Care sits on the cream background, so the dark-section
+   card colours have to be reversed here. */
+#pastoral-care .service-card { border-color: rgba(200,146,42,0.28); }
+#pastoral-care .service-name { color: var(--ink, #1a1408); }
+#pastoral-care .service-desc { color: rgba(26,20,8,0.72); }
 
 .service-icon {
   font-size: 28px; margin-bottom: 16px;
@@ -852,6 +868,18 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 </style>
 </head>
 <body>
+<div class="moved-bar" id="moved-bar">
+  We&rsquo;ve moved &mdash; you&rsquo;ll now find us at 1903 Central Dr, Ste 210, Bedford.
+  <a href="https://maps.google.com/?q=1903+Central+Dr+Ste+210+Bedford+TX+76021" target="_blank" rel="noopener">Directions</a>
+  <button class="close" onclick="dismissMoved()" aria-label="Dismiss">&times;</button>
+</div>
+<script>
+(function(){ try { if (localStorage.getItem('kim-moved-seen') === '1') {
+  var b = document.getElementById('moved-bar'); if (b) b.style.display = 'none'; } } catch(e){} })();
+function dismissMoved(){ var b = document.getElementById('moved-bar');
+  if (b) b.style.display = 'none'; try { localStorage.setItem('kim-moved-seen','1'); } catch(e){} }
+</script>
+
 <div id="pwa-banner" style="display:none;background:#0D0D0D;border-bottom:1px solid rgba(200,146,42,0.3);padding:12px 16px;text-align:center;position:sticky;top:0;z-index:9999;">
   <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(245,237,216,0.8);margin-bottom:8px;">
     Install the KIM app on your phone
@@ -933,12 +961,17 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Kingdom Insights Ministries · Grapevine, TX</p>
+    <p class="hero-eyebrow">Kingdom Insights Ministries · Bedford, TX</p>
     <h1 class="hero-title">You found us<br>at the right <em style="font-style:italic;color:var(--gold-light);">time</em>.</h1>
     <div class="hero-btns">
       <a href="/give" class="btn-gold">Support the Vision</a>
       <a href="/thevision" class="btn-outline">Explore The Vision</a>
     </div>
+    <p class="hero-meta">
+      <strong>Saturdays</strong> · Intercession 5:30 PM · Service 6:00&ndash;8:00 PM<br>
+      1903 Central Dr, Ste 210, Bedford, TX 76021 &middot;
+      <a href="https://maps.google.com/?q=1903+Central+Dr+Ste+210+Bedford+TX+76021" target="_blank" rel="noopener">Directions</a>
+    </p>
   </div>
   <div class="scroll-hint">
     <span>Scroll</span>
@@ -950,9 +983,9 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 <div class="builders-banner">
   <div class="builders-inner">
     <div class="builders-text">
-      <p class="builders-eyebrow">Last Saturday of Every Month</p>
+      <p class="builders-eyebrow">Every Saturday</p>
       <p class="builders-headline">The Builders Gathering</p>
-      <p class="builders-detail">Compass Center · Grapevine, TX · 6:00 PM – 8:00 PM</p>
+      <p class="builders-detail">Bedford, TX · 6:00 PM – 8:00 PM</p>
     </div>
     <a href="/give" class="builders-btn">Support the Vision →</a>
   </div>
@@ -1105,18 +1138,18 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
       <p class="eyebrow" style="color:var(--gold); justify-content:center;">Gather With Us</p>
       <h2 class="section-title section-title-light">Our Services</h2>
       <p style="font-size:16px; font-weight:300; color:rgba(245,237,216,0.5); max-width:520px; margin:0 auto;">Every gathering is a divine appointment. Come expecting a word, an encounter, and a community that will walk alongside you.</p>
-      <p class="services-location">4201 Pool Rd, Grapevine, TX 76051 · Available In Person & Online</p>
+      <p class="services-location">1903 Central Dr, Ste 210, Bedford, TX 76021 · Available In Person &amp; Online</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <p class="service-tag">Last Saturday of the Month · Optional</p>
-        <p class="service-time">5:00 PM</p>
-        <p class="service-duration">5:00 PM – 6:00 PM</p>
+        <p class="service-tag">Every Saturday · Optional</p>
+        <p class="service-time">5:30 PM</p>
+        <p class="service-duration">5:30 PM – 6:00 PM</p>
         <h3 class="service-name">Intercession & Personal Prayer</h3>
         <p class="service-desc">Come early and seek the face of God. This dedicated prayer hour is open to all who desire a deeper encounter before the service begins. Intercessors, prayer warriors, and newcomers are all welcome.</p>
       </div>
       <div class="service-card" style="border-color:rgba(200,146,42,0.3);">
-        <p class="service-tag">Last Saturday of the Month · Main Service</p>
+        <p class="service-tag">Every Saturday · Main Service</p>
         <p class="service-time">6:00 PM</p>
         <p class="service-duration">6:00 PM – 8:00 PM</p>
         <h3 class="service-name">The Builders Gathering</h3>
@@ -1124,9 +1157,9 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
       </div>
       <div class="service-card">
         <div class="service-icon">✝️</div>
-        <p class="service-tag">Special · Sunday April 5, 2026</p>
+        <p class="service-tag">Special · Sunday March 28, 2027</p>
         <h3 class="service-name">Easter Sunday Service</h3>
-        <p class="service-desc">Celebrate the resurrection of Jesus Christ with a special Easter service filled with worship, Word, and the joy of the risen King. Time TBD — Check Back Soon.</p>
+        <p class="service-desc">Celebrate the resurrection of Jesus Christ with a special Easter service filled with worship, Word, and the joy of the risen King. Time to be announced.</p>
       </div>
       <div class="service-card">
         <div class="service-icon">⭐</div>
