@@ -873,12 +873,12 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
   "@id": "https://kim.church/#church",
   "name": "Kingdom Insights Ministries",
   "url": "https://kim.church",
-  "description": "Kingdom Insights Ministries meets every Saturday in Bedford, Texas for The Builders Gathering: intercession from 5:30 PM, with worship and the message from 6:00 PM.",
+  "description": "Kingdom Insights Ministries meets every Sunday in Bedford, Texas for The Builders Gathering: intercession from 9:30 AM, with worship and the message from 10:00 AM.",
   "telephone": "+1-469-464-8295",
   "email": "jporo@kim.church",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "1903 Central Dr, Ste 210",
+    "streetAddress": "1903 Central Dr, Room 202",
     "addressLocality": "Bedford",
     "addressRegion": "TX",
     "postalCode": "76021",
@@ -892,9 +892,9 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "17:30",
-      "closes": "20:00"
+      "dayOfWeek": "Sunday",
+      "opens": "09:30",
+      "closes": "12:00"
     }
   ]
 }
@@ -902,7 +902,7 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 </head>
 <body>
 <div class="moved-bar" id="moved-bar">
-  We&rsquo;ve moved &mdash; you&rsquo;ll now find us at 1903 Central Dr, Ste 210, Bedford.
+  We&rsquo;ve moved &mdash; you&rsquo;ll now find us at 1903 Central Dr, Room 202, Bedford.
   <a href="https://maps.google.com/?q=1903+Central+Dr+Ste+210+Bedford+TX+76021" target="_blank" rel="noopener">Directions</a>
   <button class="close" onclick="dismissMoved()" aria-label="Dismiss">&times;</button>
 </div>
@@ -1001,8 +1001,8 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
       <a href="/thevision" class="btn-outline">Explore The Vision</a>
     </div>
     <p class="hero-meta">
-      <strong>Saturdays</strong> · Intercession 5:30 PM · Service 6:00&ndash;8:00 PM<br>
-      1903 Central Dr, Ste 210, Bedford, TX 76021 &middot;
+      <strong>Sundays</strong> · Intercession 9:30 AM · Service 10:00 AM – 12:00 PM (starts promptly)<br>
+      1903 Central Dr, Room 202, Bedford, TX 76021 &middot;
       <a href="https://maps.google.com/?q=1903+Central+Dr+Ste+210+Bedford+TX+76021" target="_blank" rel="noopener">Directions</a>
     </p>
   </div>
@@ -1016,9 +1016,9 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
 <div class="builders-banner">
   <div class="builders-inner">
     <div class="builders-text">
-      <p class="builders-eyebrow">Every Saturday</p>
+      <p class="builders-eyebrow">Every Sunday</p>
       <p class="builders-headline">The Builders Gathering</p>
-      <p class="builders-detail">Bedford, TX · 6:00 PM – 8:00 PM</p>
+      <p class="builders-detail">Bedford, TX · 10:00 AM – 12:00 PM (starts promptly)</p>
     </div>
     <a href="/give" class="builders-btn">Support the Vision →</a>
   </div>
@@ -1171,20 +1171,20 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
       <p class="eyebrow" style="color:var(--gold); justify-content:center;">Gather With Us</p>
       <h2 class="section-title section-title-light">Our Services</h2>
       <p style="font-size:16px; font-weight:300; color:rgba(245,237,216,0.5); max-width:520px; margin:0 auto;">Every gathering is a divine appointment. Come expecting a word, an encounter, and a community that will walk alongside you.</p>
-      <p class="services-location">1903 Central Dr, Ste 210, Bedford, TX 76021 · Available In Person &amp; Online</p>
+      <p class="services-location">1903 Central Dr, Room 202, Bedford, TX 76021 · Available In Person &amp; Online</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <p class="service-tag">Every Saturday · Optional</p>
-        <p class="service-time">5:30 PM</p>
-        <p class="service-duration">5:30 PM – 6:00 PM</p>
+        <p class="service-tag">Every Sunday · Optional</p>
+        <p class="service-time">9:30 AM</p>
+        <p class="service-duration">9:30 AM – 10:00 AM</p>
         <h3 class="service-name">Intercession & Personal Prayer</h3>
         <p class="service-desc">Come early and seek the face of God. This dedicated prayer hour is open to all who desire a deeper encounter before the service begins. Intercessors, prayer warriors, and newcomers are all welcome.</p>
       </div>
       <div class="service-card" style="border-color:rgba(200,146,42,0.3);">
-        <p class="service-tag">Every Saturday · Main Service</p>
-        <p class="service-time">6:00 PM</p>
-        <p class="service-duration">6:00 PM – 8:00 PM</p>
+        <p class="service-tag">Every Sunday · Main Service</p>
+        <p class="service-time">10:00 AM</p>
+        <p class="service-duration">10:00 AM – 12:00 PM (starts promptly)</p>
         <h3 class="service-name">The Builders Gathering</h3>
         <p class="service-desc">Experience powerful corporate worship, prophetic ministry, and the transformative teaching of Apostle Joshua Poro. Every gathering is an encounter with the living God.</p>
       </div>
@@ -1233,6 +1233,11 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
 </section>
 
 <!-- ABOUT -->
+<!-- kim-volunteer-banner -->
+<div class="kim-volunteer-banner" style="background:#A67C00;color:#fff;text-align:center;padding:16px 20px;font-family:Georgia,serif">
+  <span style="font-size:18px;font-weight:700;margin-right:14px">We are seeking volunteers. Come serve with us.</span>
+  <a href="#serve" style="display:inline-block;background:#fff;color:#A67C00;text-decoration:none;font-weight:700;padding:8px 20px;border-radius:999px;font-size:14px">Join the team</a>
+</div>
 <section class="section" id="about">
   <div class="section-inner">
     <div class="about-grid">
@@ -1357,7 +1362,7 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
         <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=400&fit=crop&q=80" alt="Media & Production" class="serve-img">
         <div class="serve-body">
           <h3 class="serve-name">Media & Production</h3>
-          <p class="serve-desc">Help bring the Saturday experience to life through audio, video, lighting, and digital content.</p>
+          <p class="serve-desc">Help bring the Sunday experience to life through audio, video, lighting, and digital content.</p>
           <a href="/contact" class="serve-link">Join This Team →</a>
         </div>
       </div>
@@ -1605,7 +1610,7 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
     <div>
       <p class="footer-col-title">Visit Us</p>
       <div class="footer-address">
-        <p><strong>We meet at</strong><br>1903 Central Dr Ste 210<br>Bedford, TX 76021</p>
+        <p><strong>We meet at</strong><br>1903 Central Dr Room 202<br>Bedford, TX 76021</p>
         <br>
         <p><strong>Mailing address</strong><br>1418 W Pipeline Rd<br>Hurst, TX 76053</p>
         <br>
