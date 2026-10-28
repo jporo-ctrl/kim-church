@@ -252,7 +252,7 @@
                     <div class="kim-aside-event">
             <p class="kim-aside-event-label">Support the Vision</p>
             <p class="kim-aside-event-title">Kingdom Insights Ministries</p>
-            <p class="kim-aside-event-date">Help build what God is establishing in Grapevine, TX</p>
+            <p class="kim-aside-event-date">Help build what God is establishing in Bedford, TX</p>
             <a href="/give" class="kim-aside-event-btn">Give Now</a>
           </div>
 
