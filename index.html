@@ -928,6 +928,12 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 .leader-img{background:#0D0D0D;object-fit:cover;object-position:center;height:auto !important;aspect-ratio:1/1}
 .leader-img-wrap{border-radius:28px;overflow:hidden}
 </style>
+<style>
+/* kim-msg-grid */
+.kim-msg-grid{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.kim-msg-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.kim-msg-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="moved-bar" id="moved-bar">
@@ -1067,7 +1073,7 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
     </div>
 
     <!-- PILLARS GRID -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;margin-bottom:64px;">
+    <div class="kim-msg-grid" style="display:grid;gap:2px;margin-bottom:64px;">
 
       <div style="padding:36px 28px;border:1px solid rgba(200,146,42,0.12);position:relative;">
         <p style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:rgba(200,146,42,0.15);line-height:1;margin-bottom:12px;">01</p>
