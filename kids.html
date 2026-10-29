@@ -187,6 +187,16 @@
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<style>
+/* kim-layout-batch */
+/* Hero: logo left, text right, same sizes */
+@media(min-width:900px){
+  .hero{min-height:0}
+  .hero-inner{max-width:1000px;display:grid;grid-template-columns:auto 1fr;column-gap:56px;align-items:center}
+  .hero-inner > .hero-logo{grid-column:1;grid-row:1 / span 8;margin:0}
+  .hero-inner > :not(.hero-logo){grid-column:2}
+}
+</style>
 </head>
 <body>
 
@@ -228,8 +238,7 @@
   <img src="/kim-kids-logo.png" alt="KIM Kids" class="flogo">
   <p class="fverse">"Let the little children come to me."</p>
   <p style="font-size:.82rem;margin-bottom:22px">— Jesus, Matthew 19:14</p>
-  <p class="fname">Kingdom Insights Ministries</p>
-  <p style="font-size:.82rem;margin-top:6px"><a href="/">kim.church</a></p>
+  <p class="fname"><a href="/" style="color:#fff;text-decoration:none">Kingdom Insights Ministries</a></p>
 </footer>
 
 <script>
