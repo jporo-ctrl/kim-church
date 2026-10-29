@@ -919,7 +919,13 @@ textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 @media(max-width:700px){.faith-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.faith-grid{grid-template-columns:1fr}}
 .kimeq-total{justify-content:center}
-.kimeq-total + div{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.kimeq-wrap > h1,.kimeq-wrap > h2{text-align:center}
+.kimeq-lead,.kimeq-note{text-align:center;margin-left:auto;margin-right:auto}
+.kimeq-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+</style>
+<style>
+/* kim-leader-photo */
+.leader-img{background:#0D0D0D;object-fit:cover;object-position:center top}
 </style>
 </head>
 <body>
@@ -1254,9 +1260,9 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
 
 <!-- ABOUT -->
 <!-- kim-volunteer-banner -->
-<div class="kim-volunteer-banner" style="background:#A67C00;color:#fff;text-align:center;padding:16px 20px;font-family:Georgia,serif">
-  <span style="font-size:18px;font-weight:700;margin-right:14px">We are seeking volunteers. Come serve with us.</span>
-  <a href="#serve" style="display:inline-block;background:#fff;color:#A67C00;text-decoration:none;font-weight:700;padding:8px 20px;border-radius:999px;font-size:14px">Join the team</a>
+<div class="kim-volunteer-banner" style="background:var(--gold);color:#0D0D0D;text-align:center;padding:18px 20px">
+  <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-right:18px">We are seeking volunteers. Come serve with us.</span>
+  <a href="#serve" style="display:inline-block;background:#0D0D0D;color:#F5EDD8;text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:12px 24px">Join the team</a>
 </div>
 <section class="section" id="about">
   <div class="section-inner">
@@ -1473,7 +1479,7 @@ function dismissMoved(){ var b = document.getElementById('moved-bar');
     <h2 class="section-title">Our <em>Leadership</em></h2>
     <div class="leader-grid">
       <div class="leader-img-wrap">
-        <img src="apostle-joshua-poro.jpg" alt="Apostle Joshua Poro" class="leader-img">
+        <img src="apostle-joshua-poro-new.webp" alt="Apostle Joshua Poro" class="leader-img">
         <div class="leader-stats">
           <div class="stat-box"><span class="stat-num">10+</span><span class="stat-label">Years Ministry</span></div>
           <div class="stat-box"><span class="stat-num">48K+</span><span class="stat-label">Global Followers</span></div>

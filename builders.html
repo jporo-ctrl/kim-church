@@ -108,6 +108,12 @@
 .section-eyebrow::before{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
 .section-title{text-align:center}
 </style>
+<style>
+/* kim-pillars-one-row */
+.pillars-grid{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1000px){.pillars-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+@media(max-width:600px){.pillars-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
