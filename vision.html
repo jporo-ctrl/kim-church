@@ -8,7 +8,7 @@
 <meta name="description" content="Vision Night took place June 27, 2026. 147 people. 5 nationalities. 8 pastors. Something was born. Here's what happened and what's next.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -17,7 +17,7 @@
   --muted: #6B6560; --border: rgba(200,146,42,0.25);
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: var(--ink); overflow-x: hidden; }
+body { font-family: Optima,Marcellus,Candara,sans-serif; background: var(--parchment); color: var(--ink); overflow-x: hidden; }
 
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 72px; background: rgba(13,13,13,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,146,42,0.12); }
 .nav-back { font-size: 13px; color: rgba(245,237,216,0.5); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
@@ -29,9 +29,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 
 .hero-ornament { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold)); margin: 0 auto 32px; opacity: 0; animation: fadeDown 1s ease 0.3s forwards; }
 .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 11vw, 104px); font-weight: 600; line-height: 0.95; color: #F5EDD8; margin-bottom: 12px; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; }
+.hero-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(56px, 11vw, 104px); font-weight: 600; line-height: 0.95; color: #F5EDD8; margin-bottom: 12px; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; }
 .hero-title em { font-style: italic; color: var(--gold-light); }
-.hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 3vw, 26px); font-style: italic; font-weight: 400; color: rgba(245,237,216,0.5); margin-bottom: 48px; opacity: 0; animation: fadeUp 1s ease 0.9s forwards; }
+.hero-subtitle { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(18px, 3vw, 26px); font-style: italic; font-weight: 400; color: rgba(245,237,216,0.5); margin-bottom: 48px; opacity: 0; animation: fadeUp 1s ease 0.9s forwards; }
 
 .hero-completed-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.3); padding: 10px 20px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s ease 1.0s forwards; }
 .hero-completed-badge span { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
@@ -41,7 +41,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .hero-date-block::before, .hero-date-block::after { content: ''; position: absolute; width: 8px; height: 8px; border: 1px solid var(--gold); }
 .hero-date-block::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
 .hero-date-block::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
-.hero-date { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: rgba(245,237,216,0.6); letter-spacing: 0.05em; text-decoration: line-through; text-decoration-color: rgba(200,146,42,0.4); }
+.hero-date { font-family: Optima,Marcellus,Candara,sans-serif; font-size: 28px; font-weight: 600; color: rgba(245,237,216,0.6); letter-spacing: 0.05em; text-decoration: line-through; text-decoration-color: rgba(200,146,42,0.4); }
 .hero-time { font-size: 13px; font-weight: 300; color: rgba(245,237,216,0.35); letter-spacing: 0.15em; margin-top: 6px; }
 .hero-location { font-size: 12px; color: rgba(245,237,216,0.25); margin-top: 8px; letter-spacing: 0.1em; }
 
@@ -59,7 +59,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .stats-bar { background: var(--gold); padding: 48px 24px; }
 .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
 .stat { text-align: center; padding: 20px; }
-.stat-number { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 600; color: var(--deep); line-height: 1; margin-bottom: 8px; }
+.stat-number { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(40px, 6vw, 64px); font-weight: 600; color: var(--deep); line-height: 1; margin-bottom: 8px; }
 .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(13,13,13,0.6); }
 
 /* SECTIONS */
@@ -67,7 +67,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .section-inner { max-width: 840px; margin: 0 auto; }
 .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
 .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 28px; }
+.section-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 28px; }
 .section-title em { font-style: italic; color: var(--gold); }
 .body-text { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--muted); margin-bottom: 20px; }
 .body-text strong { font-weight: 500; color: var(--ink); }
@@ -76,17 +76,17 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .word-block { background: var(--deep); padding: 80px 24px; }
 .word-inner { max-width: 760px; margin: 0 auto; text-align: center; }
 .word-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
-.word-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; color: #F5EDD8; margin-bottom: 12px; }
-.word-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: rgba(245,237,216,0.45); margin-bottom: 48px; }
+.word-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(28px, 5vw, 48px); font-weight: 600; color: #F5EDD8; margin-bottom: 12px; }
+.word-subtitle { font-family: Optima,Marcellus,Candara,sans-serif; font-size: 18px; font-style: italic; color: rgba(245,237,216,0.45); margin-bottom: 48px; }
 .scripture-card { border: 1px solid rgba(200,146,42,0.2); padding: 40px 48px; margin-bottom: 16px; }
-.scripture-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 28px); font-style: italic; font-weight: 400; color: rgba(245,237,216,0.8); line-height: 1.6; margin-bottom: 16px; }
+.scripture-text { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(20px, 3vw, 28px); font-style: italic; font-weight: 400; color: rgba(245,237,216,0.8); line-height: 1.6; margin-bottom: 16px; }
 .scripture-ref { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 
 /* WHAT HAPPENED */
 .evening-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 56px; }
 .evening-card { padding: 36px 28px; background: white; border: 1px solid rgba(200,146,42,0.12); }
 .evening-icon { font-size: 28px; margin-bottom: 16px; }
-.evening-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.evening-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
 .evening-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--muted); }
 
 /* JOURNEY TIMELINE */
@@ -95,12 +95,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .journey-steps::before { content: ''; position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: var(--border); }
 .journey-step { display: flex; gap: 32px; align-items: flex-start; padding: 32px 0; position: relative; }
 .journey-step + .journey-step { border-top: 1px solid var(--border); }
-.step-dot { width: 48px; height: 48px; flex-shrink: 0; border: 1px solid var(--gold); background: var(--parchment); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--gold); position: relative; z-index: 1; }
+.step-dot { width: 48px; height: 48px; flex-shrink: 0; border: 1px solid var(--gold); background: var(--parchment); display: flex; align-items: center; justify-content: center; font-family: Optima,Marcellus,Candara,sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); position: relative; z-index: 1; }
 .step-dot.done { background: var(--gold); color: var(--deep); border-color: var(--gold); }
 .step-dot.active { background: var(--ink); color: #F5EDD8; border-color: var(--ink); }
 .step-content { flex: 1; padding-top: 8px; }
 .step-date { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-.step-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.step-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
 .step-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--muted); }
 .step-link { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
 .step-link:hover { color: var(--gold-light); }
@@ -110,18 +110,18 @@ body { font-family: 'DM Sans', sans-serif; background: var(--parchment); color: 
 .next-section { background: var(--deep); padding: 100px 24px; text-align: center; }
 .next-inner { max-width: 600px; margin: 0 auto; }
 .next-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-.next-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.1; color: #F5EDD8; margin-bottom: 16px; }
+.next-title { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.1; color: #F5EDD8; margin-bottom: 16px; }
 .next-title em { font-style: italic; color: var(--gold-light); }
 .next-body { font-size: 16px; font-weight: 300; color: rgba(245,237,216,0.45); line-height: 1.8; margin-bottom: 48px; }
 .next-btns { display: flex; flex-direction: column; gap: 14px; max-width: 380px; margin: 0 auto; }
 
 /* SCRIPTURE BAR */
 .scripture-bar { background: var(--gold-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 24px; text-align: center; }
-.scripture-bar-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 4vw, 36px); font-style: italic; font-weight: 400; color: var(--ink); line-height: 1.55; max-width: 700px; margin: 0 auto 20px; }
+.scripture-bar-text { font-family: Optima,Marcellus,Candara,sans-serif; font-size: clamp(22px, 4vw, 36px); font-style: italic; font-weight: 400; color: var(--ink); line-height: 1.55; max-width: 700px; margin: 0 auto 20px; }
 .scripture-bar-ref { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
 
 .footer { background: var(--deep); padding: 40px 24px; text-align: center; }
-.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
+.footer-logo { font-family: Optima,Marcellus,Candara,sans-serif; font-size: 18px; font-weight: 600; color: #F5EDD8; margin-bottom: 6px; }
 .footer-sub { font-size: 11px; color: rgba(245,237,216,0.3); letter-spacing: 0.15em; margin-bottom: 20px; }
 .footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
 .footer-links a { font-size: 13px; color: rgba(245,237,216,0.4); text-decoration: none; transition: color 0.2s; }
