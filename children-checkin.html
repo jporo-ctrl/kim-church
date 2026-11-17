@@ -323,13 +323,10 @@ async function syncQueue() {
 
 // ── SUPABASE FETCH ────────────────────────────────────────────────────────────
 async function supabaseFetch(path, options = {}) {
-  const headers = {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-    ...options.headers
-  };
-  return fetch(SUPABASE_URL + path, { ...options, headers });
+  const prefer = options.headers && options.headers.Prefer;
+  const headers = { 'Content-Type': 'application/json' };
+  if (prefer) headers['X-Prefer'] = prefer;
+  return fetch('/api/kim-db?path=' + encodeURIComponent(path), { method: options.method || 'GET', headers: headers, body: options.body });
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
