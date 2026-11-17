@@ -90,10 +90,7 @@ async function lookupChildren() {
   if (phone.length < 10) { errorEl.style.display = 'block'; return; }
 
   const today = new Date().toISOString().split('T')[0];
-  const res = await fetch(
-    SUPABASE_URL + '/rest/v1/kim_children_checkin?parent_phone=eq.' + phone + '&event_date=eq.' + today + '&select=*&order=checked_in_at.asc',
-    { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } }
-  );
+  const res = await fetch('/api/kim-db?path=' + encodeURIComponent('/rest/v1/kim_children_checkin?parent_phone=eq.' + phone + '&event_date=eq.' + today + '&select=*&order=checked_in_at.asc'));
   const data = await res.json();
 
   if (!data || data.length === 0) {
