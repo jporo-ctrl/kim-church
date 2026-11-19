@@ -164,14 +164,25 @@ module.exports = async function handler(req, res) {
 
   // Verify attendant PIN
   if (action === 'verify-pin' && req.method === 'POST') {
-    const { pin } = req.body;
+    const { pin } = req.body || {};
+    // Limit wrong guesses: 5 per visitor and 30 site-wide per 15 minutes
+    const ip = String((req.headers['x-forwarded-for'] || '').split(',')[0] || 'unknown').trim().slice(0, 64);
+    const since = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+    const mine = await supabase.from('kim_pin_attempts').select('id', { count: 'exact', head: true }).eq('ip', ip).gte('attempted_at', since);
+    const everyone = await supabase.from('kim_pin_attempts').select('id', { count: 'exact', head: true }).gte('attempted_at', since);
+    if ((mine.count || 0) >= 5 || (everyone.count || 0) >= 30) {
+      return res.status(429).json({ error: 'Too many attempts. Please wait 15 minutes and try again.' });
+    }
     const { data, error } = await supabase
       .from('kim_attendants')
       .select('*')
-      .eq('pin', pin)
+      .eq('pin', typeof pin === 'string' ? pin : '')
       .eq('active', true)
       .limit(1);
-    if (error || !data || !data.length) return res.status(401).json({ error: 'Invalid PIN' });
+    if (error || !data || !data.length) {
+      await supabase.from('kim_pin_attempts').insert({ ip });
+      return res.status(401).json({ error: 'Invalid PIN' });
+    }
     return res.status(200).json({ success: true, name: data[0].name });
   }
 
