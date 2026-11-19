@@ -3,7 +3,7 @@ const twilio = require('twilio');
 const { Resend } = require('resend');
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+  if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
   const { type, body, subject, event } = req.body;
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
   try {

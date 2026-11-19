@@ -2,7 +2,7 @@ const { createClient } = require('@supabase/supabase-js');
 const twilio = require('twilio');
 const { Resend } = require('resend');
 
-const ADMIN_PASSWORD = 'KIM2026!';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ('unset-' + Math.random());
 
 module.exports = async function handler(req, res) {
   if (req.headers['x-admin-password'] !== ADMIN_PASSWORD) return res.status(401).json({ error: 'Unauthorized' });

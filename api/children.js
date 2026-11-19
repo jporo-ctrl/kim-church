@@ -114,7 +114,7 @@ module.exports = async function handler(req, res) {
 
   // Suspend/reinstate attendant
   if (action === 'suspend-attendant' && req.method === 'POST') {
-    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
     const { id, suspend } = req.body;
     const { error } = await supabase
       .from('kim_attendant_sessions')
@@ -126,7 +126,7 @@ module.exports = async function handler(req, res) {
 
   // Get all attendants (admin)
   if (action === 'all-attendants') {
-    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
     const { data, error } = await supabase
       .from('kim_attendants')
       .select('*')
@@ -137,7 +137,7 @@ module.exports = async function handler(req, res) {
 
   // Add attendant
   if (action === 'add-attendant' && req.method === 'POST') {
-    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
     const { name, pin } = req.body;
     const { error } = await supabase.from('kim_attendants').insert({ name, pin, active: true });
     if (error) return res.status(500).json({ error: error.message });
@@ -146,7 +146,7 @@ module.exports = async function handler(req, res) {
 
   // Remove attendant
   if (action === 'remove-attendant' && req.method === 'POST') {
-    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
     const { id } = req.body;
     const { error } = await supabase.from('kim_attendants').delete().eq('id', id);
     if (error) return res.status(500).json({ error: error.message });
@@ -155,7 +155,7 @@ module.exports = async function handler(req, res) {
 
   // Toggle attendant active
   if (action === 'toggle-attendant' && req.method === 'POST') {
-    if (req.headers['x-admin-password'] !== 'KIM2026!') return res.status(401).json({ error: 'Unauthorized' });
+    if (req.headers['x-admin-password'] !== (process.env.ADMIN_PASSWORD || ('unset-' + Math.random()))) return res.status(401).json({ error: 'Unauthorized' });
     const { id, active } = req.body;
     const { error } = await supabase.from('kim_attendants').update({ active }).eq('id', id);
     if (error) return res.status(500).json({ error: error.message });

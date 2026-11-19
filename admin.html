@@ -191,11 +191,11 @@ body{font-family:Optima,Marcellus,Candara,sans-serif;background:var(--bg);color:
 </div>
 
 <script>
-const ADMIN_PW = 'KIM2026!';
+let ADMIN_PW = ''; function adminLogin(p) { var x = new XMLHttpRequest(); x.open('POST', '/api/admin-auth', false); x.setRequestHeader('x-admin-password', p); try { x.send(); } catch (e) { return false; } if (x.status === 200) { ADMIN_PW = p; return true; } return false; }
 
 function doLogin() {
   const pw = document.getElementById('pw-input').value;
-  if (pw === ADMIN_PW) {
+  if (adminLogin(pw)) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-screen').style.display = 'block';
     setDate();

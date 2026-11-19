@@ -114,12 +114,12 @@
   </div>
 
   <script>
-    const PASSWORD = 'KIM2026!';
+    let PASSWORD = ''; function adminLogin(p) { var x = new XMLHttpRequest(); x.open('POST', '/api/admin-auth', false); x.setRequestHeader('x-admin-password', p); try { x.send(); } catch (e) { return false; } if (x.status === 200) { PASSWORD = p; return true; } return false; }
     let allRows = [];
     let msgType = 'sms';
 
     function doLogin() {
-      if (document.getElementById('pw-input').value === PASSWORD) {
+      if (adminLogin(document.getElementById('pw-input').value)) {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         loadCheckins();
@@ -188,7 +188,7 @@
       try {
         const res = await fetch('/api/message-checkins', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-admin-password': 'KIM2026!' },
+          headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
           body: JSON.stringify({ type: msgType, body, subject, event })
         });
         const data = await res.json();

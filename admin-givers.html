@@ -121,10 +121,10 @@ tr:hover td{background:#FAFAFA}
   </div>
 </div>
 <script>
-const PASS='KIM2026!';
+let PASS = ''; function adminLogin(p) { var x = new XMLHttpRequest(); x.open('POST', '/api/admin-auth', false); x.setRequestHeader('x-admin-password', p); try { x.send(); } catch (e) { return false; } if (x.status === 200) { PASS = p; return true; } return false; }
 let givers=[],msgType='sms';
 function login(){
-  if(document.getElementById('admin-password').value===PASS){
+  if(adminLogin(document.getElementById('admin-password').value)){
     document.getElementById('login-screen').style.display='none';
     document.getElementById('admin-screen').style.display='block';
     loadGivers();
